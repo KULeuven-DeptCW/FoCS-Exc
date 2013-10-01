@@ -1,0 +1,6 @@
+*.backup
+*.~*
+*.pdf
+*.aux
+*.log
+*.kilepr

@@ -1,0 +1,27 @@
+\ProvidesPackage{assignment-nl}
+\RequirePackage{amsmath,amsthm,amsfonts,hyperref,makeidx,booktabs,tikz,qtree,../bnf}
+\usetikzlibrary{automata}
+\RequirePackage{fullpage}
+\RequirePackage[dutch]{babel}
+\newtheorem{question}{Vraag}
+\newtheorem{bonus}{Bonusvraag}[question]
+\theoremstyle{remark}
+\newtheorem{hint}{Tip}[question]
+\newtheorem{example}{Voorbeeld}[question]
+\theoremstyle{plain}
+\newtheorem{answer}{Antwoord}[question]
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\brak}[1]{\ensuremath{\left( #1 \right)}}
+\newcommand{\fun}[2]{\ensuremath{#1\brak{#2}}}
+\newcommand{\tupl}[1]{\ensuremath{\left\langle #1 \right\rangle}}
+\newcommand{\accl}[1]{\ensuremath{\left\{ #1 \right\}}}
+\newcommand{\abs}[1]{\ensuremath{\left|#1\right|}}
+\newenvironment{tikzfigure}[2]{\begin{figure}[hbt]\centering\begin{tikzpicture}}{\end{tikzpicture}\end{figure}}
+
+\newcommand{\importgram}[1]{
+\begin{grammar}[(colon){$\rightarrow$}][(semicolon)$|$][(comma){}][(period){\\}][(quote){\begin{bf}}{\end{bf}}][(nonterminal){$\langle$}{$\rangle$}]
+%\begin{rail}
+\input{grammars/#1.tex}
+%\end{rail}
+\end{grammar}
+}

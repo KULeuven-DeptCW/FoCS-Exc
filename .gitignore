@@ -1,8 +1,10 @@
 *.backup
 *.*~*
+*~
 *.pdf
 *.aux
 *.log
 *.kilepr
 *.out
 *.bbl
+*.blg

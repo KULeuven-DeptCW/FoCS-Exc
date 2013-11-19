@@ -1,0 +1,98 @@
+\ProvidesPackage{brackets}
+\RequirePackage{amsfonts,amsmath,booktabs}
+
+\newcommand{\brak}[1]{\ensuremath{\left( #1 \right)}}
+\newcommand{\tupl}[1]{\ensuremath{\left\langle #1 \right\rangle}}
+\newcommand{\fbrk}[1]{\ensuremath{\left[ #1 \right]}}
+\newcommand{\accl}[1]{\ensuremath{\left\{ #1 \right\}}}
+\newcommand{\acclguard}[1]{\ensuremath{\left\{\begin{array}{ll} #1 \end{array}\right.}}
+\newcommand{\acclarray}[2][c]{\accl{\begin{array}{#1} #2 \end{array}}}
+\newcommand{\accol}[1]{\ensuremath{\left\{#1\right\}}}
+\newcommand{\tuple}[1]{\ensuremath{\left\langle #1\right\rangle}}
+\newcommand{\abs}[1]{\ensuremath{\left|#1\right|}}
+\newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
+\newcommand{\fun}[2]{\ensuremath{#1\brak{#2}}}
+\newcommand{\funa}[2]{\ensuremath{#1\accl{#2}}}
+\newcommand{\funf}[2]{\ensuremath{#1\fbrk{#2}}}
+\newcommand{\funm}[2]{\fun{\mbox{#1}}{#2}}
+\newcommand{\funmf}[2]{\funf{\mbox{#1}}{#2}}
+\newcommand{\funma}[2]{\funa{\mbox{#1}}{#2}}
+\newcommand{\powset}[1]{\fun{\calP}{#1}}
+\newcommand{\funsig}[3]{\ensuremath{#1:#2\rightarrow #3}}
+\newcommand{\condset}[2]{\accl{#1\ |\ #2}}
+\newcommand{\lambdacal}[2]{\ensuremath{\brak{\lambda\ #1\ {\boldsymbol .}\ #2}}}
+
+\newcommand{\AAA}{\ensuremath{\mathbb{A}}}
+\newcommand{\BBB}{\ensuremath{\mathbb{B}}}
+\newcommand{\CCC}{\ensuremath{\mathbb{C}}}
+\newcommand{\DDD}{\ensuremath{\mathbb{D}}}
+\newcommand{\EEE}{\ensuremath{\mathbb{E}}}
+\newcommand{\FFF}{\ensuremath{\mathbb{F}}}
+\newcommand{\GGG}{\ensuremath{\mathbb{G}}}
+\newcommand{\HHH}{\ensuremath{\mathbb{H}}}
+\newcommand{\III}{\ensuremath{\mathbb{I}}}
+\newcommand{\JJJ}{\ensuremath{\mathbb{J}}}
+\newcommand{\KKK}{\ensuremath{\mathbb{K}}}
+\newcommand{\LLL}{\ensuremath{\mathbb{L}}}
+\newcommand{\MMM}{\ensuremath{\mathbb{M}}}
+\newcommand{\NNN}{\ensuremath{\mathbb{N}}}
+\newcommand{\OOO}{\ensuremath{\mathbb{O}}}
+\newcommand{\PPP}{\ensuremath{\mathbb{P}}}
+\newcommand{\QQQ}{\ensuremath{\mathbb{Q}}}
+\newcommand{\RRR}{\ensuremath{\mathbb{R}}}
+\newcommand{\SSS}{\ensuremath{\mathbb{S}}}
+\newcommand{\TTT}{\ensuremath{\mathbb{T}}}
+\newcommand{\UUU}{\ensuremath{\mathbb{U}}}
+\newcommand{\VVV}{\ensuremath{\mathbb{V}}}
+\newcommand{\WWW}{\ensuremath{\mathbb{W}}}
+\newcommand{\XXX}{\ensuremath{\mathbb{X}}}
+\newcommand{\YYY}{\ensuremath{\mathbb{Y}}}
+\newcommand{\ZZZ}{\ensuremath{\mathbb{Z}}}
+
+\newcommand{\bigoh}[1]{\fun{\calO}{#1}}
+
+\newcommand{\xtrue}{\ensuremath{\mbox{\bf true}}}
+\newcommand{\xfalse}{\ensuremath{\mbox{\bf false}}}
+
+\newcommand{\calA}{\ensuremath{\mathcal{A}}}
+\newcommand{\calB}{\ensuremath{\mathcal{B}}}
+\newcommand{\calC}{\ensuremath{\mathcal{C}}}
+\newcommand{\calD}{\ensuremath{\mathcal{D}}}
+\newcommand{\calE}{\ensuremath{\mathcal{E}}}
+\newcommand{\calF}{\ensuremath{\mathcal{F}}}
+\newcommand{\calG}{\ensuremath{\mathcal{G}}}
+\newcommand{\calH}{\ensuremath{\mathcal{H}}}
+\newcommand{\calI}{\ensuremath{\mathcal{I}}}
+\newcommand{\calJ}{\ensuremath{\mathcal{J}}}
+\newcommand{\calK}{\ensuremath{\mathcal{K}}}
+\newcommand{\calL}{\ensuremath{\mathcal{L}}}
+\newcommand{\calM}{\ensuremath{\mathcal{M}}}
+\newcommand{\calN}{\ensuremath{\mathcal{N}}}
+\newcommand{\calO}{\ensuremath{\mathcal{O}}}
+\newcommand{\calP}{\ensuremath{\mathcal{P}}}
+\newcommand{\calQ}{\ensuremath{\mathcal{Q}}}
+\newcommand{\calR}{\ensuremath{\mathcal{R}}}
+\newcommand{\calS}{\ensuremath{\mathcal{S}}}
+\newcommand{\calT}{\ensuremath{\mathcal{T}}}
+\newcommand{\calU}{\ensuremath{\mathcal{U}}}
+\newcommand{\calV}{\ensuremath{\mathcal{V}}}
+\newcommand{\calW}{\ensuremath{\mathcal{W}}}
+\newcommand{\calX}{\ensuremath{\mathcal{X}}}
+\newcommand{\calY}{\ensuremath{\mathcal{Y}}}
+\newcommand{\calZ}{\ensuremath{\mathcal{Z}}}
+
+\newcommand{\BoolSet}{\BBB}
+\newcommand{\RealSet}{\RRR}
+\newcommand{\FracSet}{\QQQ}
+\newcommand{\NatSet}{\NNN}
+\newcommand{\IntSet}{\ZZZ}
+
+\newcommand{\argmin}{\ensuremath{\mbox{argmin}}}
+
+\newcommand{\defaulttable}[3]{
+\begin{tabular}{#1}
+\toprule
+#2\\\midrule
+#3\\\bottomrule
+\end{tabular}}

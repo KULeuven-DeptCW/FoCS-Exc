@@ -1,5 +1,5 @@
 \ProvidesPackage{brackets}
-\RequirePackage{amsfonts,amsmath,booktabs}
+\RequirePackage{amsfonts,amsmath,booktabs,tikz}
 
 \newcommand{\brak}[1]{\ensuremath{\left( #1 \right)}}
 \newcommand{\tupl}[1]{\ensuremath{\left\langle #1 \right\rangle}}
@@ -22,6 +22,9 @@
 \newcommand{\funsig}[3]{\ensuremath{#1:#2\rightarrow #3}}
 \newcommand{\condset}[2]{\accl{#1\ |\ #2}}
 \newcommand{\lambdacal}[2]{\ensuremath{\brak{\lambda\ #1\ {\boldsymbol .}\ #2}}}
+\newcommand{\enctikz}[2]{\tikz[baseline]{\node(#1){$#2$};}}
+\newcommand{\enctikzd}[2]{\tikz[baseline]{\node[draw,circle](#1){$#2$};}}
+\newcommand{\lambdacaltikz}[3]{\enctikz{ba#1}{(}\enctikz{l#1}{\lambda}\ \enctikz{la#1}{#2}\ \enctikz{d#1}{\boldsymbol .}\ #3\enctikz{bb#1}{)}}
 
 \newcommand{\AAA}{\ensuremath{\mathbb{A}}}
 \newcommand{\BBB}{\ensuremath{\mathbb{B}}}

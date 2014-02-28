@@ -1,11 +1,89 @@
 \documentclass{article}
 \usepackage{../brackets,../assignment-nl}
-\title{Oplossingen reeks 1}
+\title{Fundamentals of Computer Science\\Oplossingen reeks 1}
 \author{W. Van Onsem}
-\date{Maart 2013}
+\date{Maart 2014}
 \begin{document}
 \maketitle
 \begin{question}
+Find DFAs for the following languages:
+\begin{enumerate}
+ \item The set of strings $\accl{4,8,1}^{\star}$ containing the substring $481$.
+ \item The set of strings in $\accl{a}^{\star}$ whose length is divisible by either $2$ or $7$.
+ \item The set of strings $x\in\accl{0,1}^{\star}$ such that $\fun{\#_0}{x}$ is even and $\fun{\#_1}{x}$ is a multiple of $3$.
+ \item The set of strings over the alphabet $a$, $b$ containing at least three occurrences of three consecutive $b$'s, overlapping permitted (e.g., the string $bbbbb$ should be accepted).
+\end{enumerate}
+\end{question}
+\begin{question}
+Find NFAs for the following languages:
+\begin{enumerate}
+ \item $\condset{x\in\accl{0,1}^{\star}}{\mbox{$x$ contains an equal number of occurrences of $01$ and $10$}}$
+ \item $\condset{x\in\accl{a,b}^{\star}}{\mbox{$x$ contains an even number of $a$'s or an odd number of $b$'s}}$
+\end{enumerate}
+\end{question}
+\begin{question}
+Construct a nondeterministic finite automaton and an equivalent deterministic one that accept those sequences over the alphabet $\accl{a,b,c,d}$ such that at least one symbol appears precisely twice in the sequence.
+\end{question}
+\begin{question}
+Describe the following languages using regular expressions ($\Sigma=\accl{a,b}$):
+\begin{enumerate}
+ \item $\condset{x}{\mbox{$x$ contains an even number of $a$'s}}$.
+ \item $\condset{x}{\mbox{$x$ contains an odd number of $b$'s}}$.
+ \item $\condset{x}{\mbox{$x$ contains an even number of $a$'s or an odd number of $b$’s}}$.
+ \item $\condset{x}{\mbox{$x$ contains an even number of $a$'s and an odd number of $b$’s}}$.
+\end{enumerate}
+Try to simplify the expressions are much as possible (justify each simplification).
+\end{question}
+\begin{question}
+Convert the following NFA into a DFA using the subset construction:
 
+%TODO
+
+Clearly show which subset of $\accl{s,t,u}$ corresponds to each state of the deterministic automaton. Omit inaccessible states.
+\end{question}
+\begin{question}
+Minimise the following DFA using the quotient construction:
+\end{question}
+\begin{question}
+Convert the DFA from the previous question into a regular expression (use either original DFA or quotient automaton).
+\end{question}
+\begin{question}
+Convert the following regular expressions into DFAs:
+\begin{enumerate}
+ \item $\brak{000^{\star}\cup 111^{\star}}^{\star}$.
+ \item $\brak{01\cup 10}\brak{01\cup 10}\brak{01\cup 10}$.
+ \item $\brak{0\cup 1\brak{01^{\star}0}^{\star}1}^{\star}$.
+\end{enumerate}
+Try to simplify as much as possible.
+\end{question}
+\begin{question}
+Use the pumping lemma to demonstrate that the following languages are not regular:
+\begin{enumerate}
+ \item $\condset{a^nb^m}{n = 2m}$.
+ \item $\condset{x\in\accl{a,b,c}^{\star}}{\mbox{$x$ is a palindrome; i.e., $x=x^R$}}$.
+ \item The set $\mbox{PAREN}$ of balanced parentheses ($\Sigma=\accl{(,)}$).
+\end{enumerate}
+\end{question}
+\begin{question}
+Give a context-free grammar for the following languages:
+\begin{enumerate}
+ \item $\mbox{PAREN}_2$ of balanced strings of parentheses of two types $\brak{}$ and $\fbrk{}$. How would you prove that your grammar is correct?
+ \item The set of non-null strings over $\accl{a,b}$ with equally many $a$'s as $b$'s.
+\end{enumerate}
+\end{question}
+\begin{question}
+Recall that the reverse of a string $x$, denoted $x^R$, is $x$ written backwards. Formally,
+\begin{eqnarray}
+\epsilon^R=\epsilon;&\brak{xa}^R=ax^R.
+\end{eqnarray}
+For language $L\subseteq\Sigma^{\star}$, define
+\begin{equation}
+L^R=\condset{x^R}{x\in L}.
+\end{equation}
+\begin{enumerate}
+ \item Given $u,v\in\Sigma^{\star}$. Show that $\brak{uv}^R=v^Ru^R$.
+ \item Given $L_1,L_2\subseteq\Sigma^{\star}$. Show that $\brak{L_1 L_2}^R=L_2^RL_1^R$.
+ \item Show that for any $L\subseteq\Sigma^{\star}$, if $L$ is regular, then so is $L^R$.
+\end{enumerate}
 \end{question}
 \end{document}

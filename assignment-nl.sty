@@ -3,13 +3,13 @@
 \usetikzlibrary{automata}
 \RequirePackage{fullpage,float}
 \RequirePackage[dutch]{babel}
+\theoremstyle{definition}
 \newtheorem{question}{Vraag}
 \newtheorem{bonus}{Bonusvraag}[question]
+\newtheorem{answer}{Antwoord}[question]
 \theoremstyle{remark}
 \newtheorem{hint}{Tip}[question]
 \newtheorem{example}{Voorbeeld}[question]
-\theoremstyle{plain}
-\newtheorem{answer}{Antwoord}[question]
 \newenvironment{tikzfigure}[2]{\begin{figure}[H]\centering\begin{tikzpicture}}{\end{tikzpicture}\end{figure}}
 
 \newcommand{\importgram}[1]{

@@ -56,6 +56,13 @@ Describe the following languages using regular expressions ($\Sigma=\accl{a,b}$)
 \end{enumerate}
 Try to simplify the expressions are much as possible (justify each simplification).
 \begin{answer}
+The following are simplified regular expressions:
+\begin{enumerate}
+ \item $b^{\star}\brak{ab^{\star}a}^{\star}b^{\star}$.
+ \item $a^{\star}\brak{ba^{\star}b}^{\star}a^{\star}ba^{\star}$.
+ \item $b^{\star}\brak{ab^{\star}a}^{\star}b^{\star}|a^{\star}\brak{ba^{\star}b}^{\star}a^{\star}ba^{\star}$.
+ \item $\condset{x}{\mbox{$x$ contains an even number of $a$'s and an odd number of $b$’s}}$.
+\end{enumerate}
 \end{answer}
 \end{question}
 \begin{question}
@@ -96,6 +103,11 @@ Use the pumping lemma to demonstrate that the following languages are not regula
  \item The set $\mbox{PAREN}$ of balanced parentheses ($\Sigma=\accl{(,)}$).
 \end{enumerate}
 \begin{answer}
+\begin{enumerate}
+ \item Say the language is indeed regular, then take $s=a^{2\cdot p}b^p$. We know we should be able to subdivide the string $s$ into three parts $s=xyz$. Since $\abs{xy}\leq p$, we know that $y\in a^+$. We say that y has length $l=\abs{y}>0$, now take the string $s'=xy^2z$. The pumping lemma states that this string should be part of the language but $a^{2\cdot p+l}b^p$ does not satisfy the constraints of the language contradicting the pumping lemma.
+ \item Say the language is indeed regular, then take $s=a^lb^la^l$ such that $3\cdot l>p$. We know we should be able to subdivide the string $s$ into three parts $s=xyz$ with $\abs{xy}\leq p$. This means that there are three possibilities: 
+ \item The set $\mbox{PAREN}$ of balanced parentheses ($\Sigma=\accl{(,)}$).
+\end{enumerate}
 \end{answer}
 \end{question}
 \begin{question}

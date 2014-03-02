@@ -1,7 +1,9 @@
 \documentclass{article}
 \usepackage{../brackets,../assignment-nl,../importsreferences-en}
+\usetikzlibrary{automata,calc,fit,shapes,arrows}
+
 \title{Fundamentals of Computer Science\\Oplossingen reeks 1}
-\author{W. Van Onsem}
+\author{prof. B. Demoen\\W. Van Onsem}
 \date{Maart 2014}
 \begin{document}
 \maketitle
@@ -13,7 +15,15 @@ Find DFAs for the following languages:
  \item The set of strings $x\in\accl{0,1}^{\star}$ such that $\fun{\#_0}{x}$ is even and $\fun{\#_1}{x}$ is a multiple of $3$.
  \item The set of strings over the alphabet $a$, $b$ containing at least three occurrences of three consecutive $b$'s, overlapping permitted (e.g., the string $bbbbb$ should be accepted).
 \end{enumerate}
-\begin{answer}
+\begin{answer}See \figref{exc1}.
+\begin{figure}[H]
+\importtikzsubfigure{exc1-dfa1}{}
+\importtikzsubfigure{exc1-dfa2}{}
+\importtikzsubfigure{exc1-dfa3}{}
+\importtikzsubfigure{exc1-dfa4}{}
+\caption{Exercise 1}
+\figlab{exc1}
+\end{figure}
 \end{answer}
 \end{question}
 \begin{question}
@@ -22,7 +32,13 @@ Find NFAs for the following languages:
  \item $\condset{x\in\accl{0,1}^{\star}}{\mbox{$x$ contains an equal number of occurrences of $01$ and $10$}}$
  \item $\condset{x\in\accl{a,b}^{\star}}{\mbox{$x$ contains an even number of $a$'s or an odd number of $b$'s}}$
 \end{enumerate}
-\begin{answer}
+\begin{answer}See \figref{exc2}.
+\begin{figure}[H]
+\importtikzsubfigure{exc2-dfa1}{}
+\importtikzsubfigure{exc2-dfa2}{}
+\caption{Exercise 2}
+\figlab{exc2}
+\end{figure}
 \end{answer}
 \end{question}
 \begin{question}

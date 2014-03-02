@@ -1,0 +1,20 @@
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,node distance=2cm]
+\foreach \i in {0,1} {
+  \foreach \j in {1,2} {
+    \node[state]   (q\i\j) at (1.5*\j,-1.5*\i) {$q_{\i,\j}$};
+  }
+}
+\node[state,accepting,initial] (q00) at (0,0) {$q_{0,0}$};
+\node[state] (q10) at (0,-1.5) {$q_{1,0}$};
+\foreach \j in {0,1,2} {
+  \path[->] (q0\j) edge[bend left] node {$0$} (q1\j);
+  \path[->] (q1\j) edge[bend left] node {$0$} (q0\j);
+}
+\foreach \i in {0,1} {
+  \foreach \ja/\jb in {0/1,1/2} {
+    \path[->] (q\i\ja) edge node {$1$} (q\i\jb);
+  }
+}
+\path[->] (q02) edge[bend right] node[above] {$1$} (q00);
+\path[->] (q12) edge[bend left]  node[below] {$1$} (q10);
+\end{tikzpicture}

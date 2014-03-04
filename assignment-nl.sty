@@ -11,11 +11,3 @@
 \newtheorem{hint}{Tip}[question]
 \newtheorem{example}{Voorbeeld}[question]
 \newenvironment{tikzfigure}[2]{\begin{figure}[H]\centering\begin{tikzpicture}}{\end{tikzpicture}\end{figure}}
-
-\newcommand{\importgram}[1]{
-\begin{grammar}[(colon){$\rightarrow$}][(semicolon)$|$][(comma){}][(period){\\}][(quote){\begin{bf}}{\end{bf}}][(nonterminal){$\langle$}{$\rangle$}]
-%\begin{rail}
-\input{grammars/#1.tex}
-%\end{rail}
-\end{grammar}
-}

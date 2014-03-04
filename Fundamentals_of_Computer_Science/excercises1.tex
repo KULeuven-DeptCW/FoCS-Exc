@@ -117,6 +117,8 @@ Give a context-free grammar for the following languages:
  \item The set of non-null strings over $\accl{a,b}$ with equally many $a$'s as $b$'s.
 \end{enumerate}
 \begin{answer}
+\importgram{exc10i1}{$\mbox{PAREN}_2$}
+\importgram{exc10i2}{The set of non-null strings over $\accl{a,b}$ with equally many $a$'s as $b$'s.}
 \end{answer}
 \end{question}
 \begin{question}
@@ -134,6 +136,20 @@ L^R=\condset{x^R}{x\in L}.
  \item Show that for any $L\subseteq\Sigma^{\star}$, if $L$ is regular, then so is $L^R$.
 \end{enumerate}
 \begin{answer}
+\begin{enumerate}
+ \item 
+ \item 
+ \item Say a language $L$ is regular, than there exists a regular expression $E$. Based on $E$, we can construct a regular expression $E'$ that decides the reverse language inductively:
+ \begin{enumerate}
+  \item if $E=\epsilon$, then $E'=\epsilon$;
+  \item if $E=a$ with $a\in\Sigma$, then $E'=a$;
+  \item if $E=\brak{E_1E_2}$ with $E_1,E_2$ regular expressions, then $E'=\brak{E_2'E_1'}$;
+  \item if $E=\brak{E_1|E_2}$ with $E_1,E_2$ regular expressions, then $E'=\brak{E_2'|E_1'}$; and
+  \item if $E=E_1^{\star}$ with $E_1$ a regular expression, then $E'=E_1'^{\star}$.
+ \end{enumerate}
+
+\end{enumerate}
+
 \end{answer}
 \end{question}
 \end{document}

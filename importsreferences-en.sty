@@ -1,5 +1,8 @@
 \ProvidesPackage{importsreferences-en}
-\RequirePackage{tikz,subfigure,float,listings,animate}
+\RequirePackage{tikz,subfigure,float,listings,animate,float}
+
+\newfloat{gramf}{hbt}{grm}
+\floatname{gramf}{Grammar}
 
 \newcommand{\genlab}[2]{\label{#1:#2}}
 \newcommand{\genref}[3]{#2~\ref{#1:#3}}
@@ -34,6 +37,9 @@
 \newcommand{\exclab}[1]{\genlab{exc}{#1}}
 \newcommand{\excref}[1]{\genref{exc}{Exercise}{#1}}
 \newcommand{\excrefpag}[1]{\genrefpag{exc}{Exercise}{#1}}
+\newcommand{\grmlab}[1]{\genlab{grm}{#1}}
+\newcommand{\grmref}[1]{\genref{grm}{Grammar}{#1}}
+\newcommand{\grmrefpag}[1]{\genrefpag{grm}{Grammar}{#1}}
 \newcommand{\eqnlab}[1]{\genlab{eqn}{#1}}
 \newcommand{\eqnref}[1]{Equation~(\ref{eqn:#1})}
 \newcommand{\eqncref}[1]{Constraint~(\ref{eqn:#1})}
@@ -62,6 +68,14 @@
 \caption{#2}
 \figlab{#1}
 \end{figure}
+}
+
+\newcommand{\importgram}[2]{
+\begin{gramf}
+\begin{grammar}[(colon){$\rightarrow$}][(semicolon)$|$][(comma){}][(period){\\}][(quote){\begin{bf}}{\end{bf}}][(nonterminal){$\langle$}{$\rangle$}]\input{grammars/#1.tex}\end{grammar}
+\caption{#2}
+\grmlab{#1}
+\end{gramf}
 }
 
 \newcommand{\importtikzsubfigure}[2]{

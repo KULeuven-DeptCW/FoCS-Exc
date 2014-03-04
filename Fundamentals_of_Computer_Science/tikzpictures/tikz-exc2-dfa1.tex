@@ -1,11 +1,14 @@
 \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,node distance=2cm]
 \node[state,initial]   (q_i) at (0.0,0) {$q_0$};
-\node[state,accepting] (q_f) at (4,0) {$q_3$};
-\foreach \y/\c in {0/a,1/b,2/c,3/d} {
-  \node[state] (q_\c) at (2,-\y+1.5) {$q_{\c}$};
-  \path[->] (q_i)  edge node {$\c$} (q_\c);
-  \path[->] (q_\c) edge node {$\c$} (q_f);
+\node[state,accepting] (q_f) at (6,0) {$q_3$};
+\foreach \c/\d/\l in {0/1/loop below,1/0/loop above} {
+  \node[state] (q0\c) at (1.5,\c-0.5) {$q_{\c,0}$};
+  \node[state] (q1\c) at (3,\c-0.5) {$q_{\c,1}$};
+  \node[state] (q2\c) at (4.5,\c-0.5) {$q_{\c,2}$};
+  \path[->] (q_i) edge node {$\c$} (q0\c);
+  \path[->] (q0\c) edge node {$\d$} (q1\c);
+  \path[->] (q1\c) edge node {$\d$} (q2\c);
+  \path[->] (q1\c) edge[\l] node {$0,1$} ();
+  \path[->] (q2\c) edge node {$\c$} (q_f);
 }
-\path[->] (q_i) edge [loop above] node {$a,b,c,d$} ();
-\path[->] (q_f) edge [loop above] node {$a,b,c,d$} ();
 \end{tikzpicture}

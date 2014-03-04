@@ -61,7 +61,7 @@ The following are simplified regular expressions:
  \item $b^{\star}\brak{ab^{\star}a}^{\star}b^{\star}$.
  \item $a^{\star}\brak{ba^{\star}b}^{\star}a^{\star}ba^{\star}$.
  \item $b^{\star}\brak{ab^{\star}a}^{\star}b^{\star}|a^{\star}\brak{ba^{\star}b}^{\star}a^{\star}ba^{\star}$.
- \item $\condset{x}{\mbox{$x$ contains an even number of $a$'s and an odd number of $b$’s}}$.
+ \item $\brak{aa}^{\star}b\brak{aa|bb|baba|abba|baab}^{\star}$.
 \end{enumerate}
 \end{answer}
 \end{question}
@@ -105,8 +105,8 @@ Use the pumping lemma to demonstrate that the following languages are not regula
 \begin{answer}
 \begin{enumerate}
  \item Say the language is indeed regular, then take $s=a^{2\cdot p}b^p$. We know we should be able to subdivide the string $s$ into three parts $s=xyz$. Since $\abs{xy}\leq p$, we know that $y\in a^+$. We say that y has length $l=\abs{y}>0$, now take the string $s'=xy^2z$. The pumping lemma states that this string should be part of the language but $a^{2\cdot p+l}b^p$ does not satisfy the constraints of the language contradicting the pumping lemma.
- \item Say the language is indeed regular, then take $s=a^lb^la^l$ such that $3\cdot l>p$. We know we should be able to subdivide the string $s$ into three parts $s=xyz$ with $\abs{xy}\leq p$. This means that there are three possibilities: 
- \item The set $\mbox{PAREN}$ of balanced parentheses ($\Sigma=\accl{(,)}$).
+ \item Say the language is indeed regular, then take $s=a^pb^pa^p$. We know we should be able to subdivide the string $s$ into three parts $s=xyz$ with $\abs{xy}\leq p$. Therefore $y$ consists only out of $a$'s with $y=a^l$, therefore $xy^2z=a^{p+l}b^pa^p$ will yield a string that is not part of the language.
+ \item The set $\mbox{PAREN}$ of balanced parentheses ($\Sigma=\accl{(,)}$). The string $(^p)^p$ is part of the language. The theorem states we can subdivide the string in $s=xyz$, with $\abs{xy}\leq p$, thus $y$ only contains $($'s and $\abs{y}=l>0$. This would imply $xy^2z=(^{p+l})^{p}$ is part of the language as well.
 \end{enumerate}
 \end{answer}
 \end{question}

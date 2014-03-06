@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage{../brackets,../assignment-nl,../importsreferences-en}
+\usepackage{../brackets,../assignment-en,../importsreferences-en}
 \usetikzlibrary{automata,calc,fit,shapes,arrows}
 
 \title{Fundamentals of Computer Science\\Oplossingen reeks 1}
@@ -7,7 +7,7 @@
 \date{Maart 2014}
 \begin{document}
 \maketitle
-\begin{question}
+\begin{exercise}
 Find DFAs for the following languages:
 \begin{enumerate}
  \item The set of strings $\accl{4,8,1}^{\star}$ containing the substring $481$.
@@ -25,8 +25,8 @@ Find DFAs for the following languages:
 \figlab{exc1}
 \end{figure}
 \end{answer}
-\end{question}
-\begin{question}
+\end{exercise}
+\begin{exercise}
 Find NFAs for the following languages:
 \begin{enumerate}
  \item $\condset{x\in\accl{0,1}^{\star}}{\mbox{$x$ contains an equal number of occurrences of $01$ and $10$}}$
@@ -40,13 +40,13 @@ Find NFAs for the following languages:
 \figlab{exc2}
 \end{figure}
 \end{answer}
-\end{question}
-\begin{question}
+\end{exercise}
+\begin{exercise}
 Construct a nondeterministic finite automaton and an equivalent deterministic one that accept those sequences over the alphabet $\accl{a,b,c,d}$ such that at least one symbol appears precisely twice in the sequence.
 \begin{answer}
 \end{answer}
-\end{question}
-\begin{question}
+\end{exercise}
+\begin{exercise}
 Describe the following languages using regular expressions ($\Sigma=\accl{a,b}$):
 \begin{enumerate}
  \item $\condset{x}{\mbox{$x$ contains an even number of $a$'s}}$.
@@ -64,8 +64,8 @@ The following are simplified regular expressions:
  \item $\brak{aa}^{\star}b\brak{aa|bb|baba|abba|baab}^{\star}$.
 \end{enumerate}
 \end{answer}
-\end{question}
-\begin{question}
+\end{exercise}
+\begin{exercise}
 Convert the following NFA into a DFA using the subset construction:
 
 %TODO
@@ -73,18 +73,18 @@ Convert the following NFA into a DFA using the subset construction:
 Clearly show which subset of $\accl{s,t,u}$ corresponds to each state of the deterministic automaton. Omit inaccessible states.
 \begin{answer}
 \end{answer}
-\end{question}
-\begin{question}
+\end{exercise}
+\begin{exercise}
 Minimise the following DFA using the quotient construction:
 \begin{answer}
 \end{answer}
-\end{question}
-\begin{question}
+\end{exercise}
+\begin{exercise}
 Convert the DFA from the previous question into a regular expression (use either original DFA or quotient automaton).
 \begin{answer}
 \end{answer}
-\end{question}
-\begin{question}
+\end{exercise}
+\begin{exercise}
 Convert the following regular expressions into DFAs:
 \begin{enumerate}
  \item $\brak{000^{\star}\cup 111^{\star}}^{\star}$.
@@ -94,8 +94,8 @@ Convert the following regular expressions into DFAs:
 Try to simplify as much as possible.
 \begin{answer}
 \end{answer}
-\end{question}
-\begin{question}
+\end{exercise}
+\begin{exercise}
 Use the pumping lemma to demonstrate that the following languages are not regular:
 \begin{enumerate}
  \item $\condset{a^nb^m}{n = 2m}$.
@@ -109,8 +109,8 @@ Use the pumping lemma to demonstrate that the following languages are not regula
  \item The set $\mbox{PAREN}$ of balanced parentheses ($\Sigma=\accl{(,)}$). The string $(^p)^p$ is part of the language. The theorem states we can subdivide the string in $s=xyz$, with $\abs{xy}\leq p$, thus $y$ only contains $($'s and $\abs{y}=l>0$. This would imply $xy^2z=(^{p+l})^{p}$ is part of the language as well.
 \end{enumerate}
 \end{answer}
-\end{question}
-\begin{question}
+\end{exercise}
+\begin{exercise}
 Give a context-free grammar for the following languages:
 \begin{enumerate}
  \item $\mbox{PAREN}_2$ of balanced strings of parentheses of two types $\brak{}$ and $\fbrk{}$. How would you prove that your grammar is correct?
@@ -120,8 +120,8 @@ Give a context-free grammar for the following languages:
 \importgram{exc10i1}{$\mbox{PAREN}_2$}
 \importgram{exc10i2}{The set of non-null strings over $\accl{a,b}$ with equally many $a$'s as $b$'s.}
 \end{answer}
-\end{question}
-\begin{question}
+\end{exercise}
+\begin{exercise}
 Recall that the reverse of a string $x$, denoted $x^R$, is $x$ written backwards. Formally,
 \begin{eqnarray}
 \epsilon^R=\epsilon;&\brak{xa}^R=ax^R.
@@ -137,7 +137,11 @@ L^R=\condset{x^R}{x\in L}.
 \end{enumerate}
 \begin{answer}
 \begin{enumerate}
- \item 
+ \item Without loss of generality, we can say $u=u_1u_2\ldots u_k$ and $v=v_1v_2\ldots v_l$, since the reverse of a string $s=s_1s_2\ldots s_n$ maps to a string $s^R=s_ns_{n-1}\ldots s_1$ and $w=uv$ with:
+ \begin{equation}
+  w_i=\acclguard{u_i&\xif i\leq k\\v_{i-k}&\xotherwise}\r
+ \end{equation}
+
  \item 
  \item Say a language $L$ is regular, than there exists a regular expression $E$. Based on $E$, we can construct a regular expression $E'$ that decides the reverse language inductively:
  \begin{enumerate}
@@ -147,9 +151,8 @@ L^R=\condset{x^R}{x\in L}.
   \item if $E=\brak{E_1|E_2}$ with $E_1,E_2$ regular expressions, then $E'=\brak{E_2'|E_1'}$; and
   \item if $E=E_1^{\star}$ with $E_1$ a regular expression, then $E'=E_1'^{\star}$.
  \end{enumerate}
-
 \end{enumerate}
 
 \end{answer}
-\end{question}
+\end{exercise}
 \end{document}

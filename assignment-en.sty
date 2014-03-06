@@ -1,0 +1,14 @@
+\ProvidesPackage{assignment-en}
+\RequirePackage{amsmath,amsthm,amsfonts,hyperref,makeidx,booktabs,tikz,qtree,../bnf,../brackets}
+\usetikzlibrary{automata}
+\RequirePackage{fullpage,float}
+\RequirePackage[dutch]{babel}
+\theoremstyle{definition}
+\newtheorem{question}{Question}
+\newtheorem{exercise}{Exercise}
+\newtheorem{bonus}{Bonus question}[question]
+\newtheorem{answer}{Answer}[question]
+\theoremstyle{remark}
+\newtheorem{hint}{Hint}[question]
+\newtheorem{example}{Example}[question]
+\newenvironment{tikzfigure}[2]{\begin{figure}[H]\centering\begin{tikzpicture}}{\end{tikzpicture}\end{figure}}

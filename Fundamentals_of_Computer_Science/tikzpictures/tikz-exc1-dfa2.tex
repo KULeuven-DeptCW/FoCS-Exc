@@ -1,6 +1,7 @@
-\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,node distance=2cm]
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=0.75]
+\def\sc{0.75}
 \foreach \x/\y/\i/\j/\a/\b in {0/0/0/0/initial/accepting, 1/0/1/1/, 2/0/2/0/accepting/, 3/0/3/1/, 4/0/4/0/accepting/, 5/0/5/1/, 6/0/6/0/accepting/, 6/1/0/1/accepting/, 5/1/1/0/accepting/, 4/1/2/1/, 3/1/3/0/accepting/, 2/1/4/1/, 1/1/5/0/accepting/, 0/1/6/1/} {
-  \node[state,\a,\b]   (q\i\j) at (1.5*\x,-1.5*\y) {$q_{\i,\j}$};
+  \node[state,\a,\b,scale=\sc]   (q\i\j) at (1.5*\x,-1.5*\y) {$q_{\i,\j}$};
 }
 \foreach \ia/\ja/\ib/\jb in {0/0/1/1,1/1/2/0,2/0/3/1,3/1/4/0,4/0/5/1,5/1/6/0,6/0/0/1,0/1/1/0,1/0/2/1,2/1/3/0,3/0/4/1,4/1/5/0,5/0/6/1,6/1/0/0} {
   \path[->] (q\ia\ja) edge node {$a$} (q\ib\jb);

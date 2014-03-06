@@ -1,11 +1,12 @@
-\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,node distance=2cm]
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=0.75]
+\def\sc{0.75}
 \foreach \i in {0,1} {
   \foreach \j in {1,2} {
-    \node[state]   (q\i\j) at (1.5*\j,-1.5*\i) {$q_{\i,\j}$};
+    \node[state,scale=\sc]   (q\i\j) at (1.5*\j,-1.5*\i) {$q_{\i,\j}$};
   }
 }
-\node[state,accepting,initial] (q00) at (0,0) {$q_{0,0}$};
-\node[state] (q10) at (0,-1.5) {$q_{1,0}$};
+\node[state,accepting,initial,scale=\sc] (q00) at (0,0) {$q_{0,0}$};
+\node[state,scale=\sc] (q10) at (0,-1.5) {$q_{1,0}$};
 \foreach \j in {0,1,2} {
   \path[->] (q0\j) edge[bend left] node {$0$} (q1\j);
   \path[->] (q1\j) edge[bend left] node {$0$} (q0\j);

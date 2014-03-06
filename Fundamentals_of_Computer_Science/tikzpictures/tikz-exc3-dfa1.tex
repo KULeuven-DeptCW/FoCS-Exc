@@ -1,0 +1,17 @@
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=1.5*0.75]
+\def\sc{0.75}
+\def\dy{1.5}
+\node[state,initial,scale=\sc]   (qi) at (0,0) {$q_{i}$};
+\node[state,accepting,scale=\sc]   (qa) at (4,0) {$q_{a}$};
+\foreach \y/\c/\alt in {1.5/a/{b,c,d},0.5/b/{a,c,d},-0.5/c/{a,b,d},-1.5/d/{a,b,c}} {
+  \foreach \i in {0,1,2} {
+    \node[state,scale=\sc]   (q\c\i) at (\i+1,\dy*\y) {$q_{\c,\i}$};
+    \path[->] (q\c\i) edge[loop above] node {$\alt$} ();
+  }
+  \path[->] (qi) edge node {$\epsilon$} (q\c0);
+  \path[->] (q\c2) edge node {$\epsilon$} (qa);
+  \foreach \i/\j in {0/1,1/2} {
+    \path[->] (q\c\i) edge node {$\c$} (q\c\j);
+  }
+}
+\end{tikzpicture}

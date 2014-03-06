@@ -1,12 +1,15 @@
 \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=0.75]
 \def\sc{0.75}
-\node[state,initial,scale=\sc]   (q_i) at (0.0,0) {$q_0$};
-\node[state,accepting,scale=\sc] (q_f) at (4,0) {$q_3$};
-\foreach \y/\c in {0/a,1/b,2/c,3/d} {
-  \node[state,scale=\sc] (q_\c) at (2,-\y+1.5) {$q_{\c}$};
-  \path[->] (q_i)  edge node {$\c$} (q_\c);
-  \path[->] (q_\c) edge node {$\c$} (q_f);
+\node[state,initial,scale=\sc]   (q00) at (0,0) {$q_{0,0}$};
+\node[state,scale=\sc,accepting]   (q10) at (2,0) {$q_{1,0}$};
+\node[state,scale=\sc]   (q01) at (0,2) {$q_{0,1}$};
+\node[state,scale=\sc]   (q11) at (2,2) {$q_{1,1}$};
+\foreach \y in {0,1} {
+  \foreach \xa/\xb in {0/1} {
+    \path[->] (q\y\xa) edge[bend left] node {$a$} (q\y\xb);
+    \path[->] (q\xa\y) edge[bend left] node {$b$} (q\xb\y);
+    \path[->] (q\y\xb) edge[bend left] node {$a$} (q\y\xa);
+    \path[->] (q\xb\y) edge[bend left] node {$b$} (q\xa\y);
+  }
 }
-\path[->] (q_i) edge [loop above] node {$a,b,c,d$} ();
-\path[->] (q_f) edge [loop above] node {$a,b,c,d$} ();
 \end{tikzpicture}

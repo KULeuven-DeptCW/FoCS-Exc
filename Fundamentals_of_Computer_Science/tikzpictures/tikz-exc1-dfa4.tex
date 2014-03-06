@@ -1,0 +1,22 @@
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=1.5*0.75]
+\def\sc{0.75}
+\foreach \x in {0,1,2} {
+  \foreach \y in {1,2} {
+    \node[state,scale=\sc] (q\x\y) at (\x,\y) {$q_{\x,\y}$};
+  }
+}
+\foreach \x in {1,2} {
+  \node[state,scale=\sc] (q\x0) at (\x,0) {$q_{\x,0}$};
+}
+\node[state,initial,scale=\sc] (q00) at (0,0) {$q_{0,0}$};
+\node[state,accepting,scale=\sc] (q32) at (3,2) {$q_a$};
+\path[->] (q32) edge[loop below] node {$a,b$} ();
+\foreach \x/\xb in {0/1,1/2,2/3} {
+  \path[->] (q\x2) edge node {$b$} (q\xb2);
+  \path[->] (q\x0) edge[loop below] node {$a$} ();
+  \foreach \ya/\yb in {0/1,1/2} {
+    \path[->] (q\x\ya) edge node {$b$} (q\x\yb);
+    \path[->] (q\x\yb) edge[bend left] node {$a$} (q\x0);
+  }
+}
+\end{tikzpicture}

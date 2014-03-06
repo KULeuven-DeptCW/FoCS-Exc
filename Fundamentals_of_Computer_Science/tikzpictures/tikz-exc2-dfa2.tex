@@ -1,0 +1,15 @@
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=0.75]
+\def\sc{0.75}
+\node[state,initial,scale=\sc]   (q00) at (0,0) {$q_{0,0}$};
+\node[state,scale=\sc,accepting]   (q10) at (2,0) {$q_{1,0}$};
+\node[state,scale=\sc]   (q01) at (0,2) {$q_{0,1}$};
+\node[state,scale=\sc]   (q11) at (2,2) {$q_{1,1}$};
+\foreach \y in {0,1} {
+  \foreach \xa/\xb in {0/1} {
+    \path[->] (q\y\xa) edge[bend left] node {$a$} (q\y\xb);
+    \path[->] (q\xa\y) edge[bend left] node {$b$} (q\xb\y);
+    \path[->] (q\y\xb) edge[bend left] node {$a$} (q\y\xa);
+    \path[->] (q\xb\y) edge[bend left] node {$b$} (q\xa\y);
+  }
+}
+\end{tikzpicture}

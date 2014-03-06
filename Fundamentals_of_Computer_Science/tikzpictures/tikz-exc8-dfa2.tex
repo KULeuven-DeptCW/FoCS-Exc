@@ -1,0 +1,16 @@
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=1.5]
+\def\sc{0.75}
+\node[state,initial,scale=\sc] (q0) at (0,0) {$q_i$};
+\node[state,accepting,scale=\sc] (q3) at (6,0) {$q_f$};
+\foreach \i in {1,2} {
+  \node[state,scale=\sc] (q\i) at (2*\i,0) {$q_{\i}$};
+}
+\foreach \i/\j in {0/1,1/2,2/3} {
+  \node[state,scale=\sc] (q\i0) at (2*\i+1,0.5) {$q_{\i,0}$};
+  \node[state,scale=\sc] (q\i1) at (2*\i+1,-0.5) {$q_{\i,1}$};
+  \path[->] (q\i) edge node[scale=\sc] {$0$} (q\i0);
+  \path[->] (q\i) edge node[scale=\sc] {$1$} (q\i1);
+  \path[->] (q\i0) edge node[scale=\sc] {$1$} (q\j);
+  \path[->] (q\i1) edge node[scale=\sc] {$0$} (q\j);
+}
+\end{tikzpicture}

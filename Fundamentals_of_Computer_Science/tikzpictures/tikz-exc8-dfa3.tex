@@ -1,7 +1,14 @@
 \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=1.5]
 \def\sc{0.75}
 \node[state,initial,accepting,scale=\sc] (qi) at (0,0) {$q_i$};
-\node[state,accepting,scale=\sc] (q1) at (1,0) {$q_1$};
+\node[state,scale=\sc] (q1) at (1,0) {$q_1$};
+\node[state,scale=\sc] (q2) at (1,1) {$q_2$};
+\node[state,scale=\sc] (q3) at (2,0) {$q_3$};
 \path[->] (qi) edge[loop above] node[scale=\sc] {$0$} ();
 \path[->] (qi) edge node[scale=\sc] {$1$} (q1);
+\path[->] (q1) edge node[scale=\sc] {$1$} (q3);
+\path[->] (q3) edge[bend left] node[scale=\sc] {$1$} (qi);
+\path[->] (q1) edge[bend left] node[scale=\sc] {$0$} (q2);
+\path[->] (q2) edge[loop above] node[scale=\sc] {$0$} ();
+\path[->] (q2) edge[bend left] node[scale=\sc] {$1$} (q1);
 \end{tikzpicture}

@@ -1,0 +1,4 @@
+\ProvidesPackage{proofenv}
+\RequirePackage{amsthm}
+
+\newcommand{\newproof}[3]{\newenvironment{#1}{\par\normalfont\topsep6\p@\@plus6\p@ \trivlist\item[\hskip\labelsep\itshape#2\@addpunct{.}]\ignorespaces}{#3\endtrivlist}}

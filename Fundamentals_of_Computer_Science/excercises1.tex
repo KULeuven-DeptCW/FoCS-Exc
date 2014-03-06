@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage{../brackets,../assignment-en,../importsreferences-en}
+\usepackage{../brackets,../proofenv,../assignment-en,../importsreferences-en}
 \usetikzlibrary{automata,calc,fit,shapes,arrows}
 
 \title{Fundamentals of Computer Science\\Oplossingen reeks 1}
@@ -46,13 +46,9 @@ Find NFAs for the following languages:
 \begin{exercise}
 Construct a nondeterministic finite automaton and an equivalent deterministic one that accept those sequences over the alphabet $\accl{a,b,c,d}$ such that at least one symbol appears precisely twice in the sequence.
 \begin{answer}
-\begin{figure}[H]
-\centering
-\importtikzsubfigure{exc3-dfa1}{NFA}
-\importtikzsubfigure{exc3-dfa2}{DFA}
-\caption{Exercise 3}
-\figlab{exc3}
-\end{figure}
+See \figref{exc3-dfa1} for the NFA and \figref{exc3-dfa2} for the DFA.
+\importtikzfigure{exc3-dfa1}{Exercise 3: NFA}
+\importtikzfigure{exc3-dfa2}{Exercise 3: DFA}
 \end{answer}
 \end{exercise}
 \begin{exercise}

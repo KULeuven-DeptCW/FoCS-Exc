@@ -2,13 +2,12 @@
 \RequirePackage{amsmath,amsthm,amsfonts,hyperref,makeidx,booktabs,tikz,qtree,../bnf,../brackets}
 \usetikzlibrary{automata}
 \RequirePackage{fullpage,float}
-\RequirePackage[dutch]{babel}
 \theoremstyle{definition}
 \newtheorem{question}{Question}
 \newtheorem{exercise}{Exercise}
-\newtheorem{bonus}{Bonus question}[question]
-\newtheorem{answer}{Answer}[question]
+\newproof{bonus}{Bonus question}{$\diamond$}
+\newproof{answer}{Answer}{$\diamond$}
 \theoremstyle{remark}
-\newtheorem{hint}{Hint}[question]
-\newtheorem{example}{Example}[question]
+\newproof{hint}{Hint}{$\diamond$}
+\newproof{example}{Example}{$\diamond$}
 \newenvironment{tikzfigure}[2]{\begin{figure}[H]\centering\begin{tikzpicture}}{\end{tikzpicture}\end{figure}}

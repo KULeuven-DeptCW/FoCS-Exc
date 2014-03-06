@@ -1,23 +1,28 @@
-\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=0.75]
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=1]
 \def\sc{0.5}
 \foreach \a in {0,1,2,3} {
   \foreach \b in {0,1,2,3} {
     \foreach \c in {0,1,2,3} {
       \foreach \d in {0,1,2,3} {
-	\node[state,scale=\sc] (q\a\b\c\d) at (4*\a+\c,4*\b+\d) {$q_{\a,\b}^{\c,\d}$};
+        \coordinate (TMP) at (4.25*\a+\c,4.25*\b+\d);
+        \ifthenelse{\a = 2 \OR \b = 2 \OR \c = 2 \OR \d = 2}{\node[state,scale=\sc,accepting] (q\a\b\c\d) at (TMP) {$q_{\a,\b}^{\c,\d}$};}{\node[state,scale=\sc] (q\a\b\c\d) at (TMP) {$q_{\a,\b}^{\c,\d}$};}
       }
     }
   }
 }
 \foreach \ea in {0,1,2,3} {
-  \foreach \eb in {0,1,2,3} {
-    \foreach \ec in {0,1,2,3} {
+  \foreach \eb/\bb in {0/bend left,1/bend right,2/bend left,3/bend right} {
+    \foreach \ec/\bc in {0/bend left,1/bend right,2/bend left,3/bend right} {
       \foreach \oda/\odb in {0/1,1/2,2/3} {
 	\path[->] (q\ea\eb\ec\oda) edge node[scale=\sc]{$d$} (q\ea\eb\ec\odb);
 	\path[->] (q\ea\eb\oda\ec) edge node[scale=\sc]{$c$} (q\ea\eb\odb\ec);
-	\path[->] (q\ea\oda\eb\ec) edge[bend left] node[scale=\sc]{$b$} (q\ea\odb\eb\ec);
-	\path[->] (q\oda\ea\eb\ec) edge[bend left] node[scale=\sc]{$a$} (q\odb\ea\eb\ec);
+ 	\path[very thin,->] (q\ea\oda\eb\ec) edge[\bc,looseness=0.6] node[scale=\sc]{$b$} (q\ea\odb\eb\ec);
+ 	\path[very thin,->] (q\oda\ea\eb\ec) edge[\bb,looseness=0.6] node[scale=\sc]{$a$} (q\odb\ea\eb\ec);
       }
+      \path[->] (q\ea\eb\ec3) edge[in=85,out=110,loop] node[scale=\sc]{$d$} ();
+      \path[->] (q\ea\eb3\ec) edge[in=-20,out=5,loop] node[scale=\sc]{$c$} ();
+      \path[->] (q\ea3\eb\ec) edge[in=15,out=40,loop] node[scale=\sc]{$b$} ();
+      \path[->] (q3\ea\eb\ec) edge[in=50,out=75,loop] node[scale=\sc]{$a$} ();
     }
   }
 }

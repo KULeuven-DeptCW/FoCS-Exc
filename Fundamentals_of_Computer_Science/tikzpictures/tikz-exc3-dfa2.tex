@@ -12,7 +12,11 @@
 \foreach \ea in {0,1,2,3} {
   \foreach \eb in {0,1,2,3} {
     \foreach \ec in {0,1,2,3} {
-      \foreach \od in {0/1,1/2,2/2,3} {
+      \foreach \oda/\odb in {0/1,1/2,2/3} {
+	\path[->] (q\ea\eb\ec\oda) edge node[scale=\sc]{$d$} (q\ea\eb\ec\odb);
+	\path[->] (q\ea\eb\oda\ec) edge node[scale=\sc]{$c$} (q\ea\eb\odb\ec);
+	\path[->] (q\ea\oda\eb\ec) edge[bend left] node[scale=\sc]{$b$} (q\ea\odb\eb\ec);
+	\path[->] (q\oda\ea\eb\ec) edge[bend left] node[scale=\sc]{$a$} (q\odb\ea\eb\ec);
       }
     }
   }

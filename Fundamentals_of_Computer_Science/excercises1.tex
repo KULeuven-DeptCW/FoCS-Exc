@@ -48,7 +48,6 @@ Construct a nondeterministic finite automaton and an equivalent deterministic on
 \begin{answer}
 See \figref{exc3-dfa1} for the NFA and \figref{exc3-dfa2} for the DFA.
 \importtikzfigure{exc3-dfa1}{Exercise 3: NFA}
-\importtikzfigure{exc3-dfa2}{Exercise 3: DFA}
 \end{answer}
 \end{exercise}
 \begin{exercise}
@@ -72,21 +71,24 @@ The following are simplified regular expressions:
 \end{exercise}
 \begin{exercise}
 Convert the following NFA into a DFA using the subset construction:
-
-%TODO
-
+\importtikzfigure{exc5-dfa1}{NFA to convert to a DFA.}
 Clearly show which subset of $\accl{s,t,u}$ corresponds to each state of the deterministic automaton. Omit inaccessible states.
-\begin{answer}
+\begin{answer}See \figref{exc5-dfa2}
+\importtikzfigure{exc5-dfa2}{The resulting DFA.}
 \end{answer}
 \end{exercise}
 \begin{exercise}
-Minimise the following DFA using the quotient construction:
+Minimize the following DFA using the quotient construction:
+\importtabulartable{exc6-tbl1}{The original DFA.}
 \begin{answer}
+We start with the partitioning $\accl{\accl{1,2,5,6,7,8},\accl{3,4}}$. This introduces conflicts for $\tupl{1,2}$, $\tupl{1,5}$, $\tupl{1,8}$. We solve this by introducing a new partition containing the last element of each tuple, thus $\accl{\accl{1,6,7},\accl{2,5,8},\accl{3,4}}$. The new conflict is $\tupl{1,7}$, we can however omit this partition since no other partition points to $7$, all problems are resolved and we obtain \tblref{exc6-tbl2}.
+\importtabulartable{exc6-tbl2}{The final DFA.}
 \end{answer}
 \end{exercise}
 \begin{exercise}
 Convert the DFA from the previous question into a regular expression (use either original DFA or quotient automaton).
 \begin{answer}
+The obtained regular expression is $a^{\star}b\brak{a^{\star}\brak{b\brak{a|ba^{\star}b}}^{\star}}^{\star}$
 \end{answer}
 \end{exercise}
 \begin{exercise}
@@ -97,7 +99,15 @@ Convert the following regular expressions into DFAs:
  \item $\brak{0\cup 1\brak{01^{\star}0}^{\star}1}^{\star}$.
 \end{enumerate}
 Try to simplify as much as possible.
-\begin{answer}
+\begin{answer}See \figref{exc8}.
+\begin{figure}[H]
+\centering
+\importtikzsubfigure{exc8-dfa1}{}
+\importtikzsubfigure{exc8-dfa2}{}
+\importtikzsubfigure{exc8-dfa3}{}
+\caption{Exercise 1}
+\figlab{exc8}
+\end{figure}
 \end{answer}
 \end{exercise}
 \begin{exercise}
@@ -160,4 +170,5 @@ Which is equivalent to $w^R=v_lv_{l-1}\ldots v_1u_ku_{k-1}\ldots u_1$ and thus b
 
 \end{answer}
 \end{exercise}
+\importtikzfigure{exc3-dfa2}{Exercise 3: DFA}
 \end{document}

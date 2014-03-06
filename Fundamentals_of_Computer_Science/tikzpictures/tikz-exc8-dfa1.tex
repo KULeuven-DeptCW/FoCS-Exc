@@ -1,0 +1,14 @@
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=1.5]
+\def\sc{0.75}
+\node[state,initial,scale=\sc] (qi) at (0,0) {$q_i$};
+\foreach \i/\l in {0/loop below,1/loop above} {
+  \node[state,scale=\sc] (q\i0) at (1,\i-0.5) {$q_{\i,0}$};
+  \path[->] (qi) edge node[scale=\sc] {$\i$} (q\i0);
+  \node[state,accepting,scale=\sc] (q\i1) at (2,\i-0.5) {$q_{\i,1}$};
+  \path[->] (q\i0) edge node[scale=\sc] {$\i$} (q\i1);
+  \path[->] (q\i1) edge[\l] node[scale=\sc] {$\i$} ();
+}
+\foreach \i/\j/\b in {0/1/bend right,1/0/bend left} {
+  \path[->] (q\i1) edge[\b] node[scale=\sc] {$\j$} (q\j0);
+}
+\end{tikzpicture}

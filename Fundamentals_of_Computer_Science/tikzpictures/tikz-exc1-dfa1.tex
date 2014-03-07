@@ -5,9 +5,13 @@
 \node[state,scale=\sc]           (q_2) at (3.0,0) {$q_2$};
 \node[state,accepting,scale=\sc] (q_3) at (4.5,0) {$q_3$};
 
-\path[->] (q_0) edge [loop above] node {$4,8,1$} ()
+\path[->] (q_0) edge [loop above] node {$1,8$} ()
           (q_0) edge              node {$4$}     (q_1)
+          (q_1) edge [bend right] node[above] {$1$}     (q_0)
+          (q_1) edge [loop above] node {$4$}     ()
           (q_1) edge              node {$8$}     (q_2)
           (q_2) edge              node {$1$}     (q_3)
-          (q_3) edge [loop above] node {$4,8,1$} ();
+          (q_2) edge [bend right] node[above] {$4$}     (q_1)
+          (q_2) edge [bend left]  node {$8$}     (q_0)
+          (q_3) edge [loop above] node {$1,4,8$} ();
 \end{tikzpicture}

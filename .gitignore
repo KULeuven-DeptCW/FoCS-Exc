@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.backup
 *.*~*
 *~
@@ -20,3 +21,37 @@
 *.url
 *.svn
 *.toc
+=======
+*.acn
+*.acr
+*.alg
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.fdb_latexmk
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lot
+*.maf
+*.mtc
+*.mtc0
+*.nav
+*.nlo
+*.out
+*.pdfsync
+*.ps
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdy
+*.tdo
+>>>>>>> 21fc931db23fdab0e38473e674de6d72dc3e28eb

@@ -5,7 +5,8 @@
     \foreach \c in {0,1,2,3} {
       \foreach \d in {0,1,2,3} {
         \coordinate (TMP) at (4.25*\a+\c,4.25*\b+\d);
-        \ifthenelse{\a = 2 \OR \b = 2 \OR \c = 2 \OR \d = 2}{\node[state,scale=\sc,accepting] (q\a\b\c\d) at (TMP) {$q_{\a,\b}^{\c,\d}$};}{\node[state,scale=\sc] (q\a\b\c\d) at (TMP) {$q_{\a,\b}^{\c,\d}$};}
+        \ifthenelse{\a = 2 \OR \b = 2 \OR \c = 2 \OR \d = 2}{\node[state,scale=\sc,accepting] (q\a\b\c\d) at (TMP) {$q_{\a,\b}^{\c,\d}$};}{
+        \ifthenelse{\a = 0 \AND \b = 0 \AND \c = 0 \AND \d = 0}{\node[state,initial,scale=\sc] (q\a\b\c\d) at (TMP) {$q_{\a,\b}^{\c,\d}$};}{\node[state,scale=\sc] (q\a\b\c\d) at (TMP) {$q_{\a,\b}^{\c,\d}$};}}
       }
     }
   }

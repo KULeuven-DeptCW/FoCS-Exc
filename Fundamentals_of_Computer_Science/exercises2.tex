@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{../brackets,../proofenv,../assignment-en,../importsreferences-en}
+\usetikzlibrary{automata,calc,fit,shapes,arrows}
+
+\title{Fundamentals of Computer Science\\Solutions \#2}
+\author{prof. B. Demoen\\W. Van Onsem}
+\date{Maart 2014}
+\begin{document}
+\maketitle
+\begin{exercise}
+Give a context-free grammar that generates the language $L=\condset{a^ib^jc^k}{i=j\vee j=k \xwhere i,j,k\geq0}$.
+\end{exercise}
+
+\begin{exercise}
+Give a pushdown automaton for the following languages:
+\begin{enumerate}
+ \item $\mbox{PAREN}_2$ of balanced strings of parentheses of two types $()$ and $[]$.
+ \item $\condset{a^ib^jc^k}{i,j,k\geq0\wedge \brak{i=j\vee i=k}}$.
+ \item The complement of the language ${a^nb^n|n\geq 0}$.
+ \item $\condset{w\in{0,1}^{\star}}{w=w^R, \mbox{that is, $w$ is a palindrome.}}$
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Use the pumping lemma for context free languages to show that the following are not context free:
+\begin{enumerate}
+ \item $\condset{a^nb^nc^n}{n\geq0}$.
+ \item $A = {ww|w\in\accl{0,1}^\star{}}$. Hint consider $A\cap \fun{L}{a^{\star}b^{\star}a^{\star}b^{\star}}$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Prove that every regular language is context free, by showing how to convert a regular expression directly into an equivalent context-free grammar.
+\end{exercise}
+
+\begin{exercise}
+Use derivatives to show that $abbb$ is an element of $\brak{a|b}b^{\star}a^{\star}$, and that $abbab$ is not.
+\end{exercise}
+
+\begin{exercise}
+Use derivatives to generate a DFA for $\brak{a|b}b^{\star}a^{\star}$.
+\end{exercise}
+
+\begin{exercise}
+Given the following automata.
+a
+b
+s
+a , b
+t
+(a) Express the language accepted by the automata as a series of linear equations.
+(b) Solve the equations to produce a regular expression describing the accepted language.
+
+\end{exercise}
+
+\begin{exercise}
+Give a Turing machine (in full detail) to perform
+\begin{enumerate}
+ \item addition
+ \item multiplication
+\end{enumerate}
+Assume that the input string is of the form $a^n\#a^m$. In the first case, the result, namely the string on the TM when it halts, should be $a^{n+m}$. In the second case, the result should be $a^{n\cdot m}$.
+\paragraph{}
+The TM should reject if the input string is not of the correct form.
+\end{exercise}
+\end{document}

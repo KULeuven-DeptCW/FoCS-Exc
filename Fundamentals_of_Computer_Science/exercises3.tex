@@ -2,11 +2,54 @@
 \usepackage{../brackets,../proofenv,../assignment-en,../importsreferences-en}
 \usetikzlibrary{automata,calc,fit,shapes,arrows}
 
-\title{Fundamentals of Computer Science\\Solutions \#2}
+\title{Fundamentals of Computer Science\\Solutions \#3}
 \author{prof. B. Demoen\\W. Van Onsem}
 \date{Maart 2014}
 \begin{document}
 \maketitle
 \begin{exercise}
+Give Turing machines for the following:
+\begin{enumerate}
+ \item Decide $L=\condset{w\in\accl{0,1}^{\star}}{\mbox{$L$ does not contain twice as many $0$s as $1$s}}$.
+ \item Given input $a^m$, the TM halts with $a^{m^2}$ on its tape.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Design a Turing machine to compute the function $\funm{max}{x,y}=\mbox{the larger of $x$ and $y$}$.
+\end{exercise}
+
+\begin{exercise}
+Consider a Turing machine model that uses a $2$-dimensional tape, corresponding to the upper right quadrant of the plane. The head of such a Turing machine can move to the right, left, up or down.
+\paragraph{}
+Sketch a proof that such a model does not add extra computing power; that is, the class of languages recognized by such Turing machines is the same as the class recognized by basic Turing machines.
+\paragraph{}
+Be careful to define what the language of the $2$-d TM is. Discuss how to formalize this model.
+\end{exercise}
+
+\begin{exercise}
+Is is decidable for TM $M$ whether $\fun{L}{M}=\brak{\fun{L}{M}}^R$, that is, is the language of $M$ equal to its reverse?
+\end{exercise}
+
+\begin{exercise}
+Show that $∼HP=\condset{M \#x}{\mbox{$M$ does not halt on $x$}}$ is not decidable.
+\end{exercise}
+
+\begin{exercise}
+Determine whether the following problems are decidable or undecidable. Give proof.
+\begin{enumerate}
+ \item Given a TM $M$ and a string $y$, does $M$ write the symbol $\#$ on its tape on input $y$?
+ \item Given a context-free grammar $G$, does $G$ generate all strings except $\epsilon$?
+ \item Given a TM $M$ and a string $y$, does $M$ ever write a non-blank symbol on its tape on input $y$?
+ \item Given a TM $M$ and a string $y$, does the machine ever attempt to move its head left at any point during the computation on $y$?
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Determine whether the following languages are decidable or not. If so, give a Turing machine for deciding it. If not, give a proof. Assume that the input $M$ is a description of a Turing machine.
+\begin{enumerate}
+ \item $\condset{\tupl{M}}{\mbox{$M$ accepts at least two strings of different length.}}$
+ \item $\condset{\tupl{M,w}}{\mbox{$M$ accepts $w$ and rejects $w^R$}}$.
+\end{enumerate}
 \end{exercise}
 \end{document}

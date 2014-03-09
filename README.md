@@ -7,11 +7,11 @@ Content
 -------
 Exercise sessions:
 
- 1. Finite state machines and regular expressions
- 2. Context-free grammars
- 3. Turing machines
- 4. Graph theory
- 5. Computational complexity.
+ 1. Finite state machines and regular expressions (March 7)
+ 2. Context-free grammars (March 21)
+ 3. Turing machines (April 25)
+ 4. Graph theory (May 2)
+ 5. Computational complexity (May 9)
 
 Building
 --------

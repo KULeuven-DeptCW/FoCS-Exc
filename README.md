@@ -15,12 +15,41 @@ Exercise sessions:
 
 Building
 --------
-You can generate a pdf of the the exercise sessions by running
+
+### Git?
+
+Without going into detail, git is a subversioning system that allows distributed collaboration.
+
+You can checkout a git repository by installing git:
+
+```
+sudo apt-get install git
+```
+
+Next you can clone a git repository, for instance this one by running
+
+```
+git clone git@github.com:KommuSoft/FoCS-Exc.git
+```
+
+### LaTeX?
+
+LaTeX is a language designed to enable a writer to generate all kinds of publications, without having to worry about the typesetting.
+
+In order to convert the documents to a readable format, you need a LaTeX compiler:
+```
+sudo apt-get install texlive-full
+```
+
+You can then generate a pdf by running the LaTeX compiler.
+
+In order to make this more convenient, a `Makefile` has been added to the repository. By running the following command in the directory of the repository:
 ```
 make Fundamentals_of_Computer_Science/exercisesn.pdf
 ```
+Exercise session `n` is generated. You need to replace `n` with a number from `1` to `5` (see list above).
 
-And replacing `n` with the index number. In order to generate all .pdf files, run
+In order to generate all `.pdf` files, run
 ```
 make
 ```

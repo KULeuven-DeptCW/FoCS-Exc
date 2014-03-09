@@ -8,6 +8,44 @@
 \begin{document}
 \maketitle
 \begin{exercise}
+A permutation on a set $\accl{1,\ldots,k}$ is a one-to-one, onto function on this set. When $p$ is a permutation, $p^t$ means the composition of $p$ with itself $t$ times. Let
+\begin{equation}
+\mbox{PERM-POWER}=\condset{\tupl{p, q, t}}{p = q^t\mbox{ where $p$ and $q$ are permutations on $\accl{1,\ldots,k}$ and $t$ is a binary integer}}
+\end{equation}
+Show that $\mbox{PERM-POWER}\in P$.
+\begin{note}
+Note that the most obvious algorithm does not run within polynomial time.
+\end{note}
+\begin{hint}
+First try it where $t$ is a power of $2$.
+\end{hint}
+\end{exercise}
 
+\begin{exercise}
+Show that NP is closed under the Kleene star operation. That is, if $L\in NP$, then $L^{\star}\in NP$.
+\end{exercise}
+
+\begin{exercise}
+Let $\mbox{DOUBLE-SAT}=\condset{\tupl{\phi}}{\phi\mbox{ has at least two satisfying assignments}}$. Show that $\mbox{DOUBLE-SAT}\in\mbox{NP-complete}$.
+\end{exercise}
+
+\begin{exercise}
+A colouring of a graph is an assignment of colours to its vertices so that no two adjacent vertices are assigned the same colour. Let
+\begin{equation}
+\mbox{3COLOUR}=\condset{\tupl{G}}{\mbox{the vertices of $G$ can be coloured with three colours such that no two vertices joined by an edge have the same colour.}}
+\end{equation}
+Show that $\mbox{3COLOUR}$ is $\mbox{NP-complete}$.
+\begin{hint}
+The reduction will be of the form $\mbox{3SAT}\leq_p\mbox{3COLOUR}$. Use the subgraphs depicted on figure \figref{}.
+\paragraph{}
+The three colours correspond to true ($T$), false ($F$), and a third one (gray) to help enforce that other nodes are coloured $T$ or $F$. Each variable is modeled using the two nodes marked $w$ and $\neg w$. The first graph is used to enforce that $w$ and $\neg w$ are assigned values $T$ and $F$ or $F$ and $T$. The second graph is used to denote binary logical OR between the two legs $l$ and $r$, which may be either variables or other the roots ($\vee$) of other logical ORs. To ensure that an OR is coloured T, every root $\vee$-node is connected to $F$ and $N$.
+\begin{example}
+For example, the graph on \figref{} corresponds to the encoding of $w\vee\neg v$.
+\end{example}
+\end{hint}
+\end{exercise}
+
+\begin{exercise}
+Let $\mbox{EQ}_{\mbox{\small{REX}}}=\condset{\tupl{R,S}}{\mbox{$R$ and $S$ are equivalent regular expressions}}$. Show that $\mbox{EQ}_{\mbox{\small{REX}}}\in\mbox{PSPACE}$.
 \end{exercise}
 \end{document}

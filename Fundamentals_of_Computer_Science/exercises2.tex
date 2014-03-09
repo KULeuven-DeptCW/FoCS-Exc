@@ -22,6 +22,9 @@ Give a pushdown automaton for the following languages:
  \item The complement of the language ${a^nb^n|n\geq 0}$.
  \item $\condset{w\in{0,1}^{\star}}{w=w^R, \mbox{that is, $w$ is a palindrome.}}$
 \end{enumerate}
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
@@ -56,10 +59,16 @@ We can prove this by induction on the structure of the regular expression. For e
 
 \begin{exercise}
 Use derivatives to show that $abbb$ is an element of $\brak{a|b}b^{\star}a^{\star}$, and that $abbab$ is not.
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Use derivatives to generate a DFA for $\brak{a|b}b^{\star}a^{\star}$.
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
@@ -71,9 +80,13 @@ Given the following automata.
  \item Express the language accepted by the automata as a series of linear equations.
  \item Solve the equations to produce a regular expression describing the accepted language.
 \end{enumerate}
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
+\exclab{exc20}
 Give a Turing machine (in full detail) to perform
 \begin{enumerate}
  \item addition
@@ -82,5 +95,15 @@ Give a Turing machine (in full detail) to perform
 Assume that the input string is of the form $a^n\#a^m$. In the first case, the result, namely the string on the TM when it halts, should be $a^{n+m}$. In the second case, the result should be $a^{n\cdot m}$.
 \paragraph{}
 The TM should reject if the input string is not of the correct form.
+\begin{answer}
+See \figref{exc20}.
+\begin{figure}[hbt]
+\centering
+\importtikzsubfigure{exc20-dfa1}{Addition.}
+\importtikzsubfigure{exc20-dfa2}{Multiplication.}
+\caption{Solution of \excref{exc20}.}
+\figlab{exc20}
+\end{figure}
+\end{answer}
 \end{exercise}
 \end{document}

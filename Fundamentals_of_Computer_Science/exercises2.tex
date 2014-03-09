@@ -9,6 +9,9 @@
 \maketitle
 \begin{exercise}
 Give a context-free grammar that generates the language $L=\condset{a^ib^jc^k}{i=j\vee j=k \xwhere i,j,k\geq0}$.
+\begin{answer}This can be generated with the following context-free grammar:
+\importgram{exc12i1}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
@@ -25,12 +28,25 @@ Give a pushdown automaton for the following languages:
 Use the pumping lemma for context free languages to show that the following are not context free:
 \begin{enumerate}
  \item $\condset{a^nb^nc^n}{n\geq0}$.
- \item $A = {ww|w\in\accl{0,1}^\star{}}$. Hint consider $A\cap \fun{L}{a^{\star}b^{\star}a^{\star}b^{\star}}$.
+ \item $A=\condset{ww}{w\in\accl{0,1}^\star{}}$. Hint consider $A\cap \fun{L}{a^{\star}b^{\star}a^{\star}b^{\star}}$.
 \end{enumerate}
+\begin{answer}
+The following proves these languages are not context-free:
+\begin{enumerate}
+ \item 
+ \item 
+\end{enumerate}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Prove that every regular language is context free, by showing how to convert a regular expression directly into an equivalent context-free grammar.
+\begin{answer}
+We can prove this by induction on the structure of the regular expression. For every regular expression $E$ we define a non-terminal $N_E$, and define it as:
+\begin{enumerate}
+ \item If $E=\epsilon$, $N_E$
+\end{enumerate}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}

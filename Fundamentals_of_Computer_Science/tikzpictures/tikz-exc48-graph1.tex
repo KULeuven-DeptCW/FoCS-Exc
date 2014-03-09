@@ -1,0 +1,19 @@
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=1.5,nd/.style={draw=black,circle,scale=\sc,minimum width=0.75 cm,minimum height=1 cm},ndg/.style={nd,fill=gray}]
+\def\sc{0.75}
+\node[nd]  (R00) at (0,0)   {$T$};
+\node[ndg] (R01) at (1,0)   {};
+\node[nd]  (R02) at (2,0)   {$\neg w$};
+\node[nd]  (R03) at (3,0)   {$w$};
+\node[nd]  (R04) at (4,0)   {$l$};
+\node[nd]  (R05) at (5,0)   {$r$};
+\node[nd]  (R10) at (0.5,1) {$F$};
+\node[nd]  (R11) at (4,1)   {};
+\node[nd]  (R12) at (5,1)   {$\neg w$};
+\node[nd]  (R20) at (4.5,2) {$\vee$};
+\foreach \i/\j in {00/01,01/10,10/00,02/03,04/11,05/12,11/12,11/20,12/20} {
+  \path (R\i) edge (R\j);
+}
+\foreach \i/\j in {02/01,03/01} {
+  \path[dashed] (R\i) edge[bend right] (R\j);
+}
+\end{tikzpicture}

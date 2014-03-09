@@ -44,7 +44,12 @@ Prove that every regular language is context free, by showing how to convert a r
 \begin{answer}
 We can prove this by induction on the structure of the regular expression. For every regular expression $E$ we define a non-terminal $N_E$, and define it as:
 \begin{enumerate}
- \item If $E=\epsilon$, $N_E$
+ \item If $E=\epsilon$, \importgram{exc15i1}
+ \item If $E=a$ with $a\in\Sigma$, \importgram{exc15i2}
+ \item If $E=E_1E_2$, \importgram{exc15i3}
+ \item If $E=E_1|E_2$, \importgram{exc15i4}
+ \item If $E=\brak{E_1}^{\star}$, \importgram{exc15i5}
+ \item If $E=\phi$, \importgram{exc15i6} (no transition rule).
 \end{enumerate}
 \end{answer}
 \end{exercise}

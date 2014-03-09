@@ -8,5 +8,99 @@
 \begin{document}
 \maketitle
 \begin{exercise}
+Express the minimum and maximum degrees vertices in the graphs $K_n$ (complete graphs) and $K_{n,m}$ (complete bi-partite graphs) in terms of $n$ and $m$.
+\end{exercise}
+
+\begin{exercise}
+Specify a minimum value for $n$ in terms of $l$ and $m$ such that $K_{l,m}$ is a subgraph of $K_n$.
+\end{exercise}
+
+\begin{exercise}
+A regular graph is a graph where each vertex has the same number of neighbors, i.e. every vertex has the same degree. A regular graph with vertices of degree $k$ is called a $k$-regular graph.
+\paragraph{}
+For every $k$-regular graph is there a $\brak{k+1}$-regular graph that contains the $k$-regular graph as a subgraph? Proof or counterexample.
+\end{exercise}
+
+\begin{exercise}
+Is there a simple graph on $n$ vertices such that all vertices have distinct degrees? Is there a (general) graph with this property?
+\end{exercise}
+
+\begin{exercise}
+Is it possible to draw a graph that has a trail of length seven but no paths of length seven? If so, draw such an example. Is it possible to draw a graph that has a path of length seven but no trail of length seven? If so, draw such an example.
+\end{exercise}
+
+\begin{exercise}
+Show that for $n\in\NNN$, the graph $K_{n,n}$ has a subgraph isomorphic to $C_k$, a cycle of length $k$, for even $k\in\accl{4,\ldots,2\cdot n}$.
+\end{exercise}
+
+\begin{exercise}
+Prove that if a graph $G$ has exactly two vertices $u$ and $v$ of odd degree, then $G$ contains a path from $u$ to $v$.
+\end{exercise}
+
+\begin{exercise}
+Define a relation on graphs such that $G$ and $G'$ are related if and only if the maximum degree of $G$ is less than or equivalent to the maximum degree of $G'$. Does the relation satisfy the reflexive, transitive, and antisymmetric properties? Is it a partial order? Does it satisfy the symmetric property? Is the relation an equivalence relation?
+\footnote{\begin{description}
+ \item[reflexivity] a relation $R\subseteq A\times A$ is reflexive if and only if for all $a\in A$ we have $\tupl{a,a}\in R$.
+ \item[transitivity] a relation $R\subseteq A\times A$ is transitive if and only if for all $a,b,c\in A$ if $\tupl{a,b}\in R$ and $\tupl{b,c}\in R$ then $\tupl{a,c}\in R$.
+ \item[antisymmetry] a relation $R\subseteq A\times A$ is antisymmetric if and only if for all $a,b\in A$ if $\tupl{a,b}\in R$ and $\tupl{b,a}\in R$, then $a=b$.
+ \item[partial order] a relation is a partial order if and only if it is reflexive, transitive and antisymmetric.
+ \item[symmetry] a relation $R\subseteq A\times A$ is symmetric if and only if for all $a,b\in A$ if $\tupl{a,b}\in R$ then $\tupl{b,a}\in R$.
+ \item[equivalence relation] a relation is equivalence relation if and only if it is reflexive, symmetric and transitive.
+\end{description}}
+\end{exercise}
+
+\begin{exercise}
+It can be shown that there are exactly $11$ trees on seven vertices. Draw these eleven trees, making sure that no two are isomorphic.
+\end{exercise}
+
+\begin{exercise}
+Let $G$ be a $k$-regular bipartite graph with $k\geq2$. Show that $G$ has no cut edge (or bridge).
+\end{exercise}
+
+\begin{exercise}
+Show that if a digraph $G$ contains a directed circuit of positive length, then $G$ must contain a cycle.
+\end{exercise}
+
+\begin{exercise}
+For $k\in\NNN$, let $G$ be a connected graph that contains $2\cdot k$ vertices of odd degree. Show that there exist $k$ edge-disjoint subgraphs $G_1,\ldots,G_k$, such that
+\begin{enumerate}
+ \item $\fun{E}{G}=\fun{E}{G_1}\cup\fun{E}{G_2}\cup\ldots\cup\fun{E}{G_k}$, and
+ \item each $G_i$ has an Eulerian trail.
+\end{enumerate}
+\begin{hint}
+Consider the graph when you add k edges to form an Eulerian graph.
+\end{hint}
+\begin{note}
+Note that two subgraphs $G_1$ and $G_2$ of $G$ are edge-disjoint whenever $\fun{E}{G_1}\cap\fun{E}{G_2}=\emptyset$.
+\end{note}
+\end{exercise}
+
+\begin{exercise}
+Let $G$ be a $k$-regular bipartite graph with $k\geq2$. Show that $G$ has no cut edge (or bridge).
+\end{exercise}
+
+\begin{exercise}
+For $n\geq2$ show that the complete bipartite graph $K_{n,n}$ is a Hamiltonian graph.
+\end{exercise}
+
+\begin{exercise}
+Determine all $m,n\in\NNN$ such that the complete bipartite graph $K_{m,n}$ is Hamiltonian.
+\end{exercise}
+
+\begin{exercise}
+Let $G$ be a connected graph, let $T_1$ and $T_2$ be (the edge sets of) two spanning trees of $G$, and let $e\in T_1\setminus T_2$. Show that:
+\begin{enumerate}
+ \item there exists $f\in T_2\setminus T_1$ such that $\brak{T_1\setminus\accl{e}}\cup\accl{f}$ is a spanning tree of $G$, and
+ \item there exists $f\in T_2\setminus T_1$ such that $\brak{T_2\setminus\accl{f}}\cup\accl{e}$ is a spanning tree of $G$.
+\end{enumerate}
+\begin{note}
+Each of these two properties is called the Tree Exchange Property.
+\end{note}
+\end{exercise}
+
+\begin{exercise}
+A graph in which every vertex has even degree is called an even graph. The complement $E\setminus T$ of a spanning tree $T$ is called a cotree.
+\paragraph{}
+Show that every cotree of a connected graph $G$ is contained in a unique even subgraph of the graph.
 \end{exercise}
 \end{document}

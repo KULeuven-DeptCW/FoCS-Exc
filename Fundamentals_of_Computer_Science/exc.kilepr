@@ -680,7 +680,7 @@ ViMarks=.,0,8,[,0,8,],0,8
 CursorColumn=32
 CursorLine=0
 JumpList=
-ViMarks=.,0,15,[,0,15,],0,15
+ViMarks=.,0,0,[,0,0,],0,31
 
 [view-settings,view=0,item:grammars/exc15i4.tex]
 CursorColumn=0

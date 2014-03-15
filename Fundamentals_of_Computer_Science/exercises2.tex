@@ -115,7 +115,35 @@ Since $\fun{\delta}{\emptyset}=\emptyset\neq\epsilon$, we've shown that $abbab$ 
 \begin{exercise}
 Use derivatives to generate a DFA for $\brak{a|b}b^{\star}a^{\star}$.
 \begin{answer}
-We start with the initial state 
+We start with the initial state $q_0$ which represents $\brak{a|b}b^{\star}a^{\star}$. Since $\fun{\delta}{q_0}\neq\epsilon$, this is not an accepting state, it is however the initial state.
+\paragraph{}
+Next we calculate $\fun{D_a}{q_0}$ and $\fun{D_b}{q_0}$. We've already calculated $\fun{D_a}{q_0}=b^{\star}a^{\star}$, this is an expression we've not assigned to a state before. Therefore we introduce a new state $q_1\equiv b^{\star}a^{\star}$. And draw an arc $q_0\rightarrow^a q_1$. We've already shown that $\fun{\delta}{b^{\star}a^{\star}}=\epsilon$, therefore $q_1$ is an accepting state. We now calculate $\fun{D_b}{q_0}$:
+\begin{eqnarray}
+\fun{D_b}{\brak{a|b}b^{\star}a^{\star}}&=&\fbrk{\fun{D_b}{\brak{a|b}b^{\star}}a^{\star}}\cup\fbrk{\fun{\delta}{\brak{a|b}b^{\star}}\fun{D_b}{a^{\star}}}\\
+&=&\fbrk{\fbrk{\fun{D_b}{a|b}b^{\star}\cup\fun{\delta}{a|b}\fun{D_b}{b^{\star}}}a^{\star}}\cup\fbrk{\fun{\delta}{a|b}\fun{\delta}{b^{\star}}\fun{D_b}{a}a^{\star}}\\
+&=&\fbrk{\fbrk{\fbrk{\fun{D_b}{a}\cup\fun{D_b}{b}}b^{\star}\cup\fbrk{\fun{\delta}{a}\cup\fun{\delta}{b}}\fun{D_b}{b}b^{\star}}a^{\star}}\cup\fbrk{\fbrk{\fun{\delta}{a}\cup\fun{\delta}{b}}\epsilon\epsilon a^{\star}}\\
+&=&\fbrk{\fbrk{\fbrk{\emptyset\cup\epsilon}b^{\star}\cup\fbrk{\emptyset\cup\emptyset}\epsilon b^{\star}}a^{\star}}\cup\fbrk{\fbrk{\emptyset\cup\emptyset}\epsilon\emptyset a^{\star}}\\
+&=&\fbrk{\fbrk{\epsilon b^{\star}\cup\emptyset\epsilon b^{\star}}a^{\star}}\cup\fbrk{\emptyset\epsilon\emptyset a^{\star}}\\
+&=&\fbrk{\fbrk{b^{\star}\cup\emptyset}a^{\star}}\cup\emptyset\\
+&=&b^{\star}a^{\star}
+\end{eqnarray}
+We've already assigned this expression to $q_1$, thus we draw an arc $q_0\rightarrow^b q_1$ as well. From the previous exercise, we know that $\fun{D_a}{b^{\star}a^{\star}}=a^{\star}$ and $\fun{D_b}{b^{\star}a^{\star}}=b^{\star}a^{\star}$. Thus we draw an arc $q_1\rightarrow^b q_1$ and define $q_2=a^{\star}$. $q_2$ is an accepting state since $\fun{\delta}{q_2}=\fun{\delta}{a^{\star}}=\epsilon$.
+\paragraph{}
+We need to calculate the arcs of $q_2$ as well, in other words $\fun{D_a}{a^{\star}}$ and $\fun{D_b}{a^{\star}}$ we can recycle one result from the previous exercise and calculate the other one:
+\begin{eqnarray}
+\fun{D_a}{a^{\star}}&=&\fun{D_a}{a}a^{\star}=\epsilon a^{\star}=a^{\star}
+\end{eqnarray}
+We draw an arc $q_2\rightarrow^aq_2$, introduce a new state $q_{\emptyset}=\emptyset$ and draw an arc $q_2\rightarrow^b q_{\emptyset}$. It is clear that $\fun{\delta}{\emptyset}=\emptyset\neq\epsilon$, thus $q_{\emptyset}$ is not an accepting state.
+\paragraph{}
+Finally we need to draw arcs from $q_{\emptyset}$:
+\begin{eqnarray}
+\fun{D_a}{\emptyset}&=&\emptyset\\
+\fun{D_b}{\emptyset}&=&\emptyset
+\end{eqnarray}
+We thus define two loops: $q_{\emptyset}\rightarrow^aq_{\emptyset}$ and $q_{\emptyset}\rightarrow^bq_{\emptyset}$. Since there are no unexpanded states left, we have generated the entire DFA.
+\paragraph{}
+See \figref{exc17-dfa} for a complete DFA.
+\importtikzfigure{exc17-dfa}{The resulting DFA.}
 \end{answer}
 \end{exercise}
 

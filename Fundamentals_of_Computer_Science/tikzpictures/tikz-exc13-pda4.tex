@@ -1,0 +1,10 @@
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=1.5]
+\def\sc{0.75}
+\node[state,initial,scale=\sc] (qi) at (0,0) {$q_i$};
+\node[state,accepting,scale=\sc] (qf) at (1,0) {$q_f$};
+\path[->] (qi) edge[loop above] node[scale=\sc] {$0/\epsilon/0$} ();
+\path[->] (qi) edge[loop below] node[scale=\sc] {$1/\epsilon/1$} ();
+\path[->] (qi) edge             node[scale=\sc,above] {$0/\epsilon/\epsilon$} node[scale=\sc,below] {$1/\epsilon/\epsilon$} (qf);
+\path[->] (qf) edge[loop above] node[scale=\sc] {$0/0/\epsilon$} ();
+\path[->] (qf) edge[loop below] node[scale=\sc] {$1/1/\epsilon$} ();
+\end{tikzpicture}

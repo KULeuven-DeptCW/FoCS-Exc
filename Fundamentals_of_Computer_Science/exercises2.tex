@@ -19,11 +19,20 @@ Give a pushdown automaton for the following languages:
 \begin{enumerate}
  \item $\mbox{PAREN}_2$ of balanced strings of parentheses of two types $()$ and $[]$.
  \item $\condset{a^ib^jc^k}{i,j,k\geq0\wedge \brak{i=j\vee i=k}}$.
- \item The complement of the language ${a^nb^n|n\geq 0}$.
- \item $\condset{w\in{0,1}^{\star}}{w=w^R, \mbox{that is, $w$ is a palindrome.}}$
+ \item The complement of the language $\condset{a^nb^n}{n\geq 0}$.
+ \item $\condset{w\in\accl{0,1}^{\star}}{w=w^R, \mbox{that is, $w$ is a palindrome.}}$
 \end{enumerate}
 \begin{answer}
-
+See \figref{exc13}.
+\begin{figure}[hbt]
+\centering
+\importtikzsubfigure{exc13-pda1}{}
+\importtikzsubfigure{exc13-pda2}{}
+\importtikzsubfigure{exc13-pda3}{}
+\importtikzsubfigure{exc13-pda4}{}
+\caption{Exercise 2}
+\figlab{exc13}
+\end{figure}
 \end{answer}
 \end{exercise}
 
@@ -99,8 +108,8 @@ The TM should reject if the input string is not of the correct form.
 See \figref{exc20}.
 \begin{figure}[hbt]
 \centering
-\importtikzsubfigure{exc20-dfa1}{Addition.}
-\importtikzsubfigure{exc20-dfa2}{Multiplication.}
+\importtikzsubfigure{exc20-tm1}{Addition.}
+\importtikzsubfigure{exc20-tm2}{Multiplication.}
 \caption{Solution of \excref{exc20}.}
 \figlab{exc20}
 \end{figure}

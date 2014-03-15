@@ -1,0 +1,17 @@
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=1.5]
+\def\sc{0.75}
+\node[state,initial,accepting,scale=\sc] (qi) at (0,0) {$q_i$};
+\node[state,accepting,scale=\sc] (qb0) at (1,0.5) {$q_{b1}$};
+\node[state,accepting,scale=\sc] (qc0) at (1,-0.5) {$q_{c1}$};
+\node[state,accepting,scale=\sc] (qb1) at (2,0.5) {$q_{b2}$};
+\node[state,accepting,scale=\sc] (qc1) at (2,-0.5) {$q_{c2}$};
+\path[->] (qi)  edge[loop above]  node[scale=\sc] {$a/\epsilon/a$} ();
+\path[->] (qi)  edge node[scale=\sc] {$\epsilon/\epsilon/\epsilon$} (qb0);
+\path[->] (qi)  edge node[scale=\sc] {$\epsilon/\epsilon/\epsilon$} (qc0);
+\path[->] (qb0) edge node[scale=\sc] {$\epsilon/\epsilon/\epsilon$} (qb1);
+\path[->] (qc0) edge node[scale=\sc] {$\epsilon/\epsilon/\epsilon$} (qc1);
+\path[->] (qb0)  edge[loop above]  node[scale=\sc] {$b/a/\epsilon$} ();
+\path[->] (qc0)  edge[loop below]  node[scale=\sc] {$b/\epsilon/\epsilon$} ();
+\path[->] (qb1)  edge[loop above]  node[scale=\sc] {$c/\epsilon/\epsilon$} ();
+\path[->] (qc1)  edge[loop below]  node[scale=\sc] {$c/a/\epsilon$} ();
+\end{tikzpicture}

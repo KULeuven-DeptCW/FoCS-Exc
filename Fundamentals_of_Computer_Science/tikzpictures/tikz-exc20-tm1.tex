@@ -1,12 +1,12 @@
 \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=1.5]
 \def\sc{0.75}
-\node[state,initial,accepting,scale=\sc] (qi) at (0,0) {$q_i$};
-\node[state,scale=\sc] (q1) at (1,0) {$q_1$};
-\node[state,scale=\sc] (q2) at (2,0) {$q_2$};
-\path[->] (qi) edge[loop above] node[scale=\sc] {$0$} ();
-\path[->] (qi) edge[bend left]  node[scale=\sc] {$1$} (q1);
-\path[->] (q1) edge[bend left]  node[scale=\sc] {$1$} (qi);
-\path[->] (q1) edge[bend left]  node[scale=\sc] {$0$} (q2);
-\path[->] (q2) edge[loop right] node[scale=\sc] {$1$} ();
-\path[->] (q2) edge[bend left]  node[scale=\sc] {$0$} (q1);
+\node[state,initial,scale=\sc] (qi) at (0,0) {$q_i$};
+\node[state,scale=\sc] (qs) at (1,0) {$q_m$};
+\node[state,scale=\sc] (qr) at (2,0) {$q_r$};
+\node[state,accepting,scale=\sc] (qf) at (3,0) {$q_f$};
+\path[->] (qi) edge[loop above] node[scale=\sc] {$a/a/R$}  ();
+\path[->] (qi) edge             node[scale=\sc] {$\#/a/R$} (qs);
+\path[->] (qs) edge[loop above] node[scale=\sc] {$a/a/R$}  ();
+\path[->] (qs) edge             node[scale=\sc] {$\textvisiblespace/\textvisiblespace/L$}  (qr);
+\path[->] (qr) edge             node[scale=\sc] {$a/\textvisiblespace/L$}  (qf);
 \end{tikzpicture}

@@ -45,8 +45,8 @@ Use the pumping lemma for context free languages to show that the following are 
 \begin{answer}
 The following proves these languages are not context-free:
 \begin{enumerate}
- \item Given the string $s=a^pb^pc^p$ with $p$ the pump length of the language, then $s$ can be written as $s=uvxyz$ such that $\abs{vy}>0$ and $\abs{vxy}\leq p$. Now there are several options how we can divide $s$ into $uvxyz$. But it is clear that $v$ and $y$ can only consist out of one type of characters (although the characters of $v$ and $y$ may differ). Say that both $v,y\in a^{\star}$, because $\abs{vy}=l>0$, one can generate a string of the form $a^{p+l}b^pc^p\notin L$. Analogue one can proof this for $v,y\in b^{\star}$ and $v,y\in c^{\star}$.
- \item 
+ \item Given the string $s=a^pb^pc^p$ with $p$ the pump length of the language. Then $s$ can be written as $s=uvxyz$ such that $\abs{vy}>0$ and $\abs{vxy}\leq p$. Now there are several options how we can divide $s$ into $uvxyz$. But it is clear that $v$ and $y$ can only consist out of one type of characters (although the characters of $v$ and $y$ may differ). Say that both $v,y\in a^{\star}$, because $\abs{vy}=l>0$, one can generate a string of the form $a^{p+l}b^pc^p\notin L$. Analogue one can proof this for $v,y\in b^{\star}$ and $v,y\in c^{\star}$. Another case is the one where $v\in a^{\star}$ and $y\in b^{\star}$ with $\abs{v}=k$ and $\abs{y}=l$ such that $\abs{vy}=k+l=m>0$. In that case one can generate a string $uv^2xy^2z=a^{p+l}b^{p+k}c^p\notin L$. This is analogue to $v\in b^{\star}$ and $y\in c^{\star}$. Now all cases are covered.
+ \item Given a string $s=a^pb^pa^pb^p$ with $p$ the pump length of the language. Then $s$ can be written as $s=uvxyz$ such that $\abs{vy}>0$ and $\abs{vxy}\leq p$. Again we can assign several strings to $v$ and $y$ but the strings should contain only one type of string.
 \end{enumerate}
 \end{answer}
 \end{exercise}

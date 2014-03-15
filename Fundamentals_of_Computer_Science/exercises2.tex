@@ -45,7 +45,7 @@ Use the pumping lemma for context free languages to show that the following are 
 \begin{answer}
 The following proves these languages are not context-free:
 \begin{enumerate}
- \item 
+ \item Given the string $s=a^pb^pc^p$ with $p$ the pump length of the language, then $s$ can be written as $s=uvxyz$ such that $\abs{vy}>0$ and $\abs{vxy}\leq p$. Now there are several options how we can divide $s$ into $uvxyz$. But it is clear that $v$ and $y$ can only consist out of one type of characters (although the characters of $v$ and $y$ may differ). Say that both $v,y\in a^{\star}$, because $\abs{vy}=l>0$, one can generate a string of the form $a^{p+l}b^pc^p\notin L$. Analogue one can proof this for $v,y\in b^{\star}$ and $v,y\in c^{\star}$.
  \item 
 \end{enumerate}
 \end{answer}
@@ -75,20 +75,6 @@ Use derivatives to show that $abbb$ is an element of $\brak{a|b}b^{\star}a^{\sta
 
 \begin{exercise}
 Use derivatives to generate a DFA for $\brak{a|b}b^{\star}a^{\star}$.
-\begin{answer}
-
-\end{answer}
-\end{exercise}
-
-\begin{exercise}
-Given the following automata.
-
-\importtikzfigure{exc19-dfa1}{The automata of exercise 7.}
-
-\begin{enumerate}
- \item Express the language accepted by the automata as a series of linear equations.
- \item Solve the equations to produce a regular expression describing the accepted language.
-\end{enumerate}
 \begin{answer}
 
 \end{answer}

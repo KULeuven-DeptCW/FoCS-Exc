@@ -69,14 +69,53 @@ We can prove this by induction on the structure of the regular expression. For e
 \begin{exercise}
 Use derivatives to show that $abbb$ is an element of $\brak{a|b}b^{\star}a^{\star}$, and that $abbab$ is not.
 \begin{answer}
-
+We need to prove that $\fun{\delta}{\fun{D_{abbb}}{\brak{a|b}b^{\star}a^{\star}}}=\epsilon$, we do this as follows:
+\begin{equation}
+\fun{\delta}{\fun{D_{abbb}}{\brak{a|b}b^{\star}a^{\star}}}=\fun{\delta}{\fun{D_b}{\fun{D_b}{\fun{D_b}{\fun{D_a}{\brak{a|b}b^{\star}a^{\star}}}}}}
+\end{equation}
+We calculate $\fun{D_a}{\brak{a|b}b^{\star}a^{\star}}$ as follows:
+\begin{eqnarray}
+\fun{D_a}{\brak{a|b}b^{\star}a^{\star}}&=&\fbrk{\fun{D_a}{\brak{a|b}b^{\star}}a^{\star}}\cup\fbrk{\fun{\delta}{\brak{a|b}b^{\star}}\fun{D_a}{a^{\star}}}\\
+&=&\fbrk{\fbrk{\fun{D_a}{a|b}b^{\star}\cup\fun{\delta}{a|b}\fun{D_a}{b^{\star}}}a^{\star}}\cup\fbrk{\fun{\delta}{a|b}\fun{\delta}{b^{\star}}\fun{D_a}{a}a^{\star}}\\
+&=&\fbrk{\fbrk{\fbrk{\fun{D_a}{a}\cup\fun{D_a}{b}}b^{\star}\cup\fbrk{\fun{\delta}{a}\cup\fun{\delta}{b}}\fun{D_a}{b}b^{\star}}a^{\star}}\cup\fbrk{\fbrk{\fun{\delta}{a}\cup\fun{\delta}{b}}\epsilon\epsilon a^{\star}}\\
+&=&\fbrk{\fbrk{\fbrk{\epsilon\cup\emptyset}b^{\star}\cup\fbrk{\emptyset\cup\emptyset}\emptyset b^{\star}}a^{\star}}\cup\fbrk{\fbrk{\emptyset\cup\emptyset}\epsilon\epsilon a^{\star}}\\
+&=&\fbrk{\fbrk{\epsilon b^{\star}\cup\emptyset\emptyset b^{\star}}a^{\star}}\cup\fbrk{\emptyset\epsilon\epsilon a^{\star}}\\
+&=&\fbrk{\fbrk{b^{\star}\cup\emptyset}a^{\star}}\cup\emptyset\\
+&=&b^{\star}a^{\star}
+\end{eqnarray}
+Next we $\fun{D_b}{b^{\star}a^{\star}}$:
+\begin{eqnarray}
+\fun{D_b}{b^{\star}a^{\star}}&=&\fbrk{\fun{D_b}{b^{\star}}a^{\star}}\cup\fbrk{\fun{\delta}{b^{\star}}\fun{D_b}{a^{\star}}}\\
+&=&\fbrk{\fun{D_b}{b}b^{\star}a^{\star}}\cup\fbrk{\epsilon\fun{D_b}{a}a^{\star}}\\
+&=&\fbrk{\epsilon b^{\star}a^{\star}}\cup\fbrk{\epsilon\emptyset a^{\star}}\\
+&=&b^{\star}a^{\star}\cup\emptyset\\
+&=&b^{\star}a^{\star}
+\end{eqnarray}
+Since this is a fix point with respect to $b$, we can state that $\fun{D_b}{\fun{D_b}{\fun{D_b}{b^{\star}a^{\star}}}}=b^{\star}a^{\star}$. Now we only need to prove that $\fun{\delta}{b^{\star}a^{\star}}=\epsilon$:
+\begin{equation}
+\fun{\delta}{b^{\star}a^{\star}}=\fun{\delta}{b^{\star}}\fun{\delta}{a^{\star}}=\epsilon\epsilon=\epsilon
+\end{equation}
+Thus $abbbb$ is part of the language.
+\paragraph{}
+We show that $abbab$ is not part of the language by proving that $\fun{\delta}{\fun{D_{ab}}{b^{\star}a^{\star}}}\neq\epsilon$. First we calculate $\fun{D_a}{b^{\star}a^{\star}}$:
+\begin{eqnarray}
+\fun{D_a}{b^{\star}a^{\star}}&=&\fbrk{\fun{D_a}{b^{\star}}a^{\star}}\cup\fbrk{\fun{\delta}{b^{\star}}\fun{D_a}{a^{\star}}}\\
+&=&\fbrk{\fun{D_a}{b}b^{\star}a^{\star}}\cup\fbrk{\epsilon\fun{D_a}{a}a^{\star}}\\
+&=&\fbrk{\emptyset b^{\star}a^{\star}}\cup\fbrk{\epsilon\epsilon a^{\star}}\\
+&=&\emptyset\cup a^{\star}\\
+&=&a^{\star}
+\end{eqnarray}
+Next we derive $\fun{D_b}{a^{\star}}$:
+\begin{eqnarray}
+\fun{D_b}{a^{\star}}&=&\fun{D_b}{a}a^{\star}=\emptyset a^{\star}=\emptyset
+\end{eqnarray}
+Since $\fun{\delta}{\emptyset}=\emptyset\neq\epsilon$, we've shown that $abbab$ is not part of the language.
 \end{answer}
 \end{exercise}
-
 \begin{exercise}
 Use derivatives to generate a DFA for $\brak{a|b}b^{\star}a^{\star}$.
 \begin{answer}
-
+We start with the initial state 
 \end{answer}
 \end{exercise}
 

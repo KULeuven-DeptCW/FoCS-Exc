@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 *.backup
 *.*~*
 *~
@@ -21,7 +20,6 @@
 *.url
 *.svn
 *.toc
-=======
 *.acn
 *.acr
 *.alg
@@ -54,4 +52,13 @@
 *.vrb
 *.xdy
 *.tdo
->>>>>>> 21fc931db23fdab0e38473e674de6d72dc3e28eb
+
+#Media
+*.jpg
+*.jpeg
+*.flv
+*.mp4
+*.mp3
+*.gif
+*.avi
+*.mkv

@@ -57,6 +57,7 @@ make
 Links
 -----
  - Poster about Automata and Computability (dutch): <http://willemvanonsem.ulyssis.be/posterab.pdf>
+ - Poster about Fundamentals of Computer Science (work in progress) <http://willemvanonsem.ulyssis.be/posterfocs.pdf>
  - Information about the course: <http://onderwijsaanbod.kuleuven.be/syllabi/v/e/H04H0BE.htm>
 
 License

@@ -68,16 +68,17 @@ var dChar = 1.0;
 var hChar = 0.4;
 var hHead = 0.2;
 var wHead = 0.2;
+var gl;
 function initGL(canvas) {
-	try {
-		gl = canvas.getContext('webgl') || canvas.getContext("experimental-webgl");
-		gl.viewportWidth = canvas.width;
-		gl.viewportHeight = canvas.height;
-	} catch (e) {
-	}
-	if (!gl) {
-		alert("Could not initialise WebGL, sorry :-(");
-	}
+    try {
+        gl = canvas.getContext("experimental-webgl");
+        gl.viewportWidth = canvas.width;
+        gl.viewportHeight = canvas.height;
+    } catch (e) {
+    }
+    if (!gl) {
+        alert("Could not initialise WebGL, sorry :-(");
+    }
 }
 
 
@@ -91,7 +92,7 @@ function getShader(gl, id) {
 	var k = shaderScript.firstChild;
 	while (k) {
 		if (k.nodeType == 3) {
-			str += k.textContent;
+		    str += k.textContent;
 		}
 		k = k.nextSibling;
 	}
@@ -116,7 +117,6 @@ function getShader(gl, id) {
 	return shader;
 }
 
-
 var shaderProgram;
 
 function initShaders() {
@@ -136,12 +136,13 @@ function initShaders() {
 
 	shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
 	gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
-	
+
 	shaderProgram.textureCoordAttribute = gl.getAttribLocation(shaderProgram, "aTextureCoord");
-    gl.enableVertexAttribArray(shaderProgram.textureCoordAttribute);
+	gl.enableVertexAttribArray(shaderProgram.textureCoordAttribute);
 
 	shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
 	shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
+	shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
 }
 
 

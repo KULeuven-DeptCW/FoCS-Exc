@@ -15,44 +15,54 @@
 	
 	<script id="shader-vs" type="x-shader/x-vertex">
 	  attribute vec3 aVertexPosition;
-	  attribute vec4 aVertexColor;
+	  attribute vec2 aTextureCoord;
 	
 	  uniform mat4 uMVMatrix;
 	  uniform mat4 uPMatrix;
 	  
-			varying lowp vec4 vColor;
+	  varying vec2 vTextureCoord;
 	
 	  void main(void) {
 		gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
-		vColor = aVertexColor;
+		vTextureCoord = aTextureCoord;
 	  }
 	</script>
  </head>
  <body onload="webGLStart();">
  <center><canvas id="turingmachine" width="800" height="600">Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.</canvas></center>
  <script type="text/javascript" src="https://glmatrix.googlecode.com/files/glMatrix-0.9.5.min.js"></script>
+ <script type="text/javascript" src="http://webglsamples.googlecode.com/hg-history/41401f8a69b1f8d32c6863ac8c1953c8e1e8eba0/book/webgl-utils.js"></script>
  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
- <script id="shader-fs" type="x-shader/x-fragment">
-precision mediump float;
+<script id="shader-fs" type="x-shader/x-fragment">
+    precision mediump float;
 
-void main(void) {
-	gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
-}
+    varying vec2 vTextureCoord;
+
+    uniform sampler2D uSampler;
+
+    void main(void) {
+        gl_FragColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+    }
 </script>
 
 <script id="shader-vs" type="x-shader/x-vertex">
-attribute vec3 aVertexPosition;
+    attribute vec3 aVertexPosition;
+    attribute vec2 aTextureCoord;
 
-uniform mat4 uMVMatrix;
-uniform mat4 uPMatrix;
+    uniform mat4 uMVMatrix;
+    uniform mat4 uPMatrix;
 
-void main(void) {
-	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
-}
+    varying vec2 vTextureCoord;
+
+
+    void main(void) {
+        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+        vTextureCoord = aTextureCoord;
+    }
 </script>
  <script language="JavaScript">
 var canvas, gl;
-var nChars = 18;
+var nRays = 360;
 var wChar = 0.4;
 var dChar = 1.0;
 var hChar = 0.4;
@@ -126,6 +136,9 @@ function initShaders() {
 
 	shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
 	gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
+	
+	shaderProgram.textureCoordAttribute = gl.getAttribLocation(shaderProgram, "aTextureCoord");
+    gl.enableVertexAttribArray(shaderProgram.textureCoordAttribute);
 
 	shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
 	shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
@@ -146,6 +159,8 @@ var headVertexBuffer;
 var characterVertexBuffer, triangleVertexPositionBuffer;
 var characterColorBuffer;
 var characterIndexBuffer;
+var characterTextrBuffer;
+var txtr;
 
 function initBuffers() {
 	triangleVertexPositionBuffer = gl.createBuffer();
@@ -164,22 +179,38 @@ function initBuffers() {
 	gl.bindBuffer(gl.ARRAY_BUFFER, characterVertexBuffer);
 	var vertices = [];
 	var indices = [];
-	for(var i = 0, j = 0; i < nChars; i++, j += 4) {
-		vertices.push(i+wChar);vertices.push( hChar);vertices.push(0.0);
-		vertices.push(i-wChar);vertices.push( hChar);vertices.push(0.0);
-		vertices.push(i-wChar);vertices.push(-hChar);vertices.push(0.0);
-		vertices.push(i+wChar);vertices.push(-hChar);vertices.push(0.0);
+	var textures = [];
+	for(var i = 0; i <= nRays; i++) {
+		var r = 2.0*i*Math.PI/nRays;
+		var x = Math.sin(r)-2;
+		var z = Math.cos(r);
+		vertices.push(x);vertices.push( hChar);vertices.push(z);
+		vertices.push(x);vertices.push(-hChar);vertices.push(z);
+		textures.push(r);textures.push(1.0);
+		textures.push(r);textures.push(0.0);
+	}
+	for(var i = 0; i <= nRays; i++) {
+		var r = 2.0*i*Math.PI/nRays;
+		var x = Math.sin(2.0*i*Math.PI/nRays)+2;
+		var z = Math.cos(2.0*i*Math.PI/nRays);
+		vertices.push(x);vertices.push( hChar);vertices.push(z);
+		vertices.push(x);vertices.push(-hChar);vertices.push(z);
+		textures.push(r+4.0+2.0*Math.PI);textures.push(1.0);
+		textures.push(r+4.0+2.0*Math.PI);textures.push(0.0);
+	}
+	for(var i = 0, j = 0; i <= 2*nRays; i++, j += 2) {
 		indices.push(j  );indices.push(j+1);indices.push(j+2);
-		indices.push(j+3);indices.push(j+0);indices.push(j+2);
+		indices.push(j+1);indices.push(j+3);indices.push(j+2);	
 	}
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
 	characterVertexBuffer.itemSize = 3;
-	characterVertexBuffer.numItems = 4*nChars;
+	characterVertexBuffer.numItems = vertices.length/characterVertexBuffer.itemSize;
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, characterIndexBuffer);
 	gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
 	characterIndexBuffer.itemSize = 1;
-	characterIndexBuffer.numItems = 6*nChars;
-
+	characterIndexBuffer.numItems = indices.length/characterIndexBuffer.itemSize;
+	txtr = loadTexture("film.jpeg");
+	handleLoadedTexture(txtr);
 	/*squareVertexPositionBuffer = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexPositionBuffer);
 	vertices = [
@@ -193,6 +224,24 @@ function initBuffers() {
 	squareVertexPositionBuffer.numItems = 4;*/
 }
 
+function loadTexture(filename) {
+	var tt = gl.createTexture();
+    tt.image = new Image();
+    tt.image.onload = function() {
+      handleLoadedTexture(tt)
+    }
+    tt.image.src = filename;
+    return tt;
+}
+
+function handleLoadedTexture(texture) {
+	gl.bindTexture(gl.TEXTURE_2D, texture);
+	gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+	gl.bindTexture(gl.TEXTURE_2D, null);
+}
 
 function drawScene() {
 	gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
@@ -202,7 +251,7 @@ function drawScene() {
 
 	mat4.identity(mvMatrix);
 	
-	mat4.translate(mvMatrix, [0.0, 0.0, -7.0]);
+	mat4.translate(mvMatrix, [0.0, -2.0, -7.0]);
 	
 	gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, triangleVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
@@ -210,6 +259,8 @@ function drawScene() {
     gl.drawArrays(gl.TRIANGLES, 0, triangleVertexPositionBuffer.numItems);
 
 	mat4.translate(mvMatrix, [0.0, 0.0, -7.0]);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, txtr);
 	gl.bindBuffer(gl.ARRAY_BUFFER, characterVertexBuffer);
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, characterIndexBuffer);
 	gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, characterVertexBuffer.itemSize, gl.FLOAT, false, 0, 0);

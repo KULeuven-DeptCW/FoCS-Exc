@@ -52,3 +52,15 @@
 *.vrb
 *.xdy
 *.tdo
+
+#Media
+*.jpeg
+*.jpg
+*.png
+*.flv
+*.avi
+*.bmp
+*.gif
+*.mp3
+*.mp4
+*.mkv

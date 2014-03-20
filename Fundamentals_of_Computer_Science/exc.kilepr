@@ -4,7 +4,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif
 kileprversion=2
 kileversion=2.1.3
-lastDocument=exercises5.tex
+lastDocument=exercises2.tex
 masterDocument=
 name=exc1
 pkg_extIsRegExp=false
@@ -79,6 +79,55 @@ Highlighting=LaTeX
 Indentation Mode=normal
 Mode=LaTeX
 
+[document-settings,item:grammars/exc12i1.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
+[document-settings,item:grammars/exc15i1.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
+[document-settings,item:grammars/exc15i2.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
+[document-settings,item:grammars/exc15i3.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
+[document-settings,item:grammars/exc15i4.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
+[document-settings,item:grammars/exc15i5.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
+[document-settings,item:grammars/exc15i6.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
 [document-settings,item:tables/tbl-exc6-tbl1.tex]
 Bookmarks=
 Encoding=UTF-8
@@ -121,6 +170,41 @@ Highlighting=LaTeX
 Indentation Mode=normal
 Mode=LaTeX
 
+[document-settings,item:tikzpictures/tikz-exc13-pda1.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
+[document-settings,item:tikzpictures/tikz-exc13-pda2.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
+[document-settings,item:tikzpictures/tikz-exc13-pda3.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
+[document-settings,item:tikzpictures/tikz-exc13-pda4.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
+[document-settings,item:tikzpictures/tikz-exc17-dfa.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
 [document-settings,item:tikzpictures/tikz-exc19-dfa1.tex]
 Bookmarks=
 Encoding=UTF-8
@@ -136,6 +220,20 @@ Indentation Mode=normal
 Mode=LaTeX
 
 [document-settings,item:tikzpictures/tikz-exc2-dfa2.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
+[document-settings,item:tikzpictures/tikz-exc20-tm1.tex]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
+[document-settings,item:tikzpictures/tikz-exc20-tm2.tex]
 Bookmarks=
 Encoding=UTF-8
 Highlighting=LaTeX
@@ -247,13 +345,13 @@ order=1
 
 [item:exercises2.tex]
 archive=true
-column=11
+column=191
 encoding=UTF-8
 highlight=LaTeX
-line=6
+line=142
 mode=LaTeX
-open=false
-order=-1
+open=true
+order=0
 
 [item:exercises3.tex]
 archive=true
@@ -277,12 +375,12 @@ order=-1
 
 [item:exercises5.tex]
 archive=true
-column=46
+column=10
 encoding=UTF-8
 highlight=LaTeX
-line=43
+line=20
 mode=LaTeX
-open=true
+open=false
 order=0
 
 [item:grammars/exc10i1.tex]
@@ -301,6 +399,76 @@ column=2
 encoding=UTF-8
 highlight=LaTeX
 line=4
+mode=LaTeX
+open=false
+order=6
+
+[item:grammars/exc12i1.tex]
+archive=true
+column=12
+encoding=UTF-8
+highlight=LaTeX
+line=9
+mode=LaTeX
+open=false
+order=-1
+
+[item:grammars/exc15i1.tex]
+archive=true
+column=19
+encoding=UTF-8
+highlight=LaTeX
+line=0
+mode=LaTeX
+open=false
+order=1
+
+[item:grammars/exc15i2.tex]
+archive=true
+column=8
+encoding=UTF-8
+highlight=LaTeX
+line=0
+mode=LaTeX
+open=false
+order=2
+
+[item:grammars/exc15i3.tex]
+archive=true
+column=32
+encoding=UTF-8
+highlight=LaTeX
+line=0
+mode=LaTeX
+open=false
+order=3
+
+[item:grammars/exc15i4.tex]
+archive=true
+column=0
+encoding=UTF-8
+highlight=LaTeX
+line=0
+mode=LaTeX
+open=false
+order=4
+
+[item:grammars/exc15i5.tex]
+archive=true
+column=0
+encoding=UTF-8
+highlight=LaTeX
+line=0
+mode=LaTeX
+open=false
+order=5
+
+[item:grammars/exc15i6.tex]
+archive=true
+column=0
+encoding=UTF-8
+highlight=LaTeX
+line=0
 mode=LaTeX
 open=false
 order=6
@@ -365,6 +533,56 @@ mode=LaTeX
 open=false
 order=-1
 
+[item:tikzpictures/tikz-exc13-pda1.tex]
+archive=true
+column=63
+encoding=UTF-8
+highlight=LaTeX
+line=2
+mode=LaTeX
+open=true
+order=1
+
+[item:tikzpictures/tikz-exc13-pda2.tex]
+archive=true
+column=32
+encoding=UTF-8
+highlight=LaTeX
+line=15
+mode=LaTeX
+open=true
+order=2
+
+[item:tikzpictures/tikz-exc13-pda3.tex]
+archive=true
+column=79
+encoding=UTF-8
+highlight=LaTeX
+line=7
+mode=LaTeX
+open=true
+order=3
+
+[item:tikzpictures/tikz-exc13-pda4.tex]
+archive=true
+column=68
+encoding=UTF-8
+highlight=LaTeX
+line=8
+mode=LaTeX
+open=true
+order=4
+
+[item:tikzpictures/tikz-exc17-dfa.tex]
+archive=true
+column=13
+encoding=UTF-8
+highlight=LaTeX
+line=12
+mode=LaTeX
+open=true
+order=7
+
 [item:tikzpictures/tikz-exc19-dfa1.tex]
 archive=true
 column=0
@@ -395,6 +613,26 @@ mode=LaTeX
 open=false
 order=1
 
+[item:tikzpictures/tikz-exc20-tm1.tex]
+archive=true
+column=17
+encoding=UTF-8
+highlight=LaTeX
+line=11
+mode=LaTeX
+open=true
+order=5
+
+[item:tikzpictures/tikz-exc20-tm2.tex]
+archive=true
+column=31
+encoding=UTF-8
+highlight=LaTeX
+line=37
+mode=LaTeX
+open=true
+order=6
+
 [item:tikzpictures/tikz-exc3-dfa1.tex]
 archive=true
 column=47
@@ -407,10 +645,10 @@ order=0
 
 [item:tikzpictures/tikz-exc3-dfa2.tex]
 archive=true
-column=0
+column=17
 encoding=UTF-8
 highlight=LaTeX
-line=0
+line=29
 mode=LaTeX
 open=false
 order=-1
@@ -422,7 +660,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=18
 mode=LaTeX
-open=true
+open=false
 order=1
 
 [item:tikzpictures/tikz-exc48-graph2.tex]
@@ -432,7 +670,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=15
 mode=LaTeX
-open=true
+open=false
 order=2
 
 [item:tikzpictures/tikz-exc5-dfa1.tex]
@@ -504,10 +742,10 @@ JumpList=
 ViMarks=.,6,10,[,6,6,],6,10
 
 [view-settings,view=0,item:exercises2.tex]
-CursorColumn=11
-CursorLine=6
+CursorColumn=191
+CursorLine=142
 JumpList=
-ViMarks=.,6,10,[,6,6,],6,10
+ViMarks=.,142,190,[,142,156,],142,190
 
 [view-settings,view=0,item:exercises3.tex]
 CursorColumn=11
@@ -522,8 +760,8 @@ JumpList=
 ViMarks=.,6,8,[,6,6,],6,8
 
 [view-settings,view=0,item:exercises5.tex]
-CursorColumn=46
-CursorLine=43
+CursorColumn=10
+CursorLine=20
 JumpList=
 ViMarks=.,43,34,[,43,34,],43,45
 
@@ -538,6 +776,48 @@ CursorColumn=2
 CursorLine=4
 JumpList=
 ViMarks=.,4,1,[,4,1,],4,1
+
+[view-settings,view=0,item:grammars/exc12i1.tex]
+CursorColumn=12
+CursorLine=9
+JumpList=
+ViMarks=
+
+[view-settings,view=0,item:grammars/exc15i1.tex]
+CursorColumn=19
+CursorLine=0
+JumpList=
+ViMarks=.,0,5,[,0,5,],0,5
+
+[view-settings,view=0,item:grammars/exc15i2.tex]
+CursorColumn=8
+CursorLine=0
+JumpList=
+ViMarks=.,0,8,[,0,8,],0,8
+
+[view-settings,view=0,item:grammars/exc15i3.tex]
+CursorColumn=32
+CursorLine=0
+JumpList=
+ViMarks=.,0,0,[,0,0,],0,31
+
+[view-settings,view=0,item:grammars/exc15i4.tex]
+CursorColumn=0
+CursorLine=0
+JumpList=
+ViMarks=
+
+[view-settings,view=0,item:grammars/exc15i5.tex]
+CursorColumn=0
+CursorLine=0
+JumpList=
+ViMarks=
+
+[view-settings,view=0,item:grammars/exc15i6.tex]
+CursorColumn=0
+CursorLine=0
+JumpList=
+ViMarks=
 
 [view-settings,view=0,item:tables/tbl-exc6-tbl1.tex]
 CursorColumn=0
@@ -575,6 +855,36 @@ CursorLine=0
 JumpList=
 ViMarks=.,0,83,[,0,83,],0,83
 
+[view-settings,view=0,item:tikzpictures/tikz-exc13-pda1.tex]
+CursorColumn=63
+CursorLine=2
+JumpList=
+ViMarks=.,6,20,[,6,20,],6,20
+
+[view-settings,view=0,item:tikzpictures/tikz-exc13-pda2.tex]
+CursorColumn=32
+CursorLine=15
+JumpList=
+ViMarks=.,15,31,[,15,27,],15,31
+
+[view-settings,view=0,item:tikzpictures/tikz-exc13-pda3.tex]
+CursorColumn=79
+CursorLine=7
+JumpList=
+ViMarks=.,8,99,[,8,99,],8,99
+
+[view-settings,view=0,item:tikzpictures/tikz-exc13-pda4.tex]
+CursorColumn=68
+CursorLine=8
+JumpList=
+ViMarks=.,8,68,[,8,68,],8,68
+
+[view-settings,view=0,item:tikzpictures/tikz-exc17-dfa.tex]
+CursorColumn=13
+CursorLine=12
+JumpList=
+ViMarks=.,12,12,[,12,12,],12,12
+
 [view-settings,view=0,item:tikzpictures/tikz-exc19-dfa1.tex]
 CursorColumn=0
 CursorLine=0
@@ -593,6 +903,18 @@ CursorLine=10
 JumpList=
 ViMarks=.,10,0,[,0,0,],10,16
 
+[view-settings,view=0,item:tikzpictures/tikz-exc20-tm1.tex]
+CursorColumn=17
+CursorLine=11
+JumpList=
+ViMarks=.,11,17,[,11,17,],11,17
+
+[view-settings,view=0,item:tikzpictures/tikz-exc20-tm2.tex]
+CursorColumn=31
+CursorLine=37
+JumpList=
+ViMarks=.,37,30,[,37,28,],37,30
+
 [view-settings,view=0,item:tikzpictures/tikz-exc3-dfa1.tex]
 CursorColumn=47
 CursorLine=9
@@ -600,10 +922,10 @@ JumpList=
 ViMarks=.,9,47,[,9,47,],9,47
 
 [view-settings,view=0,item:tikzpictures/tikz-exc3-dfa2.tex]
-CursorColumn=0
-CursorLine=0
+CursorColumn=17
+CursorLine=29
 JumpList=
-ViMarks=
+ViMarks=.,0,0,[,0,0,],0,0
 
 [view-settings,view=0,item:tikzpictures/tikz-exc48-graph1.tex]
 CursorColumn=17

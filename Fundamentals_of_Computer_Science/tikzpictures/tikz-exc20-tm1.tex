@@ -1,0 +1,12 @@
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=1.5]
+\def\sc{0.75}
+\node[state,initial,scale=\sc] (qi) at (0,0) {$q_i$};
+\node[state,scale=\sc] (qs) at (1,0) {$q_m$};
+\node[state,scale=\sc] (qr) at (2,0) {$q_r$};
+\node[state,accepting,scale=\sc] (qf) at (3,0) {$q_f$};
+\path[->] (qi) edge[loop above] node[scale=\sc] {$a/a/R$}  ();
+\path[->] (qi) edge             node[scale=\sc] {$\#/a/R$} (qs);
+\path[->] (qs) edge[loop above] node[scale=\sc] {$a/a/R$}  ();
+\path[->] (qs) edge             node[scale=\sc] {$\textvisiblespace/\textvisiblespace/L$}  (qr);
+\path[->] (qr) edge             node[scale=\sc] {$a/\textvisiblespace/L$}  (qf);
+\end{tikzpicture}

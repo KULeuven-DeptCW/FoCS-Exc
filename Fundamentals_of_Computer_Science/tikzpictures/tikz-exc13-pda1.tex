@@ -1,0 +1,8 @@
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=1.5]
+\def\sc{0.75}
+\node[state,initial,accepting,scale=\sc] (qi) at (0,0) {$q_i$};
+\path[->] (qi) edge[in=30, out=60 ,loop]  node[scale=\sc] {$[/\epsilon/[$} (qi);
+\path[->] (qi) edge[in=120,out=150,loop] node[scale=\sc] {$(/\epsilon/($} (qi);
+\path[->] (qi) edge[in=210,out=240,loop] node[scale=\sc] {$]/[/\epsilon$} (qi);
+\path[->] (qi) edge[in=300,out=330,loop] node[scale=\sc] {$)/)/\epsilon$} (qi);
+\end{tikzpicture}

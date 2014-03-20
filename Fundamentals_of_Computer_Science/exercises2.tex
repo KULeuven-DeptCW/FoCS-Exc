@@ -9,6 +9,9 @@
 \maketitle
 \begin{exercise}
 Give a context-free grammar that generates the language $L=\condset{a^ib^jc^k}{i=j\vee j=k \xwhere i,j,k\geq0}$.
+\begin{answer}This can be generated with the following context-free grammar:
+\importgram{exc12i1}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
@@ -16,43 +19,136 @@ Give a pushdown automaton for the following languages:
 \begin{enumerate}
  \item $\mbox{PAREN}_2$ of balanced strings of parentheses of two types $()$ and $[]$.
  \item $\condset{a^ib^jc^k}{i,j,k\geq0\wedge \brak{i=j\vee i=k}}$.
- \item The complement of the language ${a^nb^n|n\geq 0}$.
- \item $\condset{w\in{0,1}^{\star}}{w=w^R, \mbox{that is, $w$ is a palindrome.}}$
+ \item The complement of the language $\condset{a^nb^n}{n\geq 0}$.
+ \item $\condset{w\in\accl{0,1}^{\star}}{w=w^R, \mbox{that is, $w$ is a palindrome.}}$
 \end{enumerate}
+\begin{answer}
+See \figref{exc13}.
+\begin{figure}[hbt]
+\centering
+\importtikzsubfigure{exc13-pda1}{}
+\importtikzsubfigure{exc13-pda2}{}
+\importtikzsubfigure{exc13-pda3}{}
+\importtikzsubfigure{exc13-pda4}{}
+\caption{Exercise 2}
+\figlab{exc13}
+\end{figure}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Use the pumping lemma for context free languages to show that the following are not context free:
 \begin{enumerate}
  \item $\condset{a^nb^nc^n}{n\geq0}$.
- \item $A = {ww|w\in\accl{0,1}^\star{}}$. Hint consider $A\cap \fun{L}{a^{\star}b^{\star}a^{\star}b^{\star}}$.
+ \item $A=\condset{ww}{w\in\accl{0,1}^\star{}}$. Hint consider $A\cap \fun{L}{a^{\star}b^{\star}a^{\star}b^{\star}}$.
 \end{enumerate}
+\begin{answer}
+The following proves these languages are not context-free:
+\begin{enumerate}
+ \item Given the string $s=a^pb^pc^p$ with $p$ the pump length of the language. Then $s$ can be written as $s=uvxyz$ such that $\abs{vy}>0$ and $\abs{vxy}\leq p$. Now there are several options how we can divide $s$ into $uvxyz$. But it is clear that $v$ and $y$ can only consist out of one type of characters (although the characters of $v$ and $y$ may differ). Say that both $v,y\in a^{\star}$, because $\abs{vy}=l>0$, one can generate a string of the form $a^{p+l}b^pc^p\notin L$. Analogue one can proof this for $v,y\in b^{\star}$ and $v,y\in c^{\star}$. Another case is the one where $v\in a^{\star}$ and $y\in b^{\star}$ with $\abs{v}=k$ and $\abs{y}=l$ such that $\abs{vy}=k+l=m>0$. In that case one can generate a string $uv^2xy^2z=a^{p+l}b^{p+k}c^p\notin L$. This is analogue to $v\in b^{\star}$ and $y\in c^{\star}$. Now all cases are covered.
+ \item Given a string $s=a^pb^pa^pb^p$ with $p$ the pump length of the language. Then $s$ can be written as $s=uvxyz$ such that $\abs{vy}>0$ and $\abs{vxy}\leq p$. Again we can assign several strings to $v$ and $y$ but the strings should contain only one type of characters. Given that both $v$ and $y$ contain the same type of characters, they must belong to the same group (since otherwise there is a $b^p$ string in between, and this contradicts the $\abs{vxy}\leq p$ constraint. In that case, we can generate a string $a^{p+k+l}b^pa^pb^p\notin L$, one can of course take another group but this yields an analogue result. Say that $v$ and $y$ consist out of different characters. In that case, they should be neighbors. None of the strings $a^{p+k}b^{p+l}a^pb^p$, $a^pb^{p+k}a^{p+l}b^p$ and $a^pb^pa^{p+k}b^{p+l}$ belongs however to $L$, which contradicts the pumping lemma.
+\end{enumerate}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Prove that every regular language is context free, by showing how to convert a regular expression directly into an equivalent context-free grammar.
+\begin{answer}
+We can prove this by induction on the structure of the regular expression. For every regular expression $E$ we define a non-terminal $N_E$, and define it as:
+\begin{enumerate}
+ \item If $E=\epsilon$, \importgram{exc15i1}
+ \item If $E=a$ with $a\in\Sigma$, \importgram{exc15i2}
+ \item If $E=E_1E_2$, \importgram{exc15i3}
+ \item If $E=E_1|E_2$, \importgram{exc15i4}
+ \item If $E=\brak{E_1}^{\star}$, \importgram{exc15i5}
+ \item If $E=\phi$, \importgram{exc15i6} (no transition rule).
+\end{enumerate}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Use derivatives to show that $abbb$ is an element of $\brak{a|b}b^{\star}a^{\star}$, and that $abbab$ is not.
+\begin{answer}
+We need to prove that $\fun{\delta}{\fun{D_{abbb}}{\brak{a|b}b^{\star}a^{\star}}}=\epsilon$, we do this as follows:
+\begin{equation}
+\fun{\delta}{\fun{D_{abbb}}{\brak{a|b}b^{\star}a^{\star}}}=\fun{\delta}{\fun{D_b}{\fun{D_b}{\fun{D_b}{\fun{D_a}{\brak{a|b}b^{\star}a^{\star}}}}}}
+\end{equation}
+We calculate $\fun{D_a}{\brak{a|b}b^{\star}a^{\star}}$ as follows:
+\begin{eqnarray}
+\fun{D_a}{\brak{a|b}b^{\star}a^{\star}}&=&\fbrk{\fun{D_a}{\brak{a|b}b^{\star}}a^{\star}}\cup\fbrk{\fun{\delta}{\brak{a|b}b^{\star}}\fun{D_a}{a^{\star}}}\\
+&=&\fbrk{\fbrk{\fun{D_a}{a|b}b^{\star}\cup\fun{\delta}{a|b}\fun{D_a}{b^{\star}}}a^{\star}}\cup\fbrk{\fun{\delta}{a|b}\fun{\delta}{b^{\star}}\fun{D_a}{a}a^{\star}}\\
+&=&\fbrk{\fbrk{\fbrk{\fun{D_a}{a}\cup\fun{D_a}{b}}b^{\star}\cup\fbrk{\fun{\delta}{a}\cup\fun{\delta}{b}}\fun{D_a}{b}b^{\star}}a^{\star}}\cup\fbrk{\fbrk{\fun{\delta}{a}\cup\fun{\delta}{b}}\epsilon\epsilon a^{\star}}\\
+&=&\fbrk{\fbrk{\fbrk{\epsilon\cup\emptyset}b^{\star}\cup\fbrk{\emptyset\cup\emptyset}\emptyset b^{\star}}a^{\star}}\cup\fbrk{\fbrk{\emptyset\cup\emptyset}\epsilon\epsilon a^{\star}}\\
+&=&\fbrk{\fbrk{\epsilon b^{\star}\cup\emptyset\emptyset b^{\star}}a^{\star}}\cup\fbrk{\emptyset\epsilon\epsilon a^{\star}}\\
+&=&\fbrk{\fbrk{b^{\star}\cup\emptyset}a^{\star}}\cup\emptyset\\
+&=&b^{\star}a^{\star}
+\end{eqnarray}
+Next we $\fun{D_b}{b^{\star}a^{\star}}$:
+\begin{eqnarray}
+\fun{D_b}{b^{\star}a^{\star}}&=&\fbrk{\fun{D_b}{b^{\star}}a^{\star}}\cup\fbrk{\fun{\delta}{b^{\star}}\fun{D_b}{a^{\star}}}\\
+&=&\fbrk{\fun{D_b}{b}b^{\star}a^{\star}}\cup\fbrk{\epsilon\fun{D_b}{a}a^{\star}}\\
+&=&\fbrk{\epsilon b^{\star}a^{\star}}\cup\fbrk{\epsilon\emptyset a^{\star}}\\
+&=&b^{\star}a^{\star}\cup\emptyset\\
+&=&b^{\star}a^{\star}
+\end{eqnarray}
+Since this is a fix point with respect to $b$, we can state that $\fun{D_b}{\fun{D_b}{\fun{D_b}{b^{\star}a^{\star}}}}=b^{\star}a^{\star}$. Now we only need to prove that $\fun{\delta}{b^{\star}a^{\star}}=\epsilon$:
+\begin{equation}
+\fun{\delta}{b^{\star}a^{\star}}=\fun{\delta}{b^{\star}}\fun{\delta}{a^{\star}}=\epsilon\epsilon=\epsilon
+\end{equation}
+Thus $abbbb$ is part of the language.
+\paragraph{}
+We show that $abbab$ is not part of the language by proving that $\fun{\delta}{\fun{D_{ab}}{b^{\star}a^{\star}}}\neq\epsilon$. First we calculate $\fun{D_a}{b^{\star}a^{\star}}$:
+\begin{eqnarray}
+\fun{D_a}{b^{\star}a^{\star}}&=&\fbrk{\fun{D_a}{b^{\star}}a^{\star}}\cup\fbrk{\fun{\delta}{b^{\star}}\fun{D_a}{a^{\star}}}\\
+&=&\fbrk{\fun{D_a}{b}b^{\star}a^{\star}}\cup\fbrk{\epsilon\fun{D_a}{a}a^{\star}}\\
+&=&\fbrk{\emptyset b^{\star}a^{\star}}\cup\fbrk{\epsilon\epsilon a^{\star}}\\
+&=&\emptyset\cup a^{\star}\\
+&=&a^{\star}
+\end{eqnarray}
+Next we derive $\fun{D_b}{a^{\star}}$:
+\begin{eqnarray}
+\fun{D_b}{a^{\star}}&=&\fun{D_b}{a}a^{\star}=\emptyset a^{\star}=\emptyset
+\end{eqnarray}
+Since $\fun{\delta}{\emptyset}=\emptyset\neq\epsilon$, we've shown that $abbab$ is not part of the language.
+\end{answer}
 \end{exercise}
-
 \begin{exercise}
 Use derivatives to generate a DFA for $\brak{a|b}b^{\star}a^{\star}$.
+\begin{answer}
+We start with the initial state $q_0$ which represents $\brak{a|b}b^{\star}a^{\star}$. Since $\fun{\delta}{q_0}\neq\epsilon$, this is not an accepting state, it is however the initial state.
+\paragraph{}
+Next we calculate $\fun{D_a}{q_0}$ and $\fun{D_b}{q_0}$. We've already calculated $\fun{D_a}{q_0}=b^{\star}a^{\star}$, this is an expression we've not assigned to a state before. Therefore we introduce a new state $q_1\equiv b^{\star}a^{\star}$. And draw an arc $q_0\rightarrow^a q_1$. We've already shown that $\fun{\delta}{b^{\star}a^{\star}}=\epsilon$, therefore $q_1$ is an accepting state. We now calculate $\fun{D_b}{q_0}$:
+\begin{eqnarray}
+\fun{D_b}{\brak{a|b}b^{\star}a^{\star}}&=&\fbrk{\fun{D_b}{\brak{a|b}b^{\star}}a^{\star}}\cup\fbrk{\fun{\delta}{\brak{a|b}b^{\star}}\fun{D_b}{a^{\star}}}\\
+&=&\fbrk{\fbrk{\fun{D_b}{a|b}b^{\star}\cup\fun{\delta}{a|b}\fun{D_b}{b^{\star}}}a^{\star}}\cup\fbrk{\fun{\delta}{a|b}\fun{\delta}{b^{\star}}\fun{D_b}{a}a^{\star}}\\
+&=&\fbrk{\fbrk{\fbrk{\fun{D_b}{a}\cup\fun{D_b}{b}}b^{\star}\cup\fbrk{\fun{\delta}{a}\cup\fun{\delta}{b}}\fun{D_b}{b}b^{\star}}a^{\star}}\cup\fbrk{\fbrk{\fun{\delta}{a}\cup\fun{\delta}{b}}\epsilon\epsilon a^{\star}}\\
+&=&\fbrk{\fbrk{\fbrk{\emptyset\cup\epsilon}b^{\star}\cup\fbrk{\emptyset\cup\emptyset}\epsilon b^{\star}}a^{\star}}\cup\fbrk{\fbrk{\emptyset\cup\emptyset}\epsilon\emptyset a^{\star}}\\
+&=&\fbrk{\fbrk{\epsilon b^{\star}\cup\emptyset\epsilon b^{\star}}a^{\star}}\cup\fbrk{\emptyset\epsilon\emptyset a^{\star}}\\
+&=&\fbrk{\fbrk{b^{\star}\cup\emptyset}a^{\star}}\cup\emptyset\\
+&=&b^{\star}a^{\star}
+\end{eqnarray}
+We've already assigned this expression to $q_1$, thus we draw an arc $q_0\rightarrow^b q_1$ as well. From the previous exercise, we know that $\fun{D_a}{b^{\star}a^{\star}}=a^{\star}$ and $\fun{D_b}{b^{\star}a^{\star}}=b^{\star}a^{\star}$. Thus we draw an arc $q_1\rightarrow^b q_1$ and define $q_2=a^{\star}$. $q_2$ is an accepting state since $\fun{\delta}{q_2}=\fun{\delta}{a^{\star}}=\epsilon$.
+\paragraph{}
+We need to calculate the arcs of $q_2$ as well, in other words $\fun{D_a}{a^{\star}}$ and $\fun{D_b}{a^{\star}}$ we can recycle one result from the previous exercise and calculate the other one:
+\begin{eqnarray}
+\fun{D_a}{a^{\star}}&=&\fun{D_a}{a}a^{\star}=\epsilon a^{\star}=a^{\star}
+\end{eqnarray}
+We draw an arc $q_2\rightarrow^aq_2$, introduce a new state $q_{\emptyset}=\emptyset$ and draw an arc $q_2\rightarrow^b q_{\emptyset}$. It is clear that $\fun{\delta}{\emptyset}=\emptyset\neq\epsilon$, thus $q_{\emptyset}$ is not an accepting state.
+\paragraph{}
+Finally we need to draw arcs from $q_{\emptyset}$:
+\begin{eqnarray}
+\fun{D_a}{\emptyset}&=&\emptyset\\
+\fun{D_b}{\emptyset}&=&\emptyset
+\end{eqnarray}
+We thus define two loops: $q_{\emptyset}\rightarrow^aq_{\emptyset}$ and $q_{\emptyset}\rightarrow^bq_{\emptyset}$. Since there are no unexpanded states left, we have generated the entire DFA.
+\paragraph{}
+See \figref{exc17-dfa} for a complete DFA.
+\importtikzfigure{exc17-dfa}{The resulting DFA.}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
-Given the following automata.
-
-\importtikzfigure{exc19-dfa1}{The automata of exercise 7.}
-
-\begin{enumerate}
- \item Express the language accepted by the automata as a series of linear equations.
- \item Solve the equations to produce a regular expression describing the accepted language.
-\end{enumerate}
-\end{exercise}
-
-\begin{exercise}
+\exclab{exc20}
 Give a Turing machine (in full detail) to perform
 \begin{enumerate}
  \item addition
@@ -61,5 +157,15 @@ Give a Turing machine (in full detail) to perform
 Assume that the input string is of the form $a^n\#a^m$. In the first case, the result, namely the string on the TM when it halts, should be $a^{n+m}$. In the second case, the result should be $a^{n\cdot m}$.
 \paragraph{}
 The TM should reject if the input string is not of the correct form.
+\begin{answer}
+See \figref{exc20}.
+\begin{figure}[hbt]
+\centering
+\importtikzsubfigure{exc20-tm1}{Addition.}
+\importtikzsubfigure{exc20-tm2}{Multiplication.}
+\caption{Solution of \excref{exc20}.}
+\figlab{exc20}
+\end{figure}
+\end{answer}
 \end{exercise}
 \end{document}

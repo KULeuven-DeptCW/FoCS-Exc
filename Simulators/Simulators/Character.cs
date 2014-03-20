@@ -2,11 +2,14 @@ using System;
 
 namespace Simulators {
 
-	public class Character {
+	public struct Character {
 
-		private int code;
+		public static readonly Character Empty = new Character (-0x01);
 
-		public Character () {
+		private readonly int code;
+
+		public Character (int code) {
+			this.code = code;
 		}
 
 		public override int GetHashCode () {

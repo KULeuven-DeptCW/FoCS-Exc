@@ -9,6 +9,15 @@ namespace Simulators {
 			get;
 			set;
 		}
+
+		public TEdge this [Character c] {
+			get {
+				TEdge res = default(TEdge);
+				this.edges.TryGetValue (c, out res);
+				return res;
+			}
+		}
+
 		private readonly Dictionary<Character,TEdge> edges;
 
 		public State () {

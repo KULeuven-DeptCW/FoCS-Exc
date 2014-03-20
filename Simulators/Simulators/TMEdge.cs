@@ -3,6 +3,24 @@ using System;
 namespace Simulators {
 	public class TMEdge : Tuple<State<TMEdge>,Character,TMDirection> {
 
+		public State<TMEdge> TargetState {
+			get {
+				return this.Item1;
+			}
+		}
+
+		public Character WriteCharacter {
+			get {
+				return this.Item2;
+			}
+		}
+
+		public TMDirection Direction {
+			get {
+				return this.Item3;
+			}
+		}
+
 		public TMEdge (State<TMEdge> state, Character chr, TMDirection dir) : base(state,chr,dir) {
 		}
 

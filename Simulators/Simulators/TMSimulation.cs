@@ -9,14 +9,15 @@ namespace Simulators {
 		public readonly Stack<Character> RStack = new Stack<Character> ();
 		public State<TMEdge> CurrentState;
 
-		public TMSimulation (IEnumerable<Character> chars) {
+		public TMSimulation (TM machine, IEnumerable<Character> chars) {
+			this.CurrentState = machine.BeginState;
 			foreach (Character c in chars.Reverse()) {
 				RStack.Push (c);
 			}
 			this.Fix ();
 		}
 
-		public Character Current {
+		public Character CurrentCharacter {
 			get {
 				return this.RStack.Peek ();
 			}
@@ -36,11 +37,13 @@ namespace Simulators {
 		}
 
 		public void Step () {
-			TMEdge edge = this.CurrentState [this.Current];
+			TMEdge edge = this.CurrentState [this.CurrentCharacter];
 			if (edge == null) {
 				this.CurrentState = null;
 			} else {
-
+				this.CurrentCharacter = edge.WriteCharacter;
+				this.MoveHead (edge.Direction);
+				this.CurrentState = edge.TargetState;
 			}
 		}
 

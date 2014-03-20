@@ -20,9 +20,17 @@ namespace Simulators {
 			return ((obj != null && obj is Character && this.code == ((Character)obj).code) || base.Equals (obj));
 		}
 
+		public static Character Parse (char c) {
+			if (c == '_') {
+				return Character.Empty;
+			} else {
+				return new Character ((int)c);
+			}
+		}
+
 		public override string ToString () {
 			if (code < 0x00) {
-				return "<empty>";
+				return "_";
 			} else {
 				return ((char)code).ToString ();
 			}

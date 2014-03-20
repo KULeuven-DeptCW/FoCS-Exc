@@ -18,7 +18,7 @@ namespace Simulators {
 			}
 		}
 
-		private readonly Dictionary<Character,TEdge> edges;
+		private readonly Dictionary<Character,TEdge> edges = new Dictionary<Character, TEdge> ();
 
 		public State () {
 		}

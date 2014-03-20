@@ -4,10 +4,13 @@ namespace Simulators {
 
 	public class TM {
 
-		private readonly State<TMEdge> beginState;
+		public State<TMEdge> BeginState {
+			get;
+			private set;
+		}
 
 		public TM (State<TMEdge> beginState) {
-			this.beginState = beginState;
+			this.BeginState = beginState;
 		}
 
 	}

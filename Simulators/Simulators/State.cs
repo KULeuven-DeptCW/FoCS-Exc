@@ -10,6 +10,11 @@ namespace Simulators {
 			set;
 		}
 
+		public bool Accepting {
+			get;
+			set;
+		}
+
 		public TEdge this [Character c] {
 			get {
 				TEdge res = default(TEdge);
@@ -20,12 +25,23 @@ namespace Simulators {
 
 		private readonly Dictionary<Character,TEdge> edges = new Dictionary<Character, TEdge> ();
 
-		public State () {
+		public State (string name, bool accepting = false) {
+			this.Name = name;
+			this.Accepting = accepting;
+		}
+
+		public void AddEdge (Character c, TEdge edge) {
+			this.edges.Add (c, edge);
 		}
 
 		public override string ToString () {
 			StringBuilder sb = new StringBuilder ();
-			sb.AppendFormat ("State {0}", this.Name);
+			sb.AppendFormat ("State");
+			if (this.Accepting) {
+				sb.Append ("!");
+			}
+			sb.Append (' ');
+			sb.Append (this.Name);
 			sb.AppendLine ();
 			foreach (KeyValuePair<Character,TEdge> edge in edges) {
 				sb.AppendFormat ("\t{0}/{1}", edge.Key, edge.Value);

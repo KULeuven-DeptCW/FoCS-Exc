@@ -13,6 +13,10 @@ namespace Simulators {
 			this.BeginState = beginState;
 		}
 
+		public static TM Parse () {
+
+		}
+
 	}
 }
 

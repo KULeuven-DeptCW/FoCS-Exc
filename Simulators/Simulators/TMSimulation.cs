@@ -1,5 +1,6 @@
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Simulators {
 
@@ -60,6 +61,25 @@ namespace Simulators {
 					this.Fix ();
 					break;
 			}
+		}
+
+		public override string ToString () {
+			StringBuilder sb = new StringBuilder ();
+			string sl = string.Join (" ", this.LStack.Reverse ());
+			sb.Append (sl);
+			sb.Append (' ');
+			sb.Append (string.Join (" ", this.RStack));
+			sb.AppendLine ();
+			for (int i = sl.Length; i > 0x00; i--) {
+				sb.Append (' ');
+			}
+			sb.Append (' ');
+			if (this.CurrentState != null) {
+				sb.Append (this.CurrentState.Name);
+			} else {
+				sb.Append ("<crash>");
+			}
+			return sb.ToString ();
 		}
 
 	}

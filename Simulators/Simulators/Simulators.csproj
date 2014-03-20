@@ -47,5 +47,6 @@
     <Compile Include="TMEdge.cs" />
     <Compile Include="MainClass.cs" />
     <Compile Include="TMSimulation.cs" />
+    <Compile Include="ParseContext.cs" />
   </ItemGroup>
 </Project>

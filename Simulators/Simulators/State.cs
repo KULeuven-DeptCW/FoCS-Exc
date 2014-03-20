@@ -1,5 +1,6 @@
-using System.Text;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace Simulators {
 
@@ -36,12 +37,11 @@ namespace Simulators {
 
 		public override string ToString () {
 			StringBuilder sb = new StringBuilder ();
-			sb.AppendFormat ("State");
+			sb.AppendFormat ("State ");
+			sb.Append (this.Name);
 			if (this.Accepting) {
 				sb.Append ("!");
 			}
-			sb.Append (' ');
-			sb.Append (this.Name);
 			sb.AppendLine ();
 			foreach (KeyValuePair<Character,TEdge> edge in edges) {
 				sb.AppendFormat ("\t{0}/{1}", edge.Key, edge.Value);

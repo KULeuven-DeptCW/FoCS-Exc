@@ -70,10 +70,10 @@ make
 
 An executable (`Simulators/Simulators/bin/Debug/Simulators.exe`) will be generated. You can run the simulator using `cd` to move to the correct directory and then run:
 ```
-mono <tmfile>.tm "<inputstring>"
+mono Simulators.exe <tmfile>.tm "<inputstring>"
 ```
 
-for example `mono test.tm "aaa#aa"` will run a Turing Machine that calculates the addition of the two given unary numbers.
+for example `mono Simulators.exe test.tm "aaa#aa"` will run a Turing Machine that calculates the addition of the two given unary numbers.
 
 Links
 -----

@@ -1,7 +1,7 @@
 FoCS-Exc
 ========
 
-Exercise sessions of "Fundamentals of Computer Science".
+Exercise sessions of "Fundamentals of Computer Science" together with some software to run the simulations.
 
 Content
 -------
@@ -43,6 +43,8 @@ sudo apt-get install texlive-full
 
 You can then generate a pdf by running the LaTeX compiler.
 
+### Makefile
+
 In order to make this more convenient, a `Makefile` has been added to the repository. By running the following command in the directory of the repository:
 ```
 make Fundamentals_of_Computer_Science/exercisesn.pdf
@@ -54,11 +56,38 @@ In order to generate all `.pdf` files, run
 make
 ```
 
+### Simulators
+
+The repository contains a small simulator for a Turing Machine as well.
+
+You can compile the program by running the following commands:
+
+```
+cd Simulators
+./configure
+make
+```
+
+An executable (`Simulators/Simulators/bin/Debug/Simulators.exe`) will be generated. You can run the simulator using `cd` to move to the correct directory and then run:
+```
+mono <tmfile>.tm "<inputstring>"
+```
+
+for example `mono test.tm "aaa#aa"` will run a Turing Machine that calculates the addition of the two given unary numbers.
+
 Links
 -----
  - Poster about Automata and Computability (dutch): <http://willemvanonsem.ulyssis.be/posterab.pdf>
  - Poster about Fundamentals of Computer Science (work in progress) <http://willemvanonsem.ulyssis.be/posterfocs.pdf>
  - Information about the course: <http://onderwijsaanbod.kuleuven.be/syllabi/v/e/H04H0BE.htm>
+
+Contributing
+------------
+Students are welcome to contribute to the repository themselves.
+
+You can do so by "forking" the repository to your own GitHub-account where you can modify your version and then open a pull request to merge your changes into this repository.
+
+Relevant contributions are rewarded by a free GitHub sticker the next exercise session.
 
 License
 -------

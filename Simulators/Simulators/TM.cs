@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -6,7 +7,7 @@ namespace Simulators {
 	public class TM {
 
 		private static readonly Regex stateRegex = new Regex (@"^State ([^!]+)(!?)$", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-		private static readonly Regex edgeRegex = new Regex (@"(.)/([^!]+)/(.)/[LRS]$", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+		private static readonly Regex edgeRegex = new Regex (@"(.)/([^!]+)/(.)/([LRS])$", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
 		public State<TMEdge> BeginState {
 			get;
@@ -19,7 +20,7 @@ namespace Simulators {
 
 		public static TM Parse (TextReader tr) {
 			ParseContext<TMEdge> pc = new ParseContext<TMEdge> ();
-			State<TMEdge> currentState = null, targetState, initState;
+			State<TMEdge> currentState = null, targetState, initState = null;
 			string line = tr.ReadLine ();
 			Character ca, cb;
 			Match m;

@@ -18,6 +18,9 @@ namespace Simulators {
 			this.Fix ();
 		}
 
+		public TMSimulation (TM machine, IEnumerable<char> chars) : this (machine, chars.Select (Character.Parse)) {
+		}
+
 		public Character CurrentCharacter {
 			get {
 				return this.RStack.Peek ();
@@ -38,13 +41,15 @@ namespace Simulators {
 		}
 
 		public void Step () {
-			TMEdge edge = this.CurrentState [this.CurrentCharacter];
-			if (edge == null) {
-				this.CurrentState = null;
-			} else {
-				this.CurrentCharacter = edge.WriteCharacter;
-				this.MoveHead (edge.Direction);
-				this.CurrentState = edge.TargetState;
+			if (this.CurrentState != null && !this.CurrentState.Accepting) {
+				TMEdge edge = this.CurrentState [this.CurrentCharacter];
+				if (edge == null) {
+					this.CurrentState = null;
+				} else {
+					this.CurrentCharacter = edge.WriteCharacter;
+					this.MoveHead (edge.Direction);
+					this.CurrentState = edge.TargetState;
+				}
 			}
 		}
 
@@ -74,6 +79,7 @@ namespace Simulators {
 				sb.Append (' ');
 			}
 			sb.Append (' ');
+			sb.Append ('^');
 			if (this.CurrentState != null) {
 				sb.Append (this.CurrentState.Name);
 			} else {

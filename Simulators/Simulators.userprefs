@@ -4,11 +4,11 @@
     <Files>
       <File FileName="Simulators/ParseContext.cs" Line="17" Column="17" />
       <File FileName="Simulators/State.cs" Line="3" Column="19" />
-      <File FileName="Simulators/TM.cs" Line="22" Column="68" />
+      <File FileName="Simulators/TM.cs" Line="44" Column="30" />
       <File FileName="Simulators/TMEdge.cs" Line="20" Column="22" />
       <File FileName="Simulators/Character.cs" Line="27" Column="32" />
-      <File FileName="Simulators/MainClass.cs" Line="9" Column="43" />
-      <File FileName="Simulators/TMSimulation.cs" Line="21" Column="92" />
+      <File FileName="Simulators/MainClass.cs" Line="11" Column="7" />
+      <File FileName="Simulators/TMSimulation.cs" Line="82" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

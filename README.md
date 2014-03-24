@@ -83,11 +83,15 @@ Links
 
 Contributing
 ------------
+
+<img src="http://cdn.shopify.com/s/files/1/0051/4802/products/sticker-small_1024x1024.jpg?v=1368814207" style="float:left"/>
+
 Students are welcome to contribute to the repository themselves.
 
 You can do so by "forking" the repository to your own GitHub-account where you can modify your version and then open a pull request to merge your changes into this repository.
 
 Relevant contributions are rewarded by a free GitHub sticker the next exercise session.
+
 
 Thanks
 ------

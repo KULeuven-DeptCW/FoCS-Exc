@@ -335,13 +335,13 @@ order=-1
 
 [item:exercises1.tex]
 archive=true
-column=11
+column=42
 encoding=UTF-8
 highlight=LaTeX
-line=6
+line=13
 mode=LaTeX
-open=false
-order=1
+open=true
+order=10
 
 [item:exercises2.tex]
 archive=true
@@ -635,13 +635,13 @@ order=6
 
 [item:tikzpictures/tikz-exc3-dfa1.tex]
 archive=true
-column=47
+column=4
 encoding=UTF-8
 highlight=LaTeX
-line=9
+line=7
 mode=LaTeX
-open=false
-order=0
+open=true
+order=9
 
 [item:tikzpictures/tikz-exc3-dfa2.tex]
 archive=true
@@ -705,10 +705,10 @@ order=-1
 
 [item:tikzpictures/tikz-exc8-dfa2.tex]
 archive=true
-column=51
+column=45
 encoding=UTF-8
 highlight=LaTeX
-line=0
+line=19
 mode=LaTeX
 open=true
 order=8
@@ -736,8 +736,8 @@ JumpList=
 ViMarks=.,73,184,[,73,184,],73,184
 
 [view-settings,view=0,item:exercises1.tex]
-CursorColumn=11
-CursorLine=6
+CursorColumn=42
+CursorLine=13
 JumpList=
 ViMarks=.,6,10,[,6,6,],6,10
 
@@ -916,8 +916,8 @@ JumpList=
 ViMarks=.,37,30,[,37,28,],37,30
 
 [view-settings,view=0,item:tikzpictures/tikz-exc3-dfa1.tex]
-CursorColumn=47
-CursorLine=9
+CursorColumn=4
+CursorLine=7
 JumpList=
 ViMarks=.,9,47,[,9,47,],9,47
 
@@ -958,10 +958,10 @@ JumpList=
 ViMarks=.,3,34,[,3,33,],3,34
 
 [view-settings,view=0,item:tikzpictures/tikz-exc8-dfa2.tex]
-CursorColumn=51
-CursorLine=0
+CursorColumn=45
+CursorLine=19
 JumpList=
-ViMarks=.,0,0,[,0,0,],18,16
+ViMarks=.,19,44,[,19,44,],19,44
 
 [view-settings,view=0,item:tikzpictures/tikz-exc8-dfa3.tex]
 CursorColumn=31

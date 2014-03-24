@@ -1,7 +1,8 @@
-\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,scale=1.5]
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,auto,scale=1.5]
 \def\sc{0.75}
 \node[state,initial,scale=\sc] (q0) at (0,0) {$q_i$};
 \node[state,accepting,scale=\sc] (q3) at (6,0) {$q_f$};
+\node[state,scale=\sc] (qw) at (7,0) {$q_w$};
 \foreach \i in {1,2} {
   \node[state,scale=\sc] (q\i) at (2*\i,0) {$q_{\i}$};
 }
@@ -13,4 +14,11 @@
   \path[->] (q\i0) edge node[scale=\sc] {$1$} (q\j);
   \path[->] (q\i1) edge node[scale=\sc] {$0$} (q\j);
 }
+\path[->] (q00) edge[bend left,looseness=0.75] node[scale=\sc] {$0$} (qw);
+\path[->] (q01) edge[bend right,looseness=0.75] node[scale=\sc] {$1$} (qw);
+\path[->] (q10) edge[bend left,looseness=0.75] node[scale=\sc] {$0$} (qw);
+\path[->] (q11) edge[bend right,looseness=0.75] node[scale=\sc] {$1$} (qw);
+\path[->] (q20) edge node[scale=\sc] {$0$} (qw);
+\path[->] (q21) edge node[scale=\sc] {$1$} (qw);
+\path[->] (qw) edge[loop right] node {$0,1$} ();
 \end{tikzpicture}

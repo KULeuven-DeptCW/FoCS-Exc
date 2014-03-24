@@ -98,7 +98,7 @@ Thanks
 
 Thanks to:
 
- - **Thomas Neven**: for reporting a problem with session 1 exercise 8.
+ - **Thomas Neven**: for reporting a problem with session 1 exercise 8 ([Issue #1](https://github.com/KommuSoft/FoCS-Exc/issues/1)).
 
 License
 -------

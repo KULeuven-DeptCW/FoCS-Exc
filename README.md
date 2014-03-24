@@ -84,7 +84,7 @@ Links
 Contributing
 ------------
 
-<img src="http://cdn.shopify.com/s/files/1/0051/4802/products/sticker-small_1024x1024.jpg?v=1368814207" style="float:left"/>
+<img src="http://cdn.shopify.com/s/files/1/0051/4802/products/sticker-small_512x512.jpg?v=1368814207" align="left"/ width="100%" height="*">
 
 Students are welcome to contribute to the repository themselves.
 

@@ -1,0 +1,129 @@
+\documentclass{article}
+\title{Fundamenten van de Computerwetenschappen:\\opgave 1}
+\author{Prof. B. Demoen (\url{Bart.Demoen@cs.kuleuven.be})\\ W. Van Onsem (\url{Willem.VanOnsem@cs.kuleuven.be})}
+\date{28 maart 2014}
+\usepackage{tikz,../assignment-nl,../importsreferences-nl}
+\usetikzlibrary{shapes}
+
+\newcommand{\bchr}[2]{\fbrk{\begin{array}{c}#1\\#2\end{array}}}
+
+\newcommand{\cdfa}[2]{\begin{tikzpicture}[statesc/.style={state,scale=0.75}]
+\def\cnt{#1}
+\def\ra{1.5}
+\def\alpha{-360/\cnt}
+\node[statesc,initial,accepting] (Q1) at (180:\ra cm) {$q_0$};
+\foreach \i in {2,3,...,\cnt} {
+  \node[statesc] (Q\i) at (\alpha*\i+180-\alpha:\ra cm) {$q_{\i}$};
+}
+\foreach \i/\j/\t in {#2} {
+  \path[->] (Q\i) edge node[sloped,above]{$\t$} (Q\j);
+}
+\end{tikzpicture}}
+\begin{document}
+\maketitle
+\richtlijnen{}
+\begin{question}[Pompend lemma van reguliere talen] Stel een speciale familie van DFAs $C_n$ met $n$ toestanden. De toestanden zijn geordend $q_0,q_1,\ldots,q_{n-1}$ zodat de eerste toestand $q_0$ de initi\"ele en enige accepterende toestand is. Verder kan de DFA enkel overgangen bevatten van een toestand $q_i$ naar een toestand $q_j$ indien $i<j$. De enige uitzondering is $q_{n-1}$ vanwaar een boog (mogelijk met meerdere karakters) vertrekt naar $q_0$. Of formeler:
+\begin{quote}\begin{definition}[Cyclische DFA]
+Gegeven een getal $n\in\NNN$, een \emph{cyclische DFA} met $n$ toestanden is een DFA $\tupl{Q,\Sigma,\delta,F,q_1}$ met $Q=\accl{q_1,q_2,\ldots,q_n}$, $\Sigma$ een eindig alfabet, $F=\accl{q_1}$ en $\delta$ is gedefinieerd als volgt:
+\begin{eqnarray}
+\forall q_i\in Q\setminus\accl{q_n},a\in\Sigma:\exists q_j\in Q:\fun{\delta}{q_i,a}=q_j\mbox{ met } j>i\\
+\forall a\in\Sigma:\fun{\delta}{q_n,a}=q_1
+\end{eqnarray}
+\end{definition}\end{quote}
+\begin{example}
+\figref{mrt-q1} toont enkele voorbeelden van een dergelijke DFA.
+\begin{figure}[hbt]
+\centering
+\importtikzsubfigure{mrt-dfa1}{}
+\importtikzsubfigure{mrt-dfa2}{}
+\importtikzsubfigure{mrt-dfa3}{}
+\importtikzsubfigure{mrt-dfa4}{}
+\importtikzsubfigure{mrt-dfa5}{}
+\caption{Voorbeelden van de familie van DFAs}
+\figlab{mrt-q1}
+\end{figure}
+\end{example}
+\paragraph{}
+Is de verzameling van talen die beslist kunnen worden met een cyclische DFA strikt kleiner dat de set van talen die met een normale DFA kunnen worden voorgesteld? Of kun je elke DFA omvormen tot een cyclische DFA die dezelfde taal beslist?
+\end{question}
+
+\begin{question}[Minimalisatie van een DFA]
+Betreft het minimalisatiealgoritme:
+\begin{enumerate}
+ \item Het minimalisatiealgoritme in sectie \S4.4.2 (pagina 39) in de cursus is niet erg effici\"ent, vooral stap 3. Kun je \'e\'en of meer verbeteringen voorstellen zodat het algoritme effici\"enter werkt?
+ \item Stel dat een DFA niet beslist of een string wel of niet tot een taal behoort, maar alle mogelijk strings $s\in\Sigma^{\star}$ onderverdeelt in $k$ categorie\"en $K=\accl{1,2,\ldots,k}$. Dit doet men door elke toestand $q_i$ te annoteren met een categorie $\fun{l}{q_i}$. Indien de automaat stopt in een toestand $q_f$ met $\fun{l}{q_f}=j$, dan behoort de string tot categorie $j$. Wat moet je aanpassen aan de $f$-gelijk-constructie, zodat je dergelijke DFAs kunt minimaliseren met behoud van de categorisatie-functie.
+\end{enumerate}
+\end{question}
+
+\begin{question}[Reguliere basis-operaties]
+Toon volgende eigenschappen bij reguliere basis-operaties aan:
+\begin{enumerate}
+ \item De concatenatie-operatie $R_1R_2R_3$ is associatief.
+ \item De concatenatie-operatie is distributief over de unie-operatie.
+ \item De unie-operatie is niet distributief over de Kleene-ster-operatie.
+\end{enumerate}
+\end{question}
+
+
+\begin{question}[Reguliere talen]
+Geef voor onderstaande talen een reguliere expressie, een DFA, of bewijs aan de hand van het pompend lemma dat de taal niet regulier is:
+\begin{enumerate}
+ \item $L=\accl{\begin{array}{l|l}w\in\accl{a,b}^{\star}&\mbox{voor elke substring van $w$ is het verschil tussen}\\&\mbox{het aantal $a$'s en het aantal $b$'s nooit groter dan 2.}\end{array}}$
+ \item $L=\condset{a^nb^mc^n}{n,m\in\NNN:n,m\geq 0}$
+\end{enumerate}
+\end{question}
+
+\begin{question}[Voorstellingskracht van reguliere talen]
+Bewijs (bijvoorbeeld aan de hand van een constructie) of geef een tegenvoorbeeld voor volgende stellingen:
+\begin{enumerate}
+ \item Stel een niet-reguliere taal $L$(er bestaat geen DFA die de taal kan beslissen), dan is $L^{\star}$ ook niet regulier.
+ \item Stel twee reguliere talen $L_1$ en $L_2$, is de taal $L$ dan ook regulier met:
+ \begin{equation}
+  L=\condset{s_1t_1s_2t_2\ldots s_nt_n}{s\in L_1,t\in L_2}
+ \end{equation}
+ Merk op dat de strings in $L$ allemaal een even lengte hebben, en de strings $s$ en $t$ respectievelijk uit $L_1$ en $L_2$ dezelfde lengte moeten hebben.
+\end{enumerate}
+\end{question}
+
+\begin{question}[Brzozowski afgeleide]
+Gegeven twee reguliere expressies $R_1$ en $R_2$, $R=R_1\cap R_2$ is gedefinieerd als een operatie waardoor $L_R=L_{R_1}\cap L_{R_2}$. Geef een definitie voor de Brzozowski-afgeleide $\fun{\delta}{R_1\cap R_2}$ en $\fun{D_a}{R_1\cap R_2}$ met $a\in\Sigma$ zodat deze overeenstemming is met de originele definitie van de Brzozowski afgeleide (sectie \S4.9, pagina 50 in de cursus). Leg kort de semantische betekenis van je definitie uit.
+\end{question}
+
+\begin{question}[Contextvrije talen]
+Geef voor onderstaande talen een context-vrije grammatica, een push-down automaat, of bewijs aan de hand van het pompend lemma dat de taal niet context-vrij is.
+\begin{enumerate}
+ \item $\condset{a^{2^n}}{n\in\NNN}$.
+ \item $\condset{s\in\accl{\tfrac{0}{0},\tfrac{0}{1},\tfrac{1}{0},\tfrac{1}{1}}^{\star}}{\mbox{Binaire waarde bovenste rij is $3\times$ de binaire waarde onderste rij}}$.
+ \item $\condset{ww^Rw}{w\in\accl{0,1}^{\star}}$.
+ \item Een taal met $\Sigma=\accl{(,),[,]}$ volgens de normale regels van haakjes, maar waarbij de vierkante haken op ieder niveau altijd na de ronde haken komen te staan. Bijvoorbeeld $\brak{}\fbrk{}$, $\brak{\fbrk{}}{\brak{}}$ en $\brak{\brak{}\fbrk{\brak{}}}\brak{}$ is correct, maar $\fbrk{}\brak{}$ en $\brak{\fbrk{}\brak{}\fbrk{}}\fbrk{}$ niet.
+\end{enumerate}
+\end{question}
+
+\begin{question}[Eigenschappen van talen]
+Stel $L_1,L_2$ reguliere talen, $L_3,L_4$ eindige talen en $L_5,L_6$ context-vrije talen. Welke eigenschappen (\'e\'en of meerdere uit $\accl{\mbox{eindig},\mbox{regulier},\mbox{context-vrij}}$) gelden dan voor volgende operaties? Leg kort uit waarom of geef een tegenvoorbeeld:
+\begin{enumerate}
+ \item $\overline{L_3}L_1$.
+ \item $L_1L_5^{\star}L_2$.
+ \item $L_6\setminus L_2$ gegeven dat $L_6\cap L_2$ regulier is.
+ \item $\overline{L_4}\cup L_4L_1$
+\end{enumerate}
+\end{question}
+
+\begin{question}[$\oplus$NFA]
+Beschouw een $\oplus$NFA\footnote{Uitspraak Parity-NFA}:
+\begin{quote}
+\begin{definition}
+Een $\oplus$NFA is een $\oplus$NFA accepteert een string $s$ wanneer een oneven aantal paden bij $s$ op de $NFA$ in een accepterende toestand terecht komen en verwerpt wanneer een even aantal paden in een accepterende toestand terecht komen.
+\end{definition}
+\end{quote}
+Welke uitspraken zijn waar, beargumenteer of geef een tegenvoorbeeld:
+\begin{enumerate}
+ \item Elke DFA is een $\oplus$NFA en deze $\oplus$NFA bepaalt dezelfde taal.
+ \item Voor elke $\oplus$NFA bestaat er een DFA die dezelfde taal beslist.
+ \item Wanneer de NFA geen $\epsilon$-bogen bevat en er vanuit elke toestand voor elk karakter juist \'e\'en boog vertrekt is de $\oplus$NFA ook een DFA die dezelfde taal beslist.
+ \item We kunnen gegeven een DFA en een $\oplus$NFA de doorsnede-constructie in de cursus gebruiken om een $\oplus$NFA te bouwen die de doorsnede van de twee talen beslist.
+ \item Niet alle talen beslist door een $\oplus$NFA zijn regulier, maar ze zijn allemaal context-vrij.
+\end{enumerate}
+\end{question}
+
+\end{document}

@@ -23,7 +23,7 @@
 \maketitle
 \richtlijnen{}
 \aboutanswers{}
-\begin{question}[Pompend lemma van reguliere talen] Stel een speciale familie van DFAs $C_n$ met $n$ toestanden. De toestanden zijn geordend $q_0,q_1,\ldots,q_{n-1}$ zodat de eerste toestand $q_0$ de initi\"ele en enige accepterende toestand is. Verder kan de DFA enkel overgangen bevatten van een toestand $q_i$ naar een toestand $q_j$ indien $i<j$. De enige uitzondering is $q_{n-1}$ vanwaar een boog (mogelijk met meerdere karakters) vertrekt naar $q_0$. Of formeler:
+\begin{question}Stel een speciale familie van DFAs $C_n$ met $n$ toestanden. De toestanden zijn geordend $q_0,q_1,\ldots,q_{n-1}$ zodat de eerste toestand $q_0$ de initi\"ele en enige accepterende toestand is. Verder kan de DFA enkel overgangen bevatten van een toestand $q_i$ naar een toestand $q_j$ indien $i<j$. De enige uitzondering is $q_{n-1}$ vanwaar een boog (mogelijk met meerdere karakters) vertrekt naar $q_0$. Of formeler:
 \begin{quote}\begin{definition}[Cyclische DFA]
 Gegeven een getal $n\in\NNN$, een \emph{cyclische DFA} met $n$ toestanden is een DFA $\tupl{Q,\Sigma,\delta,F,q_1}$ met $Q=\accl{q_1,q_2,\ldots,q_n}$, $\Sigma$ een eindig alfabet, $F=\accl{q_1}$ en $\delta$ is gedefinieerd als volgt:
 \begin{eqnarray}
@@ -52,7 +52,6 @@ $\mbox{RegLan}_C$ is een \textbf{strikte deelverzameling} van $\mbox{RegLan}$. W
  \item Elke eindige taal (vermits een DFA geen $\epsilon$-bogen bevat en een cyclus van minstens lengte $1$ impliceert dat we strings willekeurig veel kunnen herhalen).
  \item Talen die na een bepaald patroon geen eerder geziene karakters meer bevatten, bijvoorbeeld $L=a^{\star}bc^{\star}$.
 \end{enumerate}
-
 \end{answer}
 \end{question}
 
@@ -63,10 +62,16 @@ Betreft het minimalisatiealgoritme:
  \item Stel dat een DFA niet beslist of een string wel of niet tot een taal behoort, maar alle mogelijk strings $s\in\Sigma^{\star}$ onderverdeelt in $k$ categorie\"en $K=\accl{1,2,\ldots,k}$. Dit doet men door elke toestand $q_i$ te annoteren met een categorie $\fun{l}{q_i}$. Indien de automaat stopt in een toestand $q_f$ met $\fun{l}{q_f}=j$, dan behoort de string tot categorie $j$. Wat moet je aanpassen aan de $f$-gelijk-constructie, zodat je dergelijke DFAs kunt minimaliseren met behoud van de categorisatie-functie.
 \end{enumerate}
 \begin{answer}
-
+Hiervoor dienen we de equivalentie-relatie $\approx$ te veralgemenen:
+\begin{equation}
+\forall p,q\in Q:p\approx q\Leftrightarrow\forall s\in\Sigma^{\star},\forall i:\brak{\fun{\hat{\delta}}{p,s}\in F_i\leftrightarrow \fun{\hat{\delta}}{q,s}}
+\end{equation}
+Dit leidt tot volgende aanpassing in het minimalisatie-algoritme: in de tweede stap markeren we $\tupl{p,q}$ indien $p$ en $q$ tot een verschillende $F$ behoren of formeler:
+\begin{quote}
+2. Mark $\tupl{p,q}$ if $p\in F_i$,$q\in F_j$ and $F_i\neq F_j$.
+\end{quote}
 \end{answer}
 \end{question}
-
 
 \begin{question}[Reguliere talen]
 Geef voor onderstaande talen een reguliere expressie, een DFA, of bewijs aan de hand van het pompend lemma dat de taal niet regulier is:
@@ -147,7 +152,7 @@ Geef voor onderstaande talen een context-vrije grammatica, een push-down automaa
 \begin{answer}
 \begin{enumerate}
  \item Dit is \textbf{niet context-vrij}. We bewijzen aan de hand van het pompend lemma. Stel $s$ een string $s=a^q$ met $q$ een macht van $2$ en $q>p$ met $p$ de onbekende pomplengte. Voor elke mogelijke opdeling $s=uvxyz$ weten we dat $v$ en $y$ uitsluitend uit $a$'s kunnen bestaan, we stellen $v=a^k$ en $y=a^l$. We weten dat moet gelden $0<l+k<p<q$. Stel $i=2$, dan is de gegenereerde string $a^{q+l+k}$. Vermits $q<q+k+l<2\cdot q$ is dit geen macht van $2$. Bijgevolg behoort deze string niet tot $L$.
- \item Deze taal is \textbf{regulier}.\figref{mrt-q5-dfa} toont hiervoor een DFA. De machine werkt \emph{big-endian}\footnote{Bij een big-endian machine worden eerst de minst significante bits ingevoerd.} en houdt telkens de overdracht bij. In het begin is de overdacht $0$. Wanneer er op de bovenste lijn een $1$ verschijnt, moet er onderaan $3$ worden toegevoegd. Vermits er slechts \'e\'en bit onderaan beschikbaar is, staat daarop een $1$ en schrijven we de rest (de overdacht) weg in een toestand. Omdat de overdacht maximum $4$ bereikt, kan deze taal worden beslist met een DFA. Indien we een \emph{little-endian} machine wensen te construeren kunnen we een constructie gebruiken om een DFA te bouwen die de omgekeerde taal beslist. Vermits elke DFA een PDA is waarbij de stapel niet wordt gebruikt, is de taal dus context-vrij.\\
+ \item Deze taal is \textbf{regulier}. \figref{mrt-q5-dfa} toont hiervoor een DFA. De machine werkt \emph{big-endian}\footnote{Bij een big-endian machine worden eerst de minst significante bits ingevoerd.} en houdt telkens de overdracht bij. In het begin is de overdacht $0$. Wanneer er op de bovenste lijn een $1$ verschijnt, moet er onderaan $3$ worden toegevoegd. Vermits er slechts \'e\'en bit onderaan beschikbaar is, staat daarop een $1$ en schrijven we de rest (de overdacht) weg in een toestand. Omdat de overdacht maximum $4$ bereikt, kan deze taal worden beslist met een DFA. Indien we een \emph{little-endian} machine wensen te construeren kunnen we een constructie gebruiken om een DFA te bouwen die de omgekeerde taal beslist. Vermits elke DFA een PDA is waarbij de stapel niet wordt gebruikt, is de taal dus context-vrij.\\
  \importtikzfigure{mrt-q5-dfa}{Een DFA die binaire vermenigvuldiging met $3$ controleert.}
  Een interessant gevolg is dus dat men in digitale logica een \emph{online vermenigvuldiger} kan bouwen die in lineaire tijd voor een vaste constante een sequentieel ingevoerd binair getal, een binair getal kan genereren waarvan de invoer vermenigvuldigt is met de gegeven constante.
  \item Deze taal is \textbf{niet context-vrij}. Dit bewijzen we door eerst de doorsnede met $a^{\star}b^{\star}a^{\star}b^{\star}$ te nemen. In dat geval bekomen we de taal $L'=\condset{a^nb^{2\cdot n}a^{2\cdot n}b^n}{n\in\NNN}$. Een voor de hand liggende keuze voor $s$ is $s=a^pb^{2\cdot p}a^{2\cdot p}b^p$, met $p$ de onbekende pomplengte. Voor alle opdelingen $s=uvxyz$ weten we, op basis van de voorwaarden van het pompend lemma. Dat $v$ en $y$ elk uit slechts \'e\'en soort karakters kunnen bestaan. Onafhankelijk van welke karakters gekozen worden, kunnen hoogstens twee van de vier groepen verder worden uitgebreid. Bijgevolg is er geen enkele opdeling waarvoor we de taal kunnen pompen. Bijgevolg is de taal niet context-vrij.
@@ -167,10 +172,9 @@ Een $\oplus$NFA is een $\oplus$NFA accepteert een string $s$ wanneer een oneven 
 Welke uitspraken zijn waar, beargumenteer of geef een tegenvoorbeeld:
 \begin{enumerate}
  \item Elke DFA is een $\oplus$NFA en deze $\oplus$NFA bepaalt dezelfde taal.
- \item Voor elke $\oplus$NFA bestaat er een DFA die dezelfde taal beslist.
- \item Wanneer de NFA geen $\epsilon$-bogen bevat en er vanuit elke toestand voor elk karakter juist \'e\'en boog vertrekt is de $\oplus$NFA ook een DFA die dezelfde taal beslist.
- \item We kunnen gegeven een DFA en een $\oplus$NFA de doorsnede-constructie in de cursus gebruiken om een $\oplus$NFA te bouwen die de doorsnede van de twee talen beslist.
- \item Niet alle talen beslist door een $\oplus$NFA zijn regulier, maar ze zijn allemaal context-vrij.
+ \item Een $\oplus\mbox{NFA}$ zonder $\epsilon$-bogen en met voor elke toestand en karakter juist \'e\'en boog, is een DFA die dezelfde taal beslist.
+ \item Elke taal bepaald door een $\oplus\mbox{NFA}$ is context-vrij.
+ \item Elke taal bepaald door een $\oplus\mbox{NFA}$ is regulier.
 \end{enumerate}
 \begin{answer}
 \begin{enumerate}
@@ -183,11 +187,11 @@ Welke uitspraken zijn waar, beargumenteer of geef een tegenvoorbeeld:
  Stel een $\oplus\mbox{NFA}=\tupl{Q,\Sigma,\delta,q_0,F}$, dan construeren we een $\mbox{DFA}=\tupl{Q',\Sigma,\delta',q_0',F'}$ als volgt:
  \begin{eqnarray}
   Q'&=&\powset{Q}\\
-  q_0'&=&\accl{q_0}\\
-  \forall q'\in Q',a\in\Sigma:\fun{\delta'}{q',a}&=&\condset{\fun{\delta}{q,a}}{q\in q'}\\
+  q_0'&=&\fun{E}{q_0}\\
+  \forall q'\in Q',a\in\Sigma:\fun{\delta'}{q',a}&=&\displaystyle\bigcup_{q\in q'}\fun{E}{\fun{\delta}{q,a}}\\
   F'&=&\condset{q'\in Q'}{\#\brak{q'\cap F}\mod 2=1}
  \end{eqnarray}
-
+ Met $E$ gedefinieerd als in \S4.3.
  \end{construction}
  \end{quote}
 

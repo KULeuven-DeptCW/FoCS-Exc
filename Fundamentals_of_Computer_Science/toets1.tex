@@ -77,6 +77,7 @@ Geef voor onderstaande talen een reguliere expressie, een DFA, of bewijs aan de 
 \begin{answer}
 \begin{enumerate}
  \item Deze taal is regulier. Op \figref{mrt-q3-dfa} toont een (minimale) DFA die deze taal beslist. Het idee is om telkens het verschil in $a$'s en $b$'s bij te houden. Indien dit op een willekeurig moment groter wordt dan $2$, komt de DFA in een verwerp-toestand terecht. Indien de DFA op het einde niet op de verwerp-toestand staat, wordt de string geaccepteerd.
+ \importtikzfigure{mrt-q3-dfa}{Een DFA die $L_1$ beslist.}
  \item Deze taal is niet regulier. We kunnen eerst de doorsnede nemen met de taal $L=a^{\star}c^{\star}$, in dat geval is $L'=\condset{a^nb^mc^n}{n,m\in\NNN:n,m\geq 0}\cap\accl{a^{\star}c^{\star}}=\condset{a^nc^n}{n\in\NNN}$, een schoolvoorbeeld van een niet-reguliere taal waarvan het pompend lemma in de cursustekst staat uitgewerkt.\\
  Het pompend lemma rechtstreeks gebruiken is minder evident. We werken het hier toch uit. Stel een string $s\in\Sigma^{\star}$ langer dan de pomplengte $p$ met $s=a^pb^pc^p$. Dan moet er een opdeling $s=xyz$ bestaan met $\abs{xy}\leq p$ en $\abs{y}>0$ zodat $\forall i\in\NNN:xy^iz\in L$. Het is evident dat $y$ uit slechts \'e\'en soort karakters kan bestaan: anders pompen we ook strings die meer dan twee keer van karakter verwisselen. Iets wat niet kan volgens de taal. Vermits $\abs{xy}\leq p$, weten we dat $y$ uitsluitend uit $a$'s kan bestaan. Stel $y=a^l$ met $l$ onbekend maar groter dan $0$, dan pompen we voor $i=2$ de string $a^{p+l}b^pc^p$, deze string behoort niet tot de taal bij om het even welke $l$ groter dan $0$. Dit leidt dus tot een contradictie.
 \end{enumerate}
@@ -123,7 +124,7 @@ Bewijs (bijvoorbeeld aan de hand van een constructie) of geef een tegenvoorbeeld
   F&=&F_1\times F_2\times\accl{0}\\
   \forall a\in \Sigma:\fun{\delta}{q_w,a}&=&q_w\\
   \forall q_1\in Q_1,q_2\in Q_2,a\in \Sigma_1:\fun{\delta}{q_1\times q_2\times 0,a}&=&\fun{\delta_1}{q_1,a}\times q_2\times 1\\
-  \forall q_1\in Q_1,q_2\in Q_2,a\in \Sigma_2:\fun{\delta}{q_1\times q_2\times 1,a}&=&q_1\times\fun{\delta_2}{q_2,a}\times 1\\
+  \forall q_1\in Q_1,q_2\in Q_2,a\in \Sigma_2:\fun{\delta}{q_1\times q_2\times 1,a}&=&q_1\times\fun{\delta_2}{q_2,a}\times 0\\
   \forall q_1\in Q_1,q_2\in Q_2,a\in \Sigma\setminus\Sigma_1:\fun{\delta}{q_1\times q_2\times 0,a}&=&q_w\\
   \forall q_1\in Q_1,q_2\in Q_2,a\in \Sigma\setminus\Sigma_2:\fun{\delta}{q_1\times q_2\times 1,a}&=&q_w
  \end{eqnarray}
@@ -141,8 +142,17 @@ Geef voor onderstaande talen een context-vrije grammatica, een push-down automaa
  \item $\condset{a^{2^n}}{n\in\NNN}$.
  \item $\condset{s\in\accl{\tfrac{0}{0},\tfrac{0}{1},\tfrac{1}{0},\tfrac{1}{1}}^{\star}}{\mbox{Binaire waarde bovenste rij is $3\times$ de binaire waarde onderste rij}}$.
  \item $\condset{ww^Rw}{w\in\accl{0,1}^{\star}}$.
+ \item Een taal met $\Sigma=\accl{(,),[,]}$ volgens de normale regels van haakjes, maar waarbij de vierkante haken op ieder niveau altijd na de ronde haken komen te staan. Bijvoorbeeld $\brak{}\fbrk{}$, $\brak{\fbrk{}}{\brak{}}$ en $\brak{\brak{}\fbrk{\brak{}}}\brak{}$ is correct, maar $\fbrk{}\brak{}$ en $\brak{\fbrk{}\brak{}\fbrk{}}\fbrk{}$ niet.
 \end{enumerate}
 \begin{answer}
+\begin{enumerate}
+ \item Dit is \textbf{niet context-vrij}. We bewijzen aan de hand van het pompend lemma. Stel $s$ een string $s=a^q$ met $q$ een macht van $2$ en $q>p$ met $p$ de onbekende pomplengte. Voor elke mogelijke opdeling $s=uvxyz$ weten we dat $v$ en $y$ uitsluitend uit $a$'s kunnen bestaan, we stellen $v=a^k$ en $y=a^l$. We weten dat moet gelden $0<l+k<p<q$. Stel $i=2$, dan is de gegenereerde string $a^{q+l+k}$. Vermits $q<q+k+l<2\cdot q$ is dit geen macht van $2$. Bijgevolg behoort deze string niet tot $L$.
+ \item Deze taal is \textbf{regulier}.\figref{mrt-q5-dfa} toont hiervoor een DFA. Vermits elke DFA een PDA is waarbij de stapel niet wordt gebruikt, is de taal dus context-vrij.\\
+ \importtikzfigure{mrt-q5-dfa}{Een DFA die binaire vermenigvuldiging met een constante controleert.}
+ Een interessant gevolg is dus dat men in digitale logica een \emph{online vermenigvuldiger} kan bouwen die in lineaire tijd voor een vaste constante een sequentieel ingevoerd binair getal, een binair getal kan genereren waarvan de invoer vermenigvuldigt is met de gegeven constante.
+ \item Deze taal is \textbf{niet context-vrij}.
+ \item Deze taal is \textbf{context-vrij}. Zie grammatica \grmref{mrt-q5-grm} voor een context-vrije grammatica.
+\end{enumerate}
 
 \end{answer}
 \end{question}

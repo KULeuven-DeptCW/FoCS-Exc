@@ -1,14 +1,16 @@
 \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
- \node[state,accepting,initial,initial where=above] (q0) {$q_0$};
- \node[state,accepting] (q9) [left=of q0] {$q_{-1}$};
- \node[state,accepting] (q8) [left=of q9] {$q_{-2}$};
- \node[state,accepting] (q1) [right=of q0] {$q_1$};
- \node[state,accepting] (q2) [right=of q1] {$q_2$};
- \node[state]           (qw) [below=of q0] {$q_w$};
- \foreach \i/\j in {8/9,9/0,0/1,1/2} {
-   \path[->] (q\j) edge [bend right] node {$a$} (q\i);
-   \path[->] (q\i) edge [bend right] node {$b$} (q\j);
+ \node[state,initial,accepting] (q0) {$q_0$};
+ \node[state] (q2) [right=of q0] {$q_2$};
+ \node[state] (q4) [right=of q2] {$q_4$};
+ \node[state] (qw) [below=of q2] {$q_w$};
+ \foreach \qa/\qb/\m/\n in {0/2/1/1,2/0/0/1,2/4/1/0,4/2/0/0} {
+   \path[->] (q\qa) edge [bend right] node[above] {$\tfrac{\m}{\n}$} (q\qb);
  }
- \path[<-] (qw) edge [bend left] node {$a$} (q8) edge [bend right] node {$b$} (q2);
- \path[->] (qw) edge [loop above] node {$a$,$b$} ();
+ \foreach \qa/\m/\n in {0/0/0,4/1/1} {
+   \path[->] (q\qa) edge [loop above] node {$\tfrac{\m}{\n}$} ();
+ }
+ \foreach \qa/\ma/\na/\mb/\nb in {0/0/1/1/0,2/1/1/0/0,4/0/1/1/0} {
+   \path[->] (q\qa) edge node[sloped,below,midway] {$\tfrac{\ma}{\na},\tfrac{\mb}{\nb}$} (qw);
+ }
+ \path[->] (qw) edge [loop below] node {$\tfrac{0}{0},\tfrac{0}{1},\tfrac{1}{0},\tfrac{1}{1}$} ();
  \end{tikzpicture}

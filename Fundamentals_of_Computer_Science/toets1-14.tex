@@ -76,9 +76,9 @@ Geef voor onderstaande talen een reguliere expressie, een DFA, of bewijs aan de 
 \end{enumerate}
 \begin{answer}
 \begin{enumerate}
- \item Deze taal is regulier. Op \figref{mrt-q3-dfa} toont een (minimale) DFA die deze taal beslist. Het idee is om telkens het verschil in $a$'s en $b$'s bij te houden. Indien dit op een willekeurig moment groter wordt dan $2$, komt de DFA in een verwerp-toestand terecht. Indien de DFA op het einde niet op de verwerp-toestand staat, wordt de string geaccepteerd.
+ \item Deze taal is \textbf{regulier}. Op \figref{mrt-q3-dfa} toont een (minimale) DFA die deze taal beslist. Het idee is om telkens het verschil in $a$'s en $b$'s bij te houden. Indien dit op een willekeurig moment groter wordt dan $2$, komt de DFA in een verwerp-toestand terecht. Indien de DFA op het einde niet op de verwerp-toestand staat, wordt de string geaccepteerd.
  \importtikzfigure{mrt-q3-dfa}{Een DFA die $L_1$ beslist.}
- \item Deze taal is niet regulier. We kunnen eerst de doorsnede nemen met de taal $L=a^{\star}c^{\star}$, in dat geval is $L'=\condset{a^nb^mc^n}{n,m\in\NNN:n,m\geq 0}\cap\accl{a^{\star}c^{\star}}=\condset{a^nc^n}{n\in\NNN}$, een schoolvoorbeeld van een niet-reguliere taal waarvan het pompend lemma in de cursustekst staat uitgewerkt.\\
+ \item Deze taal is \textbf{niet regulier}. We kunnen eerst de doorsnede nemen met de taal $L=a^{\star}c^{\star}$, in dat geval is $L'=\condset{a^nb^mc^n}{n,m\in\NNN:n,m\geq 0}\cap\accl{a^{\star}c^{\star}}=\condset{a^nc^n}{n\in\NNN}$, een schoolvoorbeeld van een niet-reguliere taal waarvan het pompend lemma in de cursustekst staat uitgewerkt.\\
  Het pompend lemma rechtstreeks gebruiken is minder evident. We werken het hier toch uit. Stel een string $s\in\Sigma^{\star}$ langer dan de pomplengte $p$ met $s=a^pb^pc^p$. Dan moet er een opdeling $s=xyz$ bestaan met $\abs{xy}\leq p$ en $\abs{y}>0$ zodat $\forall i\in\NNN:xy^iz\in L$. Het is evident dat $y$ uit slechts \'e\'en soort karakters kan bestaan: anders pompen we ook strings die meer dan twee keer van karakter verwisselen. Iets wat niet kan volgens de taal. Vermits $\abs{xy}\leq p$, weten we dat $y$ uitsluitend uit $a$'s kan bestaan. Stel $y=a^l$ met $l$ onbekend maar groter dan $0$, dan pompen we voor $i=2$ de string $a^{p+l}b^pc^p$, deze string behoort niet tot de taal bij om het even welke $l$ groter dan $0$. Dit leidt dus tot een contradictie.
 \end{enumerate}
 \end{answer}
@@ -147,14 +147,13 @@ Geef voor onderstaande talen een context-vrije grammatica, een push-down automaa
 \begin{answer}
 \begin{enumerate}
  \item Dit is \textbf{niet context-vrij}. We bewijzen aan de hand van het pompend lemma. Stel $s$ een string $s=a^q$ met $q$ een macht van $2$ en $q>p$ met $p$ de onbekende pomplengte. Voor elke mogelijke opdeling $s=uvxyz$ weten we dat $v$ en $y$ uitsluitend uit $a$'s kunnen bestaan, we stellen $v=a^k$ en $y=a^l$. We weten dat moet gelden $0<l+k<p<q$. Stel $i=2$, dan is de gegenereerde string $a^{q+l+k}$. Vermits $q<q+k+l<2\cdot q$ is dit geen macht van $2$. Bijgevolg behoort deze string niet tot $L$.
- \item Deze taal is \textbf{regulier}.\figref{mrt-q5-dfa} toont hiervoor een DFA. Vermits elke DFA een PDA is waarbij de stapel niet wordt gebruikt, is de taal dus context-vrij.\\
- \importtikzfigure{mrt-q5-dfa}{Een DFA die binaire vermenigvuldiging met een constante controleert.}
+ \item Deze taal is \textbf{regulier}.\figref{mrt-q5-dfa} toont hiervoor een DFA. De machine werkt \emph{big-endian}\footnote{Bij een big-endian machine worden eerst de minst significante bits ingevoerd.} en houdt telkens de overdracht bij. In het begin is de overdacht $0$. Wanneer er op de bovenste lijn een $1$ verschijnt, moet er onderaan $3$ worden toegevoegd. Vermits er slechts \'e\'en bit onderaan beschikbaar is, staat daarop een $1$ en schrijven we de rest (de overdacht) weg in een toestand. Omdat de overdacht maximum $4$ bereikt, kan deze taal worden beslist met een DFA. Indien we een \emph{little-endian} machine wensen te construeren kunnen we een constructie gebruiken om een DFA te bouwen die de omgekeerde taal beslist. Vermits elke DFA een PDA is waarbij de stapel niet wordt gebruikt, is de taal dus context-vrij.\\
+ \importtikzfigure{mrt-q5-dfa}{Een DFA die binaire vermenigvuldiging met $3$ controleert.}
  Een interessant gevolg is dus dat men in digitale logica een \emph{online vermenigvuldiger} kan bouwen die in lineaire tijd voor een vaste constante een sequentieel ingevoerd binair getal, een binair getal kan genereren waarvan de invoer vermenigvuldigt is met de gegeven constante.
  \item Deze taal is \textbf{niet context-vrij}. Dit bewijzen we door eerst de doorsnede met $a^{\star}b^{\star}a^{\star}b^{\star}$ te nemen. In dat geval bekomen we de taal $L'=\condset{a^nb^{2\cdot n}a^{2\cdot n}b^n}{n\in\NNN}$. Een voor de hand liggende keuze voor $s$ is $s=a^pb^{2\cdot p}a^{2\cdot p}b^p$, met $p$ de onbekende pomplengte. Voor alle opdelingen $s=uvxyz$ weten we, op basis van de voorwaarden van het pompend lemma. Dat $v$ en $y$ elk uit slechts \'e\'en soort karakters kunnen bestaan. Onafhankelijk van welke karakters gekozen worden, kunnen hoogstens twee van de vier groepen verder worden uitgebreid. Bijgevolg is er geen enkele opdeling waarvoor we de taal kunnen pompen. Bijgevolg is de taal niet context-vrij.
  \item Deze taal is \textbf{context-vrij}. Zie \grmref{mrt-q5-grm} voor een context-vrije grammatica.
  \importgram{mrt-q5-grm}{Een contex-vrije grammatica voor de haakjes-taal. Scheve haken duiden op een non-terminal, de overige haken zijn terminals.}
 \end{enumerate}
-
 \end{answer}
 \end{question}
 

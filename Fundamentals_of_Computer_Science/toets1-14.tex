@@ -175,11 +175,20 @@ Welke uitspraken zijn waar, beargumenteer of geef een tegenvoorbeeld:
 \begin{answer}
 \begin{enumerate}
  \item \textbf{Waar}. Een DFA bevindt zich telkens in \'e\'en toestand tegelijk. Wanneer dit een accepterende toestand is, is het aantal accepterende toestanden waarin we ons bevinden oneven, dus zou de $\oplus\mbox{NFA}$ ook accepteren. Wanneer we ons niet in accepterende toestand bevinden, is het aantal accepterende toestanden even, zowel de DFA en de $\oplus\mbox{NFA}$ zouden dus verwerpen.
- \item \textbf{Waar}.
+ \item \textbf{Waar}. Een NFA die aan deze voorwaarden voldoet is een DFA. Immers betekent dit dat $\delta$ een totale functie wordt met $\funsig{\delta}{Q\times\Sigma}{R}$ met $R=\powset{Q}$ zodat $\# R=1$. Bijgevolg kunnen we $R$ schrijven als $Q$ en wordt $\funsig{\delta}{Q\times\Sigma}{Q}$. Dit is de signatuur van $\delta$ voor een DFA.
  \item \textbf{Waar}. Volgend item toont aan dat een $\oplus\mbox{NFA}$ uitsluitend reguliere talen kan beslissen. Omdat elke reguliere taal ook context-vrij is, is deze uitspraak waar.
  \item \textbf{Waar}. We kunnen analoog aan een NFA, een constructie maken voor een $\oplus\mbox{NFA}$ zodat we een DFA bekomen die dezelfde taal accepteert.
  \begin{quote}
-  
+ \begin{construction}[$\oplus\mbox{NFA}$ naar DFA]
+ Stel een $\oplus\mbox{NFA}=\tupl{Q,\Sigma,\delta,q_0,F}$, dan construeren we een $\mbox{DFA}=\tupl{Q',\Sigma,\delta',q_0',F'}$ als volgt:
+ \begin{eqnarray}
+  Q'&=&\powset{Q}\\
+  q_0'&=&\accl{q_0}\\
+  \forall q'\in Q',a\in\Sigma:\fun{\delta'}{q',a}&=&\condset{\fun{\delta}{q,a}}{q\in q'}\\
+  F'&=&\condset{q'\in Q'}{\#\brak{q'\cap F}\mod 2=1}
+ \end{eqnarray}
+
+ \end{construction}
  \end{quote}
 
 \end{enumerate}

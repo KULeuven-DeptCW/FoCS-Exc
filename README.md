@@ -56,6 +56,8 @@ In order to generate all `.pdf` files, run
 make
 ```
 
+We advice you to only generate files from the `master` branch since this branch should contain solutions who are at least finished and won't generate compile errors. Although it is still possible some solutions contain small errors (see the section about [contributing](#contributing)).
+
 ### Simulators
 
 The repository contains a small simulator for a Turing Machine as well.

@@ -1,5 +1,5 @@
 \documentclass{article}
-\title{Fundamenten van de Computerwetenschappen:\\opgave 1}
+\title{FCW: gekwoteerde opgave 1}
 \author{Prof. B. Demoen (\url{Bart.Demoen@cs.kuleuven.be})\\ W. Van Onsem (\url{Willem.VanOnsem@cs.kuleuven.be})}
 \date{28 maart 2014}
 \usepackage{tikz,../assignment-nl,../importsreferences-nl}
@@ -22,6 +22,7 @@
 \begin{document}
 \maketitle
 \richtlijnen{}
+\aboutanswers{}
 \begin{question}[Pompend lemma van reguliere talen] Stel een speciale familie van DFAs $C_n$ met $n$ toestanden. De toestanden zijn geordend $q_0,q_1,\ldots,q_{n-1}$ zodat de eerste toestand $q_0$ de initi\"ele en enige accepterende toestand is. Verder kan de DFA enkel overgangen bevatten van een toestand $q_i$ naar een toestand $q_j$ indien $i<j$. De enige uitzondering is $q_{n-1}$ vanwaar een boog (mogelijk met meerdere karakters) vertrekt naar $q_0$. Of formeler:
 \begin{quote}\begin{definition}[Cyclische DFA]
 Gegeven een getal $n\in\NNN$, een \emph{cyclische DFA} met $n$ toestanden is een DFA $\tupl{Q,\Sigma,\delta,F,q_1}$ met $Q=\accl{q_1,q_2,\ldots,q_n}$, $\Sigma$ een eindig alfabet, $F=\accl{q_1}$ en $\delta$ is gedefinieerd als volgt:
@@ -34,12 +35,9 @@ Gegeven een getal $n\in\NNN$, een \emph{cyclische DFA} met $n$ toestanden is een
 \figref{mrt-q1} toont enkele voorbeelden van een dergelijke DFA.
 \begin{figure}[hbt]
 \centering
-\importtikzsubfigure{mrt-dfa1}{}
-\importtikzsubfigure{mrt-dfa2}{}
 \importtikzsubfigure{mrt-dfa3}{}
 \importtikzsubfigure{mrt-dfa4}{}
-\importtikzsubfigure{mrt-dfa5}{}
-\caption{Voorbeelden van de familie van DFAs}
+\caption{Voorbeelden van de familie van cyclische DFAs}
 \figlab{mrt-q1}
 \end{figure}
 \end{example}
@@ -55,15 +53,6 @@ Betreft het minimalisatiealgoritme:
 \end{enumerate}
 \end{question}
 
-\begin{question}[Reguliere basis-operaties]
-Toon volgende eigenschappen bij reguliere basis-operaties aan:
-\begin{enumerate}
- \item De concatenatie-operatie $R_1R_2R_3$ is associatief.
- \item De concatenatie-operatie is distributief over de unie-operatie.
- \item De unie-operatie is niet distributief over de Kleene-ster-operatie.
-\end{enumerate}
-\end{question}
-
 
 \begin{question}[Reguliere talen]
 Geef voor onderstaande talen een reguliere expressie, een DFA, of bewijs aan de hand van het pompend lemma dat de taal niet regulier is:
@@ -71,6 +60,13 @@ Geef voor onderstaande talen een reguliere expressie, een DFA, of bewijs aan de 
  \item $L=\accl{\begin{array}{l|l}w\in\accl{a,b}^{\star}&\mbox{voor elke substring van $w$ is het verschil tussen}\\&\mbox{het aantal $a$'s en het aantal $b$'s nooit groter dan 2.}\end{array}}$
  \item $L=\condset{a^nb^mc^n}{n,m\in\NNN:n,m\geq 0}$
 \end{enumerate}
+\begin{answer}
+\begin{enumerate}
+ \item Deze taal is regulier. Op \figref{mrt-q3-dfa} toont een (minimale) DFA die deze taal beslist. Het idee is om telkens het verschil in $a$'s en $b$'s bij te houden. Indien dit op een willekeurig moment groter wordt dan $2$, komt de DFA in een verwerp-toestand terecht. Indien de DFA op het einde niet op de verwerp-toestand staat, wordt de string geaccepteerd.
+ \item Deze taal is niet regulier. We kunnen eerst de doorsnede nemen met de taal $L=a^{\star}c^{\star}$, in dat geval is $L'=\condset{a^nb^mc^n}{n,m\in\NNN:n,m\geq 0}\cap\accl{a^{\star}c^{\star}}=\condset{a^nc^n}{n\in\NNN}$, een schoolvoorbeeld van een niet-reguliere taal waarvan het pompend lemma in de cursustekst staat uitgewerkt.\\
+ Het pompend lemma rechtstreeks gebruiken is minder evident. We werken het hier toch uit. Stel een string $s\in\Sigma^{\star}$ langer dan de pomplengte $p$ met $s=a^pb^pc^p$. Dan moet er een opdeling $s=xyz$ bestaan met $\abs{xy}\leq p$ en $\abs{y}>0$ zodat $\forall i\in\NNN:xy^iz\in L$. Het is evident dat $y$ uit slechts \'e\'en soort karakters kan bestaan: anders pompen we ook strings die meer dan twee keer van karakter verwisselen. Iets wat niet kan volgens de taal. Vermits $\abs{xy}\leq p$, weten we dat $y$ uitsluitend uit $a$'s kan bestaan. Stel $y=a^l$ met $l$ onbekend maar groter dan $0$, dan pompen we voor $i=2$ de string $a^{p+l}b^pc^p$, deze string behoort niet tot de taal bij om het even welke $l$ groter dan $0$. Dit leidt dus tot een contradictie.
+\end{enumerate}
+\end{answer}
 \end{question}
 
 \begin{question}[Voorstellingskracht van reguliere talen]
@@ -83,10 +79,28 @@ Bewijs (bijvoorbeeld aan de hand van een constructie) of geef een tegenvoorbeeld
  \end{equation}
  Merk op dat de strings in $L$ allemaal een even lengte hebben, en de strings $s$ en $t$ respectievelijk uit $L_1$ en $L_2$ dezelfde lengte moeten hebben.
 \end{enumerate}
-\end{question}
-
-\begin{question}[Brzozowski afgeleide]
-Gegeven twee reguliere expressies $R_1$ en $R_2$, $R=R_1\cap R_2$ is gedefinieerd als een operatie waardoor $L_R=L_{R_1}\cap L_{R_2}$. Geef een definitie voor de Brzozowski-afgeleide $\fun{\delta}{R_1\cap R_2}$ en $\fun{D_a}{R_1\cap R_2}$ met $a\in\Sigma$ zodat deze overeenstemming is met de originele definitie van de Brzozowski afgeleide (sectie \S4.9, pagina 50 in de cursus). Leg kort de semantische betekenis van je definitie uit.
+\begin{answer}
+\begin{enumerate}
+ \item Deze uitspraak is \textbf{fout}. Stel een taal $L=\condset{a^q}{q\in\PPP}$ met $\PPP$ de set van priemgetallen. $L$ is geen reguliere taal:
+ \begin{quote}
+ \begin{proof}
+ We bewijzen dit aan de hand van het pompend lemma. Neem een string $s=a^q$ met $q$ een priemgetal groter dan de onbekende pomplengte $p$. In dat geval bestaat er een opdeling $s=xyz$. Het is evident dat $y$ uit \'e\'en of meerdere $a$'s bestaat, m.a.w. $y=a^l$ met $l>0$. De lengte $\abs{xz}=q-l$. In het geval we $i$ gelijk nemen aan $i=q-l$ bekomen we de string $xy^{q-l}z=a^{l\cdot\brak{q-l}+q-l}=a^{\brak{q-l}\cdot\brak{l+1}}$. Het aantal $a$'s is hier dus deelbaar door $q-l$ en $l+1$, bijgevolg is $\brak{q-l}\cdot\brak{l+1}$ geen priemgetal, en behoort de string $xy^{q-l}z$ niet tot $L$.
+ \end{proof}
+ \end{quote}
+ $L^{\star}$ is echter wel regulier:
+ \begin{quote}
+ \begin{proof}
+ We weten dat zowel $2$ en $3$ in $\PPP$ zitten. We kunnen elk getal groter dan $2$ schrijven als een som van $2$ en $3$ per inductie:
+ \begin{enumerate}
+  \item $2$ is te schrijven als $2$ (een som met slechts \'e\'en element)
+  \item Stel dat $n$ te schrijven valt als de som van elementen uit $\accl{2,3}$ dan geldt dit ook voor $n+1$. Indien de som van $n$ immers een $2$ bevat, kunnen we de $2$ vervangen door een $3$; indien $n$ enkel $3$'en bevat, vervangen we een $3$ door $2+2$.
+ \end{enumerate}
+ Bijgevolg is $L^{\star}=aaa^{\star}$
+ \end{proof}
+ \end{quote}
+ \item Deze uitspraak is \textbf{waar}.
+\end{enumerate}
+\end{answer}
 \end{question}
 
 \begin{question}[Contextvrije talen]
@@ -95,18 +109,10 @@ Geef voor onderstaande talen een context-vrije grammatica, een push-down automaa
  \item $\condset{a^{2^n}}{n\in\NNN}$.
  \item $\condset{s\in\accl{\tfrac{0}{0},\tfrac{0}{1},\tfrac{1}{0},\tfrac{1}{1}}^{\star}}{\mbox{Binaire waarde bovenste rij is $3\times$ de binaire waarde onderste rij}}$.
  \item $\condset{ww^Rw}{w\in\accl{0,1}^{\star}}$.
- \item Een taal met $\Sigma=\accl{(,),[,]}$ volgens de normale regels van haakjes, maar waarbij de vierkante haken op ieder niveau altijd na de ronde haken komen te staan. Bijvoorbeeld $\brak{}\fbrk{}$, $\brak{\fbrk{}}{\brak{}}$ en $\brak{\brak{}\fbrk{\brak{}}}\brak{}$ is correct, maar $\fbrk{}\brak{}$ en $\brak{\fbrk{}\brak{}\fbrk{}}\fbrk{}$ niet.
 \end{enumerate}
-\end{question}
+\begin{answer}
 
-\begin{question}[Eigenschappen van talen]
-Stel $L_1,L_2$ reguliere talen, $L_3,L_4$ eindige talen en $L_5,L_6$ context-vrije talen. Welke eigenschappen (\'e\'en of meerdere uit $\accl{\mbox{eindig},\mbox{regulier},\mbox{context-vrij}}$) gelden dan voor volgende operaties? Leg kort uit waarom of geef een tegenvoorbeeld:
-\begin{enumerate}
- \item $\overline{L_3}L_1$.
- \item $L_1L_5^{\star}L_2$.
- \item $L_6\setminus L_2$ gegeven dat $L_6\cap L_2$ regulier is.
- \item $\overline{L_4}\cup L_4L_1$
-\end{enumerate}
+\end{answer}
 \end{question}
 
 \begin{question}[$\oplus$NFA]

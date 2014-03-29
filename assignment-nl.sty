@@ -1,13 +1,18 @@
 \ProvidesPackage{assignment-nl}
-\RequirePackage{amsmath,amsthm,amsfonts,hyperref,makeidx,booktabs,tikz,qtree,../bnf,../brackets}
+\RequirePackage{amsmath,amsthm,amsfonts,amssymb,hyperref,makeidx,booktabs,tikz,qtree,../bnf,../brackets,totcount,../proofenv}
 \usetikzlibrary{automata}
 \RequirePackage{fullpage,float}
 \RequirePackage[dutch]{babel}
 \theoremstyle{definition}
 \newtheorem{question}{Vraag}
-\newtheorem{bonus}{Bonusvraag}[question]
-\newtheorem{answer}{Antwoord}[question]
-\theoremstyle{remark}
-\newtheorem{hint}{Tip}[question]
-\newtheorem{example}{Voorbeeld}[question]
+\newtheorem{definition}{Definitie}
+\regtotcounter{question}
+\newproof{bonus}{Bonusvraag}{$\Diamond$}
+\newproof{answer}{Antwoord}{$\Diamond$}
+\newproof{hint}{Tip}{$\Diamond$}
+\newproof{example}{Voorbeeld}{$\Diamond$}
 \newenvironment{tikzfigure}[2]{\begin{figure}[H]\centering\begin{tikzpicture}}{\end{tikzpicture}\end{figure}}
+
+\newcommand{\richtlijnen}{\paragraph{Richtlijnen}Je schrijft enkel op de gekleurde bladen die je gekregen hebt: op je werkplek liggen geen andere bladen dan die gekleurde bladen en de bladen van de cursustekst. De bladen van je cursustekst waarop oplossingen van oefeningen of aanwijzingen tot oplossingen van oefeningen staan, steek je ook weg. Je jas, je boekentas, je gsm... leg je vooraan in het auditorium, zoals gebruikelijk bij een examen. Bij het afgeven zorg je dat je naam op je bladen staat, en dat je alles aan elkaar niet. Er zijn \total{question} vragen.}
+
+\newcommand{\aboutanswers}{\paragraph{Betreft de antwoorden}De antwoorden zijn niet exhaustief: andere tegenvoorbeelden, bewijzen, strategie\"en zijn mogelijk ook correct. De antwoorden zijn ook eerder schetsend: meestal moet men een antwoord gedetailleerder uitwerken dan hier vermeld. Dit document heeft echter vooral de intentie om een oplossingsstrategie voor de verschillende vragen aan te reiken.}

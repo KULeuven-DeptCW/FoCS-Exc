@@ -43,6 +43,17 @@ Gegeven een getal $n\in\NNN$, een \emph{cyclische DFA} met $n$ toestanden is een
 \end{example}
 \paragraph{}
 Is de verzameling van talen die beslist kunnen worden met een cyclische DFA strikt kleiner dat de set van talen die met een normale DFA kunnen worden voorgesteld? Of kun je elke DFA omvormen tot een cyclische DFA die dezelfde taal beslist?
+
+\begin{answer}
+$\mbox{RegLan}_C$ is een \textbf{strikte deelverzameling} van $\mbox{RegLan}$. We dienen hiervoor te bewijzen dat minstens \'e\'en taal $L$ niet behoort. Er zijn verschillende families van talen die we niet kunnen voorstellen met een cyclische DFA. Hieronder een niet-exhaustieve opsomming:
+\begin{enumerate}
+ \item De lege taal (vermits de start-toestand accepterend is).
+ \item Elke taal die geen $\epsilon$ bevat (vermits de start-toestand accepterend is).
+ \item Elke eindige taal (vermits een DFA geen $\epsilon$-bogen bevat en een cyclus van minstens lengte $1$ impliceert dat we strings willekeurig veel kunnen herhalen).
+ \item Talen die na een bepaald patroon geen eerder geziene karakters meer bevatten, bijvoorbeeld $L=a^{\star}bc^{\star}$.
+\end{enumerate}
+
+\end{answer}
 \end{question}
 
 \begin{question}[Minimalisatie van een DFA]
@@ -51,6 +62,9 @@ Betreft het minimalisatiealgoritme:
  \item Het minimalisatiealgoritme in sectie \S4.4.2 (pagina 39) in de cursus is niet erg effici\"ent, vooral stap 3. Kun je \'e\'en of meer verbeteringen voorstellen zodat het algoritme effici\"enter werkt?
  \item Stel dat een DFA niet beslist of een string wel of niet tot een taal behoort, maar alle mogelijk strings $s\in\Sigma^{\star}$ onderverdeelt in $k$ categorie\"en $K=\accl{1,2,\ldots,k}$. Dit doet men door elke toestand $q_i$ te annoteren met een categorie $\fun{l}{q_i}$. Indien de automaat stopt in een toestand $q_f$ met $\fun{l}{q_f}=j$, dan behoort de string tot categorie $j$. Wat moet je aanpassen aan de $f$-gelijk-constructie, zodat je dergelijke DFAs kunt minimaliseren met behoud van de categorisatie-functie.
 \end{enumerate}
+\begin{answer}
+
+\end{answer}
 \end{question}
 
 
@@ -90,15 +104,33 @@ Bewijs (bijvoorbeeld aan de hand van een constructie) of geef een tegenvoorbeeld
  $L^{\star}$ is echter wel regulier:
  \begin{quote}
  \begin{proof}
- We weten dat zowel $2$ en $3$ in $\PPP$ zitten. We kunnen elk getal groter dan $2$ schrijven als een som van $2$ en $3$ per inductie:
+ We weten dat zowel $2$ en $3$ in $\PPP$ zitten. We kunnen elk natuurlijk getal groter dan $1$ schrijven als een som van $2$ en $3$ per inductie:
  \begin{enumerate}
   \item $2$ is te schrijven als $2$ (een som met slechts \'e\'en element)
   \item Stel dat $n$ te schrijven valt als de som van elementen uit $\accl{2,3}$ dan geldt dit ook voor $n+1$. Indien de som van $n$ immers een $2$ bevat, kunnen we de $2$ vervangen door een $3$; indien $n$ enkel $3$'en bevat, vervangen we een $3$ door $2+2$.
  \end{enumerate}
- Bijgevolg is $L^{\star}=aaa^{\star}$
+ Bijgevolg is $L^{\star}=\epsilon|aaa^{\star}$
  \end{proof}
  \end{quote}
- \item Deze uitspraak is \textbf{waar}.
+ \item Deze uitspraak is \textbf{waar}. Hieronder geven we een constructie.
+ \begin{quote}
+ \begin{construction}[Meng-DFA]
+ Vermits $L_1$ en $L_2$ regulier zijn bestaan er DFA's $\mbox{DFA}_1=\tupl{Q_1,\delta_1,\Sigma_1,F_1,q_{0,1}}$ en $\mbox{DFA}_2=\tupl{Q_2,\delta_2,\Sigma_2,F_2,q_{0,2}}$. De constructie resulteert in $\mbox{meng-DFA}=\tupl{Q,\delta,\Sigma,F,q_0}$ met:
+ \begin{eqnarray}
+  Q&=&\brak{Q_1\times Q_2\times\accl{0,1}}\cup\accl{q_w}\\
+  \Sigma&=&\Sigma_1\cup\Sigma_2\\
+  q_0&=&q_0\times q_1\times 0\\
+  F&=&F_1\times F_2\times\accl{0}\\
+  \forall a\in \Sigma:\fun{\delta}{q_w,a}&=&q_w\\
+  \forall q_1\in Q_1,q_2\in Q_2,a\in \Sigma_1:\fun{\delta}{q_1\times q_2\times 0,a}&=&\fun{\delta_1}{q_1,a}\times q_2\times 1\\
+  \forall q_1\in Q_1,q_2\in Q_2,a\in \Sigma_2:\fun{\delta}{q_1\times q_2\times 1,a}&=&q_1\times\fun{\delta_2}{q_2,a}\times 1\\
+  \forall q_1\in Q_1,q_2\in Q_2,a\in \Sigma\setminus\Sigma_1:\fun{\delta}{q_1\times q_2\times 0,a}&=&q_w\\
+  \forall q_1\in Q_1,q_2\in Q_2,a\in \Sigma\setminus\Sigma_2:\fun{\delta}{q_1\times q_2\times 1,a}&=&q_w
+ \end{eqnarray}
+ Met $q_w$ een nieuwe toestand zodat $q_w\notin\brak{Q_1\times Q_2\times\accl{0,1}}$.
+ \end{construction}
+ \end{quote}
+ De intu\"itie is dat een toestand $q\in Q$ de toestanden van de twee originele DFA's bijhoudt alsook weet of het op dat moment verder moet in met de eerste of de tweede DFA. Indien het index-cijfer\footnote{Het derde component van een toestand.} op $0$ staat, is het de beurt aan de eerste DFA. Indien het ingelezen karakter effectief tot $\Sigma_1$ behoort, passen we de eerste toestand aan volgens $\delta_1$ en zetten we het index-cijfer op $1$. Indien het karakter niet tot $\Sigma_1$ behoort, komen we in een reject-toestand $q_w$ terecht. Analoog construeren we voor de tweede DFA. De nieuwe DFA kan enkel accepteren als het index-cijfer op $0$ staat: de tweede DFA is dan even vaak aan de beurt geweest als de eerste.
 \end{enumerate}
 \end{answer}
 \end{question}
@@ -130,6 +162,8 @@ Welke uitspraken zijn waar, beargumenteer of geef een tegenvoorbeeld:
  \item We kunnen gegeven een DFA en een $\oplus$NFA de doorsnede-constructie in de cursus gebruiken om een $\oplus$NFA te bouwen die de doorsnede van de twee talen beslist.
  \item Niet alle talen beslist door een $\oplus$NFA zijn regulier, maar ze zijn allemaal context-vrij.
 \end{enumerate}
-\end{question}
+\begin{answer}
 
+\end{answer}
+\end{question}
 \end{document}

@@ -150,8 +150,9 @@ Geef voor onderstaande talen een context-vrije grammatica, een push-down automaa
  \item Deze taal is \textbf{regulier}.\figref{mrt-q5-dfa} toont hiervoor een DFA. Vermits elke DFA een PDA is waarbij de stapel niet wordt gebruikt, is de taal dus context-vrij.\\
  \importtikzfigure{mrt-q5-dfa}{Een DFA die binaire vermenigvuldiging met een constante controleert.}
  Een interessant gevolg is dus dat men in digitale logica een \emph{online vermenigvuldiger} kan bouwen die in lineaire tijd voor een vaste constante een sequentieel ingevoerd binair getal, een binair getal kan genereren waarvan de invoer vermenigvuldigt is met de gegeven constante.
- \item Deze taal is \textbf{niet context-vrij}.
- \item Deze taal is \textbf{context-vrij}. Zie grammatica \grmref{mrt-q5-grm} voor een context-vrije grammatica.
+ \item Deze taal is \textbf{niet context-vrij}. Dit bewijzen we door eerst de doorsnede met $a^{\star}b^{\star}a^{\star}b^{\star}$ te nemen. In dat geval bekomen we de taal $L'=\condset{a^nb^{2\cdot n}a^{2\cdot n}b^n}{n\in\NNN}$. Een voor de hand liggende keuze voor $s$ is $s=a^pb^{2\cdot p}a^{2\cdot p}b^p$, met $p$ de onbekende pomplengte. Voor alle opdelingen $s=uvxyz$ weten we, op basis van de voorwaarden van het pompend lemma. Dat $v$ en $y$ elk uit slechts \'e\'en soort karakters kunnen bestaan. Onafhankelijk van welke karakters gekozen worden, kunnen hoogstens twee van de vier groepen verder worden uitgebreid. Bijgevolg is er geen enkele opdeling waarvoor we de taal kunnen pompen. Bijgevolg is de taal niet context-vrij.
+ \item Deze taal is \textbf{context-vrij}. Zie \grmref{mrt-q5-grm} voor een context-vrije grammatica.
+ \importgram{mrt-q5-grm}{Een contex-vrije grammatica voor de haakjes-taal. Scheve haken duiden op een non-terminal, de overige haken zijn terminals.}
 \end{enumerate}
 
 \end{answer}
@@ -173,6 +174,16 @@ Welke uitspraken zijn waar, beargumenteer of geef een tegenvoorbeeld:
  \item Niet alle talen beslist door een $\oplus$NFA zijn regulier, maar ze zijn allemaal context-vrij.
 \end{enumerate}
 \begin{answer}
+\begin{enumerate}
+ \item \textbf{Waar}. Een DFA bevindt zich telkens in \'e\'en toestand tegelijk. Wanneer dit een accepterende toestand is, is het aantal accepterende toestanden waarin we ons bevinden oneven, dus zou de $\oplus\mbox{NFA}$ ook accepteren. Wanneer we ons niet in accepterende toestand bevinden, is het aantal accepterende toestanden even, zowel de DFA en de $\oplus\mbox{NFA}$ zouden dus verwerpen.
+ \item \textbf{Waar}.
+ \item \textbf{Waar}. Volgend item toont aan dat een $\oplus\mbox{NFA}$ uitsluitend reguliere talen kan beslissen. Omdat elke reguliere taal ook context-vrij is, is deze uitspraak waar.
+ \item \textbf{Waar}. We kunnen analoog aan een NFA, een constructie maken voor een $\oplus\mbox{NFA}$ zodat we een DFA bekomen die dezelfde taal accepteert.
+ \begin{quote}
+  
+ \end{quote}
+
+\end{enumerate}
 
 \end{answer}
 \end{question}

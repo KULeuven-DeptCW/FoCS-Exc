@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <title>The Turing machine (TM)</title>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+ <script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
+ <script type="text/javascript" src="webgl-utils.js"></script>
+<script id="shader-fs" type="x-shader/x-fragment">
+		varying lowp vec4 vColor;
+		
+	  void main(void) {
+		gl_FragColor = vColor;
+	  }
+	</script>
+	
+	<!-- Vertex shader program -->
+	
+	<script id="shader-vs" type="x-shader/x-vertex">
+	  attribute vec3 aVertexPosition;
+	  attribute vec4 aVertexColor;
+	
+	  uniform mat4 uMVMatrix;
+	  uniform mat4 uPMatrix;
+	  
+			varying lowp vec4 vColor;
+	
+	  void main(void) {
+		gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+		vColor = aVertexColor;
+	  }
+	</script>
+ <script language="JavaScript">
+var canvas, gl;
+var nRays = 360;
+var wChar = 0.4;
+var dChar = 1.0;
+var hChar = 0.4;
+var hHead = 0.2;
+var wHead = 0.2;
+
+function initGL(canvas) {
+    try {
+        gl = canvas.getContext("experimental-webgl");
+        gl.viewportWidth = canvas.width;
+        gl.viewportHeight = canvas.height;
+    } catch (e) {
+    }
+    if (!gl) {
+        alert("Could not initialise WebGL, sorry :-(");
+    }
+}
+
+
+function getShader(gl, id) {
+    var shaderScript = document.getElementById(id);
+    if (!shaderScript) {
+        return null;
+    }
+
+    var str = "";
+    var k = shaderScript.firstChild;
+    while (k) {
+        if (k.nodeType == 3) {
+            str += k.textContent;
+        }
+        k = k.nextSibling;
+    }
+
+    var shader;
+    if (shaderScript.type == "x-shader/x-fragment") {
+        shader = gl.createShader(gl.FRAGMENT_SHADER);
+    } else if (shaderScript.type == "x-shader/x-vertex") {
+        shader = gl.createShader(gl.VERTEX_SHADER);
+    } else {
+        return null;
+    }
+
+    gl.shaderSource(shader, str);
+    gl.compileShader(shader);
+
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        alert(gl.getShaderInfoLog(shader));
+        return null;
+    }
+
+    return shader;
+}
+
+
+var shaderProgram;
+
+function initShaders() {
+    var fragmentShader = getShader(gl, "shader-fs");
+    var vertexShader = getShader(gl, "shader-vs");
+
+    shaderProgram = gl.createProgram();
+    gl.attachShader(shaderProgram, vertexShader);
+    gl.attachShader(shaderProgram, fragmentShader);
+    gl.linkProgram(shaderProgram);
+
+    if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+        alert("Could not initialise shaders");
+    }
+
+    gl.useProgram(shaderProgram);
+
+    shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
+    gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
+
+    shaderProgram.textureCoordAttribute = gl.getAttribLocation(shaderProgram, "aTextureCoord");
+    gl.enableVertexAttribArray(shaderProgram.textureCoordAttribute);
+
+    shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
+    shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
+    shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
+}
+
+function handleLoadedTexture(texture) {
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    gl.bindTexture(gl.TEXTURE_2D, null);
+}
+
+function setMatrixUniforms() {
+	gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
+	gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
+}
+
+
+
+var headVertexBuffer;
+var characterVertexBuffer, triangleVertexPositionBuffer;
+var characterColorBuffer;
+var characterIndexBuffer;
+var characterTextrBuffer;
+var txtr;
+
+function initBuffers() {
+	triangleVertexPositionBuffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
+	var vertices = [
+		 0.0,       -hChar,       0.0,
+		-0.5*wHead, -hHead-hChar, 0.0,
+		 0.5*wHead, -hHead-hChar, 0.0
+	];
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+	triangleVertexPositionBuffer.itemSize = 3;
+	triangleVertexPositionBuffer.numItems = 3;
+        
+	characterVertexBuffer = gl.createBuffer();
+	characterIndexBuffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, characterVertexBuffer);
+	var vertices = [];
+	var indices = [];
+	var textures = [];
+	for(var i = 0; i <= nRays; i++) {
+		var r = 2.0*i*Math.PI/nRays;
+		var x = Math.sin(r)-2;
+		var z = Math.cos(r);
+		vertices.push(x);vertices.push( hChar);vertices.push(z);
+		vertices.push(x);vertices.push(-hChar);vertices.push(z);
+		textures.push(r);textures.push(1.0);
+		textures.push(r);textures.push(0.0);
+	}
+	for(var i = 0; i <= nRays; i++) {
+		var r = 2.0*i*Math.PI/nRays;
+		var x = Math.sin(2.0*i*Math.PI/nRays)+2;
+		var z = Math.cos(2.0*i*Math.PI/nRays);
+		vertices.push(x);vertices.push( hChar);vertices.push(z);
+		vertices.push(x);vertices.push(-hChar);vertices.push(z);
+		textures.push(r+4.0+2.0*Math.PI);textures.push(1.0);
+		textures.push(r+4.0+2.0*Math.PI);textures.push(0.0);
+	}
+	for(var i = 0, j = 0; i <= 2*nRays; i++, j += 2) {
+		indices.push(j  );indices.push(j+1);indices.push(j+2);
+		indices.push(j+1);indices.push(j+3);indices.push(j+2);	
+	}
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+	characterVertexBuffer.itemSize = 3;
+	characterVertexBuffer.numItems = vertices.length/characterVertexBuffer.itemSize;
+	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, characterIndexBuffer);
+	gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
+	characterIndexBuffer.itemSize = 1;
+	characterIndexBuffer.numItems = indices.length/characterIndexBuffer.itemSize;
+}
+
+var neheTexture;
+
+function initTexture() {
+    neheTexture = gl.createTexture();
+    neheTexture.image = new Image();
+    neheTexture.image.onload = function () {
+        handleLoadedTexture(neheTexture)
+    }
+
+    neheTexture.image.src = "nehe.gif";
+}
+
+function setMatrixUniforms() {
+    gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
+    gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
+}
+
+var mvMatrix = mat4.create();
+var mvMatrixStack = [];
+var pMatrix = mat4.create();
+
+function mvPushMatrix() {
+    var copy = mat4.create();
+    mat4.set(mvMatrix, copy);
+    mvMatrixStack.push(copy);
+}
+
+function mvPopMatrix() {
+    if (mvMatrixStack.length == 0) {
+        throw "Invalid popMatrix!";
+    }
+    mvMatrix = mvMatrixStack.pop();
+}
+
+function drawScene() {
+	gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
+	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+	mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
+
+	mat4.identity(mvMatrix);
+	
+	mat4.translate(mvMatrix, [0.0, -2.0, -7.0]);
+	
+	gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
+    gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, triangleVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    setMatrixUniforms();
+    gl.drawArrays(gl.TRIANGLES, 0, triangleVertexPositionBuffer.numItems);
+
+	mat4.translate(mvMatrix, [0.0, 0.0, -7.0]);
+    
+	gl.bindBuffer(gl.ARRAY_BUFFER, characterVertexBuffer);
+	gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, characterVertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
+	
+	gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, neheTexture);
+    gl.uniform1i(shaderProgram.samplerUniform, 0);
+    
+	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, characterIndexBuffer);
+	
+	setMatrixUniforms();
+	gl.drawElements(gl.TRIANGLES, characterIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+}
+
+var lastTime = 0;
+
+function animate() {
+    var timeNow = new Date().getTime();
+    if (lastTime != 0) {
+        var elapsed = timeNow - lastTime;
+    }
+    lastTime = timeNow;
+}
+
+
+function tick() {
+    requestAnimFrame(tick);
+    drawScene();
+    animate();
+}
+
+function webGLStart () {	
+	canvas = document.getElementById('turingmachine');
+    initGL(canvas);
+    initShaders();
+    initBuffers();
+    initTexture();
+
+    gl.clearColor(0.99,0.96,0.9,1);
+    gl.enable(gl.DEPTH_TEST);
+
+    tick();
+}
+</script>
+ </head>
+ <body onload="webGLStart();">
+ <center><canvas id="turingmachine" width="800" height="600">Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.</canvas></center>
+</body>
+</html>

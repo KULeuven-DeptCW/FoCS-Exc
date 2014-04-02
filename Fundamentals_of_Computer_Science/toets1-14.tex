@@ -38,7 +38,7 @@ Een \emph{cyclische DFA} met $n \in \NNN$ toestanden is een DFA
 $\tupl{Q,\Sigma,\delta,F,q_1}$ met $Q=\accl{q_1,q_2,\ldots,q_n}$,
 $\Sigma$ een eindig alfabet, $F=\accl{q_1}$ en $\delta$ voldoet aan:
 \begin{eqnarray}
-\forall i,j \in [1..n], \forall a \in \Sigma: \delta(q_i,a) = q_j \Rightarrow (j>i) \vee ((j = 0) \wedge (i = n))\\
+\forall i,j \in [1..n], \forall a \in \Sigma: \delta(q_i,a) = q_j \Rightarrow (j>i) \vee ((j = 1) \wedge (i = n))\\
 \forall a\in\Sigma:\fun{\delta}{q_n,a}=q_1
 \end{eqnarray}
 \end{definition}\end{quote}

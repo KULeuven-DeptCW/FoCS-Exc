@@ -4,6 +4,7 @@ all :
 	make "Fundamentals_of_Computer_Science/exercises3.pdf"
 	make "Fundamentals_of_Computer_Science/exercises4.pdf"
 	make "Fundamentals_of_Computer_Science/exercises5.pdf"
+	make "Fundamentals_of_Computer_Science/toets1-14.pdf"
 %.pdf: %.tex *.sty Fundamentals_of_Computer_Science/*/*.tex
 	bash makepdf.sh $<
 %.txt: %.tex

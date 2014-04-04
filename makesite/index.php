@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+  <head profile="http://www.w3.org/2005/10/profile">
+  <link rel="icon" type="image/png" href="icon.ico">
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="description" content="Bootstrap-select : A custom select for @twitter bootstrap using button dropdown." />
@@ -48,7 +49,7 @@
       }
     </style>
 
-    <title>Crunching some pdfs</title>
+    <title>Cooking some pdfs</title>
   </head>
 
   <body>
@@ -59,13 +60,14 @@
       	<form method="post" action="crunch.php">
         <h1>Any preferences?</h1>
         <hr>
-        What would you like to eat? <select class="selectpicker" multiple data-selected-text-format="count">
+        Please select your meal <select class="selectpicker" multiple data-selected-text-format="count">
         	<option>Exercise 1</option>
         	<option>Exercise 2</option>
         	<option>Exercise 3</option>
         	<option>Exercise 4</option>
         	<option>Exercise 5</option>
         </select>
+        <div class="alert alert-warning"><strong>Warning!</strong> compiling takes considerable amount of time (> 1 minute), ony use this service if you have difficulty compiling the files yourselves.</div>
         </hr>
         <a class="zip_download_link" href="#">Download files in a .zip file</a>
         <a class="tar_download_link" href="#">Download files in a .tar.gz file</a>

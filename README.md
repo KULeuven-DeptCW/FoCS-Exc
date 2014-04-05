@@ -13,6 +13,11 @@ Exercise sessions:
  4. Graph theory (May 2)
  5. Computational complexity (May 9)
 
+Tests (with solutions):
+
+ 1. March 28, 2014 (`toets1-14.tex`)
+ 2. May 16, 2014 (todo)
+
 Building
 --------
 
@@ -82,6 +87,8 @@ Links
  - Poster about Automata and Computability (dutch): <http://willemvanonsem.ulyssis.be/posterab.pdf>
  - Poster about Fundamentals of Computer Science (work in progress) <http://willemvanonsem.ulyssis.be/posterfocs.pdf>
  - Information about the course: <http://onderwijsaanbod.kuleuven.be/syllabi/v/e/H04H0BE.htm>
+ - Course website: <http://people.cs.kuleuven.be/~bart.demoen/FCW/>
+ - Automata and Computability Course website: <http://people.cs.kuleuven.be/~bart.demoen/AB/>
 
 Contributing
 ------------

@@ -14,7 +14,11 @@ Give Turing machines for the following:
  \item Given input $a^m$, the TM halts with $a^{m^2}$ on its tape.
 \end{enumerate}
 \begin{answer}
+\begin{enumerate}
+ \item The Turing machine always converts a $1$ to a $2$ when shifting to the right and two $0$'s to $2$'s when shifting to the left. When only $2$ remains, the machine fails. If when shifting not enough $0$'s or $1$'s are encountered, the machine accepts. The Turing machine is depicted in \figref{exc21-tm1}. A \verb+.tm+ file is available called \verb+ex3-tm1.tm+.
 \importtikzfigure{exc21-tm1}{A graphical representation of a Turing machines that decides $L$.}
+ \item The Turing machine 
+\end{enumerate}
 \importtikzfigure{exc21-tm2}{A graphical representation of a Turing machines that computes the square-function.}
 \end{answer}
 \end{exercise}

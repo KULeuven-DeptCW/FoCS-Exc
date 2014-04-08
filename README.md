@@ -1,7 +1,7 @@
 FoCS-Exc
 ========
 
-Exercise sessions of "Fundamentals of Computer Science" together with some software to run the simulations.
+Exercise sessions of "Fundamentals of Computer Science" (H04H0B) together with some software to run the simulations.
 
 Content
 -------

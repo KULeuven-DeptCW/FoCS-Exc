@@ -34,7 +34,7 @@ sudo apt-get install git
 Next you can clone a git repository, for instance this one by running
 
 ```
-git clone git@github.com:KommuSoft/FoCS-Exc.git
+git clone git@github.com:KULeuven-DeptCW/FoCS-Exc.git
 ```
 
 ### LaTeX?
@@ -89,6 +89,10 @@ Links
  - Information about the course: <http://onderwijsaanbod.kuleuven.be/syllabi/v/e/H04H0BE.htm>
  - Course website: <http://people.cs.kuleuven.be/~bart.demoen/FCW/>
  - Automata and Computability Course website: <http://people.cs.kuleuven.be/~bart.demoen/AB/>
+
+Related GitHub repositories with exercises:
+
+ - Automata and Computability: <https://github.com/KULeuven-DeptCW/AaC-Exc>
 
 Contributing
 ------------

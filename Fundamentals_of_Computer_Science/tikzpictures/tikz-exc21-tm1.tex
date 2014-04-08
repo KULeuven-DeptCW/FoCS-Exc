@@ -1,0 +1,24 @@
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,auto,scale=1.5]
+\def\sc{0.75}
+\node[state,initial,scale=\sc]   (q00) at (0,0)  {$q_a$};
+\node[state,refusing,scale=\sc]  (q01) at (1,0)  {$q_b$};
+\node[state,scale=\sc]           (q02) at (1,1)  {$q_c$};
+\node[state,scale=\sc]           (q03) at (1,-1) {$q_d$};
+\path[->] (q00) edge             node[scale=\sc,above] {$0/2/R$}                                 (q02)
+          (q00) edge             node[scale=\sc,above] {$1/2/R$}                                 (q03)
+	  (q00) edge             node[scale=\sc,left] {$\textvisiblespace/\textvisiblespace/S$}  (q01)
+;
+\foreach \i/\c/\d in {03/1/R} {
+  \path[->] (q\i) edge[loop below] node[scale=\sc] {$\c/\c/\d$} ();
+}
+\foreach \i/\c/\d in {00/2/R,02/0/R} {
+  \path[->] (q\i) edge[loop above] node[scale=\sc] {$\c/\c/\d$} ();
+}
+\foreach \i/\ca/\cb/\d/\ab in {} {
+  \path[->] (q\i) edge[loop \ab] node[scale=\sc] {$\ca/\cb/\d$} ();
+}
+\foreach \i in {01} {
+  %\path[->] (q\i) edge[loop below] node[scale=\sc] {$\#/\#/L$} ();
+}
+%TODO
+\end{tikzpicture}

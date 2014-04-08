@@ -13,10 +13,18 @@ Give Turing machines for the following:
  \item Decide $L=\condset{w\in\accl{0,1}^{\star}}{\mbox{$L$ does not contain twice as many $0$s as $1$s}}$.
  \item Given input $a^m$, the TM halts with $a^{m^2}$ on its tape.
 \end{enumerate}
+\begin{answer}
+\importtikzfigure{exc21-tm1}{A graphical representation of a Turing machines that decides $L$.}
+\importtikzfigure{exc21-tm2}{A graphical representation of a Turing machines that computes the square-function.}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Design a Turing machine to compute the function $\funm{max}{x,y}=\mbox{the larger of $x$ and $y$}$.
+\begin{answer}
+We assume that the Turing machine takes as input $a^x\#a^y$. Each iteration, the Turing machine replaces the first and last $a$ of the tape with a $b$. The first group of characters that contains only $b$'s is removed together with the $#$ and the $b$'s of the other group are converted to $a$'s. In case both groups end up with only $b$'s at the same time, the choice is arbitrary. Figure~\ref{} shows a graphical representation of such Turing machine.
+\importtikzfigure{exc22-tm}{A graphical representation of a Turing machines that computes the maximum.}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
@@ -25,14 +33,32 @@ Consider a Turing machine model that uses a $2$-dimensional tape, corresponding 
 Sketch a proof that such a model does not add extra computing power; that is, the class of languages recognized by such Turing machines is the same as the class recognized by basic Turing machines.
 \paragraph{}
 Be careful to define what the language of the $2$-d TM is. Discuss how to formalize this model.
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Is is decidable for TM $M$ whether $\fun{L}{M}=\brak{\fun{L}{M}}^R$, that is, is the language of $M$ equal to its reverse?
+\begin{answer}
+No, this is a consequence of \emph{Rice's theorem}.
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Show that $∼HP=\condset{M \#x}{\mbox{$M$ does not halt on $x$}}$ is not decidable.
+\begin{answer}
+We proof this by contradiction:
+\begin{proof}
+Say that there exists a Turing machine $T_H$ for $~HP$. This means that $B$ accepts
+if $M$ does not halt on $x$. We now construct a \emph{contradiction}-machine $C$:
+\begin{equation}
+\fun{C}{\tupl{M}}=\neg\fun{B}{\tupl{M,M}}
+\end{equation}
+In other words $C$ accepts a given Turing machine $M$, if $M$ halts on some representation
+of $M$. We now calculate $\fun{C}{\tupl{C}}$. If $\fun{C}{\tupl{C}}=\xtrue$, then TODO
+\end{proof}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
@@ -43,6 +69,14 @@ Determine whether the following problems are decidable or undecidable. Give proo
  \item Given a TM $M$ and a string $y$, does $M$ ever write a non-blank symbol on its tape on input $y$?
  \item Given a TM $M$ and a string $y$, does the machine ever attempt to move its head left at any point during the computation on $y$?
 \end{enumerate}
+\begin{answer}
+\begin{enumerate}
+ \item \textbf{Undecidable}.
+ \item \textbf{Undecidable}.
+ \item \textbf{Undecidable}.
+ \item \textbf{Undecidable}.
+\end{enumerate}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
@@ -52,4 +86,11 @@ Determine whether the following languages are decidable or not. If so, give a Tu
  \item $\condset{\tupl{M,w}}{\mbox{$M$ accepts $w$ and rejects $w^R$}}$.
 \end{enumerate}
 \end{exercise}
+\begin{answer}
+\begin{enumerate}
+ \item \textbf{Undecidable}.
+ \item \textbf{Undecidable}.
+\end{enumerate}
+
+\end{answer}
 \end{document}

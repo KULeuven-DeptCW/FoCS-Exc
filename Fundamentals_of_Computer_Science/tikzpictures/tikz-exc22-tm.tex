@@ -1,4 +1,28 @@
 \begin{tikzpicture}[shorten >=1pt,node distance=2cm,auto,scale=1.5]
 \def\sc{0.75}
-\node[state,initial,scale=\sc] (q00) at (0,0) {$q_a$};
+\node[state,initial,scale=\sc]   (q00) at (0,0) {$q_a$};
+\node[state,scale=\sc]           (q01) at (1,0) {$q_b$};
+\node[state,scale=\sc]           (q02) at (2,0) {$q_c$};
+\node[state,scale=\sc]           (q03) at (2,1) {$q_d$};
+\node[state,scale=\sc]           (q04) at (1,1) {$q_e$};
+\node[state,scale=\sc]           (q05) at (2,-1) {$q_f$};
+\node[state,accepting,scale=\sc] (q06) at (3,-1) {$q_g$};
+\node[state,scale=\sc]           (q07) at (1,2) {$q_h$};
+\node[state,accepting,scale=\sc] (q08) at (0,2) {$q_i$};
+\path[->] (q00) edge             node[scale=\sc] {$\#/\#/R$}                                     (q01)
+          (q01) edge             node[scale=\sc] {$a/b/L$}                                       (q02)
+          (q02) edge             node[scale=\sc,right] {$\#/\#/L$}                               (q03)
+          (q03) edge             node[scale=\sc] {$a/b/R$}                                       (q04)
+          (q04) edge             node[scale=\sc,left] {$\#/\#/R$}                                (q01)
+          (q01) edge             node[scale=\sc,right] {$\textvisiblespace/\textvisiblespace/L$} (q05)
+          (q05) edge             node[scale=\sc,above] {$\#/\textvisiblespace/L$}                (q06)
+          (q03) edge             node[scale=\sc,left]  {$\textvisiblespace/\textvisiblespace/R$} (q07)
+          (q07) edge             node[scale=\sc,below] {$\#/\textvisiblespace/R$}                (q08)
+;
+\foreach \i/\c/\d/\ld in {00/a/R/below,01/b/R/below,02/b/L/right,03/b/L/above,04/b/R/left} {
+  \path[->] (q\i) edge[loop \ld] node[scale=\sc] {$\c/\c/\d$} ();
+}
+\foreach \i/\ca/\cb/\d/\ld in {05/b/\textvisiblespace/L/below,07/b/\textvisiblespace/R/above} {
+  \path[->] (q\i) edge[loop \ld] node[scale=\sc] {$\ca/\cb/\d$} ();
+}
 \end{tikzpicture}

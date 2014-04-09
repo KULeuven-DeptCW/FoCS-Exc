@@ -26,7 +26,7 @@ Give Turing machines for the following:
 \begin{exercise}
 Design a Turing machine to compute the function $\funm{max}{x,y}=\mbox{the larger of $x$ and $y$}$.
 \begin{answer}
-We assume that the Turing machine takes as input $a^x\#a^y$. Each iteration, the Turing machine replaces the first and last $a$ of the tape with a $b$. The first group of characters that contains only $b$'s is removed together with the $#$ and the $b$'s of the other group are converted to $a$'s. In case both groups end up with only $b$'s at the same time, the choice is arbitrary. \figref{exc22-tm} shows a graphical representation of such Turing machine.
+We assume that the Turing machine takes as input $a^x\#a^y$. Each iteration, the Turing machine replaces the first and last $a$ of the tape with a $b$. The first group of characters that contains only $b$'s is removed together with the $#$ and the $b$'s of the other group are converted to $a$'s. In case both groups end up with only $b$'s at the same time, the choice is arbitrary. \figref{exc22-tm} shows a graphical representation of such Turing machine. A file \verb+ex3-tm3.tm+. is available in the git repository as well.
 \importtikzfigure{exc22-tm}{A graphical representation of a Turing machines that computes the maximum.}
 \end{answer}
 \end{exercise}
@@ -57,10 +57,12 @@ We proof this by contradiction:
 Say that there exists a Turing machine $T_H$ for $~HP$. This means that $B$ accepts
 if $M$ does not halt on $x$. We now construct a \emph{contradiction}-machine $C$:
 \begin{equation}
-\fun{C}{\tupl{M}}=\neg\fun{B}{\tupl{M,M}}
+\fun{C}{\tupl{M}}=\fun{B}{\tupl{M,M}}
 \end{equation}
-In other words $C$ accepts a given Turing machine $M$, if $M$ halts on some representation
-of $M$. We now calculate $\fun{C}{\tupl{C}}$. If $\fun{C}{\tupl{C}}=\xtrue$, then TODO
+In other words $C$ accepts a given Turing machine $M$, if $M$ does not halts on some representation
+of $M$. We now calculate $\fun{C}{\tupl{C}}$. If $\fun{C}{\tupl{C}}=\xtrue$, since however this implies that
+$C$ does not halt on $\tupl{C}$, but this would imply by the definition of accepting that
+$\fun{C}{\tupl{C}}$ is $\xfalse$. Thus contradiction.
 \end{proof}
 \end{answer}
 \end{exercise}
@@ -75,7 +77,7 @@ Determine whether the following problems are decidable or undecidable. Give proo
 \end{enumerate}
 \begin{answer}
 \begin{enumerate}
- \item \textbf{Undecidable}.
+ \item \textbf{Undecidable}. Otherwise the acceptance problem would be decidable: take a Turing machine $M$ introduce a new character $@$, all the transitions where $\#$, was involved are replaced with transitions with $@$. Now we introduce a new acceptance state $q_a'$ and introduce an edge from the original acceptance state $q_a$ with for each $a\in\Sigma$ $a/\#/R$. If we call with input our modified Turing machine and $y$, the result would be the acceptance of $y$ on $M$.
  \item \textbf{Undecidable}.
  \item \textbf{Undecidable}.
  \item \textbf{Undecidable}.

@@ -26,7 +26,7 @@ Give Turing machines for the following:
 \begin{exercise}
 Design a Turing machine to compute the function $\funm{max}{x,y}=\mbox{the larger of $x$ and $y$}$.
 \begin{answer}
-We assume that the Turing machine takes as input $a^x\#a^y$. Each iteration, the Turing machine replaces the first and last $a$ of the tape with a $b$. The first group of characters that contains only $b$'s is removed together with the $#$ and the $b$'s of the other group are converted to $a$'s. In case both groups end up with only $b$'s at the same time, the choice is arbitrary. Figure~\ref{} shows a graphical representation of such Turing machine.
+We assume that the Turing machine takes as input $a^x\#a^y$. Each iteration, the Turing machine replaces the first and last $a$ of the tape with a $b$. The first group of characters that contains only $b$'s is removed together with the $#$ and the $b$'s of the other group are converted to $a$'s. In case both groups end up with only $b$'s at the same time, the choice is arbitrary. \figref{exc22-tm} shows a graphical representation of such Turing machine.
 \importtikzfigure{exc22-tm}{A graphical representation of a Turing machines that computes the maximum.}
 \end{answer}
 \end{exercise}

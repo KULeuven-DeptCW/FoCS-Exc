@@ -38,7 +38,7 @@ Sketch a proof that such a model does not add extra computing power; that is, th
 \paragraph{}
 Be careful to define what the language of the $2$-d TM is. Discuss how to formalize this model.
 \begin{answer}
-
+One can see a $2$-d grid as a (possibly) infinite number of tapes.
 \end{answer}
 \end{exercise}
 
@@ -50,19 +50,11 @@ No, this is a consequence of \emph{Rice's theorem}.
 \end{exercise}
 
 \begin{exercise}
-Show that $∼HP=\condset{M \#x}{\mbox{$M$ does not halt on $x$}}$ is not decidable.
+Show that $\neg HP=\condset{M \#x}{\mbox{$M$ does not halt on $x$}}$ is not decidable.
 \begin{answer}
 We proof this by contradiction:
 \begin{proof}
-Say that there exists a Turing machine $T_H$ for $~HP$. This means that $B$ accepts
-if $M$ does not halt on $x$. We now construct a \emph{contradiction}-machine $C$:
-\begin{equation}
-\fun{C}{\tupl{M}}=\fun{B}{\tupl{M,M}}
-\end{equation}
-In other words $C$ accepts a given Turing machine $M$, if $M$ does not halts on some representation
-of $M$. We now calculate $\fun{C}{\tupl{C}}$. If $\fun{C}{\tupl{C}}=\xtrue$, since however this implies that
-$C$ does not halt on $\tupl{C}$, but this would imply by the definition of accepting that
-$\fun{C}{\tupl{C}}$ is $\xfalse$. Thus contradiction.
+If $\neg HP$ was decidable, we could construct a Turing machine that decides the Halting problem: such machine would first emulate $\fun{\neg HP}{M\#x}$ and then flip the result.
 \end{proof}
 \end{answer}
 \end{exercise}
@@ -94,8 +86,8 @@ Determine whether the following languages are decidable or not. If so, give a Tu
 \end{exercise}
 \begin{answer}
 \begin{enumerate}
- \item \textbf{Undecidable}.
- \item \textbf{Undecidable}.
+ \item \textbf{Undecidable}, a consequence of \emph{Rice's} theorem.
+ \item \textbf{Undecidable}, a consequence of \emph{Rice's} theorem.
 \end{enumerate}
 
 \end{answer}

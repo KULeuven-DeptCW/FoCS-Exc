@@ -15,30 +15,30 @@
 \node[state,accepting,scale=\sc] (q13) at (4,1)    {$q_n$};
 \path[->] (q00) edge             node[scale=\sc] {$\textvisiblespace/\#/L$}                (q01)
           (q01) edge             node[scale=\sc] {$\textvisiblespace/\textvisiblespace/R$} (q02)
-          (q02) edge             node[scale=\sc] {$a/A/R$}                                 (q03)
+          (q02) edge             node[scale=\sc] {$a/A/L$}                                 (q03)
           (q02) edge             node[scale=\sc] {$\#/\textvisiblespace/R$}                (q12)
-          (q03) edge             node[scale=\sc] {$\#/\#/R$}                               (q04)
-          (q04) edge             node[scale=\sc] {$a/b/L$}                                 (q05)
-          (q05) edge             node[scale=\sc] {$\textvisiblespace/\textvisiblespace/R$} (q06)
+          (q03) edge             node[scale=\sc] {$\textvisiblespace/\textvisiblespace/R$} (q04)
+          (q04) edge             node[scale=\sc] {$a/b/R,A/B/R$}                           (q05)
+          (q05) edge             node[scale=\sc] {$\#/\#/R$}                               (q06)
           (q06) edge             node[scale=\sc] {$\textvisiblespace/a/L$}                 (q08)
           (q08) edge             node[scale=\sc] {$\#/\#/L$}                               (q09)
-          (q09) edge             node[sloped,scale=\sc] {$b/b/R$}                          (q04)
+          (q09) edge             node[right,scale=\sc] {$b/b/R,B/B/R$}                     (q04)
           (q04) edge             node[scale=\sc] {$\#/\#/L$}                               (q10)
-          (q10) edge             node[scale=\sc] {$\#/\#/L$}                               (q11)
-          (q11) edge             node[scale=\sc] {$\textvisiblespace/\textvisiblespace/R$} (q02)
-          (q12) edge             node[scale=\sc] {$\#/\textvisiblespace/R$}                (q13)
+          (q10) edge             node[scale=\sc] {$\textvisiblespace/\textvisiblespace/R$} (q11)
+          (q11) edge             node[scale=\sc] {$A/a/R$}                                 (q02)
+          (q12) edge             node[scale=\sc] {$\textvisiblespace/\textvisiblespace/R$} (q13)
 ;
-\foreach \i/\c/\d in {08/a/L,09/a/L,11/a/L} {
+\foreach \i/\c/\d in {08/a/L,11/a/R} {
   \path[->] (q\i) edge[loop below] node[scale=\sc] {$\c/\c/\d$} ();
 }
-\foreach \i/\c/\d in {00/a/R,01/a/L,05/a/R,06/a/R} {
+\foreach \i/\c/\d in {00/a/R,01/a/L,03/a/L,06/a/R} {
   \path[->] (q\i) edge[loop above] node[scale=\sc] {$\c/\c/\d$} ();
 }
-\path[->] (q03) edge[loop above] node[scale=\sc] {$a/a/L,A/A/L$} ();
-\foreach \i/\ca/\cb/\d/\ab in {10/b/a/R/below,12/a/\textvisiblespace/R/above} {
+\foreach \i/\ca/\cb/\d/\la/\ld in {05/a/A/R/above,09/a/A/L/below} {
+  \path[->] (q\i) edge[loop \ld] node[scale=\sc] {$\ca/\ca/\d,\cb/\cb/\d$} ();
+}
+\foreach \i/\ca/\cb/\d/\ab in {12/a/\textvisiblespace/L/above} {
   \path[->] (q\i) edge[loop \ab] node[scale=\sc] {$\ca/\cb/\d$} ();
 }
-\foreach \i in {01} {
-  %\path[->] (q\i) edge[loop below] node[scale=\sc] {$\#/\#/L$} ();
-}
+\path[->] (q10) edge[loop below] node[scale=\sc] {$b/a/L,B/A/L$} ();
 \end{tikzpicture}

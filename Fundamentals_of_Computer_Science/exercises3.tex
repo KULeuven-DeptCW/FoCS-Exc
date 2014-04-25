@@ -6,6 +6,21 @@
 \date{April 25, 2014}
 \begin{document}
 \maketitle
+\begin{prel}
+The acceptance problem is defined as $A_{TM}=\condset{\tupl{M,s}}{\mbox{$M$ accepts $s$}}$ and is undecidable.
+\begin{proof}
+Say there exists a Turing machine $B$ that decides $A_{TM}$, this implies that $B$ accepts in case the given Turing machine $M$ accepts $s$ and otherwise rejects. Now we construct a contradiction machine:
+\begin{equation}
+\fun{C}{\tupl{M}}=\neg\fun{B}{\tupl{M,M}}
+\end{equation}
+Where $\neg$ is the opposite answer. We now execute $\fun{C}{\tupl{C}}$, this is defined as $\neg\fun{B}{\tupl{C,C}}$. Say $\fun{C}{\tupl{C}}$ accepts, in that case $\fun{B}{\tupl{C,C}}$ should accept as well, but than should $\neg\fun{B}{\tupl{C,C}}$ reject and by extent $\fun{C}{\tupl{C}}$ thus contradiction.
+\end{proof}
+\paragraph{}
+The halting problem is defined as $H_{TM}=\condset{\tupl{M,s}}{\mbox{$M$ halts on $s$}}$ and is undecidable.
+\begin{proof}
+Say $H_{TM}$ is decidable, then we could decide $A_{TM}$. Proof by contradiction: say $H_{TM}$ is decidable, then there exists a Turing machine $B$ that decides $H_{TM}$, in that case there exists a Turing machine $C$ that first emulates $B$ on the given input. In case $M$ halts, we emulate $M$ on $s$ and return the answer of $M$, if $B$ rejects, we know $M$ would get stuck in an infinite loop and thus we reject. Now since $A_{TM}$ is undecidable, we know we can't construct such a machine and thus $H_{TM}$ is undecidable as well.
+\end{proof}
+\end{prel}
 \begin{exercise}
 Give Turing machines for the following:
 \begin{enumerate}

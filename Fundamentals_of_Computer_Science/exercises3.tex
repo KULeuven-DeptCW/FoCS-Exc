@@ -7,19 +7,24 @@
 \begin{document}
 \maketitle
 \begin{prel}
-The acceptance problem is defined as $A_{TM}=\condset{\tupl{M,s}}{\mbox{$M$ accepts $s$}}$ and is undecidable.
-\begin{proof}
+\begin{enumerate}
+\item The acceptance problem is defined as $A_{TM}=\condset{\tupl{M,s}}{\mbox{$M$ accepts $s$}}$ and is undecidable.
+\begin{quote}\begin{proof}
 Say there exists a Turing machine $B$ that decides $A_{TM}$, this implies that $B$ accepts in case the given Turing machine $M$ accepts $s$ and otherwise rejects. Now we construct a contradiction machine:
 \begin{equation}
 \fun{C}{\tupl{M}}=\neg\fun{B}{\tupl{M,M}}
 \end{equation}
 Where $\neg$ is the opposite answer. We now execute $\fun{C}{\tupl{C}}$, this is defined as $\neg\fun{B}{\tupl{C,C}}$. Say $\fun{C}{\tupl{C}}$ accepts, in that case $\fun{B}{\tupl{C,C}}$ should accept as well, but than should $\neg\fun{B}{\tupl{C,C}}$ reject and by extent $\fun{C}{\tupl{C}}$ thus contradiction.
-\end{proof}
+\end{proof}\end{quote}
 \paragraph{}
-The halting problem is defined as $H_{TM}=\condset{\tupl{M,s}}{\mbox{$M$ halts on $s$}}$ and is undecidable.
-\begin{proof}
-Say $H_{TM}$ is decidable, then we could decide $A_{TM}$. Proof by contradiction: say $H_{TM}$ is decidable, then there exists a Turing machine $B$ that decides $H_{TM}$, in that case there exists a Turing machine $C$ that first emulates $B$ on the given input. In case $M$ halts, we emulate $M$ on $s$ and return the answer of $M$, if $B$ rejects, we know $M$ would get stuck in an infinite loop and thus we reject. Now since $A_{TM}$ is undecidable, we know we can't construct such a machine and thus $H_{TM}$ is undecidable as well.
-\end{proof}
+\item The halting problem is defined as $H_{TM}=\condset{\tupl{M,s}}{\mbox{$M$ halts on $s$}}$ and is undecidable.
+\begin{quote}\begin{proof}Say $H_{TM}$ is decidable, then we could decide $A_{TM}$. Proof by contradiction: say $H_{TM}$ is decidable, then there exists a Turing machine $B$ that decides $H_{TM}$, in that case there exists a Turing machine $C$ that first emulates $B$ on the given input. In case $M$ halts, we emulate $M$ on $s$ and return the answer of $M$, if $B$ rejects, we know $M$ would get stuck in an infinite loop and thus we reject. Now since $A_{TM}$ is undecidable, we know we can't construct such a machine and thus $H_{TM}$ is undecidable as well.
+\end{proof}\end{quote}
+\item The emptiness problem is defined as follows: $E_{TM}=\condset{\tupl{M}}{L_M=\emptyset}$ and is undecidable.
+\begin{quote}\begin{proof}
+Say $E_{TM}$ was decidable, then $A_{TM}$ was decidable. If so, there exists a Turing machine $F$ that decides $E_{TM}$, in that case we could construct a Turing machine $B$ that decides $A_{TM}$ as follows. $B$ manipulates the given Turing machine $M$ such that this machine first checks if the given input is indeed $s$ only in that case, the head is placed back to its original place and the original Turing machine is emulated. If the string is not $s$, then the modified Turing machine $M'$ rejects. As a result, $L_{M'}=L_{M}\cap\accl{s}$. This language is empty if $M$ doesn't accept $M$. By emulating $F$ on $M'$ and invert the result, we have constructed a Turing machine that decides $A_{TM}$. This is impossible thus contradiction.
+\end{proof}\end{quote}
+\end{enumerate}
 \end{prel}
 \begin{exercise}
 Give Turing machines for the following:

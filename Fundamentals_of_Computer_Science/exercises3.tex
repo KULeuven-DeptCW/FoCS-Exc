@@ -1,7 +1,6 @@
 \documentclass{article}
-\usepackage{../brackets,../proofenv,../assignment-en,../importsreferences-en}
+\usepackage{../brackets,../proofenv,../assignment-en,../importsreferences-en,amssymb}
 \usetikzlibrary{automata,calc,fit,shapes,arrows}
-
 \title{Fundamentals of Computer Science\\Solutions \#3\\\url{http://goo.gl/XS14aw}}
 \author{prof. B. Demoen\\W. Van Onsem}
 \date{April 25, 2014}
@@ -26,7 +25,7 @@ Give Turing machines for the following:
 \begin{exercise}
 Design a Turing machine to compute the function $\funm{max}{x,y}=\mbox{the larger of $x$ and $y$}$.
 \begin{answer}
-We assume that the Turing machine takes as input $a^x\#a^y$. Each iteration, the Turing machine replaces the first and last $a$ of the tape with a $b$. The first group of characters that contains only $b$'s is removed together with the $#$ and the $b$'s of the other group are converted to $a$'s. In case both groups end up with only $b$'s at the same time, the choice is arbitrary. \figref{exc22-tm} shows a graphical representation of such Turing machine. A file \verb+ex3-tm3.tm+. is available in the git repository as well.
+We assume that the Turing machine takes as input $a^x\#a^y$. Each iteration, the Turing machine replaces the first and last $a$ of the tape with a $b$. The first group of characters that contains only $b$'s is removed together with the $\#$ and the $b$'s of the other group are converted to $a$'s. In case both groups end up with only $b$'s at the same time, the choice is arbitrary. \figref{exc22-tm} shows a graphical representation of such Turing machine. A file \verb+ex3-tm3.tm+. is available in the git repository as well.
 \importtikzfigure{exc22-tm}{A graphical representation of a Turing machines that computes the maximum.}
 \end{answer}
 \end{exercise}
@@ -38,14 +37,15 @@ Sketch a proof that such a model does not add extra computing power; that is, th
 \paragraph{}
 Be careful to define what the language of the $2$-d TM is. Discuss how to formalize this model.
 \begin{answer}
-One can see a $2$-d grid as a (possibly) infinite number of tapes.
+We describe a $2$-dimensional tape Turing machine the same way as a normal Turing machine, but where the alphabet of possible head movements is enriched: $M=\accl{\leftarrow,\uparrow,\rightarrow,\downarrow}$.
+One can see a $2$-d grid as a (possibly) infinite number of tapes. However since at each point in time, the machine has only executed a finite number of steps, only a finite amount of space contains data (and thus should be stored).
 \end{answer}
 \end{exercise}
 
 \begin{exercise}
 Is is decidable for TM $M$ whether $\fun{L}{M}=\brak{\fun{L}{M}}^R$, that is, is the language of $M$ equal to its reverse?
 \begin{answer}
-No, this is a consequence of \emph{Rice's theorem}.
+No, this is a consequence of \emph{Rice's theorem}. An alternative proof: in that case we could decide the acceptance problem: .
 \end{answer}
 \end{exercise}
 
@@ -71,8 +71,8 @@ Determine whether the following problems are decidable or undecidable. Give proo
 \begin{enumerate}
  \item \textbf{Undecidable}. Otherwise the acceptance problem would be decidable: take a Turing machine $M$ introduce a new character $@$, all the transitions where $\#$, was involved are replaced with transitions with $@$. Now we introduce a new acceptance state $q_a'$ and introduce an edge from the original acceptance state $q_a$ with for each $a\in\Sigma$ $a/\#/R$. If we call with input our modified Turing machine and $y$, the result would be the acceptance of $y$ on $M$.
  \item \textbf{Undecidable}.
- \item \textbf{Undecidable}.
- \item \textbf{Undecidable}.
+ \item \textbf{Undecidable}. If this problem was decidable, then the opposite, the fact that $M$ never writes a non-blank to its tape on input $y$. Say that there exists a Turing machine $N$ that should decide such language, than this machine was able to solve the acceptance problem $A$. $A$ first transforms the given Turing machine such that another character, here denoted as $\bowtie$ is used instead of the blank character when writing a blank character. Both the blank character ($\textvisiblespace$) and the $\bowtie$ are interpreted as a blank character when reading them from the tape. It is clear that this machine decides the same language (thus our transformation preserves the language. Now for the accepting state $q_a$ of the original machine, two new states are introduced $q_{pa}$ and $q_a'$. $q_{pa}$ is a pre-accepting state and replaces the original $q_a$, $q_{pa}$ however is not the accepting state. $q_a'$ is the new accepting state. Edges are drawn from $q_{pa}$ such that for all $a\in\Gamma$, $q_{pa}\rightarrow^{a/\textvisiblespace/R}q_a$. It is clear that the transformed machine accepts a string if and only if that machine writes a blank character to the tape on input $y$. This would imply that we can use $N$ to solve the accepting problem, thus contradiction.
+ \item \textbf{Undecidable}. We use the previous item to proof this. Say a Turing machine $I$ exists that decides this language, 
 \end{enumerate}
 \end{answer}
 \end{exercise}
@@ -87,8 +87,11 @@ Determine whether the following languages are decidable or not. If so, give a Tu
 \begin{answer}
 \begin{enumerate}
  \item \textbf{Undecidable}, a consequence of \emph{Rice's} theorem.
+ \begin{proof}
+  Given there is a Turing machine $D$ that would decide this language, the emptiness problem could be decided $E=\condset{\tupl{M}}{L_M=\emptyset}$. We do this by modifying the Turing machine such that 
+ \end{proof}
  \item \textbf{Undecidable}, a consequence of \emph{Rice's} theorem.
+ \begin{proof}Given that this language was decidable, we could decide the acceptance problem. Say there is a machine $R$ that decides the language. A Turing machine that decides the acceptance problem $A$ could do the following. It modifies the machine $M$ such by introducing a new initial state $q_i'$. This state checks if the first character is a $\bowtie$ (a character that does not occurs in the original tape alphabet), if so the character is erased, the head is moved to the right and the second character is checked, if this is a $\Game$ the character is erased as well, the head moved to the right the machine continues like as if it were in the original state $q_i$ of the given machine. As a consequence, the language that the modified Turing machine accepts is $L_{M'}=\condset{\bowtie\Game w}{w\in L_M}$, since $\bowtie,\Game\notin\Gamma_M$, we know that there is no $w\in L_M'$ for which $w^R\in L_M'$ as well, by then calling $\fun{R}{\tupl{M',\bowtie\Game w}}$, we've generated a machine that decides the acceptance problem thus contradiction.\end{proof}
 \end{enumerate}
-
 \end{answer}
 \end{document}

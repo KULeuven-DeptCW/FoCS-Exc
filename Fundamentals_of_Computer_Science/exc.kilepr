@@ -376,10 +376,10 @@ order=0
 
 [item:exercises3.tex]
 archive=true
-column=66
+column=127
 encoding=UTF-8
 highlight=LaTeX
-line=40
+line=47
 mode=LaTeX
 open=true
 order=0
@@ -799,10 +799,10 @@ JumpList=
 ViMarks=.,142,190,[,142,156,],142,190
 
 [view-settings,view=0,item:exercises3.tex]
-CursorColumn=66
-CursorLine=40
+CursorColumn=127
+CursorLine=47
 JumpList=
-ViMarks=.,40,65,[,40,53,],40,65
+ViMarks=.,47,128,[,47,128,],47,128
 
 [view-settings,view=0,item:exercises4.tex]
 CursorColumn=9

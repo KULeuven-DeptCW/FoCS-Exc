@@ -65,7 +65,11 @@ One can see a $2$-d grid as a (possibly) infinite number of tapes. However since
 \begin{exercise}
 Is is decidable for TM $M$ whether $\fun{L}{M}=\brak{\fun{L}{M}}^R$, that is, is the language of $M$ equal to its reverse?
 \begin{answer}
-No, this is a consequence of \emph{Rice's theorem}. An alternative proof: in that case we could decide the acceptance problem: .
+No, this is a consequence of \emph{Rice's theorem}. An alternative proof: in case there exists a Turing machine $S$ that decides this problem, we could decide the acceptance problem. A Turing machine deciding the acceptance problem would look like:
+\begin{quote}
+We manipulate $M$ such that the machine first checks if the input string is $\bowtie s$ with $\bowtie$ a character not used by the tape alphabet of the original machine and $s$ the string we wish to check for. If the input string is indeed $\bowtie s$ we continue by emulating the original machine, if not we reject. If $s\in L_M$, we know that $L_{M'}=\accl{\bowie s}$ for which the reverse language property doesn't hold. In case $s\notin L_M$, $L_{M'}=\emptyset$ thus the property holds. By manipulating the given machine and emulating $S$ on the machine, we can decide the acceptance problem.
+\end{quote}
+Since the acceptance problem is however undecidable, we know that $S$ cannot exist.
 \end{answer}
 \end{exercise}
 
@@ -90,9 +94,9 @@ Determine whether the following problems are decidable or undecidable. Give proo
 \begin{answer}
 \begin{enumerate}
  \item \textbf{Undecidable}. Otherwise the acceptance problem would be decidable: take a Turing machine $M$ introduce a new character $@$, all the transitions where $\#$, was involved are replaced with transitions with $@$. Now we introduce a new acceptance state $q_a'$ and introduce an edge from the original acceptance state $q_a$ with for each $a\in\Sigma$ $a/\#/R$. If we call with input our modified Turing machine and $y$, the result would be the acceptance of $y$ on $M$.
- \item \textbf{Undecidable}.
+ \item \textbf{Undecidable}. We can reduce this problem to the acceptance problem using computation histories.
  \item \textbf{Undecidable}. If this problem was decidable, then the opposite, the fact that $M$ never writes a non-blank to its tape on input $y$. Say that there exists a Turing machine $N$ that should decide such language, than this machine was able to solve the acceptance problem $A$. $A$ first transforms the given Turing machine such that another character, here denoted as $\bowtie$ is used instead of the blank character when writing a blank character. Both the blank character ($\textvisiblespace$) and the $\bowtie$ are interpreted as a blank character when reading them from the tape. It is clear that this machine decides the same language (thus our transformation preserves the language. Now for the accepting state $q_a$ of the original machine, two new states are introduced $q_{pa}$ and $q_a'$. $q_{pa}$ is a pre-accepting state and replaces the original $q_a$, $q_{pa}$ however is not the accepting state. $q_a'$ is the new accepting state. Edges are drawn from $q_{pa}$ such that for all $a\in\Gamma$, $q_{pa}\rightarrow^{a/\textvisiblespace/R}q_a$. It is clear that the transformed machine accepts a string if and only if that machine writes a blank character to the tape on input $y$. This would imply that we can use $N$ to solve the accepting problem, thus contradiction.
- \item \textbf{Undecidable}. We use the previous item to proof this. Say a Turing machine $I$ exists that decides this language, 
+ \item \textbf{Decidable}. We can implement a debugger that co-executes with the original Turing machine. As long as the Turing machine is in the range of the original input, we can easily check if the head only moves to the right. Some definitions allow a Turing machine to stay put for one time interval. In that case we can simply store all the tuples of $Q\times\Gamma$ with $Q$ the number of states and $\Gamma$ the character underneath the head for that memory cell. If such state is reached a second time, we know that we are in an infinite loop. One we leave the input part of the tape, the Turing machine acts like a DFA, we can simply use a reachability analysis from the active state to determine whether we will ever enter a state in which we will move to the left.
 \end{enumerate}
 \end{answer}
 \end{exercise}
@@ -108,7 +112,7 @@ Determine whether the following languages are decidable or not. If so, give a Tu
 \begin{enumerate}
  \item \textbf{Undecidable}, a consequence of \emph{Rice's} theorem.
  \begin{proof}
-  Given there is a Turing machine $D$ that would decide this language, the emptiness problem could be decided $E=\condset{\tupl{M}}{L_M=\emptyset}$. We do this by modifying the Turing machine such that 
+  Given there is a Turing machine $D$ that would decide this language, the emptiness problem could be decided the acceptance problem. We do this by modifying the Turing machine such that its language is defined as $L_{M'}=\brak{L_M\cap\accl{s}}\cup\accl{ss}$. Such Turing machine $\tupl{M'}$ belongs to the language if $M$ accepts $s$. Thus this would imply we can decide the acceptance problem which we can't.
  \end{proof}
  \item \textbf{Undecidable}, a consequence of \emph{Rice's} theorem.
  \begin{proof}Given that this language was decidable, we could decide the acceptance problem. Say there is a machine $R$ that decides the language. A Turing machine that decides the acceptance problem $A$ could do the following. It modifies the machine $M$ such by introducing a new initial state $q_i'$. This state checks if the first character is a $\bowtie$ (a character that does not occurs in the original tape alphabet), if so the character is erased, the head is moved to the right and the second character is checked, if this is a $\Game$ the character is erased as well, the head moved to the right the machine continues like as if it were in the original state $q_i$ of the given machine. As a consequence, the language that the modified Turing machine accepts is $L_{M'}=\condset{\bowtie\Game w}{w\in L_M}$, since $\bowtie,\Game\notin\Gamma_M$, we know that there is no $w\in L_M'$ for which $w^R\in L_M'$ as well, by then calling $\fun{R}{\tupl{M',\bowtie\Game w}}$, we've generated a machine that decides the acceptance problem thus contradiction.\end{proof}

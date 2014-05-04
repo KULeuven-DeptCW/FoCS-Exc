@@ -59,6 +59,16 @@ Be careful to define what the language of the $2$-d TM is. Discuss how to formal
 \begin{answer}
 We describe a $2$-dimensional tape Turing machine the same way as a normal Turing machine, but where the alphabet of possible head movements is enriched: $M=\accl{\leftarrow,\uparrow,\rightarrow,\downarrow}$.
 One can see a $2$-d grid as a (possibly) infinite number of tapes. However since at each point in time, the machine has only executed a finite number of steps, only a finite amount of space contains data (and thus should be stored).
+\paragraph{}
+Say we are in step $k$, then at most $k$ horizontal tapes can be initialized. We store these sequentially. In order to keep track of the position of the head on each tape, we use the hat-marker $\hat{a}$, accent-marker $a'$ and a tape separation marker $\bowtie$. The $\hat{a}$ marker means that the $2$-d head shares the same $x$-coordinate. The accent $a'$ implies that the head is actually placed on that character. The different tapes are separated by a $\bowtie$ character.
+\begin{figure}[hbt]
+\centering
+\importtikzsubfigure{exc23-2d}{A $2$-d tape.}
+\importtikzsubfigure{exc23-1d}{Its $1$-d tape counterpart.}
+\caption{A $2$-d tape emulated on a $1$-d tape.}
+\end{figure}
+\paragraph{}
+The approach requires some excessive amount of bookkeeping. When the head is moved to the left, all the $\hat{a}$ markers must be placed to the left as well, by using an accent, the Turing machine can track back the active tape. If the head was at the most left point, additional place must be reserved, this results in tapes being moved more to the left. Analogue for moving the head to the right. In case we move the head up, we simply remark the character with the $a'$ mark as $\hat{a}$, move to the right and mark the first $\hat{a}$ character as $a'$. It is however possible that we were at the rightmost tape. In that case we need to initialize a new tape. Analogue for moving the head down.
 \end{answer}
 \end{exercise}
 
@@ -67,7 +77,7 @@ Is is decidable for TM $M$ whether $\fun{L}{M}=\brak{\fun{L}{M}}^R$, that is, is
 \begin{answer}
 No, this is a consequence of \emph{Rice's theorem}. An alternative proof: in case there exists a Turing machine $S$ that decides this problem, we could decide the acceptance problem. A Turing machine deciding the acceptance problem would look like:
 \begin{quote}
-We manipulate $M$ such that the machine first checks if the input string is $\bowtie s$ with $\bowtie$ a character not used by the tape alphabet of the original machine and $s$ the string we wish to check for. If the input string is indeed $\bowtie s$ we continue by emulating the original machine, if not we reject. If $s\in L_M$, we know that $L_{M'}=\accl{\bowie s}$ for which the reverse language property doesn't hold. In case $s\notin L_M$, $L_{M'}=\emptyset$ thus the property holds. By manipulating the given machine and emulating $S$ on the machine, we can decide the acceptance problem.
+We manipulate $M$ such that the machine first checks if the input string is $\bowtie\Game s$ with $\bowtie$ and $\Game$ characters not used by the tape alphabet of the original machine and $s$ the string we wish to check for. If the input string is indeed $\bowtie s$ we continue by emulating the original machine, if not we reject. If $s\in L_M$, we know that $L_{M'}=\accl{\bowtie\Game s}$ for which the reverse language property doesn't hold. In case $s\notin L_M$, $L_{M'}=\emptyset$ thus the property holds. By manipulating the given machine and emulating $S$ on the machine, we can decide the acceptance problem.
 \end{quote}
 Since the acceptance problem is however undecidable, we know that $S$ cannot exist.
 \end{answer}
@@ -112,7 +122,7 @@ Determine whether the following languages are decidable or not. If so, give a Tu
 \begin{enumerate}
  \item \textbf{Undecidable}, a consequence of \emph{Rice's} theorem.
  \begin{proof}
-  Given there is a Turing machine $D$ that would decide this language, the emptiness problem could be decided the acceptance problem. We do this by modifying the Turing machine such that its language is defined as $L_{M'}=\brak{L_M\cap\accl{s}}\cup\accl{ss}$. Such Turing machine $\tupl{M'}$ belongs to the language if $M$ accepts $s$. Thus this would imply we can decide the acceptance problem which we can't.
+  Given there is a Turing machine $D$ that would decide this language, the acceptance problem could be decided. We do this by modifying the Turing machine such that its language is defined as $L_{M'}=\brak{L_M\cap\accl{s}}\cup\accl{\Game s}$ with $\Game$ a character not yet used. Such Turing machine $\tupl{M'}$ belongs to the language if $M$ accepts $s$. Thus this would imply we can decide the acceptance problem which we can't.
  \end{proof}
  \item \textbf{Undecidable}, a consequence of \emph{Rice's} theorem.
  \begin{proof}Given that this language was decidable, we could decide the acceptance problem. Say there is a machine $R$ that decides the language. A Turing machine that decides the acceptance problem $A$ could do the following. It modifies the machine $M$ such by introducing a new initial state $q_i'$. This state checks if the first character is a $\bowtie$ (a character that does not occurs in the original tape alphabet), if so the character is erased, the head is moved to the right and the second character is checked, if this is a $\Game$ the character is erased as well, the head moved to the right the machine continues like as if it were in the original state $q_i$ of the given machine. As a consequence, the language that the modified Turing machine accepts is $L_{M'}=\condset{\bowtie\Game w}{w\in L_M}$, since $\bowtie,\Game\notin\Gamma_M$, we know that there is no $w\in L_M'$ for which $w^R\in L_M'$ as well, by then calling $\fun{R}{\tupl{M',\bowtie\Game w}}$, we've generated a machine that decides the acceptance problem thus contradiction.\end{proof}

@@ -15,7 +15,7 @@ Exercise sessions:
 
 Tests (with solutions):
 
- 1. March 28, 2014 (`toets1-14.tex`)
+ 1. March 28, 2014 (`toets14-1.tex`, *Dutch*)
  2. May 16, 2014 (todo)
 
 Building

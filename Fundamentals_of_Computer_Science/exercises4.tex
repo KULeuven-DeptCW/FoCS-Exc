@@ -26,9 +26,11 @@ A regular graph is a graph where each vertex has the same number of neighbors, i
 \paragraph{}
 For every $k$-regular graph is there a $\brak{k+1}$-regular graph that contains the $k$-regular graph as a subgraph? Proof or counterexample.
 \begin{answer}
-This is false.
+Yes.
 \begin{proof}
-Consider a $0$-regular graph with $n$ vertices where $n$ is odd. We need to construct a $1$-regular graph. If this was possible, the total degree of the graph should be $n$, since the \emph{Handshaking theorem} states that the sum of the degrees is always even and $n$ is odd, we reach a contradiction.
+Without loss of generality, we define an ordering into our graph $G=\tupl{V,E,\phi}$ with $V=\accl{v_1,v_2,\ldots,v_n}$ and $E=\accl{e_1,e_2,\ldots,e_l}$ with $l=n\cdot k/2$. We will construct a graph $G'=\tupl{V',E',\phi'}$. Furthermore we consider two cases, one where the number of vertices $n$ is even, and one where $n$ is odd.
+\paragraph{}In the case $n$ is even, we can increase the degree of every vertex by adding $n/2$ additional edges $E'=E\cup\accl{e_{l+1},\ldots,e_{l+n/2}}$ with $\fun{\phi}{e_{l+i}}=\tupl{v_{2\cdot i},v_{2\cdot i+1}}$ for $i=1\ldots l+n/2$. Since the new edges range over the vertices and each vertex occurs only once, the new edges add a degree of one to the vertices. Since the original vertices and edges are maintained, the original graph is clearly a subgraph.
+\paragraph{}This does not hold if $n$ is odd, since this implies there is a single vertex (here called $v_n$) that has no neighbor with which an edge can be formed. In that case, we duplicate the 
 \end{proof}
 \end{answer}
 \end{exercise}

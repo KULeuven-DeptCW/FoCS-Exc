@@ -8,21 +8,40 @@
 \begin{document}
 \maketitle
 \begin{exercise}
-Express the minimum and maximum degrees vertices in the graphs $K_n$ (complete graphs) and $K_{n,m}$ (complete bi-partite graphs) in terms of $n$ and $m$.
+Express the minimum and maximum degrees vertices in the graphs $K_n$ (complete graphs) and $K_{n,m}$ (complete bipartite graphs) in terms of $n$ and $m$.
+\begin{answer}
+In a complete graph $K_n$ each vertex $v_i$ is connected with each other vertex $v_j$. Thus each vertex is connected with $n-1$ edges, the minimum and maximum degree. In a bipartite graph, we consider two types of vertices $u_i$ for $i=1\ldots n$ and $v_j$ for $j=1\ldots m$. All vertices $u_i$ are connected with all vertices $v_j$, thus the degree is $m$. All vertices $v_j$ are connected with all vertices $u_i$, thus the degree is $n$. The minimum degree is thus $\fun{\min}{m,n}$, the maximum $\fun{\max}{m,n}$.
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Specify a minimum value for $n$ in terms of $l$ and $m$ such that $K_{l,m}$ is a subgraph of $K_n$.
+\begin{answer}
+Since a $K_{l,m}$ graph contains $l+m$ vertices, obviously $n$ must be larger or equal to $m+n$. Since a complete graph contains an edge for each two different vertices, there is no restriction to add more vertices, all the edges in the $K_{l,m}$ graph are part of a $K_{l+m}$ graph.
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 A regular graph is a graph where each vertex has the same number of neighbors, i.e. every vertex has the same degree. A regular graph with vertices of degree $k$ is called a $k$-regular graph.
 \paragraph{}
 For every $k$-regular graph is there a $\brak{k+1}$-regular graph that contains the $k$-regular graph as a subgraph? Proof or counterexample.
+\begin{answer}
+This is false.
+\begin{proof}
+Consider a $0$-regular graph with $n$ vertices where $n$ is odd. We need to construct a $1$-regular graph. If this was possible, the total degree of the graph should be $n$, since the \emph{Handshaking theorem} states that the sum of the degrees is always even and $n$ is odd, we reach a contradiction.
+\end{proof}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Is there a simple graph on $n$ vertices such that all vertices have distinct degrees? Is there a (general) graph with this property?
+\begin{answer}
+Yes. This is true for every $n$.
+\begin{construction}[Distinct degree graph]
+
+\end{construction}
+\end{answer}
+
 \end{exercise}
 
 \begin{exercise}

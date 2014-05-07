@@ -29,8 +29,8 @@ For every $k$-regular graph is there a $\brak{k+1}$-regular graph that contains 
 Yes.
 \begin{proof}
 Without loss of generality, we define an ordering into our graph $G=\tupl{V,E,\phi}$ with $V=\accl{v_1,v_2,\ldots,v_n}$ and $E=\accl{e_1,e_2,\ldots,e_l}$ with $l=n\cdot k/2$. We will construct a graph $G'=\tupl{V',E',\phi'}$. Furthermore we consider two cases, one where the number of vertices $n$ is even, and one where $n$ is odd.
-\paragraph{}In the case $n$ is even, we can increase the degree of every vertex by adding $n/2$ additional edges $E'=E\cup\accl{e_{l+1},\ldots,e_{l+n/2}}$ with $\fun{\phi}{e_{l+i}}=\tupl{v_{2\cdot i},v_{2\cdot i+1}}$ for $i=1\ldots l+n/2$. Since the new edges range over the vertices and each vertex occurs only once, the new edges add a degree of one to the vertices. Since the original vertices and edges are maintained, the original graph is clearly a subgraph.
-\paragraph{}This does not hold if $n$ is odd, since this implies there is a single vertex (here called $v_n$) that has no neighbor with which an edge can be formed. In that case, we duplicate the 
+\paragraph{}In the case $n$ is even, we can increase the degree of every vertex by adding $n/2$ additional edges $E'=E\cup\accl{e_{l+1},\ldots,e_{l+n/2}}$ with $\fun{\phi}{e_{l+i}}=\tupl{v_{2\cdot i},v_{2\cdot i+1}}$ for $i=1\ldots n/2$. The set of original vertices $V'=V$ is maintained and of course the old edges are not modified $\fun{\phi'}{e_i}=\fun{\phi}{e_i}$ for $i=1\ldots l$. Since the new edges range over the vertices and each vertex occurs only once, the new edges add a degree of one to the vertices. Since the original vertices and edges are maintained, the original graph is clearly a subgraph.
+\paragraph{}This does not hold if $n$ is odd, since this implies there is a single vertex (here called $v_n$) that has no neighbor with which an edge can be formed. In that case, we duplicate the graph. More formally $V'=V\cup V_2$ with $V_2=\condset{v'_i}{i\in\accl{1,2,\ldots,n}}$. Furthermore the original edges are maintained and duplicate edges are introduced $E_2=\condset{e'_i}{i\in\accl{1,2,\ldots,l}}$ with $\fun{\phi}{e'_i}=\tupl{v'_j,v'_k}$ given $\fun{\phi}{e_i}=\tupl{v_j,v__k}$. By using the same construction as in the even case, we can add $\floor{n/2}$ additional edges to both parts of the graph. Finally the two vertices $v'_n$ and $v_n$ that have no neighbor are coupled increasing their degree with one as well, or more formally:
 \end{proof}
 \end{answer}
 \end{exercise}
@@ -38,24 +38,35 @@ Without loss of generality, we define an ordering into our graph $G=\tupl{V,E,\p
 \begin{exercise}
 Is there a simple graph on $n$ vertices such that all vertices have distinct degrees? Is there a (general) graph with this property?
 \begin{answer}
-Yes. This is true for every $n$.
-\begin{construction}[Distinct degree graph]
-
-\end{construction}
+Not for simple graphs, but for general graphs this holds.
+\begin{quote}\begin{proof}
+Take $n=2$. In that case there are two vertices $V=\accl{v_1,v_2}$. There are only two possible graphs, one with an edge $e_1=\tupl{v_1,v_2}$ and one without. In both cases, both edges have the same degree. Thus counterexample.
+\end{proof}\end{quote}
+\begin{construct}[Distinct degree graph]
+Simply define 
+\end{construct}
 \end{answer}
-
 \end{exercise}
 
 \begin{exercise}
 Is it possible to draw a graph that has a trail of length seven but no paths of length seven? If so, draw such an example. Is it possible to draw a graph that has a path of length seven but no trail of length seven? If so, draw such an example.
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Show that for $n\in\NNN$, the graph $K_{n,n}$ has a subgraph isomorphic to $C_k$, a cycle of length $k$, for even $k\in\accl{4,\ldots,2\cdot n}$.
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Prove that if a graph $G$ has exactly two vertices $u$ and $v$ of odd degree, then $G$ contains a path from $u$ to $v$.
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
@@ -68,18 +79,30 @@ Define a relation on graphs such that $G$ and $G'$ are related if and only if th
  \item[symmetry] a relation $R\subseteq A\times A$ is symmetric if and only if for all $a,b\in A$ if $\tupl{a,b}\in R$ then $\tupl{b,a}\in R$.
  \item[equivalence relation] a relation is equivalence relation if and only if it is reflexive, symmetric and transitive.
 \end{description}}
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 It can be shown that there are exactly $11$ trees on seven vertices. Draw these eleven trees, making sure that no two are isomorphic.
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Let $G$ be a $k$-regular bipartite graph with $k\geq2$. Show that $G$ has no cut edge (or bridge).
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Show that if a digraph $G$ contains a directed circuit of positive length, then $G$ must contain a cycle.
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
@@ -93,19 +116,31 @@ Consider the graph when you add k edges to form an Eulerian graph.
 \end{hint}
 \begin{note}
 Note that two subgraphs $G_1$ and $G_2$ of $G$ are edge-disjoint whenever $\fun{E}{G_1}\cap\fun{E}{G_2}=\emptyset$.
+\begin{answer}
+
+\end{answer}
 \end{note}
 \end{exercise}
 
 \begin{exercise}
 Let $G$ be a $k$-regular bipartite graph with $k\geq2$. Show that $G$ has no cut edge (or bridge).
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 For $n\geq2$ show that the complete bipartite graph $K_{n,n}$ is a Hamiltonian graph.
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Determine all $m,n\in\NNN$ such that the complete bipartite graph $K_{m,n}$ is Hamiltonian.
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
@@ -117,11 +152,17 @@ Let $G$ be a connected graph, let $T_1$ and $T_2$ be (the edge sets of) two span
 \begin{note}
 Each of these two properties is called the Tree Exchange Property.
 \end{note}
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 A graph in which every vertex has even degree is called an even graph. The complement $E\setminus T$ of a spanning tree $T$ is called a cotree.
 \paragraph{}
 Show that every cotree of a connected graph $G$ is contained in a unique even subgraph of the graph.
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 \end{document}

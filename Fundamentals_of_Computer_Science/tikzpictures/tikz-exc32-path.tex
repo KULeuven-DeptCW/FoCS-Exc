@@ -1,19 +1,6 @@
 \begin{tikzpicture}[shorten >=1pt,node distance=2cm,auto,scale=1.5,nd/.style={draw=black,circle,scale=\sc,minimum width=0.75 cm,minimum height=1 cm},ndg/.style={nd,fill=gray}]
 \def\sc{0.75}
-\node[nd]  (R00) at (0,0)   {$\neg w$};
-\node[nd]  (R01) at (1,0)   {$w$};
-\node[nd]  (R02) at (2,0)   {};
-\node[nd]  (R10) at (3,0.5) {};
-\node[nd]  (R20) at (0,1)   {$\neg v$};
-\node[nd]  (R21) at (1,1)   {$v$};
-\node[nd]  (R22) at (2,1)   {};
-\node[ndg] (R30) at (0.5,3) {};
-\node[nd]  (R40) at (0,4)   {$T$};
-\node[nd]  (R41) at (1,4)   {$F$};
-\foreach \i/\j in {00/01,01/02,02/10,02/22,20/21,22/10,20/30,21/30,30/40,30/41,40/41} {
-  \path (R\i) edge (R\j);
-}
-\foreach \i/\j in {30/00,01/30,10/30,10/41,20/22} {
-  \path (R\i) edge[bend right] (R\j);
+\foreach \i in {1,...,5} {
+  \node[nd] at (\i,0) {$v_\i$};
 }
 \end{tikzpicture}

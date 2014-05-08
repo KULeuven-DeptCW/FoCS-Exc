@@ -56,8 +56,13 @@ In other words, $v_i$ contains $i$ loops.
 \begin{exercise}
 Is it possible to draw a graph that has a trail of length seven but no paths of length seven? If so, draw such an example. Is it possible to draw a graph that has a path of length seven but no trail of length seven? If so, draw such an example.
 \begin{answer}
+It is possible to draw a graph that has a trail of length seven, but no paths of length seven. Such graph is depicted on \figref{exc32-trail}. There is only one trail and that trail \emph{reuses} vertices.
 \importtikzfigure{exc32-trail}{A graph with a trail of length seven but no path of length seven.}
-\importtikzfigure{exc32-path}{A graph with a trail of length seven but no path of length seven.}
+\paragraph{}
+It is not possible to construct a graph that has a path of length seven but not a trail with length seven:
+\begin{proof}
+Given a graph $G=\tupl{V,E,\phi}$ with a path of length seven. Without loss of generality we can order the vertices such that the path $p=v_1\rightarrow v_2\rightarrow v_3\rightarrow v_4\rightarrow v_5\rightarrow v_6\rightarrow v_7\rightarrow v_8$. We know for sure that all the vertices are different by the definition of a path. Since an edge is a tuple of two (different) vertices and the given path contains seven edges where for each two edges, at least one vertex is different, we know that the path contains seven different edges. This is a definition of a trail with length seven. Note that by extent each path of length $n$ is a trail of length $n$ as well.
+\end{proof}
 \end{answer}
 \end{exercise}
 

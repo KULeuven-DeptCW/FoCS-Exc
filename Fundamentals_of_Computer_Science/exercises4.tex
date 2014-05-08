@@ -7,6 +7,7 @@
 \date{May 2014}
 \begin{document}
 \maketitle
+
 \begin{exercise}
 Express the minimum and maximum degrees vertices in the graphs $K_n$ (complete graphs) and $K_{n,m}$ (complete bipartite graphs) in terms of $n$ and $m$.
 \begin{answer}
@@ -30,7 +31,7 @@ Yes.
 \begin{proof}
 Without loss of generality, we define an ordering into our graph $G=\tupl{V,E,\phi}$ with $V=\accl{v_1,v_2,\ldots,v_n}$ and $E=\accl{e_1,e_2,\ldots,e_l}$ with $l=n\cdot k/2$. We will construct a graph $G'=\tupl{V',E',\phi'}$. Furthermore we consider two cases, one where the number of vertices $n$ is even, and one where $n$ is odd.
 \paragraph{}In the case $n$ is even, we can increase the degree of every vertex by adding $n/2$ additional edges $E'=E\cup\accl{e_{l+1},\ldots,e_{l+n/2}}$ with $\fun{\phi}{e_{l+i}}=\tupl{v_{2\cdot i},v_{2\cdot i+1}}$ for $i=1\ldots n/2$. The set of original vertices $V'=V$ is maintained and of course the old edges are not modified $\fun{\phi'}{e_i}=\fun{\phi}{e_i}$ for $i=1\ldots l$. Since the new edges range over the vertices and each vertex occurs only once, the new edges add a degree of one to the vertices. Since the original vertices and edges are maintained, the original graph is clearly a subgraph.
-\paragraph{}This does not hold if $n$ is odd, since this implies there is a single vertex (here called $v_n$) that has no neighbor with which an edge can be formed. In that case, we duplicate the graph. More formally $V'=V\cup V_2$ with $V_2=\condset{v'_i}{i\in\accl{1,2,\ldots,n}}$. Furthermore the original edges are maintained and duplicate edges are introduced $E_2=\condset{e'_i}{i\in\accl{1,2,\ldots,l}}$ with $\fun{\phi}{e'_i}=\tupl{v'_j,v'_k}$ given $\fun{\phi}{e_i}=\tupl{v_j,v__k}$. By using the same construction as in the even case, we can add $\floor{n/2}$ additional edges to both parts of the graph. Finally the two vertices $v'_n$ and $v_n$ that have no neighbor are coupled increasing their degree with one as well, or more formally:
+\paragraph{}This does not hold if $n$ is odd, since this implies there is a single vertex (here called $v_n$) that has no neighbor with which an edge can be formed. In that case, we duplicate the graph. More formally $V'=V\cup V_2$ with $V_2=\condset{v'_i}{i\in\accl{1,2,\ldots,n}}$. Furthermore the original edges are maintained and duplicate edges are introduced $E_2=\condset{e'_i}{i\in\accl{1,2,\ldots,l}}$ with $\fun{\phi}{e'_i}=\tupl{v'_j,v'_k}$ given $\fun{\phi}{e_i}=\tupl{v_j,v_k}$. By using the same construction as in the even case, we can add $\floor{n/2}$ additional edges to both parts of the graph. Finally the two vertices $v'_n$ and $v_n$ that have no neighbor are coupled increasing their degree with one as well, or more formally:
 \end{proof}
 \end{answer}
 \end{exercise}
@@ -42,9 +43,13 @@ Not for simple graphs, but for general graphs this holds.
 \begin{quote}\begin{proof}
 Take $n=2$. In that case there are two vertices $V=\accl{v_1,v_2}$. There are only two possible graphs, one with an edge $e_1=\tupl{v_1,v_2}$ and one without. In both cases, both edges have the same degree. Thus counterexample.
 \end{proof}\end{quote}
-\begin{construct}[Distinct degree graph]
-Simply define 
-\end{construct}
+\begin{construction}[Distinct degree graph]
+Given the number of vertices $n$, we first define an ordering on the vertices $V=\accl{v_1,v_2,\ldots,v_n}$. We then introduce edges $E=\accl{e_1,e_2,\ldots,e_m}$ with $m=n\cdot\brak{n-1}/2$. Such that:
+\begin{equation}
+\fun{\phi}{e_i}=\tupl{v_j,v_j}\mbox{ with }\displaystyle\sum_{k=1}^{j-1}{k}\leq j<\displaystyle\sum_{k=1}^{j}{k}
+\end{equation}
+In other words, $v_i$ contains $i$ loops.
+\end{construction}
 \end{answer}
 \end{exercise}
 
@@ -58,14 +63,16 @@ Is it possible to draw a graph that has a trail of length seven but no paths of 
 \begin{exercise}
 Show that for $n\in\NNN$, the graph $K_{n,n}$ has a subgraph isomorphic to $C_k$, a cycle of length $k$, for even $k\in\accl{4,\ldots,2\cdot n}$.
 \begin{answer}
-
+First we number the vertices in the bipartite graph $\accl{v_{11},v_{12},\ldots,v_{1n},\ldots,v_{21},v_{22},\ldots,v_{2n}}$ where $v_{1i}$'s belong to the first partition and $v_{2i}$'s to the second partition. A cycle of length $k$ can be defined as follows: $v_{11}\rightarrow v_{21}\rightarrow v_{21}\rightarrow v_{22}\rightarrow\ldots\rightarrow v_{l1}\rightarrow v_{l2}\rightarrow v_{11}$ with $l=k/2$. This is possible because there is an edge between every $v_{1i}$ and $v_{2j}$ and no vertex occurs in the path twice.
 \end{answer}
 \end{exercise}
 
 \begin{exercise}
 Prove that if a graph $G$ has exactly two vertices $u$ and $v$ of odd degree, then $G$ contains a path from $u$ to $v$.
 \begin{answer}
-
+\begin{proof}
+We first define two new functions: $\fun{l_G}{v}$ the number of loops of a vertex $v$ and $\fun{x_G}{v}$ the number of edges to another vertex of $v$. By definition the degree of a vertex is equal to $\fun{d_G}{v}=2\cdot\fun{l_G}{v}+\fun{x_G}{v}$. Since the degrees of both vertices are odd, we know that $\fun{x_G}{u}$ and $\fun{x_G}{v}$ are odd as well. Since the smallest odd integer is $1$, we know there is at least one edge between $u$ and $v$. The path is simply such edge.
+\end{proof}
 \end{answer}
 \end{exercise}
 
@@ -80,7 +87,12 @@ Define a relation on graphs such that $G$ and $G'$ are related if and only if th
  \item[equivalence relation] a relation is equivalence relation if and only if it is reflexive, symmetric and transitive.
 \end{description}}
 \begin{answer}
-
+For convenience, we will denote this relation with $\preceq$. It is clear that the relation is \textbf{symmetrical}: the maximum degree of two equivalent graphs is the equivalent as well, thus $G\preceq G$ is equivalent with $\funm{maxdeg}{G}\leq\funm{maxdeg}{G}$, since this is a deterministic number, the relation holds.
+\paragraph{}The relation is \textbf{transitive} as well, since the relation on integers is transitive as well.
+\paragraph{}The relation is \textbf{not antisymmetric}; although the relation on integers is antisymmetric, there are several graphs that map to the same maximum degree. Two graphs with the same maximum degree but different (for instance they have a different number of vertices), map to the same maximum degree thus $G\preceq G'$ and $G'\preceq G$, but $G\neq G'$.
+\paragraph{}Since the relation is not antisymmetry, the relation is not a \textbf{partial order};
+\paragraph{}The relation is \textbf{not symmetrical}: given two graphs $G$  and $G'$ where $G$ has a smaller maximum degree, $G\preceq G'$ holds, but $G'\preceq G$ doesn't.
+\paragraph{}It is \textbf{not an equivalence relation} since the symmetry property does not hold.
 \end{answer}
 \end{exercise}
 

@@ -1,0 +1,8 @@
+\begin{tikzpicture}
+\foreach \y/\x/\i in {1/0/1,2/0/2,3/0/3,4/0/4,5/0/5,6/0/6,7/0/7} {
+    \draw[circle] (V\i) at (\x,\y) {$v_{\i}$};
+}
+\foreach \i/\j in {1/2,2/3,3/4,4/5,5/6,6/7} {
+  \path[->] (V\i) edge (V\j);
+}
+\end{tikzpicture}

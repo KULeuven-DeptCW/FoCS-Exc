@@ -140,34 +140,34 @@ For $k\in\NNN$, let $G$ be a connected graph that contains $2\cdot k$ vertices o
  \item each $G_i$ has an Eulerian trail.
 \end{enumerate}
 \begin{hint}
-Consider the graph when you add k edges to form an Eulerian graph.
+Consider the graph when you add $k$ edges to form an Eulerian graph.
 \end{hint}
 \begin{note}
 Note that two subgraphs $G_1$ and $G_2$ of $G$ are edge-disjoint whenever $\fun{E}{G_1}\cap\fun{E}{G_2}=\emptyset$.
 \begin{answer}
+We use a repetitive construction and then proof we can repeat the process enough to create disjunctive sets.
+\begin{quote}[Eulerian trail construction]
+Given the connected graph, find two 
+\end{quote}
 
 \end{answer}
 \end{note}
 \end{exercise}
 
 \begin{exercise}
-Let $G$ be a $k$-regular bipartite graph with $k\geq2$. Show that $G$ has no cut edge (or bridge).
-\begin{answer}
-
-\end{answer}
-\end{exercise}
-
-\begin{exercise}
 For $n\geq2$ show that the complete bipartite graph $K_{n,n}$ is a Hamiltonian graph.
 \begin{answer}
-
+We order the partitions such that the first partition is $\accl{v_1,v_2,\ldots,v_n}$ and the second $\accl{v_1',v_2',\ldots,v_n'}$. In that case a Hamiltonian cycle is the following: $v_1\rightarrow v_1'\rightarrow v_2\rightarrow v_2'\rightarrow\ldots\rightarrow v_n\rightarrow v_n'\rightarrow v_1$. Since for each pair of vertices $\tupl{v_i,v_j'}$ there exists an edge, such cycle always exists. Furthermore all the vertices in the cycle are unique. These two facts proof the existence of a Hamiltonian cycle. Therefore the graph is a Hamiltonian graph.
 \end{answer}
 \end{exercise}
 
 \begin{exercise}
 Determine all $m,n\in\NNN$ such that the complete bipartite graph $K_{m,n}$ is Hamiltonian.
 \begin{answer}
-
+This is only the case $m=n$ and $n\geq 2$. We proof the two statements separately.
+\begin{quote}\begin{proof}
+We assume $m>n$, in case $n>m$ swap the two partitions.
+\end{proof}\end{quote}
 \end{answer}
 \end{exercise}
 

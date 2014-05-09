@@ -113,7 +113,16 @@ See \figref{exc36-trees}.
 \begin{exercise}
 Let $G$ be a $k$-regular bipartite graph with $k\geq2$. Show that $G$ has no cut edge (or bridge).
 \begin{answer}
-
+We proof this using contradiction.
+\begin{quote}\begin{proof}
+Say $G$ has a cut edge $\tupl{v_1,v_2}$, then this would imply that when we remove $\tupl{v_2,v_2}$, this results in two separate components here denoted with $G_1$ and $G_2$. As a result $G_1$ will contain three types of vertices $V_{11}=\accl{v_1}$ with a degree of $k-1$ and $V_{12}=\accl{v_1,v_2,\ldots,v_n}$ (the vertices of the original first partition, all with degree $k$) and $V_{13}=\accl{v_1',v_2',\ldots,v_m'}$ (the vertices of the original second partition, all with a degree of $k$) (since the removed edge was a bridge between the two components, no other vertex of $G_1$ is modified). Without loss of generality, we can state that $v_1$ was part of the first partition\footnote{In the other case, simply swap the indices of the partitions.}. This implies that the number of edges in $G_1$ is equal to $\abs{\fun{E}{G_1}}=\brak{k-1}\cdot\abs{V_{11}}+k\cdot\abs{V_{12}}=k\cdot\abs{V_{13}}$. We then perform the following algebraic manipulation:
+\begin{eqnarray}
+k-1+k\cdot n&=&k\cdot m\\
+k\cdot\brak{n+m+1}&=&1\\
+n+m+1=\displaystyle\frac{1}{k}
+\end{eqnarray}
+Now $n+m+1$ is an integer since the sum of integers is an integer. $1/k$ however can't be an integer since $k\geq2$. Thus the equality doesn't hold and contradiction.
+\end{proof}\end{quote}
 \end{answer}
 \end{exercise}
 

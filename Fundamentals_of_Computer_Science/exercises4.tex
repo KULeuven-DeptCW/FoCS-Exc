@@ -164,9 +164,13 @@ We order the partitions such that the first partition is $\accl{v_1,v_2,\ldots,v
 \begin{exercise}
 Determine all $m,n\in\NNN$ such that the complete bipartite graph $K_{m,n}$ is Hamiltonian.
 \begin{answer}
-This is only the case $m=n$ and $n\geq 2$. We proof the two statements separately.
+This is only the case $m=n$ and $n\geq 2$. We proof the two statements separately. We first proof $n=m$:
 \begin{quote}\begin{proof}
-We assume $m>n$, in case $n>m$ swap the two partitions.
+We assume $m>n$, in case $n>m$ swap the two partitions. The first partition contains the vertices $\accl{v_1,v_2,\ldots,v_n}$ and the second $\accl{v_1',v_2',\ldots,v_m'}$. Since we describe a cycle, we can start at any vertex we want, independent of the partition. We choose vertex $v_1$. $v_1$ is only connected with vertices $v_j'$. Since the order is arbitrary, we go to $v_1'$. We repeat this process until we reach $v_{n+1}$. Since there is no next vertex in the second partition and $v_{n+1}$ is not connected to any vertex $v_i$ we cannot close the circle without passing a second time through an already visited vertex $v_j'$. Since this is not our initial vertex, this is not a Hamiltonian cycle.
+\end{proof}\end{quote}
+Proof that $n$ must be larger or equal to $2$:
+\begin{quote}\begin{proof}
+In the case $m=n=0$, the graph does not contain any vertices, since a cycle must have at least a length of $1$, we cannot define such cycle, thus the graph is not Hamiltonian. In the case of $m=n=1$ we consider two vertices $v$ and $v'$ and an edge $e=\tupl{v,v'}$. The starting point of a Hamiltonian cycle is arbitrary, we choose $v$. We can use the edge to visit $v'$, but we cannot return to $v$ without using $e$ since this is the only edge in the graph.
 \end{proof}\end{quote}
 \end{answer}
 \end{exercise}

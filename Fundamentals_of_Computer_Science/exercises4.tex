@@ -150,8 +150,16 @@ Note that two subgraphs $G_1$ and $G_2$ of $G$ are edge-disjoint whenever $\fun{
 \begin{answer}
 We use a repetitive construction and then proof we can repeat the process enough to create disjunctive sets.
 \begin{quote}\begin{construction}[Eulerian trail construction]
-Given the connected graph, find two 
+Given the connected graph, search for a node with an odd degree. From this node construct a trail until you cannot add any edges anymore. The edges in the trail together with all the vertices of the original vertices of the graph a subgraph. It is clear that the graph contains an Eulerian trail since it was constructed based on a trail and these are the only edges added to the graph. The operation will convert two vertices of odd degree into vertices of even degrees. Furthermore the vertices of even degree remain even degree (since the trail will never stop there and going through such vertex reduces the degree with two).
 \end{construction}\end{quote}
+We now need to proof that we can repeat this process $k$ times, and that after $k$ times, all edges in the original graph are removed. We first proof that we can repeat this process $k$ times:
+\begin{quote}\begin{proof}
+The operation converts the beginning and ending vertex of the trail into vertices with even degree. Originally these vertices had an odd degree. Since there are $2\cdot k$ such vertices, we can repeat the process exactly $2\cdot k$ times.
+\end{proof}\end{quote}
+We now need to proof that all the edges are taken:
+\begin{quote}\begin{proof}
+Say that after repeating the process $k$ times, edges remain in the graph. Since we consider a simple graph and the degree of the vertices must be even in the end, the graph can only contain (multiple) cycles. Since in the first iteration of the process the graph was connected, the first trail can reach any vertex. In that case all these cycles could be incorporated into the first cycle.
+\end{proof}\end{quote}
 \end{answer}
 \end{note}
 \end{exercise}

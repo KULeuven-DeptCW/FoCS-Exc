@@ -28,11 +28,11 @@ A regular graph is a graph where each vertex has the same number of neighbors, i
 For every $k$-regular graph is there a $\brak{k+1}$-regular graph that contains the $k$-regular graph as a subgraph? Proof or counterexample.
 \begin{answer}
 Yes.
-\begin{proof}
+\begin{quote}\begin{proof}
 Without loss of generality, we define an ordering into our graph $G=\tupl{V,E,\phi}$ with $V=\accl{v_1,v_2,\ldots,v_n}$ and $E=\accl{e_1,e_2,\ldots,e_l}$ with $l=n\cdot k/2$. We will construct a graph $G'=\tupl{V',E',\phi'}$. Furthermore we consider two cases, one where the number of vertices $n$ is even, and one where $n$ is odd.
 \paragraph{}In the case $n$ is even, we can increase the degree of every vertex by adding $n/2$ additional edges $E'=E\cup\accl{e_{l+1},\ldots,e_{l+n/2}}$ with $\fun{\phi}{e_{l+i}}=\tupl{v_{2\cdot i},v_{2\cdot i+1}}$ for $i=1\ldots n/2$. The set of original vertices $V'=V$ is maintained and of course the old edges are not modified $\fun{\phi'}{e_i}=\fun{\phi}{e_i}$ for $i=1\ldots l$. Since the new edges range over the vertices and each vertex occurs only once, the new edges add a degree of one to the vertices. Since the original vertices and edges are maintained, the original graph is clearly a subgraph.
 \paragraph{}This does not hold if $n$ is odd, since this implies there is a single vertex (here called $v_n$) that has no neighbor with which an edge can be formed. In that case, we duplicate the graph. More formally $V'=V\cup V_2$ with $V_2=\condset{v'_i}{i\in\accl{1,2,\ldots,n}}$. Furthermore the original edges are maintained and duplicate edges are introduced $E_2=\condset{e'_i}{i\in\accl{1,2,\ldots,l}}$ with $\fun{\phi}{e'_i}=\tupl{v'_j,v'_k}$ given $\fun{\phi}{e_i}=\tupl{v_j,v_k}$. By using the same construction as in the even case, we can add $\floor{n/2}$ additional edges to both parts of the graph. Finally the two vertices $v'_n$ and $v_n$ that have no neighbor are coupled increasing their degree with one as well, or more formally:
-\end{proof}
+\end{proof}\end{quote}
 \end{answer}
 \end{exercise}
 
@@ -43,13 +43,14 @@ Not for simple graphs, but for general graphs this holds.
 \begin{quote}\begin{proof}
 Take $n=2$. In that case there are two vertices $V=\accl{v_1,v_2}$. There are only two possible graphs, one with an edge $e_1=\tupl{v_1,v_2}$ and one without. In both cases, both edges have the same degree. Thus counterexample.
 \end{proof}\end{quote}
-\begin{construction}[Distinct degree graph]
+For general graphs, we propose a construction:
+\begin{quote}\begin{construction}[Distinct degree graph]
 Given the number of vertices $n$, we first define an ordering on the vertices $V=\accl{v_1,v_2,\ldots,v_n}$. We then introduce edges $E=\accl{e_1,e_2,\ldots,e_m}$ with $m=n\cdot\brak{n-1}/2$. Such that:
 \begin{equation}
 \fun{\phi}{e_i}=\tupl{v_j,v_j}\mbox{ with }\displaystyle\sum_{k=1}^{j-1}{k}\leq j<\displaystyle\sum_{k=1}^{j}{k}
 \end{equation}
 In other words, $v_i$ contains $i$ loops.
-\end{construction}
+\end{construction}\end{quote}
 \end{answer}
 \end{exercise}
 
@@ -60,9 +61,9 @@ It is possible to draw a graph that has a trail of length seven, but no paths of
 \importtikzfigure{exc32-trail}{A graph with a trail of length seven but no path of length seven.}
 \paragraph{}
 It is not possible to construct a graph that has a path of length seven but not a trail with length seven:
-\begin{proof}
+\begin{quote}\begin{proof}
 Given a graph $G=\tupl{V,E,\phi}$ with a path of length seven. Without loss of generality we can order the vertices such that the path $p=v_1\rightarrow v_2\rightarrow v_3\rightarrow v_4\rightarrow v_5\rightarrow v_6\rightarrow v_7\rightarrow v_8$. We know for sure that all the vertices are different by the definition of a path. Since an edge is a tuple of two (different) vertices and the given path contains seven edges where for each two edges, at least one vertex is different, we know that the path contains seven different edges. This is a definition of a trail with length seven. Note that by extent each path of length $n$ is a trail of length $n$ as well.
-\end{proof}
+\end{proof}\end{quote}
 \end{answer}
 \end{exercise}
 
@@ -76,9 +77,9 @@ First we number the vertices in the bipartite graph $\accl{v_{11},v_{12},\ldots,
 \begin{exercise}
 Prove that if a graph $G$ has exactly two vertices $u$ and $v$ of odd degree, then $G$ contains a path from $u$ to $v$.
 \begin{answer}
-\begin{proof}
+\begin{quote}\begin{proof}
 We first define two new functions: $\fun{l_G}{v}$ the number of loops of a vertex $v$ and $\fun{x_G}{v}$ the number of edges to another vertex of $v$. By definition the degree of a vertex is equal to $\fun{d_G}{v}=2\cdot\fun{l_G}{v}+\fun{x_G}{v}$. Since the degrees of both vertices are odd, we know that $\fun{x_G}{u}$ and $\fun{x_G}{v}$ are odd as well. Since the smallest odd integer is $1$, we know there is at least one edge between $u$ and $v$. The path is simply such edge.
-\end{proof}
+\end{proof}\end{quote}
 \end{answer}
 \end{exercise}
 
@@ -129,7 +130,9 @@ Now $n+m+1$ is an integer since the sum of integers is an integer. $1/k$ however
 \begin{exercise}
 Show that if a digraph $G$ contains a directed circuit of positive length, then $G$ must contain a cycle.
 \begin{answer}
-
+\begin{quote}\begin{proof}
+Without loss of generality we can order the vertices and edges such that the directed circuit is $v_0\rightarrow^{e_1}v_1\rightarrow^{e_2}v_2\rightarrow\ldots\rightarrow^{v_k}v_0$ with $k>0$. It is possible that some $v_i$'s in the directed circuit are the same. We can however eliminate parts in the circuit of the form $v_i\rightarrow v_j\rightarrow\ldots\rightarrow v_i$ if $v_i\neq v_0$ since these parts of the circuit eventually return to the original vertex. As a result we have a circuit $v_0\rightarrow v_1'\rightarrow v_2'\rightarrow\ldots v_0$ with no duplicate vertices but with a length of at least $1$. This is a cycle.
+\end{proof}\end{quote}
 \end{answer}
 \end{exercise}
 
@@ -146,10 +149,9 @@ Consider the graph when you add $k$ edges to form an Eulerian graph.
 Note that two subgraphs $G_1$ and $G_2$ of $G$ are edge-disjoint whenever $\fun{E}{G_1}\cap\fun{E}{G_2}=\emptyset$.
 \begin{answer}
 We use a repetitive construction and then proof we can repeat the process enough to create disjunctive sets.
-\begin{quote}[Eulerian trail construction]
+\begin{quote}\begin{construction}[Eulerian trail construction]
 Given the connected graph, find two 
-\end{quote}
-
+\end{construction}\end{quote}
 \end{answer}
 \end{note}
 \end{exercise}
@@ -185,7 +187,9 @@ Let $G$ be a connected graph, let $T_1$ and $T_2$ be (the edge sets of) two span
 Each of these two properties is called the Tree Exchange Property.
 \end{note}
 \begin{answer}
-
+\begin{proof}
+Any subgraph of $G$ with $n-1$ edges and every vertex having at least one edge is a spanning tree. Since $e=\tupl{v_1,v_2}$ is not within the two spanning trees, there must be at least two paths to reach $v_2$ from $v_1$. By removing $e$, $v_1$ is no longer reachable from $v_2$. By adding an edge $f$ from $T_2\setminus T_1$, the connectivity of the two parts of the graph must somehow be restored. Since the operations can be swapped, the second arguments holds as well.
+\end{proof}
 \end{answer}
 \end{exercise}
 

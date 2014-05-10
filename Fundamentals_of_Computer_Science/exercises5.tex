@@ -40,7 +40,7 @@ Given a Boolean function $\phi$ with variables $x_1,x_2,\ldots x_n$, we can conv
 \end{proof}\end{quote}
 Furthermore we need to proof that the problem is in \cclass{NP}:
 \begin{quote}\begin{proof}
-
+The \langdef{Sat} problem is in \cclass{NP} because the algorithm first branches over all the variables $\vec{x}$ and then accepts if the configuration of the active branch satisfies the given formula $\phi$. We can modify this algorithm such that it works for \langdef{Double-Sat}. In that case the algorithm branches twice over the variables generating two vector of Boolean values $\vec{v}_1$ and $\vec{v}_2$. We can check if the two value vectors are equal in polynomial time. If both vectors are identical, we reject immediately. Otherwise we check if the given formula $\phi$ on the first value vector $\vec{v}_1$ and (if successful) we validate $\vec{v}_2$ as well. Only if the two vectors are satisfied, we accept. If there are two different value assignments that can satisfy $\phi$ we will have generated a branch that accepts and the nondeterministic Turing machine will accept, if not the machine will reject. Thus \langdef{Double-Sat} is in \cclass{NP}.
 \end{proof}\end{quote}
 \end{answer}
 \end{exercise}

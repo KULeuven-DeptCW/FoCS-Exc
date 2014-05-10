@@ -10,9 +10,9 @@
 \begin{exercise}
 A permutation on a set $\accl{1,\ldots,k}$ is a one-to-one, onto function on this set. When $p$ is a permutation, $p^t$ means the composition of $p$ with itself $t$ times. Let
 \begin{equation}
-\mbox{PERM-POWER}=\condset{\tupl{p, q, t}}{p = q^t\mbox{ where $p$ and $q$ are permutations on $\accl{1,\ldots,k}$ and $t$ is a binary integer}}
+\langdef{Perm-Power}=\condset{\tupl{p, q, t}}{p = q^t\mbox{ where $p$ and $q$ are permutations on $\accl{1,\ldots,k}$ and $t$ is a binary integer}}
 \end{equation}
-Show that $\mbox{PERM-POWER}\in P$.
+Show that $\langdef{Perm-Power}\in P$.
 \begin{note}
 Note that the most obvious algorithm does not run within polynomial time.
 \end{note}
@@ -32,20 +32,20 @@ Show that NP is closed under the Kleene star operation. That is, if $L\in NP$, t
 \end{exercise}
 
 \begin{exercise}
-Let $\mbox{DOUBLE-SAT}=\condset{\tupl{\phi}}{\phi\mbox{ has at least two satisfying assignments}}$. Show that $\mbox{DOUBLE-SAT}\in\mbox{NP-complete}$.
+Let $\langdef{Double-Sat}=\condset{\tupl{\phi}}{\phi\mbox{ has at least two satisfying assignments}}$. Show that $\langdef{Double-Sat}\in\mbox{NP-complete}$.
 \begin{answer}
-
+In order to do this we need to show two things: \langdef{Double-Sat} is in \cclass{NP} and there exists a reduction from \textsc{Sat} in polynomial time to \langdef{Double-Sat}.
 \end{answer}
 \end{exercise}
 
 \begin{exercise}
 A colouring of a graph is an assignment of colours to its vertices so that no two adjacent vertices are assigned the same colour. Let
 \begin{equation}
-\mbox{3COLOUR}=\condset{\tupl{G}}{\mbox{the vertices of $G$ can be coloured with three colours such that no two vertices joined by an edge have the same colour.}}
+\langdef{3Colour}=\condset{\tupl{G}}{\mbox{the vertices of $G$ can be coloured with three colours such that no two vertices joined by an edge have the same colour.}}
 \end{equation}
-Show that $\mbox{3COLOUR}$ is $\mbox{NP-complete}$.
+Show that $\langdef{3Colour}$ is $\mbox{NP-complete}$.
 \begin{hint}
-The reduction will be of the form $\mbox{3SAT}\leq_p\mbox{3COLOUR}$. Use the subgraphs depicted on \figref{exc48-graph1}.
+The reduction will be of the form $\mbox{3SAT}\leq_p\langdef{3Colour}$. Use the subgraphs depicted on \figref{exc48-graph1}.
 \importtikzfigure{exc48-graph1}{Subgraphs used to reduce.}
 \paragraph{}
 The three colours correspond to true ($T$), false ($F$), and a third one (gray) to help enforce that other nodes are coloured $T$ or $F$. Each variable is modeled using the two nodes marked $w$ and $\neg w$. The first graph is used to enforce that $w$ and $\neg w$ are assigned values $T$ and $F$ or $F$ and $T$. The second graph is used to denote binary logical OR between the two legs $l$ and $r$, which may be either variables or other the roots ($\vee$) of other logical ORs. To ensure that an OR is coloured T, every root $\vee$-node is connected to $F$ and $N$.

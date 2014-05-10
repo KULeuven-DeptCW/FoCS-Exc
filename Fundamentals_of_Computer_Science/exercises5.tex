@@ -36,7 +36,7 @@ A colouring of a graph is an assignment of colours to its vertices so that no tw
 \end{equation}
 Show that $\mbox{3COLOUR}$ is $\mbox{NP-complete}$.
 \begin{hint}
-The reduction will be of the form $\mbox{3SAT}\leq_p\mbox{3COLOUR}$. Use the subgraphs depicted on figure \figref{}.
+The reduction will be of the form $\mbox{3SAT}\leq_p\mbox{3COLOUR}$. Use the subgraphs depicted on \figref{exc48-graph1}.
 \importtikzfigure{exc48-graph1}{Subgraphs used to reduce.}
 \paragraph{}
 The three colours correspond to true ($T$), false ($F$), and a third one (gray) to help enforce that other nodes are coloured $T$ or $F$. Each variable is modeled using the two nodes marked $w$ and $\neg w$. The first graph is used to enforce that $w$ and $\neg w$ are assigned values $T$ and $F$ or $F$ and $T$. The second graph is used to denote binary logical OR between the two legs $l$ and $r$, which may be either variables or other the roots ($\vee$) of other logical ORs. To ensure that an OR is coloured T, every root $\vee$-node is connected to $F$ and $N$.

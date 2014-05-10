@@ -7,34 +7,80 @@
 \date{May 2014}
 \begin{document}
 \maketitle
+
 \begin{exercise}
-Express the minimum and maximum degrees vertices in the graphs $K_n$ (complete graphs) and $K_{n,m}$ (complete bi-partite graphs) in terms of $n$ and $m$.
+Express the minimum and maximum degrees vertices in the graphs $K_n$ (complete graphs) and $K_{n,m}$ (complete bipartite graphs) in terms of $n$ and $m$.
+\begin{answer}
+In a complete graph $K_n$ each vertex $v_i$ is connected with each other vertex $v_j$. Thus each vertex is connected with $n-1$ edges, the minimum and maximum degree. In a bipartite graph, we consider two types of vertices $u_i$ for $i=1\ldots n$ and $v_j$ for $j=1\ldots m$. All vertices $u_i$ are connected with all vertices $v_j$, thus the degree is $m$. All vertices $v_j$ are connected with all vertices $u_i$, thus the degree is $n$. The minimum degree is thus $\fun{\min}{m,n}$, the maximum $\fun{\max}{m,n}$.
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Specify a minimum value for $n$ in terms of $l$ and $m$ such that $K_{l,m}$ is a subgraph of $K_n$.
+\begin{answer}
+Since a $K_{l,m}$ graph contains $l+m$ vertices, obviously $n$ must be larger or equal to $m+n$. Since a complete graph contains an edge for each two different vertices, there is no restriction to add more vertices, all the edges in the $K_{l,m}$ graph are part of a $K_{l+m}$ graph.
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 A regular graph is a graph where each vertex has the same number of neighbors, i.e. every vertex has the same degree. A regular graph with vertices of degree $k$ is called a $k$-regular graph.
 \paragraph{}
 For every $k$-regular graph is there a $\brak{k+1}$-regular graph that contains the $k$-regular graph as a subgraph? Proof or counterexample.
+\begin{answer}
+Yes.
+\begin{quote}\begin{proof}
+Without loss of generality, we define an ordering into our graph $G=\tupl{V,E,\phi}$ with $V=\accl{v_1,v_2,\ldots,v_n}$ and $E=\accl{e_1,e_2,\ldots,e_l}$ with $l=n\cdot k/2$. We will construct a graph $G'=\tupl{V',E',\phi'}$. Furthermore we consider two cases, one where the number of vertices $n$ is even, and one where $n$ is odd.
+\paragraph{}In the case $n$ is even, we can increase the degree of every vertex by adding $n/2$ additional edges $E'=E\cup\accl{e_{l+1},\ldots,e_{l+n/2}}$ with $\fun{\phi}{e_{l+i}}=\tupl{v_{2\cdot i},v_{2\cdot i+1}}$ for $i=1\ldots n/2$. The set of original vertices $V'=V$ is maintained and of course the old edges are not modified $\fun{\phi'}{e_i}=\fun{\phi}{e_i}$ for $i=1\ldots l$. Since the new edges range over the vertices and each vertex occurs only once, the new edges add a degree of one to the vertices. Since the original vertices and edges are maintained, the original graph is clearly a subgraph.
+\paragraph{}This does not hold if $n$ is odd, since this implies there is a single vertex (here called $v_n$) that has no neighbor with which an edge can be formed. In that case, we duplicate the graph. More formally $V'=V\cup V_2$ with $V_2=\condset{v'_i}{i\in\accl{1,2,\ldots,n}}$. Furthermore the original edges are maintained and duplicate edges are introduced $E_2=\condset{e'_i}{i\in\accl{1,2,\ldots,l}}$ with $\fun{\phi}{e'_i}=\tupl{v'_j,v'_k}$ given $\fun{\phi}{e_i}=\tupl{v_j,v_k}$. By using the same construction as in the even case, we can add $\floor{n/2}$ additional edges to both parts of the graph. Finally the two vertices $v'_n$ and $v_n$ that have no neighbor are coupled increasing their degree with one as well, or more formally:
+\end{proof}\end{quote}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Is there a simple graph on $n$ vertices such that all vertices have distinct degrees? Is there a (general) graph with this property?
+\begin{answer}
+Not for simple graphs, but for general graphs this holds.
+\begin{quote}\begin{proof}
+Take $n=2$. In that case there are two vertices $V=\accl{v_1,v_2}$. There are only two possible graphs, one with an edge $e_1=\tupl{v_1,v_2}$ and one without. In both cases, both edges have the same degree. Thus counterexample.
+\end{proof}\end{quote}
+For general graphs, we propose a construction:
+\begin{quote}\begin{construction}[Distinct degree graph]
+Given the number of vertices $n$, we first define an ordering on the vertices $V=\accl{v_1,v_2,\ldots,v_n}$. We then introduce edges $E=\accl{e_1,e_2,\ldots,e_m}$ with $m=n\cdot\brak{n-1}/2$. Such that:
+\begin{equation}
+\fun{\phi}{e_i}=\tupl{v_j,v_j}\mbox{ with }\displaystyle\sum_{k=1}^{j-1}{k}\leq j<\displaystyle\sum_{k=1}^{j}{k}
+\end{equation}
+In other words, $v_i$ contains $i$ loops.
+\end{construction}\end{quote}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Is it possible to draw a graph that has a trail of length seven but no paths of length seven? If so, draw such an example. Is it possible to draw a graph that has a path of length seven but no trail of length seven? If so, draw such an example.
+\begin{answer}
+It is possible to draw a graph that has a trail of length seven, but no paths of length seven. Such graph is depicted on \figref{exc32-trail}. There is only one trail and that trail \emph{reuses} vertices.
+\importtikzfigure{exc32-trail}{A graph with a trail of length seven but no path of length seven.}
+\paragraph{}
+It is not possible to construct a graph that has a path of length seven but not a trail with length seven:
+\begin{quote}\begin{proof}
+Given a graph $G=\tupl{V,E,\phi}$ with a path of length seven. Without loss of generality we can order the vertices such that the path $p=v_1\rightarrow v_2\rightarrow v_3\rightarrow v_4\rightarrow v_5\rightarrow v_6\rightarrow v_7\rightarrow v_8$. We know for sure that all the vertices are different by the definition of a path. Since an edge is a tuple of two (different) vertices and the given path contains seven edges where for each two edges, at least one vertex is different, we know that the path contains seven different edges. This is a definition of a trail with length seven. Note that by extent each path of length $n$ is a trail of length $n$ as well.
+\end{proof}\end{quote}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Show that for $n\in\NNN$, the graph $K_{n,n}$ has a subgraph isomorphic to $C_k$, a cycle of length $k$, for even $k\in\accl{4,\ldots,2\cdot n}$.
+\begin{answer}
+First we number the vertices in the bipartite graph $\accl{v_{11},v_{12},\ldots,v_{1n},\ldots,v_{21},v_{22},\ldots,v_{2n}}$ where $v_{1i}$'s belong to the first partition and $v_{2i}$'s to the second partition. A cycle of length $k$ can be defined as follows: $v_{11}\rightarrow v_{21}\rightarrow v_{21}\rightarrow v_{22}\rightarrow\ldots\rightarrow v_{l1}\rightarrow v_{l2}\rightarrow v_{11}$ with $l=k/2$. This is possible because there is an edge between every $v_{1i}$ and $v_{2j}$ and no vertex occurs in the path twice.
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Prove that if a graph $G$ has exactly two vertices $u$ and $v$ of odd degree, then $G$ contains a path from $u$ to $v$.
+\begin{answer}
+\begin{quote}\begin{proof}
+We first define two new functions: $\fun{l_G}{v}$ the number of loops of a vertex $v$ and $\fun{x_G}{v}$ the number of edges to another vertex of $v$. By definition the degree of a vertex is equal to $\fun{d_G}{v}=2\cdot\fun{l_G}{v}+\fun{x_G}{v}$. Since the degrees of both vertices are odd, we know that $\fun{x_G}{u}$ and $\fun{x_G}{v}$ are odd as well. Since the smallest odd integer is $1$, we know there is at least one edge between $u$ and $v$. The path is simply such edge.
+\end{proof}\end{quote}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
@@ -47,18 +93,47 @@ Define a relation on graphs such that $G$ and $G'$ are related if and only if th
  \item[symmetry] a relation $R\subseteq A\times A$ is symmetric if and only if for all $a,b\in A$ if $\tupl{a,b}\in R$ then $\tupl{b,a}\in R$.
  \item[equivalence relation] a relation is equivalence relation if and only if it is reflexive, symmetric and transitive.
 \end{description}}
+\begin{answer}
+For convenience, we will denote this relation with $\preceq$. It is clear that the relation is \textbf{symmetrical}: the maximum degree of two equivalent graphs is the equivalent as well, thus $G\preceq G$ is equivalent with $\funm{maxdeg}{G}\leq\funm{maxdeg}{G}$, since this is a deterministic number, the relation holds.
+\paragraph{}The relation is \textbf{transitive} as well, since the relation on integers is transitive as well.
+\paragraph{}The relation is \textbf{not antisymmetric}; although the relation on integers is antisymmetric, there are several graphs that map to the same maximum degree. Two graphs with the same maximum degree but different (for instance they have a different number of vertices), map to the same maximum degree thus $G\preceq G'$ and $G'\preceq G$, but $G\neq G'$.
+\paragraph{}Since the relation is not antisymmetry, the relation is not a \textbf{partial order};
+\paragraph{}The relation is \textbf{not symmetrical}: given two graphs $G$  and $G'$ where $G$ has a smaller maximum degree, $G\preceq G'$ holds, but $G'\preceq G$ doesn't.
+\paragraph{}It is \textbf{not an equivalence relation} since the symmetry property does not hold.
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 It can be shown that there are exactly $11$ trees on seven vertices. Draw these eleven trees, making sure that no two are isomorphic.
+\begin{answer}
+See \figref{exc36-trees}.
+\importtikzfigure{exc36-trees}{The $11$ non-isomorphic trees with seven vertices.}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Let $G$ be a $k$-regular bipartite graph with $k\geq2$. Show that $G$ has no cut edge (or bridge).
+\begin{answer}
+We proof this using contradiction.
+\begin{quote}\begin{proof}
+Say $G$ has a cut edge $\tupl{v_1,v_2}$, then this would imply that when we remove $\tupl{v_2,v_2}$, this results in two separate components here denoted with $G_1$ and $G_2$. As a result $G_1$ will contain three types of vertices $V_{11}=\accl{v_1}$ with a degree of $k-1$ and $V_{12}=\accl{v_1,v_2,\ldots,v_n}$ (the vertices of the original first partition, all with degree $k$) and $V_{13}=\accl{v_1',v_2',\ldots,v_m'}$ (the vertices of the original second partition, all with a degree of $k$) (since the removed edge was a bridge between the two components, no other vertex of $G_1$ is modified). Without loss of generality, we can state that $v_1$ was part of the first partition\footnote{In the other case, simply swap the indices of the partitions.}. This implies that the number of edges in $G_1$ is equal to $\abs{\fun{E}{G_1}}=\brak{k-1}\cdot\abs{V_{11}}+k\cdot\abs{V_{12}}=k\cdot\abs{V_{13}}$. We then perform the following algebraic manipulation:
+\begin{eqnarray}
+k-1+k\cdot n&=&k\cdot m\\
+k\cdot\brak{n+m+1}&=&1\\
+n+m+1=\displaystyle\frac{1}{k}
+\end{eqnarray}
+Now $n+m+1$ is an integer since the sum of integers is an integer. $1/k$ however can't be an integer since $k\geq2$. Thus the equality doesn't hold and contradiction.
+\end{proof}\end{quote}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Show that if a digraph $G$ contains a directed circuit of positive length, then $G$ must contain a cycle.
+\begin{answer}
+\begin{quote}\begin{proof}
+Without loss of generality we can order the vertices and edges such that the directed circuit is $v_0\rightarrow^{e_1}v_1\rightarrow^{e_2}v_2\rightarrow\ldots\rightarrow^{v_k}v_0$ with $k>0$. It is possible that some $v_i$'s in the directed circuit are the same. We can however eliminate parts in the circuit of the form $v_i\rightarrow v_j\rightarrow\ldots\rightarrow v_i$ if $v_i\neq v_0$ since these parts of the circuit eventually return to the original vertex. As a result we have a circuit $v_0\rightarrow v_1'\rightarrow v_2'\rightarrow\ldots v_0$ with no duplicate vertices but with a length of at least $1$. This is a cycle.
+\end{proof}\end{quote}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
@@ -68,23 +143,46 @@ For $k\in\NNN$, let $G$ be a connected graph that contains $2\cdot k$ vertices o
  \item each $G_i$ has an Eulerian trail.
 \end{enumerate}
 \begin{hint}
-Consider the graph when you add k edges to form an Eulerian graph.
+Consider the graph when you add $k$ edges to form an Eulerian graph.
 \end{hint}
 \begin{note}
 Note that two subgraphs $G_1$ and $G_2$ of $G$ are edge-disjoint whenever $\fun{E}{G_1}\cap\fun{E}{G_2}=\emptyset$.
+\begin{answer}
+We use a repetitive construction and then proof we can repeat the process enough to create disjunctive sets.
+\begin{quote}\begin{construction}[Eulerian trail construction]
+Given the connected graph, search for a node with an odd degree. From this node construct a trail until you cannot add any edges anymore. The edges in the trail together with all the vertices of the original vertices of the graph a subgraph. It is clear that the graph contains an Eulerian trail since it was constructed based on a trail and these are the only edges added to the graph. The operation will convert two vertices of odd degree into vertices of even degrees. Furthermore the vertices of even degree remain even degree (since the trail will never stop there and going through such vertex reduces the degree with two).
+\end{construction}\end{quote}
+We now need to proof that we can repeat this process $k$ times, and that after $k$ times, all edges in the original graph are removed. We first proof that we can repeat this process $k$ times:
+\begin{quote}\begin{proof}
+The operation converts the beginning and ending vertex of the trail into vertices with even degree. Originally these vertices had an odd degree. Since there are $2\cdot k$ such vertices, we can repeat the process exactly $2\cdot k$ times.
+\end{proof}\end{quote}
+We now need to proof that all the edges are taken:
+\begin{quote}\begin{proof}
+Say that after repeating the process $k$ times, edges remain in the graph. Since we consider a simple graph and the degree of the vertices must be even in the end, the graph can only contain (multiple) cycles. Since in the first iteration of the process the graph was connected, the first trail can reach any vertex. In that case all these cycles could be incorporated into the first cycle.
+\end{proof}\end{quote}
+\end{answer}
 \end{note}
 \end{exercise}
 
 \begin{exercise}
-Let $G$ be a $k$-regular bipartite graph with $k\geq2$. Show that $G$ has no cut edge (or bridge).
-\end{exercise}
-
-\begin{exercise}
 For $n\geq2$ show that the complete bipartite graph $K_{n,n}$ is a Hamiltonian graph.
+\begin{answer}
+We order the partitions such that the first partition is $\accl{v_1,v_2,\ldots,v_n}$ and the second $\accl{v_1',v_2',\ldots,v_n'}$. In that case a Hamiltonian cycle is the following: $v_1\rightarrow v_1'\rightarrow v_2\rightarrow v_2'\rightarrow\ldots\rightarrow v_n\rightarrow v_n'\rightarrow v_1$. Since for each pair of vertices $\tupl{v_i,v_j'}$ there exists an edge, such cycle always exists. Furthermore all the vertices in the cycle are unique. These two facts proof the existence of a Hamiltonian cycle. Therefore the graph is a Hamiltonian graph.
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Determine all $m,n\in\NNN$ such that the complete bipartite graph $K_{m,n}$ is Hamiltonian.
+\begin{answer}
+This is only the case $m=n$ and $n\geq 2$. We proof the two statements separately. We first proof $n=m$:
+\begin{quote}\begin{proof}
+We assume $m>n$, in case $n>m$ swap the two partitions. The first partition contains the vertices $\accl{v_1,v_2,\ldots,v_n}$ and the second $\accl{v_1',v_2',\ldots,v_m'}$. Since we describe a cycle, we can start at any vertex we want, independent of the partition. We choose vertex $v_1$. $v_1$ is only connected with vertices $v_j'$. Since the order is arbitrary, we go to $v_1'$. We repeat this process until we reach $v_{n+1}$. Since there is no next vertex in the second partition and $v_{n+1}$ is not connected to any vertex $v_i$ we cannot close the circle without passing a second time through an already visited vertex $v_j'$. Since this is not our initial vertex, this is not a Hamiltonian cycle.
+\end{proof}\end{quote}
+Proof that $n$ must be larger or equal to $2$:
+\begin{quote}\begin{proof}
+In the case $m=n=0$, the graph does not contain any vertices, since a cycle must have at least a length of $1$, we cannot define such cycle, thus the graph is not Hamiltonian. In the case of $m=n=1$ we consider two vertices $v$ and $v'$ and an edge $e=\tupl{v,v'}$. The starting point of a Hamiltonian cycle is arbitrary, we choose $v$. We can use the edge to visit $v'$, but we cannot return to $v$ without using $e$ since this is the only edge in the graph.
+\end{proof}\end{quote}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
@@ -96,11 +194,19 @@ Let $G$ be a connected graph, let $T_1$ and $T_2$ be (the edge sets of) two span
 \begin{note}
 Each of these two properties is called the Tree Exchange Property.
 \end{note}
+\begin{answer}
+\begin{proof}
+Any subgraph of $G$ with $n-1$ edges and every vertex having at least one edge is a spanning tree. Since $e=\tupl{v_1,v_2}$ is not within the two spanning trees, there must be at least two paths to reach $v_2$ from $v_1$. By removing $e$, $v_1$ is no longer reachable from $v_2$. By adding an edge $f$ from $T_2\setminus T_1$, the connectivity of the two parts of the graph must somehow be restored. Since the operations can be swapped, the second arguments holds as well.
+\end{proof}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 A graph in which every vertex has even degree is called an even graph. The complement $E\setminus T$ of a spanning tree $T$ is called a cotree.
 \paragraph{}
 Show that every cotree of a connected graph $G$ is contained in a unique even subgraph of the graph.
+\begin{answer}
+
+\end{answer}
 \end{exercise}
 \end{document}

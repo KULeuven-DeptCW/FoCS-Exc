@@ -20,7 +20,11 @@ Note that the most obvious algorithm does not run within polynomial time.
 First try it where $t$ is a power of $2$.
 \end{hint}
 \begin{answer}
-
+The obvious algorithm is depicted in \algoref{}. In the algorithm the permutation power is checked by repeating the permutation enough times. This
+however does not work in polynomial time because the binary integer $t$ in length $n$ can scale up to $2^n$.
+\paragraph{}
+We can however calculate permutations to the power of $k$ with $k$ a power of $2$. In that case the algorithm runs in $\bigoh{\log_2 t}$. Since
+$t=\bigoh{2^n}$, the total time complexity is $\bigoh{n}$. Pseudo-code for such algorithm is depicted in \algoref{}.
 \end{answer}
 \end{exercise}
 

@@ -34,7 +34,14 @@ Show that NP is closed under the Kleene star operation. That is, if $L\in NP$, t
 \begin{exercise}
 Let $\langdef{Double-Sat}=\condset{\tupl{\phi}}{\phi\mbox{ has at least two satisfying assignments}}$. Show that $\langdef{Double-Sat}\in\mbox{NP-complete}$.
 \begin{answer}
-In order to do this we need to show two things: \langdef{Double-Sat} is in \cclass{NP} and there exists a reduction from \textsc{Sat} in polynomial time to \langdef{Double-Sat}.
+In order to do this we need to show two things: \langdef{Double-Sat} is in \cclass{NP} and there exists a reduction from \textsc{Sat} in polynomial time to \langdef{Double-Sat}. We first proof \langdef{Sat} can be reduced to \langdef{Double-Sat}:
+\begin{quote}\begin{proof}
+Given a Boolean function $\phi$ with variables $x_1,x_2,\ldots x_n$, we can convert it to a Boolean function $\phi'=\phi\wedge\brak{x_{n+1}\vee\neg x_{n+1}}$. In other words we've added an additional variable and a clause that is always true, whatever the value of $x_{n+1}$ is. If there is a valid assignment $\vec{x}$ for $\phi$, there are two assignments for $\phi'$ (namely the original assignment with $x_{n+1}$ true and one with $x_{n+1}$ false). If on the other hand if $\phi$ has no valid assignment, then whatever the value of $x_{n+1}$ is, there is no assignment for $\phi$. We can convert any Boolean formula $\phi$ to a formula $\phi'$ in polynomial time by enumerating over the input, counting the number of involved variables and add the defined suffix at the end of the input. We have thus reduce \langdef{Sat} to \langdef{Double-Sat} in polynomial time.
+\end{proof}\end{quote}
+Furthermore we need to proof that the problem is in \cclass{NP}:
+\begin{quote}\begin{proof}
+
+\end{proof}\end{quote}
 \end{answer}
 \end{exercise}
 

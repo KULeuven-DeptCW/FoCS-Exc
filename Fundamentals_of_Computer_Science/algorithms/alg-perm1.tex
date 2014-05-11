@@ -1,0 +1,22 @@
+\Function{Perm1}{$q,p,t$}
+\State $r\gets\Call{Identity}{\abs{p}}$
+\Forrange{i}{1}{t}
+\State $r\gets\Call{Multiply}{r,p}$
+\EndFor
+\State \Return $q=r$
+\EndFunction
+\Function{Identity}{$n$}
+\State $r\gets\Call{GenerateVector}{n}$
+\Forrange{i}{1}{n}
+\State $r_i\gets i$
+\EndFor
+\State \Return $r$
+\EndFunction
+\Function{Multiply}{$p,q$}
+\State $r\gets\Call{GenerateVector}{n}$
+\Forrange{i}{1}{\abs{p}}
+\State $t\gets p_i$
+\State $r_i\gets q_t$
+\EndFor
+\State \Return $r$
+\EndFunction

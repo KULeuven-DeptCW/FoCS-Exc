@@ -1,0 +1,11 @@
+\Function{Perm2}{$q,p,t$}
+\State $r\gets\Call{Identity}{\abs{p}}$
+\While{$t>0$}
+\If{$t\mod 2=1$}
+\State $r\gets\Call{Multiply}{r,p}$
+\EndIf
+\State $p\gets\Call{Multiply}{p,p}$
+\State $t\gets\floor{t/2}$
+\EndWhile
+\State \Return $q=r$
+\EndFunction

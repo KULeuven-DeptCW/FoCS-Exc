@@ -1,5 +1,5 @@
 \ProvidesPackage{importsreferences-en}
-\RequirePackage{tikz,subfigure,float,listings,animate,float}
+\RequirePackage{tikz,subfigure,float,listings,animate,float,etoolbox,algorithmicx,algpseudocode,algorithm}
 
 \newfloat{gramf}{hbt}{grm}
 \floatname{gramf}{Grammar}
@@ -48,6 +48,7 @@
 \newcommand{\eqnnref}[1]{(\ref{eqn:#1})}
 \newcommand{\eqnnrefr}[2]{(\ref{eqn:#1})-(\ref{eqn:#2})}
 \newcommand{\alglab}[1]{\genlab{alg}{#1}}
+\newcommand{\algoref}[1]{\genref{alg}{Algorithm}{#1}}
 \newcommand{\lstlab}[1]{\genlab{lst}{#1}}
 \newcommand{\lstref}[2][Listing]{\genref{lst}{#1}{#2}}
 
@@ -104,6 +105,13 @@
 \caption{#2}\alglab{#1}
 \input{algorithms/alg-#1.tex}
 \end{algorithm}}
+
+\algnewcommand\algorithmicto{\textbf{to}}
+\algnewcommand\algorithmicwith{\textbf{with}}
+\newcommand{\Forrange}[4][1]{
+\ifthenelse{#1=1}
+{\For{\ensuremath{#2\gets#3\ \algorithmicto\ #4}}}
+{\For{\ensuremath{#2\gets#3\ \algorithmicto\ #4\ \algorithmicwith\ #1}}}}
 
 \newcommand{\importlisting}[3][Java]{
 \begin{listing}[hbt]

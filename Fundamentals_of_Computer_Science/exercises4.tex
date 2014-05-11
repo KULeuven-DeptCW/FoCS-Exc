@@ -206,7 +206,7 @@ A graph in which every vertex has even degree is called an even graph. The compl
 \paragraph{}
 Show that every cotree of a connected graph $G$ is contained in a unique even subgraph of the graph.
 \begin{answer}
-
+A graph where every vertex has an even degree, can only contain cycles. In a tree, there is always exactly one path between two given vertices. This implies that an edge $e=\tupl{v,v'}$ in the cotree is a redundant edge: there exists a path $v\rightarrow^{e_1'}v_1\rightarrow^{e_2'}\ldots\rightarrow^{e_m'}v'$ between $v_1$ and $v_2$ that does not contain $e$. This implies that we can create a cycle $v\rightarrow^{e_1'}v_1\rightarrow^{e_2'}\ldots\rightarrow^{e_m'}v'\rightarrow^e v$ that is definitely a part of the original graph. We can do this for every edge that is not part of the tree (the cotree). Since the cotree is unique for every unique tree, we know that the resulting even graph is unique as well.
 \end{answer}
 \end{exercise}
 \end{document}

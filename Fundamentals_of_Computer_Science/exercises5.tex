@@ -102,7 +102,7 @@ Next, for each variable $x_i$ in the \langdef{3Sat} formula, we define two nodes
 \paragraph{}
 Finally, we need to encode the clauses. In order to do this, we need a structure that functions like a 3-OR gate. We can the constraint the color of such gate to true such that all the clauses in the $\langdef{3Sat}$ function must be true. We defined such gate on \figref{exc48-gate} for three variables $x_1$, $x_2$ and $x_3$. On the picture, each node is annotated with possible values such that the graph is consistent (T stands for true, F for false, G for gray and D for don't care (true or false)). As one can see, at least one of the three variables must be true.
 \paragraph{}
-We can now implement the any clause simply by implementing a 3-OR gate. By connecting the output of the gate with the gray and false constant vertex, we know for sure that the result must be true. An example of the $\brak{x_1\vee\neg x_2\vee x_3}\wedge\brak{x_2\vee\ne x_3\vee x_4}$ is depicted in \figref{exc48-clause}. Since each gate has a constant number of vertices and edges, the operation itself is constant as well and thus is the operation polynomial in the size of the input.
+We can now implement the any clause simply by implementing a 3-OR gate. By connecting the output of the gate with the gray and false constant vertex, we know for sure that the result must be true. An example of the $\brak{x_1\vee\neg x_2\vee x_3}\wedge\brak{x_2\vee\neg x_3\vee x_4}$ is depicted in \figref{exc48-clause}. Since each gate has a constant number of vertices and edges, the operation itself is constant as well and thus is the operation polynomial in the size of the input.
 \end{answer}
 \end{exercise}
 \begin{exercise}

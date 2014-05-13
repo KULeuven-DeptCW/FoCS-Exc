@@ -13,8 +13,8 @@
 \foreach \i/\j in {10/00,00/01,10/01} {
   \path (R\i) edge (R\j);
 }
-\foreach \i/\xa/\ya in {0/3/2} {
-  \begin{scope}[xshift=\xa cm, yshift=\ya cm]
+\foreach \i/\xa/\ya/\xs/\va/\vb/\vc in {0/3/2/1/10/21/30,0/-2/2/-1/20/31/40} {
+  \begin{scope}[xshift=\xa cm, yshift=\ya cm,xscale=\xs]
     \node[nd] (gi\i) at (0,0) {};
     \node[nd] (gj\i) at (0,-1.5) {};
     \node[nd] (gl\i) at (1,-0.75) {};
@@ -26,6 +26,9 @@
     \path (gl\i) edge (gm\i);
     \path (R10) edge[bend left] (gf\i);
     \path (R01) edge[bend left] (gf\i);
+    \path (V\va) edge[bend left] (gi\i);
+    \path (V\vb) edge[bend left] (gj\i);
+    \path (V\vc) edge[bend left] (gn\i);
   \end{scope}
 }
 \end{tikzpicture}

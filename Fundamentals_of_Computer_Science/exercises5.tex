@@ -88,12 +88,15 @@ For example, the graph on \figref{exc48-graph2} corresponds to the encoding of $
 \begin{answer}
 The \langdef{3Sat} language describes all Boolean formulas that are a conjunction of disjunctions where each disjunction (also called \emph{clause}) contains (at most) three literals. A clause is thus of the form $x\vee y\vee z$ (of course $x$, $y$ and $z$ can be replaced by any variable or their negation).
 \paragraph{}
-In a first stage, we construct a $K_3$ complete graph. By using this configuration, we know for sure that the three vertices will have a different color. We can name the colours arbitrarily true, false and gray. 
+In a first stage, we construct a $K_3$ complete graph. By using this configuration, we know for sure that the three vertices will have a different color. We can name the colours arbitrarily true, false and gray as depicted on \figref{exc48-k3}.
 \begin{figure}[hbt]
 \centering
-\importtikzsubfigure{exc48-k3}{$K_3$ graph forces three different colours.}
+\importtikzsubfigure{exc48-k3}{$K_3$ graph.}
+\importtikzsubfigure{exc48-var}{Introducing variables.}
 \caption{Elements in the conversion of \langdef{3Sat} to \langdef{3Colour}.}
 \end{figure}
+\paragraph{}
+Next, for each variable $x_i$ in the \langdef{3Sat} formula, we define two nodes $x_i$ and $\neg x_i$. There is an obvious edge between the two nodes to enforce that the value of $x_i$ is different from $\neg x_i$. Furthermore, there is an edge from the gray node to both the $x_i$ and $\neg x_i$ node. This forces the variable nodes to be true or false. As depicted on \figref{exc48-var} with $4$ variables.
 \end{answer}
 \end{exercise}
 

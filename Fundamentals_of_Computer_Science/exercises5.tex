@@ -86,7 +86,14 @@ For example, the graph on \figref{exc48-graph2} corresponds to the encoding of $
 \end{example}
 \end{hint}
 \begin{answer}
-
+The \langdef{3Sat} language describes all Boolean formulas that are a conjunction of disjunctions where each disjunction (also called \emph{clause}) contains (at most) three literals. A clause is thus of the form $x\vee y\vee z$ (of course $x$, $y$ and $z$ can be replaced by any variable or their negation).
+\paragraph{}
+In a first stage, we construct a $K_3$ complete graph. By using this configuration, we know for sure that the three vertices will have a different color. We can name the colours arbitrarily true, false and gray. 
+\begin{figure}[hbt]
+\centering
+\importtikzsubfigure{exc48-k3}{$K_3$ graph forces three different colours.}
+\caption{Elements in the conversion of \langdef{3Sat} to \langdef{3Colour}.}
+\end{figure}
 \end{answer}
 \end{exercise}
 

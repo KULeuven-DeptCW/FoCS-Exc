@@ -35,8 +35,23 @@ Show that NP is closed under the Kleene star operation. That is, if $L\in NP$, t
 \begin{answer}
 We proof this by constructing a nondeterministic Turing machine that decided $L^{\star}$ given the nondeterministic Turing machine $M_L$ that decides $L$:
 \begin{quote}\begin{proof}
-
+The non-deterministic Turing machine branches on the composition of elements on $L$ and of course a way to determine if these elements are in $L$.
+\paragraph{}
+In a first stage the algorithm will branch over the structure of the given string $s$. This means that it is split into substrings $s_i$ with $\abs{s_i}>0$. One can argue that a string of length $0$ can also be part of the original language $L$, but since this doesn't yield anything, there is no use to check if such string is part of $L$. We can split the strings simply by branching: for each character in the string, a branch will write a marker between the two characters, another branch will concatenate the second character to the first one. After this part of the algorithm is performed, each possible subdivision of the original string is assigned to at least one branch.
+\paragraph{}
+Next each branch emulates the non-deterministic Turing machine on every substring. This can be done by running the non-deterministic Turing machine in a debugger setting that prevents the Turing machine from overwriting other strings. The non-deterministic Turing machine can branch. This is not a problem: all successful branches simply proceed by emulating the non-determinstic Turing machine on the next part of the original string. If all parts are accepted, the non-deterministic Turing machine accepts.
+\paragraph{}
+Each branch runs in polynomial time because subdividing a string runs in polynomial time (the overhead is shifting $n$ characters $m$ times to the right to introduce split markers, with $m$ the number of parts to subdivide the original string in). Furthermore the original machine is called $m$ times. The machine has a Time complexity that $\bigoh{n^k}$ with $k$ a constant. And possibly a polynomial overhead for each step $\bigoh{n^l}$ (initiated by the debugger). Thus the total time complexity for each branch is:
+\begin{equation}
+\bigoh{n\cdot m+m\cdot n^k\cdot n^l}
+\end{equation}
+Since the $m$ has an upper bound of $n$, the time complexity of each branch is restricted by:
+\begin{equation}
+\bigoh{n^2+n^{k+l+1}}
+\end{equation}
+With $k$ and $l$ constants thus polynomial.
 \end{proof}\end{quote}
+Please not that the fact that the original language $L$ is NP-complete, implies that the language $L^{\star}$ is NP-complete as well. Sometimes a \emph{collapse} in the complexity hierarchy may occur.
 \end{answer}
 \end{exercise}
 
@@ -78,7 +93,7 @@ For example, the graph on \figref{exc48-graph2} corresponds to the encoding of $
 \begin{exercise}
 Let $\mbox{EQ}_{\mbox{\small{REX}}}=\condset{\tupl{R,S}}{\mbox{$R$ and $S$ are equivalent regular expressions}}$. Show that $\mbox{EQ}_{\mbox{\small{REX}}}\in\mbox{PSPACE}$.
 \begin{answer}
-
+In a first stage we convert the regular expressions into their DFA counterparts. 
 \end{answer}
 \end{exercise}
 \end{document}

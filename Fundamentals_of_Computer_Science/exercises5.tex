@@ -92,14 +92,16 @@ In a first stage, we construct a $K_3$ complete graph. By using this configurati
 \begin{figure}[hbt]
 \centering
 \importtikzsubfigure{exc48-k3}{$K_3$ graph.}
-\importtikzsubfigure{exc48-var}{Introducing variables.}
+\importtikzsubfigure{exc48-var}{With variables.}
+\importtikzsubfigure{exc48-gate}{3-OR gate.}
 \caption{Elements in the conversion of \langdef{3Sat} to \langdef{3Colour}.}
 \end{figure}
 \paragraph{}
-Next, for each variable $x_i$ in the \langdef{3Sat} formula, we define two nodes $x_i$ and $\neg x_i$. There is an obvious edge between the two nodes to enforce that the value of $x_i$ is different from $\neg x_i$. Furthermore, there is an edge from the gray node to both the $x_i$ and $\neg x_i$ node. This forces the variable nodes to be true or false. As depicted on \figref{exc48-var} with $4$ variables.
+Next, for each variable $x_i$ in the \langdef{3Sat} formula, we define two nodes $x_i$ and $\neg x_i$. There is an obvious edge between the two nodes to enforce that the value of $x_i$ is different from $\neg x_i$. Furthermore, there is an edge from the gray node to both the $x_i$ and $\neg x_i$ node. This forces the variable nodes to be true or false. As depicted on \figref{exc48-var} with $4$ variables. Since the number of vertices and edges we add is polynomial and they can be calculated straightforward, this operation can be performed in polynomial time.
+\paragraph{}
+Finally, we need to encode the clauses. In order to do this, we need a structure that functions like a 3-OR gate. We can the constraint the color of such gate to true such that all the clauses in the $\langdef{3Sat}$ function must be true. We defined such gate on \figref{exc48-gate} for three variables $x_1$, $x_2$ and $x_3$. On the picture, each node is annotated with possible values such that the graph is consistent (T stands for true, F for false, G for gray and D for don't care (true or false)). As one can see, at least one of the three variables must be true.
 \end{answer}
 \end{exercise}
-
 \begin{exercise}
 Let $\mbox{EQ}_{\mbox{\small{REX}}}=\condset{\tupl{R,S}}{\mbox{$R$ and $S$ are equivalent regular expressions}}$. Show that $\mbox{EQ}_{\mbox{\small{REX}}}\in\mbox{PSPACE}$.
 \begin{answer}

@@ -1,4 +1,4 @@
-\begin{tikzpicture}[shorten >=1pt,node distance=2cm,auto,scale=1.5,nd/.style={draw=black,circle,scale=\sc,minimum width=0.75 cm,minimum height=1 cm},ndg/.style={nd,fill=gray}]
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,auto,scale=1.5,nd/.style={draw=black,circle,scale=\sc,minimum width=0.75 cm,minimum height=1 cm},ndg/.style={nd,fill=gray},scale=0.75]
 \def\sc{0.75}
 \node[ndg] (R10) at (0.5,3) {};
 \node[nd]  (R00) at (0,4)   {$T$};
@@ -12,5 +12,20 @@
 }
 \foreach \i/\j in {10/00,00/01,10/01} {
   \path (R\i) edge (R\j);
+}
+\foreach \i/\xa/\ya in {0/3/2} {
+  \begin{scope}[xshift=\xa cm, yshift=\ya cm]
+    \node[nd] (gi\i) at (0,0) {};
+    \node[nd] (gj\i) at (0,-1.5) {};
+    \node[nd] (gl\i) at (1,-0.75) {};
+    \node[nd] (gm\i) at (2,-0.75) {};
+    \node[nd] (gn\i) at (2,-3) {};
+    \node[nd] (gf\i) at (3,-1.875) {};
+    \path (gi\i) edge (gj\i);\path (gj\i) edge (gl\i);\path (gl\i) edge (gi\i);
+    \path (gm\i) edge (gn\i);\path (gn\i) edge (gf\i);\path (gf\i) edge (gm\i);
+    \path (gl\i) edge (gm\i);
+    \path (R10) edge[bend left] (gf\i);
+    \path (R01) edge[bend left] (gf\i);
+  \end{scope}
 }
 \end{tikzpicture}

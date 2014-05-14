@@ -10,33 +10,73 @@
 \begin{exercise}
 A permutation on a set $\accl{1,\ldots,k}$ is a one-to-one, onto function on this set. When $p$ is a permutation, $p^t$ means the composition of $p$ with itself $t$ times. Let
 \begin{equation}
-\mbox{PERM-POWER}=\condset{\tupl{p, q, t}}{p = q^t\mbox{ where $p$ and $q$ are permutations on $\accl{1,\ldots,k}$ and $t$ is a binary integer}}
+\langdef{Perm-Power}=\condset{\tupl{p, q, t}}{p = q^t\mbox{ where $p$ and $q$ are permutations on $\accl{1,\ldots,k}$ and $t$ is a binary integer}}
 \end{equation}
-Show that $\mbox{PERM-POWER}\in P$.
+Show that $\langdef{Perm-Power}\in P$.
 \begin{note}
 Note that the most obvious algorithm does not run within polynomial time.
 \end{note}
 \begin{hint}
 First try it where $t$ is a power of $2$.
 \end{hint}
+\begin{answer}
+The obvious algorithm is depicted in \algoref{perm1}. In the algorithm the permutation power is checked by repeating the permutation enough times. This
+however does not work in polynomial time because the binary integer $t$ in length $n$ can scale up to $2^n$.
+\importalgorithmicalgorithm{perm1}{The most obvious algorithm to calculate the permutation power.}
+\paragraph{}
+We can however calculate permutations to the power of $k$ with $k$ a power of $2$. In that case the algorithm runs in $\bigoh{\log_2 t}$. Since
+$t=\bigoh{2^n}$, the total time complexity is $\bigoh{n}$. Pseudo-code for such algorithm is depicted in \algoref{perm2}.
+\importalgorithmicalgorithm{perm2}{A permutation power algorithm in polynomial time.}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 Show that NP is closed under the Kleene star operation. That is, if $L\in NP$, then $L^{\star}\in NP$.
+\begin{answer}
+We proof this by constructing a nondeterministic Turing machine that decided $L^{\star}$ given the nondeterministic Turing machine $M_L$ that decides $L$:
+\begin{quote}\begin{proof}
+The non-deterministic Turing machine branches on the composition of elements on $L$ and of course a way to determine if these elements are in $L$.
+\paragraph{}
+In a first stage the algorithm will branch over the structure of the given string $s$. This means that it is split into substrings $s_i$ with $\abs{s_i}>0$. One can argue that a string of length $0$ can also be part of the original language $L$, but since this doesn't yield anything, there is no use to check if such string is part of $L$. We can split the strings simply by branching: for each character in the string, a branch will write a marker between the two characters, another branch will concatenate the second character to the first one. After this part of the algorithm is performed, each possible subdivision of the original string is assigned to at least one branch.
+\paragraph{}
+Next each branch emulates the non-deterministic Turing machine on every substring. This can be done by running the non-deterministic Turing machine in a debugger setting that prevents the Turing machine from overwriting other strings. The non-deterministic Turing machine can branch. This is not a problem: all successful branches simply proceed by emulating the non-determinstic Turing machine on the next part of the original string. If all parts are accepted, the non-deterministic Turing machine accepts.
+\paragraph{}
+Each branch runs in polynomial time because subdividing a string runs in polynomial time (the overhead is shifting $n$ characters $m$ times to the right to introduce split markers, with $m$ the number of parts to subdivide the original string in). Furthermore the original machine is called $m$ times. The machine has a Time complexity that $\bigoh{n^k}$ with $k$ a constant. And possibly a polynomial overhead for each step $\bigoh{n^l}$ (initiated by the debugger). Thus the total time complexity for each branch is:
+\begin{equation}
+\bigoh{n\cdot m+m\cdot n^k\cdot n^l}
+\end{equation}
+Since the $m$ has an upper bound of $n$, the time complexity of each branch is restricted by:
+\begin{equation}
+\bigoh{n^2+n^{k+l+1}}
+\end{equation}
+With $k$ and $l$ constants thus polynomial.
+\end{proof}\end{quote}
+Please not that the fact that the original language $L$ is NP-complete, implies that the language $L^{\star}$ is NP-complete as well. Sometimes a \emph{collapse} in the complexity hierarchy may occur.
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
-Let $\mbox{DOUBLE-SAT}=\condset{\tupl{\phi}}{\phi\mbox{ has at least two satisfying assignments}}$. Show that $\mbox{DOUBLE-SAT}\in\mbox{NP-complete}$.
+Let $\langdef{Double-Sat}=\condset{\tupl{\phi}}{\phi\mbox{ has at least two satisfying assignments}}$. Show that $\langdef{Double-Sat}\in\mbox{NP-complete}$.
+\begin{answer}
+In order to do this we need to show two things: \langdef{Double-Sat} is in \cclass{NP} and there exists a reduction from \textsc{Sat} in polynomial time to \langdef{Double-Sat}. We first proof \langdef{Sat} can be reduced to \langdef{Double-Sat}:
+\begin{quote}\begin{proof}
+Given a Boolean function $\phi$ with variables $x_1,x_2,\ldots x_n$, we can convert it to a Boolean function $\phi'=\phi\wedge\brak{x_{n+1}\vee\neg x_{n+1}}$. In other words we've added an additional variable and a clause that is always true, whatever the value of $x_{n+1}$ is. If there is a valid assignment $\vec{x}$ for $\phi$, there are two assignments for $\phi'$ (namely the original assignment with $x_{n+1}$ true and one with $x_{n+1}$ false). If on the other hand if $\phi$ has no valid assignment, then whatever the value of $x_{n+1}$ is, there is no assignment for $\phi$. We can convert any Boolean formula $\phi$ to a formula $\phi'$ in polynomial time by enumerating over the input, counting the number of involved variables and add the defined suffix at the end of the input. We have thus reduce \langdef{Sat} to \langdef{Double-Sat} in polynomial time.
+\end{proof}\end{quote}
+Furthermore we need to proof that the problem is in \cclass{NP}:
+\begin{quote}\begin{proof}
+The \langdef{Sat} problem is in \cclass{NP} because the algorithm first branches over all the variables $\vec{x}$ and then accepts if the configuration of the active branch satisfies the given formula $\phi$. We can modify this algorithm such that it works for \langdef{Double-Sat}. In that case the algorithm branches twice over the variables generating two vector of Boolean values $\vec{v}_1$ and $\vec{v}_2$. We can check if the two value vectors are equal in polynomial time. If both vectors are identical, we reject immediately. Otherwise we check if the given formula $\phi$ on the first value vector $\vec{v}_1$ and (if successful) we validate $\vec{v}_2$ as well. Only if the two vectors are satisfied, we accept. If there are two different value assignments that can satisfy $\phi$ we will have generated a branch that accepts and the nondeterministic Turing machine will accept, if not the machine will reject. Thus \langdef{Double-Sat} is in \cclass{NP}.
+\end{proof}\end{quote}
+\end{answer}
 \end{exercise}
 
 \begin{exercise}
 A colouring of a graph is an assignment of colours to its vertices so that no two adjacent vertices are assigned the same colour. Let
 \begin{equation}
-\mbox{3COLOUR}=\condset{\tupl{G}}{\mbox{the vertices of $G$ can be coloured with three colours such that no two vertices joined by an edge have the same colour.}}
+\langdef{3Colour}=\condset{\tupl{G}}{\mbox{the vertices of $G$ can be coloured with three colours such that no two vertices joined by an edge have the same colour.}}
 \end{equation}
-Show that $\mbox{3COLOUR}$ is $\mbox{NP-complete}$.
+Show that $\langdef{3Colour}$ is $\mbox{NP-complete}$.
 \begin{hint}
-The reduction will be of the form $\mbox{3SAT}\leq_p\mbox{3COLOUR}$. Use the subgraphs depicted on \figref{exc48-graph1}.
+The reduction will be of the form $\mbox{3SAT}\leq_p\langdef{3Colour}$. Use the subgraphs depicted on \figref{exc48-graph1}.
 \importtikzfigure{exc48-graph1}{Subgraphs used to reduce.}
 \paragraph{}
 The three colours correspond to true ($T$), false ($F$), and a third one (gray) to help enforce that other nodes are coloured $T$ or $F$. Each variable is modeled using the two nodes marked $w$ and $\neg w$. The first graph is used to enforce that $w$ and $\neg w$ are assigned values $T$ and $F$ or $F$ and $T$. The second graph is used to denote binary logical OR between the two legs $l$ and $r$, which may be either variables or other the roots ($\vee$) of other logical ORs. To ensure that an OR is coloured T, every root $\vee$-node is connected to $F$ and $N$.
@@ -45,9 +85,34 @@ For example, the graph on \figref{exc48-graph2} corresponds to the encoding of $
 \importtikzfigure{exc48-graph2}{Example for $w\vee\neg v$.}
 \end{example}
 \end{hint}
+\begin{answer}
+The \langdef{3Sat} language describes all Boolean formulas that are a conjunction of disjunctions where each disjunction (also called \emph{clause}) contains (at most) three literals. A clause is thus of the form $x\vee y\vee z$ (of course $x$, $y$ and $z$ can be replaced by any variable or their negation).
+\paragraph{}
+In a first stage, we construct a $K_3$ complete graph. By using this configuration, we know for sure that the three vertices will have a different color. We can name the colours arbitrarily true, false and gray as depicted on \figref{exc48-k3}.
+\begin{figure}[hbt]
+\centering
+\importtikzsubfigure{exc48-k3}{$K_3$ graph.}
+\importtikzsubfigure{exc48-var}{With variables.}
+\importtikzsubfigure{exc48-gate}{3-OR gate.}
+\importtikzsubfigure{exc48-clause}{Final example.}
+\caption{Elements in the conversion of \langdef{3Sat} to \langdef{3Colour}.}
+\end{figure}
+\paragraph{}
+Next, for each variable $x_i$ in the \langdef{3Sat} formula, we define two nodes $x_i$ and $\neg x_i$. There is an obvious edge between the two nodes to enforce that the value of $x_i$ is different from $\neg x_i$. Furthermore, there is an edge from the gray node to both the $x_i$ and $\neg x_i$ node. This forces the variable nodes to be true or false. As depicted on \figref{exc48-var} with $4$ variables. Since the number of vertices and edges we add is polynomial and they can be calculated straightforward, this operation can be performed in polynomial time.
+\paragraph{}
+Finally, we need to encode the clauses. In order to do this, we need a structure that functions like a 3-OR gate. We can the constraint the color of such gate to true such that all the clauses in the $\langdef{3Sat}$ function must be true. We defined such gate on \figref{exc48-gate} for three variables $x_1$, $x_2$ and $x_3$. On the picture, each node is annotated with possible values such that the graph is consistent (T stands for true, F for false, G for gray and D for don't care (true or false)). As one can see, at least one of the three variables must be true.
+\paragraph{}
+We can now implement the any clause simply by implementing a 3-OR gate. By connecting the output of the gate with the gray and false constant vertex, we know for sure that the result must be true. An example of the $\brak{x_1\vee\neg x_2\vee x_3}\wedge\brak{x_2\vee\neg x_3\vee x_4}$ is depicted in \figref{exc48-clause}. Since each gate has a constant number of vertices and edges, the operation itself is constant as well and thus is the operation polynomial in the size of the input.
+\end{answer}
 \end{exercise}
-
 \begin{exercise}
 Let $\mbox{EQ}_{\mbox{\small{REX}}}=\condset{\tupl{R,S}}{\mbox{$R$ and $S$ are equivalent regular expressions}}$. Show that $\mbox{EQ}_{\mbox{\small{REX}}}\in\mbox{PSPACE}$.
+\begin{answer}
+In a first stage, we can convert the regular expressions to their NFA counterparts. This NFA takes only polynomial space. We can however not convert the NFA immediately to a DFA, since this could require exponential size.
+\paragraph{}
+Next we need to branch over a large number of strings. The pumping lemma states that for strings $s\in\Sigma^{\star}$ larger than $p$ with $p$ bounded by the size of the regex, there is a part in the strings where the regular expression cannot see a difference between one, two, etc. repetitions. We thus branch over all strings of a length that scales with the size of the regular expression. We run each such string on both machines. We perform an analysis in the meanwhile: if the string is accepted by one machine, it must be accepted by the other machine as well. If the string reaches a dead end in the first, it should reach a dead-end in the second as well. Finally if the string is in a loop: meaning that the same subset of active states occurs on one machine, a (potentially) different subset of states must be repeated in the second machine as well.
+\paragraph{}
+If this is true for all branches of the algorithm, the algorithm accepts, otherwise it rejects. Since we evaluate only strings that scale polynomial with the size of the regular expression, and we can encode the active string using polynomial space, we can do the entire branching in polynomial space.
+\end{answer}
 \end{exercise}
 \end{document}

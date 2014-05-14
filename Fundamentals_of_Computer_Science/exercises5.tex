@@ -108,7 +108,11 @@ We can now implement the any clause simply by implementing a 3-OR gate. By conne
 \begin{exercise}
 Let $\mbox{EQ}_{\mbox{\small{REX}}}=\condset{\tupl{R,S}}{\mbox{$R$ and $S$ are equivalent regular expressions}}$. Show that $\mbox{EQ}_{\mbox{\small{REX}}}\in\mbox{PSPACE}$.
 \begin{answer}
-In a first stage we convert the regular expressions into their DFA counterparts. 
+In a first stage, we can convert the regular expressions to their NFA counterparts. This NFA takes only polynomial space. We can however not convert the NFA immediately to a DFA, since this could require exponential size.
+\paragraph{}
+Next we need to branch over a large number of strings. The pumping lemma states that for strings $s\in\Sigma^{\star}$ larger than $p$ with $p$ bounded by the size of the regex, there is a part in the strings where the regular expression cannot see a difference between one, two, etc. repetitions. We thus branch over all strings of a length that scales with the size of the regular expression. We run each such string on both machines. We perform an analysis in the meanwhile: if the string is accepted by one machine, it must be accepted by the other machine as well. If the string reaches a dead end in the first, it should reach a dead-end in the second as well. Finally if the string is in a loop: meaning that the same subset of active states occurs on one machine, a (potentially) different subset of states must be repeated in the second machine as well.
+\paragraph{}
+If this is true for all branches of the algorithm, the algorithm accepts, otherwise it rejects. Since we evaluate only strings that scale polynomial with the size of the regular expression, and we can encode the active string using polynomial space, we can do the entire branching in polynomial space.
 \end{answer}
 \end{exercise}
 \end{document}

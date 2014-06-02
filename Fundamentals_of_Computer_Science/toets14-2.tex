@@ -1,0 +1,304 @@
+\documentclass{article}
+\title{Fundamenten van de Computerwetenschappen:\\opgave 2}
+\author{Prof. B. Demoen (\url{Bart.Demoen@cs.kuleuven.be})\\ W. Van Onsem (\url{Willem.VanOnsem@cs.kuleuven.be})}
+\date{16 mei 2014}
+\usepackage{tikz,../assignment-nl,../importsreferences-nl}
+\usetikzlibrary{shapes}
+
+\newcommand{\bchr}[2]{\fbrk{\begin{array}{c}#1\\#2\end{array}}}
+\begin{document}
+\maketitle
+
+\richtlijnen{}
+
+\begin{question}[Beslisbaarheid]
+Zijn volgende talen beslisbaar? Bewijs of beschrijf een algoritme dat de taal beslist:
+\begin{enumerate}
+ \item De taal van Turing machines $M$ die een taal bepalen waarvoor
+minstens twee verschillende (niet-isomorfe) Turing machines bestaan
+die deze taal bepalen, of formeler: $\condset{\tupl{M}}{\exists
+M'\neq M:L_M=L_{M'}}$;
+ \item De taal van Turing machines die een reguliere taal bepalen,
+of formeler $\condset{\tupl{M}}{L_M\mbox{ is regulier}}$;
+ \item De taal van Turing machines $\tupl{M_1,M_2}$ die
+respectievelijk de talen $L_{M_1}$ en $L_{M_2}$ bepalen met minstens
+\'{e}\'{e}n gemeenschappelijke string. Of formeler:
+$G=\condset{\tupl{M_1,M_2}}{L_{M_1}\cap L_{M_2}\neq\emptyset}$. Hint:
+reduceer van of naar een gekend niet-belisbaar probleem (bijvoorbeeld het
+\emph{acceptance}, \emph{emptiness}, \emph{halting},... probleem). Is $G$ herkenbaar ?
+\end{enumerate}
+\begin{answer}
+~~
+\begin{enumerate}
+ \item Deze taal is \textbf{triviaal waar} voor elke Turing machine. We kunnen immers bijvoorbeeld een Turing machine aanpassen door nieuwe toestanden toe te voegen die nooit een rol spelen, bogen toe te voegen met karakters die nooit op de tape worden gezet, of bijvoorbeeld een \emph{no-operation} toestand toevoegen\footnote{Bijvoorbeeld voor een boog $q_1\rightarrow^{a/b/R} q_2$ introduceren we een toestand $q_3$ met bogen $q_1\rightarrow^{a/c/S}q_3\rightarrow^{c/b/R}q_2$.}. Bijgevolg is deze taal \textbf{beslisbaar}. Het algoritme zal immers voor elke invoer altijd $\xtrue$ teruggeven.
+ \item Deze taal is \textbf{niet-beslisbaar}. Dit is een gevolg van de \emph{Stelling van Rice}. Het is duidelijk dat de taal niet triviaal is, immers kan een Turing machine ook contextvrije talen beslissen. Verder is de eigenschap taal-invariant: alle machines die eenzelfde taal $L$ bepalen behoren wel of niet tot de taal. De machine hoeft bijvoorbeeld niet in lineaire tijd te werken.
+ \item Deze taal is \textbf{niet-beslisbaar}. We kunnen dit ook bewijzen aan de hand van een reductie vanuit het \emph{acceptance}-probleem $A_{TM}=\condset{\tupl{M,s}}{s\in L_M}$. We kunnen immers algoritmisch een Turing machine construeren die \'e\'en gegeven string accepteert.
+ \begin{quote}
+  \begin{construction}[Single Turing Machine]
+   Een \emph{Single Turing Machine} accepteert juist \'e\'en string $s$. Dit doen we door een initi\"ele toestand $q_0$ te defini\"eren, en voor elk karakter $s_i$ ($i=1\ldots n$), een nieuwe toestand $q_i$ te defini\"eren en een boog $q_{i-1}\rightarrow^{s_i/s_i/R}q_{i}$. $q_n$ is een accepterende toestand. Voor alle niet-accepterende toestanden $q_{i-1}$ en karakters $a\in\Sigma\setminus\accl{s_i}$ defini\"eren we ook bogen $q_{i-1}\rightarrow^{a/a/R}q_r$ met $q_r$ de reject-toestand van de Turing machine.
+  \end{construction}
+ \end{quote}
+Het algoritme om het acceptance probleem op te lossen construeert dus eerst zo'n Turing machine $M'$ die enkel de gegeven string $s$ accepteert en roept vervolgens de Turing machine $G$ op die $L_G$ beslist. Het resultaat van $\fun{G}{M,M'}$ bepaalt dan of $s\in L_M$. Formeler is $A_{TM}\leq_mG$ door $\tupl{M,s}$ om te zetten naar $\tupl{M,M_s}$ (met $M_s$ de single Turing machine voor $s$). Vermits het acceptance probleem echter niet beslisbaar is, en de constructie van $M'$ beslisbaar gebeurt, ligt het probleem bij het feit dat $G$ niet beslisbaar is.
+
+\paragraph{}
+$G$ is echter wel herkenbaar: dit doen we aan de hand van een iteratief proces: in iteratie $i$ zullen we de tot dusver opgestarte simulaties van Turing machines \'e\'en stap verder zetten, en starten we voor elke string met lengte $i$ een nieuwe simulatie op. Zo'n simulatie bestaat uit het draaien van $M$ en $M'$ op de string. Wanneer tijdens een iteratie \'e\'en of meer machines accepteren waardoor een string zowel door $M$ en $M'$ is geaccepteerd, accepteren we. Merk op dat het algoritme nooit verwerpt. In het geval $\tupl{M,M'}$ niet in de taal zit, zullen we in een oneindige lus terecht komen. Dit vormt geen probleem bij het herkennen: de machine moet accepteren als de gegeven invoer tot de taal behoort, de machine hoeft niet te verwerpen indien dit niet zo is.
+\end{enumerate}
+\end{answer}
+\end{question}
+
+\begin{question}[Beslisbaarheid]
+Stel dat $A$ en $B$ twee verschillende herkenbare, niet-beslisbare talen zijn.
+Geef aan van elk van de volgende uitspraken of ze waar zijn: geef een
+argument, bewijs, (tegen)voorbeeld ... (het gaat over de doorsnede van $A$ en
+$B$, behalve op het einde)
+\begin{itemize}
+\item $A \cap B$ is altijd herkenbaar
+\item $A \cap B$ kan niet-beslisbaar zijn
+\item $A \cap B$ kan beslisbaar zijn
+\item het is mogelijk dat $A \subseteq \overline{B}$
+\end{itemize}
+\begin{answer}
+~~
+\begin{itemize}
+ \item \textbf{Waar}. Vermits beide talen immers herkenbaar zijn, bestaan er Turing machines
+ $M_A$ en $M_B$ die respectievelijk de talen $A$ en $B$ \emph{herkennen}. Een Turing
+ machine $M_{A\cap B}$ werkt als volgt: eerst maken we een kopie van de invoer $s$, die we op
+ een veilige plaats op de tape zetten.
+ Vervolgens laten we $M_A$ lopen op de originele string $s$. Indien $M_A$ accepteert,
+ laten we $M_B$ lopen op de kopie van $s$. Indien $M_B$ ook accepteert, accepteren we. In het
+ geval \'e\'en van de machines verwerpt, verwerpen we ook. Wanneer $s\in A\cap B$, betekent dit dat
+ beide machines $M_A$ en $M_B$ uiteindelijk moeten accepteren en stoppen. In dit geval zal onze machine
+ dus ook accepteren. Wanneer $s$ tot minstens \'e\'en van de talen $A$ of $B$ niet behoort, kan een
+ machine in een oneindige lus terecht komen. Dit vormt geen probleem: onze machine moet immers
+ enkel de strings die tot $A\cap B$ horen accepteren.
+ \item \textbf{Waar}. Stel dat $B=A\cup\accl{s}$ met $s$ een willekeurige string die niet in $A$ zit\footnote{Merk op dat er altijd zo'n string bestaat. Immers indien $A=\Sigma^{\star}$ is $A$ door een DFA te beslissen, en zou de taal dus beslisbaar zijn.}. Dan geldt $A\cap B=A\cap\brak{A\cup\accl{s}}=A$, wat dus opnieuw een niet-beslisbaar probleem is.
+ \item \textbf{Waar}. Stel eerst een niet-beslisbare herkenbare taal $X$. Op basis van $X$, construeren we de talen $A=\condset{ss}{s\in X}$ en $B=\condset{sso}{s\in X}$ en $o$ een willekeurig karakter. Zowel $A$ en $B$ zijn niet beslisbaar: anders zouden we immers een algoritme kunnen construeren om $X$ te beslissen: we manipuleren eerst de invoer $s$ naar $ss$ of $sso$ waarna we de Turing machine die $A$ of $B$ beslist zouden laten draaien op de gemanipuleerde invoer. $A$ en $B$ zijn wel herkenbaar: er bestaat immers een herkenner voor $X$, we kunnen eerst kijken of de invoer $t$ wel degelijk met respectievelijk het patroon $ss$ of $sso$ overeenkomt en indien dit zo is, laten we de herkenner voor $X$ werken op het hieruit gevonden patroon $s$. Om te bewijzen dat $A\subseteq\overline{B}$ geldt, moeten we aantonen dat elke string $s\in A$, onmogelijk in $B$ kan zitten. Dit kunnen we doen omdat $A$ uitsluitend strings met even lengte bevat, terwijl $B$ uitsluitend strings met oneven lengte bevat.
+\end{itemize}
+\end{answer}
+\end{question}
+
+\begin{question}[Grafentheorie]
+Bewijs volgende stellingen:
+\begin{enumerate}
+\item Een binaire boom is een gerichte boom waarbij elke knoop\footnote{Behalve \'e\'en knoop die we de wortel noemen: deze heeft nul ouders.} een
+ouder heeft en nul of twee kinderen. Bewijs dat een binaire boom met
+minstens \'e\'en knoop, \'e\'en blad meer heeft dan inwendige knopen.
+Een knoop is inwendig als die knoop kinderen heeft.
+
+\item Bewijs volgende uitspraak: een gerichte graaf die een kring
+bevat die zowel Euleriaans als Hamiltoniaans is, is een cyclische
+graaf.
+% \begin{quote}
+  \begin{definition}[Cyclische graaf]
+   Een cyclische graaf $C_n$ is een gerichte graaf met $n$ knopen $V=\accl{v_1,v_2,\ldots,v_n}$ met volgende bogen: $E=\condset{\tupl{v_i,v_{i+1}}}{i\in\NNN:1\leq i< n}\cup\accl{\tupl{v_n,v_1}}$.
+  \end{definition}
+% \end{quote}
+\end{enumerate}
+\begin{answer}
+\begin{enumerate}
+ \item We bewijzen dit aan de hand van inductie.
+ \begin{quote}\begin{proof}
+  Elke boom heeft een wortel. Immers spreken we over een gerichte graaf. Indien de boom geen wortel zou hebben, zou elke knoop een ouder hebben en vermits een boom geen lussen mag bevatten, zou dit impliceren dat zo'n boom oneindig veel knopen zou bevatten, dit mag niet volgens de definitie van een graaf en bijgevolg ook boom.
+  \paragraph{}
+  In het \textbf{basisgeval} is de wortel tevens een blad. Bijgevolg is dit ook de enige knoop in de boom\footnote{Immers heeft een blad geen kinderen en vermits een boom samenhangend moet zijn, kunnen er ook geen andere niet-verbonden knopen deel uitmaken van de boom.}. In dat geval is het aantal bladen dus gelijk aan \'e\'en en het aantal inwendige knopen gelijk aan $0$. De stelling klopt bijgevolg.
+  \paragraph{}
+  Stel dat de wortel geen blad is, dan is de wortel een inwendige knoop met twee kinderen. Deze kinderen en hun nakomelingen vormen zelf ook een boom. Per \textbf{inductie} weten we dus dat de deelbomen van de kinderen zelf aan de voorwaarde voldoen. In dat geval is het aantal inwendige knopen van de boom dus gelijk aan: $i=1+i_l+i_r$ met $i_l$ het aantal inwendige knopen van het linker kind en $i_r$ het aantal inwendige knopen van het rechter kind. Het aantal bladen is gelijk aan $b=b_l+b_r$. Bovendien geldt: $b_l=i_l+1$ en $b_r=i_r+1$. Wanneer we substitutie uitvoeren op de originele formule om het aantal inwendige knopen te berekenen bekomen we dus: $b=b_l+b_r$ en $i=1+i_l+i_r=b_l-1+b_r-1+1=b_l+b_r-1=b-1$. Bijgevolg klopt de stelling.
+ \end{proof}\end{quote}
+ \item 
+\begin{quote}\begin{proof}
+Zonder verlies van algemeenheid, geven we een ordening aan de kring $v_1\rightarrow^{e_1}v_2\rightarrow^{e_2}\ldots\rightarrow^{e_n}v_1$. Vermits deze kring Euleriaans en Hamiltoniaans is, weten we dat elke boog $e_i$ en elke knoop $v_j$ uniek is in de kring. Bovendien geldt dat elke knoop en elke boog wel degelijk in de kring aanwezig moet zijn. Een Euleriaanse kring stelt immers dat elke boog juist \'e\'enmaal voorkomt en een Hamiltoniaanse kring vereist dat elke vertex juist \'e\'en keer voorkomt.
+\paragraph{}
+Bijgevolg komt de ordening van de kring volledig overeen met de definitie van de cyclische graaf. Immers kunnen we de ordening eenvoudigweg overnemen zodat $V\supseteq V'=\accl{v_1,v_2,\ldots,v_n}$. Uit de ordening leiden we af dat $\forall j\in\accl{1,2,\ldots,n-1}$, $e_j=\tupl{v_j,v_{j+1}}$ en $e_n=\tupl{v_n,v_1}$, bijgevolg bevat de set van bogen die in de kring zitten minstens: $E\supseteq E'=\condset{\tupl{v_i,v_{i+1}}}{i\in\NNN:1\leq i< n}\cup\accl{\tupl{v_n,v_1}}$.
+\paragraph{}
+We dienen nog aan te tonen dat we geen graaf kunnen construeren met meer knopen en/of bogen. Dit volgt opnieuw uit de definitie van een Euleriaans en Hamiltoniaans pad. Immers bevat dit pad alle elementen die mogelijk in de graaf kunnen zitten. Bijgevolg geldt $V=V'$ en $E=E'$. Dit komt overeen met de eerder gestelde definitie van een cyclische graaf.
+\end{proof}\end{quote}
+\end{enumerate}
+\end{answer}
+\end{question}
+
+\begin{question}[Graaf-algoritme]
+De algoritmen van Prim en Kruskal berekenen een minimale opspannende
+boom door vanuit een lege graaf iteratief bogen toe te voegen. Bij een
+grote samenhangende graaf die {\em bijna} een boom is, is het
+effici\"{e}nter iteratief bogen te verwijderen uit de graaf om tot een
+minimale opspannende boom te komen.
+
+% \paragraph{}
+Ontwerp een algoritme dat een minimaal opspannende boom berekent door
+iteratief bogen weg te laten uit de graaf. Aan welke voorwaarde moet
+een boog voldoen om weggelaten te worden ? Beargumenteer de correctheid
+van je algoritme.
+\begin{answer}
+Het algoritme ordent eerst de bogen van groot naar klein (op basis van het gewicht/label),
+vervolgens verwijdert men bogen van groot naar klein. Enkel indien het verwijderen
+van een boog $\tupl{v_1,v_2}$ de connectiviteit tussen $v_1$ en $v_2$ niet in
+gevaar brengt, wordt de boog ook daadwerkelijk verwijderd. Een eenvoudig connectiviteitsalgoritme
+kan bestaan uit bijvoorbeeld \emph{Dijkstra's algoritme} maar bijvoorbeeld het \emph{algoritme van Thorup}
+werkt in $\bigoh{\log V\cdot\brak{\log\log V}^3}$.
+\paragraph{}
+Een boog in een graaf kan men verwijderen zonder dat de connectiviteit vermindert indien deze boog deel
+uit maakt van een kring. Men kan dus de boog $e_1=\tupl{v_1,v_2}$ verwijderen indien er een boog $e_2=\tupl{v_3,v_4}$ indien
+er een pad bestaat $v_3\rightsquigarrow v_1\rightarrow v_2\rightsquigarrow v_4$\footnote{$\rightsquigarrow$ duidt aan dat we een pad bedoelen, met andere woorden een sequentie van nul of meer aangrenzende bogen.}. Merk op dat we voor elke kring telkens \'e\'en boog kunnen verwijderen. We bewijzen nu de correctheid van het voorgestelde algoritme in drie delen:
+\paragraph{}
+Het algoritme \textbf{behoudt de connectiviteit}:
+\begin{quote}\begin{proof}
+we verwijderen enkel bogen $e_1=\tupl{v_1,v_2}$ indien er nog een boog $e_2=\tupl{v_3,v_4}$ bestaat die deel uitmaakt van kring waar ook $e_1$ toe behoort. Dit betekent dat elk paar vertices $v_5$ en $v_6$ die verbonden zijn door een pad $e_2=\tupl{v_3,v_4}$ indien er een pad bestaat $v_5\rightsquigarrow v_1\rightarrow v_2\rightsquigarrow v_6$ door het verwijderen van de boog $e_1$, zijn de
+twee vertices nog steeds verbonden over het pad $v_5\rightsquigarrow v_1\rightsquigarrow v_3\rightarrow v_4\rightsquigarrow v_2\rightsquigarrow v_6$.
+\end{proof}\end{quote}
+\paragraph{}
+Het \textbf{resultaat is een boom}:
+\begin{quote}\begin{proof}
+Een boom bevat geen kringen. We bewijzen dat het resultaat van het algoritme een graaf is zonder kringen. Dit komt omdat we over alle bogen itereren en we deze bogen verwijderen wanneer ze deel uitmaken van een kring. M.a.w. stel dat er op het einde van het algoritme nog een kring in de boom zouden zitten, dat had het algoritme tijdens het itereren bij \'e\'en van de bogen in de kring kunnen detecteren en deze boog verwijderen.
+\end{proof}\end{quote}
+\paragraph{}
+De boom ook \textbf{minimaal}.
+\begin{quote}\begin{proof}
+Stel dat de boom $T$ niet minimaal is. In dat geval bestaat er een andere minimaal opspannende boom  $T'$ waarbij de som van de gewichten van de bogen kleiner is.
+Bijgevolg bevat deze boom minstens een verzameling bogen $E'$ die niet in $T$ zitten, en bevat $T$ een set bogen $E$ die niet in $T'$ zitten. Omdat bomen telkens $n-1$
+bogen bevatten bij $n$ knopen weten we dat $\abs{E}=\abs{E'}$ en bovendien geldt $\sum_{e'\in E'}\fun{w}{e'}<\sum_{e\in E}\fun{w}{e}$. Dit impliceert dat
+$E'$ minstens \'e\'en boog $e'$ bevat die goedkoper is dan een boog $e$ in $E$. $e'$ toevoegen aan $T$ zou tot een kring leiden: immers wanneer we \'e\'en
+$e'=\tupl{v_1,v_2}$ zouden toevoegen aan $T$, kunnen we het originele pad $v_1\rightsquigarrow v_2$ gebruiken die al in $T$ bestaat en via de toegevoegde
+boog $e'$. Omdat $T'$ goedkoper is, betekent dit dat er dus in de beschouwde kring een boog $e$ moet bestaan met een hogere kostprijs dan $e'$.
+Het algoritme voert echter een iteratie uit over de bogen van groot naar klein. Bijgevolg zal het algoritme eerst $e$ analyseren en verwijderen.
+Bijgevolg is het onmogelijk dat er zo'n boog $e'$ kan bestaan, hieruit volgt dus inconsistentie.
+\end{proof}\end{quote}
+\end{answer}
+\end{question}
+
+\begin{question}[Complexiteitstheorie]
+~~
+\begin{enumerate}
+\item Bepaal zo nauwkeurig mogelijk de tijdscomplexiteit van een
+procedure die een ballon opblaast, vertrekkend van een lege ballon:
+als invoer krijgt die procedure de diameter van de te bekomen ballon
+(in centimeters). De procedure heeft als elementaire operatie: een
+vaste (gegeven) hoeveelheid lucht in de ballon blazen.
+
+\item Als $f(n) = \bigoh{2.17^n}$ dan ook $f(n) = \bigoh{3.14^n}$, of
+omgekeerd, of beide ? Bewijs je antwoord.
+
+\item Stel taal $L$ heeft {\bf geheugen}complexiteit
+$\bigoh{\fun{f}{n}}$ met $n$ de lengte van de invoer, wat kan je dan
+zeggen over de onder- en bovengrenzen van de {\bf tijds}complexiteit van $L$ ?
+Geef argumenten voor je antwoord.
+
+\item Stel taal $L$ heeft {\bf tijds}complexiteit $\bigoh{\fun{g}{n}}$
+met $n$ de lengte van de invoer, wat kan je zeggen over de onder- en
+bovengrenzen van de {\bf geheugen}complexiteit van $L$ ? Geef argumenten voor
+je antwoord.
+
+\item Zijn talen met een tijdscomplexiteit $\bigoh{\log_2 n}$ met $n$
+de lengte van de invoer nuttig ? Indien ja geef een voorbeeld van zo'n
+taal, indien nee geef argumenten.
+
+\item Wanneer een taal $L_1$ gereduceerd kan worden naar een taal
+$L_2$ in tijd $\bigoh{\fun{f}{n}}$, en $L_2$ heeft een
+tijdscomplexiteit $\bigoh{\fun{g}{n}}$, kan je dan iets zeggen over de
+bovengrens op de tijdscomplexiteit van $L_1$? Geef argumenten voor je antwoord.
+\end{enumerate}
+\begin{answer}
+~~
+\begin{enumerate}
+ \item Het volume van een bol is:
+ \begin{equation}
+  V_{\mbox{\small bol}}=\displaystyle\frac{4\cdot\pi\cdot r^3}{3}
+ \end{equation}
+Met $r$ de straal van de ballon. Dit is dus het volume aan lucht die we in de ballon moeten
+blazen en bepaalt dus het aantal instructies. Bijgevolg kunnen we stellen dat de tijdscomplexiteit
+voor dit probleem gelijk is aan $\pi\cdot d^3/6\cdot V_0$ met $d$ de diameter in centimeters en $V_0$
+de inhoud van de longen van Alan Turing (of zijn machine) in kubieke centimeters. Wanneer de diameter dus met een getalstelsel met radix $r\geq2$ wordt
+voorgesteld, is de tijdscomplexiteit $\bigoh{2^{\alpha\cdot n}}$ met $\alpha=3\cdot\log_2 r$. Immers geldt: $d=\bigoh{r^n}$.
+ \item Enkel het \textbf{eerste geval klopt}. Indien $\fun{f}{n}=\bigoh{2.17^n}$, dan bestaat er immers een $n_0$ zodat
+ $\forall n>n_0:\fun{f}{n}\leq c_0\cdot2.17^n$, in dat geval weten we ook dat er een $n_1$ bestaat waarvoor:
+ $\forall n>n_1:\fun{f}{n}\leq c_1\cdot3.14^n$. Immers bestaat er een $n_2$ zodat $\forall n>n_2:c_0\cdot 2.17^n\leq c_1\cdot3.14^n$:
+ \begin{equation}
+  n_2\equiv\displaystyle\frac{\fun{\log}{c_0/c_1}}{\fun{\log}{3.14/2.17}}\eqnlab{ntwo}
+ \end{equation}
+We weten dus dat volgende eigenschap geldt: $\forall n>\fun{\max}{n_0,n_2}:\fun{f}{n}\leq c_1\cdot 3.14^n$, de wiskundige
+vertaling van de tweede voorwaarde.
+\paragraph{}
+De \textbf{omgekeerde implicatie klopt niet}. Stel bijvoorbeeld $\fun{f}{n}=c_1\cdot 3.14^n$. In dat geval geldt zeker $\fun{f}{n}=\bigoh{3.14^n}$, want:
+\begin{equation}
+\forall n:c_1\cdot 3.14^n\leq c_1\cdot 3.14^n
+\end{equation}
+Wat een algemenere voorwaarde is dan $\fun{f}{n}=\bigoh{3.14^n}$. In dat geval geldt echter niet dat $\fun{f}{n}=\bigoh{2.17^n}$. Voor elke $n_0$ bestaat er immers altijd een $k>n_0$ zodat:
+\begin{equation}
+c_1\cdot 3.14^k>c_2\cdot 2.17^k
+\end{equation}
+ofwel
+\begin{equation}
+\dfrac{c_1}{c_2}\cdot\brak{\dfrac{3.14}{2.17}}^k>1
+\end{equation}
+
+\begin{quote}\begin{proof}
+We gebruiken de constante $n_2$ zoals gedefinieerd in \eqnref{ntwo}. Indien we nemen $k=\fun{\max}{n_0+1,n_2+1}$. Dit levert altijd een waarde op voor $k$ waaraan de voorwaarde voldoet. Immers weten we zeker dat $k\geq n_2+1$ dus:
+\begin{equation}
+\dfrac{c_1}{c_2}\cdot\dfrac{3.14}{2.17}^k=\dfrac{c_1}{c_2}\cdot\brak{\dfrac{3.14}{2.17}}^{n_2}\cdot\brak{\dfrac{3.14}{2.17}}^{k-n_2}=\dfrac{c_1}{c_2}\cdot\dfrac{c_2}{c_1}\cdot\brak{\dfrac{3.14}{2.17}}^{k-n_2}=\brak{\dfrac{3.14}{2.17}}^{k-n_2}>1\eqnlab{onlylarger}
+\end{equation}
+Vermits $\frac{3.14}{2.17}>1$, zal naarmate $k-n_2\geq 1$ groter wordt, de waarde aan de linkerkant van de vergelijking enkel groter worden, de voorwaarde $k\geq n_0+1$ heeft dus geen invloed op de correctheid van \eqnref{onlylarger}.
+\end{proof}\end{quote}
+Bijgevolg geldt: $\forall n_0\in\NNN,c_1,c_2\in\RRR^+:\exists k>n_0:c_1\cdot\fun{f}{n}=c_1\cdot 3.14^n>c_2\cdot 2.17^n$. Dit is wiskundig
+equivalent met de negatie van $\fun{f}{n}=\bigoh{2.17^n}$.
+ \item Over de \textbf{ondergrens} van de tijdscomplexiteit kan men niks zeggen, $\bigoh{\fun{f}{n}}$ is immers zelf een bovengrens, het is mogelijk
+ dat indien $\fun{f}{n}=n^2$, er een Turing machine bestaat die het probleem met minder geheugen oplost.
+ \paragraph{}
+ De tijdscomplexiteit wordt \textbf{bovenaan begrensd} met $\bigoh{2^{\alpha\cdot\fun{f}{n}}}$ we bewijzen dit met een bewijs uit het ongerijmde:
+ \begin{quote}\begin{proof}
+ Stel een Turing machine die een taal beslist met geheugencomplexiteit $\bigoh{\fun{f}{n}}$. De Turing machine heeft een tape-alfabet $\Gamma$ en een
+ verzameling toestanden $Q$. Zo'n machine kan op $c_1\cdot\fun{f}{n}$ geheugencellen, hoogstens $\abs{\Gamma}^{c_1\cdot\fun{f}{n}}$
+ verschillende strings schrijven. Verder staat de lees/schrijfkop altijd op \'e\'en van de $c_1\cdot\fun{f}{n}$ cellen en
+ kan de machine in \'e\'en van de $Q$ toestanden zitten. Er zijn er dus $c=\abs{Q}\cdot c_1\cdot\fun{f}{n}\cdot\abs{\Gamma}^{c_1\fun{f}{n}}$
+ configuraties mogelijk. Wanneer de Turing machine meer stappen zet dan $c$ stappen zet, betekent dit dat de machine tijdens de uitvoer minstens
+ \'e\'en van de configuraties minstens tweemaal heeft beschouwd. De Turing machine kan echter geen onderscheid maken in de uitvoer tussen twee
+ dezelfde configuraties. Dit betekent dus dat Turing machine in een oneindige lus zou terecht komen\footnote{Immers heeft de eerste maal dat de Turing
+ machine deze configuratie heeft beschouwd, geleid tot een tweede beschouwing. Dit betekent dus dat de tweede beschouwing uiteindelijk tot een derde,... zal leiden.}.
+ Een beslisser mag echter nooit in een oneindige lus terecht komen. Een beslisser die meer dan $c$ stappen zet tijdens de uitvoering, is dus onmogelijk.
+ \end{proof}\end{quote}
+ Omdat $Q$ een vaste constante is, mogen we deze in de big O notatie  elimineren. Ook $\abs{\Gamma}$ en $c_1$ kunnen we op die manier elimineren.
+ We bekomen dus $\bigoh{2^{\beta\cdot\fun{f}{n}+\gamma}}$ met $\beta=c_1\cdot\fun{\log_2}{\abs{\Gamma}}$ en $\gamma=\fun{\log_2}{\fun{f}{n}}$,
+ vermits voor alle $x$ geldt: $\log_2 x\leq x$, volstaat het om $\alpha$ gelijk te stellen aan $\alpha=\beta+1$, en dus als
+ bovengrens $\bigoh{2^{\alpha\cdot\fun{f}{n}}}$ te nemen.
+ \item We kunnen opnieuw niets zeggen over de ondergrens \textbf{ondergrens}, vermits $\bigoh{\fun{g}{n}}$ zelf een bovengrens is, en
+ we niet weten wat de concrete tijdscomplexiteit is.
+ \paragraph{}
+ De \textbf{bovengrens} op de geheugencomplexiteit is $\bigoh{\fun{g}{n}}$. Immers kunnen we in tijd $\bigoh{\fun{g}{n}}$, slechts $\bigoh{\fun{g}{n}}$
+ cellen bezoeken.
+ \item \textbf{Nee}, in het geval de tijdscomplexiteit onder $\bigoh{n}$ zit,
+ betekent dit dat we vanaf een zekere invoer lengte $n_0$, de volledige invoer niet meer
+ uitlezen\footnote{Immers geven we de machine niet voldoende tijd om de volledige invoer te lezen.}.
+ Dit betekent dus dat een deel van de invoer onbelangrijk is. In dat geval bevatten de strings in de taal dus nutteloze gegevens.
+ Een dergelijke taal valt dus altijd te comprimeren naar een taal $L'$ waarbij de tijdscomplexiteit minstens
+ $\bigoh{n}$ bedraagt\footnote{Merk op dat de $n$ in dit geval wel kleiner is dan de $n$ van de originele taal.}.
+ \item In dat geval kunnen we een bovengrens zetten op tijdscomplexiteit van $L_1$,
+ namelijk $\bigoh{\fun{f}{n}+\fun{g}{c_0\cdot\fun{f}{n}}}$ met $c_0$ een onbekende constante.
+ We weten immers dat er een Turing machine $M_R$ bestaat die een string $s_1\in\Sigma_1^{\star}$ omzet
+ in een string $s_2\in\Sigma_2^{\star}$ zodat $s_1\in L_1\leftrightarrow s_2\in L_2$ in tijd $\bigoh{\fun{f}{n}}$.
+ Er bestaat ook een Turing machine $M_{L_2}$ die $L_2$ beslist in tijd $\bigoh{\fun{g}{n}}$.
+ \paragraph{}
+ We beschrijven een Turing machine $M_{L_1}$ die $L_1$ beslist. Deze Turing machine roept eerst $M_R$ op.
+ Vermits $M_R$ in tijd $\bigoh{\fun{f}{n}}$ loopt, kan de uitvoer van $M_R$ hoogstens $\bigoh{\fun{f}{n}}$ in lengte
+ zijn ofwel dus bovenaan begrensd door $c_0\cdot\fun{f}{n}$ voor een $n>n_0$ met $n_0$ een onbekende constante.
+ $M_{L_1}$ voert daarna $M_{L_2}$ uit op het resultaat dat na de reductie op de tape staat.
+ De lengte van de uitvoer na de reductie - de lengte van de invoer voor $M_{L_2}$ - is dus $c_0\cdot\fun{f}{n}$.
+ 
+ \paragraph{}
+ De uitvoer van $M_R$ vormt de invoer van $M_{L_2}$. Deze machine werkt in $\bigoh{\fun{g}{m}}$, met $m$ de invoer-lengte
+ voor strings voor $M_{L_2}$ wat begrensd is tot $m\leq c_0\cdot\fun{f}{n}$. Er geldt dus dat $m=c_0\cdot\fun{f}{n}$, $M_{L_2}$ zal dus beslissen
+ in \bigoh{\fun{g}{c_0\cdot\fun{f}{n}}}. $M_{L_1}$ beslist bijgevolg in \bigoh{\fun{f}{n}+\fun{g}{c_0\cdot\fun{f}{n}}}.
+ 
+ \paragraph{}
+ Het behouden van de term $\fun{f}{n}$ in de tijdscomplexiteit is noodzakelijk. Het is mogelijk dat reductie-machine $M_R$
+ bijvoorbeeld reduceert naar een string die begrensd is door een constante. Bijvoorbeeld omdat $L_2$ enkel de strings $1^{\star}$ accepteert,
+ en de reductie de taal $L_1$ al grotendeels beslist door bijvoorbeeld door te reduceren naar een $1$ als de string tot $L_1$ behoort, en $0$
+ indien dit niet het geval is. Het is dus niet zeker dat $\fun{g}{m}$ de dominante factor is.
+ 
+ \paragraph{}
+ Indien $\fun{g}{n}$ polynomiaal is, kunnen we bovendien stellen dat $\bigoh{\fun{f}{n}+\fun{g}{c_1\cdot\fun{f}{n}}}$ verder kan worden vereenvoudigd tot $\bigoh{\fun{f}{n}+\fun{g}{\fun{f}{n}}}$: er geldt
+ \begin{equation}
+  c_2\cdot\brak{c_1\cdot\fun{f}{n}}^{k}=c_2\cdot c_1^k\cdot\fun{f^k}{n}=c_3\cdot\fun{f^k}{n}\mbox{ met }c_3=c_2\cdot c_1^k
+ \end{equation}
+ Omdat $k$ een vaste constante is, kunnen we dus $c_1^k$ in de constante factor schuiven.
+\end{enumerate}
+\end{answer}
+\end{question}
+\end{document}

@@ -112,17 +112,16 @@ As long as there are items in the priority queue, the first item is selected. If
  \begin{proof}
   The algorithm terminates because all substeps sterminate. Dijkstra's algorithm terminates and we call it twice so step (a) and (c) terminate. Modifying the weights can be done by iterating over the edges, since the number of edges is finite, this step terminates as well. Finally removing edges that are contained in both paths definitely terminates, since the paths only contain a finite amount of edges.
   \paragraph{}
-  Evidently the first path is the shortest path for the original graph. When we call Dijkstra's algorithm on the modified graph, the weight of each path $e=\tupl{s,v_1,\ldots,v_m,t}$ will be equal to $w_'e=w_e+w_t-w_s$. So the weight of the path we obtain is the weight of that path for the original graph \emph{minus} the weight of the shortest path of the original graph. We are thus reasoning about the extra weight of the ``shortest path'' compared to the. We thus obtain the shortest path, and the shortest path - with respect to the original graph - where we removed the edges. By merging them we obtain the shortest cycle containing the two points.
+  Evidently the first path is the shortest path for the original graph. When we call Dijkstra's algorithm on the modified graph, the weight of each path $e=\tupl{s,v_1,\ldots,v_m,t}$ will be equal to $w_e'=w_e+w_t-w_s$. So the weight of the path we obtain is the weight of that path for the original graph \emph{minus} the weight of the shortest path of the original graph. We are thus reasoning about the extra weight of the ``shortest path'' compared to the. We thus obtain the shortest path, and the shortest path - with respect to the original graph - where we removed the edges. By merging them we obtain the shortest cycle containing the two points.
  \end{proof}
 
  \item If the graph does not contain positive edges, one can use the \emph{Bellman-Ford algorithm} where we replace the weight of every edge with its negative counterpart. This is however not an assumption we can make. One can expect that if there is a positive cycle, we simply keep running through that cycle. The definition of a path however states that it can contain every edge at most once. If thus enter a positive cycle, we need to exit the cycle at last before we traverse an edge for the second time. You cannot incorporate this behavior in Dijkstra's algorithm because the edges it has already traversed is a property that scales with the length of the path. There are thus an exponential amount of paths each with \emph{different context}. As a result one has to implement a backtracking algorithm that considers all possible paths. The problem is \textsc{NP-hard} and there is an easy reduction from the \emph{Hamiltonian cycle problem}.
  \begin{proof}
   Since the backtracking algorithm iterates over all possible paths up to length $n-1$ - thus all real paths - and evaluates the weight of these paths, evidently the algorithm will come up with the longest path.
  \end{proof}
-
 \end{enumerate}
-
 \end{answer}
+
 \end{exercise}
 \begin{exercise}[Assignment problem]
 \begin{enumerate}
@@ -170,7 +169,10 @@ We will now demonstrate the \emph{Maximum Flow algorithm} on the graph (\figref{
 \end{exercise}
 \begin{exercise}[Graph properties]~~
 \begin{enumerate}
- \item Give a formula that describes the number of paths of length $k$ between two different vertices in a graph $K_{n,n}$.
+ \item Give a formula that describes the number of paths of length $k$ between two different vertices in a graph $K_{n,n}$?
+ \item Can one draw a graph with $n$ vertices such that every vertex has a distinct degree?
+ \item Show that for every $n$, $K_{n,n}$ has a subgraph isomorphic to $C_k$ - a cycle of length $k$ - for every $k\in\accl{4,6,\ldots,2\cdot n}$.
+ \item Show that for every $n\geq 2$, $K_{n,n}$ is a Hamiltonian graph.
 \end{enumerate}
 
 \end{exercise}
@@ -185,6 +187,12 @@ We will now demonstrate the \emph{Maximum Flow algorithm} on the graph (\figref{
   \end{definition}
  \end{quote}
  For which values for $n$ does an $n$-cube contain a Hamiltonian path? Prove your answer. Show paths for the $3$- and $4$-cube.
+\end{enumerate}
+\end{exercise}
+\begin{exercise}[Trees]
+\begin{enumerate}
+ \item How many non-isomorphic trees can be constructed with $n$ vertices?
+ \item Draw the $11$ non-isomorphic trees with $7$ vertices.
 \end{enumerate}
 \end{exercise}
 \begin{exercise}[Independent set]~~

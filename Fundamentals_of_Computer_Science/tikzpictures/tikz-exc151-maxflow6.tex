@@ -1,0 +1,34 @@
+\begin{tikzpicture}[node/.style={state,scale=0.7},nlb/.style={scale=0.7,anchor=south},edl/.style={above,sloped,near end,scale=0.7}]
+\node[node] (w) at (-3.5,0) {$w$};
+\node[node] (x1) at (-1.5,1) {$x_1$};
+\node[node] (x2) at (-1.5,0) {$x_2$};
+\node[node] (x3) at (-1.5,-1) {$x_3$};
+\node[node] (y1) at (1.5,1.5) {$y_1$};
+\node[node] (y2) at (1.5,0.5) {$y_2$};
+\node[node] (y3) at (1.5,-0.5) {$y_3$};
+\node[node] (y4) at (1.5,-1.5) {$y_4$};
+\node[node] (z) at (3.5,0) {$z$};
+\draw [->] (w) to node[edl] {$1,1$} (x1);
+\draw [->] (w) to node[edl] {$1,2$} (x2);
+\draw [->] (w) to node[edl] {$1,1$} (x3);
+\draw [->] (x1) to node[edl] {$1,1$} (y1);
+\draw [->] (x1) to node[edl] {$0,1$} (y4);
+\draw [->] (x2) to node[edl] {$0,1$} (y1);
+\draw [->] (x2) to node[edl] {$1,1$} (y3);
+\draw [->] (x3) to node[edl] {$1,1$} (y2);
+\draw [->] (x3) to node[edl] {$0,1$} (y4);
+\draw [->] (y1) to node[edl] {$1,1$} (z);
+\draw [->] (y2) to node[edl] {$1,1$} (z);
+\draw [->] (y3) to node[edl] {$1,1$} (z);
+\draw [->] (y4) to node[edl] {$0,1$} (z);
+%labels
+% \draw (w.west) node[nlb]{$\tupl{-,\infty}$};
+% \draw (x1.north) node[nlb]{$\tupl{y_1,1}$};
+% \draw (x2.north) node[nlb]{$\tupl{w,2}$};
+% \draw (x3.north) node[nlb]{$\tupl{w,1}$};
+% \draw (y1.north) node[nlb]{$\tupl{x_2,1}$};
+% \draw (y2.north) node[nlb]{$\tupl{x_3,1}$};
+% \draw (y3.north) node[nlb]{$\tupl{x_2,1}$};
+% \draw (y4.north) node[nlb]{$\tupl{x_1,1}$};
+% \draw (z.north) node[nlb]{$\tupl{y_3,1}$};
+\end{tikzpicture}

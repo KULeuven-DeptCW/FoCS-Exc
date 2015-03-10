@@ -1,0 +1,202 @@
+\documentclass{article}
+\title{Exercise sessions \#1 and \#2\\Graph theory}
+\author{prof. B. Demoen\and W. Van Onsem}
+\date{March 2015}
+\usepackage{../brackets,../proofenv,../assignment-en,../importsreferences-en,subfigure}
+\usepackage[normalem]{ulem}
+\begin{document}
+\maketitle
+\begin{exercise}[adjacency matrix]~~
+\begin{enumerate}
+ \item Construct the adjacency matrix of the following graph.
+ \item Use this matrix to determine whether there a path between $a$ and $d$?
+ \item If so, what is the minimum number of edges in such path? How can you determine this using the adjacency matrix?
+ \item How many matrix-multiplication operations do you need to calculate the connectivity between every two nodes for a given graph $\fun{G}{V,E}$? What if the number of edges is very small?
+ \item Is there a specific property for adjacency matrices for undirected graphs that is not necessary true of adjacency matrices for directed graphs?
+\end{enumerate}
+\importtikzfigure{exc151-graph}{Graph for exercise 1.}
+\begin{answer}~~
+\begin{enumerate}
+ \item See matrix $A$. The indices of $A$ correspond to the nodes in \emph{alphabetical} order.
+ \begin{equation}
+  A=\brak{\begin{array}{ccccc}0&1&1&0&1\\1&0&0&0&0\\1&0&0&1&1\\0&0&1&0&0\\1&0&1&0&0\end{array}}
+ \end{equation}
+ \item We can see that there is no direct edge between $a$ and $d$ because $A_{ad}=0$, we thus determine whether there is a path of length $2$ between $a$ and $d$ by calculating the square of $A$:
+ \begin{equation}
+  A^2=\brak{\begin{array}{ccccc}3&0&1&1&1\\0&1&1&0&1\\1&1&3&0&1\\1&0&0&1&1\\1&1&1&1&2\end{array}}
+ \end{equation}
+ As we can see $A_{ad}^2=1$, there exists thus a path of length $2$.
+ \item Since $A^0=\III_5$ doesn't contain a path from $a$ to $d$ and neither does $A$, but $A^2$ does, we know that the shortest path uses two edges.
+ \item If we first perform a matrix-addition, $B=A+\III$. The resulting matrix $B$ contains the edges as well as loops. If we now calculate $B^2$ we obtain all paths of length $0$, $1$ and $2$. A naive algorithm can now perform $n$ multiplications, thus calculate $B^{n-1}$ with $n$ the number of \emph{nodes}. Since there are $n$ nodes, it can take at most $n-1$ steps to go from one vertex to another one. A smarter approach hover is to reuse the result we obtain by $B^2$. Since $B^4=\brak{B^2}^2$, we can speed up the process. The algorithm does not calculate $B^{n-1}$ using $n-2$ matrix multiplications, but $\fun{\log_2}{n-1}$. If the number of edges is very small, we can make it even more efficient. The longest path is bounded by the number of edges $e$. If $e$ is very small, we can calculate $B^{\fun{\min}{n-1,e}}$. We can use our efficient algorithm for this.
+\end{enumerate}
+\end{answer}
+\end{exercise}
+\begin{exercise}[Euler's theorem]~~
+\begin{enumerate}
+ \item Generalize Euler's theorem with respect to \emph{directed} graphs. Don't forget to take loops into account.
+ \item Prove that in a graph containing exactly two vertices $u$ and $v$ of odd degree, there exists a path from $u$ to $v$.
+\end{enumerate}
+\begin{answer}~~
+\begin{enumerate}
+ \item The new theorem states:
+ \begin{theorem}[Euler's modified theorem]
+  A directed graph $\fun{G}{V,E}$ contains a Eulerian path if and only if the graph is connected\footnote{Note that the definition of connected differs a bit in the context of a directed graph.} and for all vertices $v\in V$ is the number of incoming edges equal to the number of outgoing edges.
+ \end{theorem}
+ \begin{proof}
+  Evidently the graph must be a connected graph: a Eulerian cycle contains each vertex so that means that we need to be able to traverse from every vertex to every vertex by following the Eulerian cycle.
+  \paragraph{}
+  We construct a cycle $P$ we do this by starting from a vertex $v$ since the graph is connected, we know that there must be at least one outgoing edge. We now take one of the edges to a vertex $w$. Since $w$ has at least one incoming edge, it has at least one outgoing edge as well, so we can repeat this operation until we reach $v$ again. Now there are two possibilities:
+  \begin{enumerate}
+   \item We have visited every edge. In that case we've constructed a Eulerian cycle so we're done; or
+   \item We haven't visited an edge. Optionally this means we haven't even visited every vertex. Since the graph is connected however, it means that there is at least one vertex we've visited where there exists an edge we haven't visited in our original path. Now since our original path always took one incoming and one outgoing edge per cycle, we know that this vertex must also contain an unused incoming edge. If we take the outgoing vertex, we're sure we can find a way to return to the vertex since the graph is connected. We can thus construct a cycle from that vertex that we can add to the path.
+  \end{enumerate}
+  By keeping to add cycles to the path, we will eventually end up with a Eulerian cycle because we can't add a cycle to the path anymore of no edges haven't been visited anymore.
+ \end{proof}
+ \item
+  \begin{proof}
+   We first define two new functions: $\fun{l_G}{v}$ the number of loops of a vertex $v$ and $\fun{x_G}{v}$ the number of edges to another vertex of $v$. By definition the degree of a vertex is equal to $\fun{d_G}{v}=2\cdot\fun{l_G}{v}+\fun{x_G}{v}$. Since the degrees of both vertices are odd, we know that $\fun{x_G}{u}$ and $\fun{x_G}{v}$ are odd as well. Since the smallest odd integer is $1$, we know there is at least one edge between $u$ and $v$. The path is simply such edge.
+  \end{proof}
+\end{enumerate}
+\end{answer}
+\end{exercise}
+\begin{exercise}[Dijkstra's algorithm]
+Describe an algorithm to carry out the following tasks:
+\begin{enumerate}
+ \item Find the shortest path to \emph{all} nodes from a given \emph{source} node given the graph only contains positive weights.
+ \item Detect a \emph{cycle} where the sum of the weights of the edges of that cycle is strictly negative. Evidently the graph can contain edges with negative weights.
+ \item The shortest path for a graph in which edges can have negative weights. The graph doesn't contain cycles such that the weight is strictly negative.
+ \item Given a graph containing only positive weights, find two paths: from $a$ to $b$ and from $b$ to $a$ such that the two paths don't have any edges in common and the \emph{total} weight - the sum of the two paths - is minimized.
+ \item Find the \emph{longest} path for a given graph with only positive weights.
+\end{enumerate}
+Prove that your algorithm is correct.
+\begin{hint}
+In many cases a slight modification of \emph{Dijkstra's algorithm} will be sufficient.
+\end{hint}
+\begin{answer}
+First we will briefly sketch the working principle of Dijkstra's algorithm. Dijkstra's algorithm labels vertices considers a priority queue. Initially all vertices are labeled with $\tupl{+\infty,\xfalse}$ except the source vertex $s$ which is labeled with $\tupl{0,\xfalse}$. The label contains the shortest path to the corresponding vertex up to that point of the algorithm. Dijkstra's algorithm schedules the source vertex $s$ in the priority.
+\paragraph{}
+As long as there are items in the priority queue, the first item is selected. If the node is already visited (the second element of the label of the vertex), we ignore the vertex. Otherwise we first set the second element of the label to $\xtrue$, the first element of the label is called the \emph{weight} of the vertex $w_v$. Next we iterate over all outgoing edges $\tupl{v,u}\in\fun{E}{v}$ of $v$, we calculate the target weight $w_u$ as $w_u=w_v+w_e$ with $w$ the weight of the edge. If the target weight is lower than the weight of the vertex $u$ at that moment, we modify the weight and schedule $u$ in the priority queue. Otherwise, we leave $u$ unmodified. The algorithm stops when the destination vertex $d$ is scheduled first in the priority queue.
+\begin{proof}
+\emph{Dijkstra's algorithm} works correct because it guarantees progression if the weights of all edges are positive: each time a node is expanded, the weight of that node is the weight shortest path between the source and that vertex. This is true, because the priority queue is dequeued by increasing weight. Given there is shorter path $\tupl{v_1,v_2,\ldots,v_n}$ to vertex that is expanded, the the weight of vertex $v_{n-1}$ has a weight lower than the weight of the vertex. But in that case $v_{n-1}$ would have been expanded earlier and thus further have minimized the weight for $v_n$.
+\end{proof}
+\begin{enumerate}
+ \item We only need to modify the stop criterion of Dijkstra's algorithm. Now the algorithm stops if the priority queue is empty.
+ \begin{proof}
+ This algorithm is correct because eventually all vertices connected with the given source index will be scheduled: if the vertex $v$ is connected with the source $s$, there is a path $\tupl{s,v_1,v_2,\ldots,v}$ between the the source vertex and that vertex. Since we definitely expand $s$, $v_1$ is placed on the priority queue, and each vertex $v_i$ is scheduled because at least the previous vertex $v_{i-1}$ is scheduled. So at least all vertices will eventually get scheduled. Since Dijkstra's algorithm only expands a node if there is no shorter path between the source and that node, all connected nodes are expanded and marked with the weight of the shortest path.
+ \end{proof}
+ \item One can use \emph{Bellman-Ford's algorithm} this algorithm as well as it's proof are explained in the next item.
+ \item This is the well known \emph{Bellman-Ford algorithm}.
+ Dijkstra's algorithm works on a node-by-node basis where each node is placed in a queue and processed. Since Dijkstra's algorithm guarantees - based on the fact that all edges have positive weights - progression, we know for sure that the node expanded is optimal. This is no longer possible if the graph can contain negative edges. \emph{Bellman-Ford's algorithm} still labels the vertices but only with the weights. All vertices are thus labeled with $\infty$ except the source node which is labeled with $0$. The the following step is repeated $n$ times with $n-1$ the number of vertices or until the weights of the vertices no longer change if that occurs earlier.
+ \begin{quote}
+ Iterate over all edges $e=\tupl{u,v}\in E$. If $u$ has a weight $w_u$ and $e$ weight $w_e$, if $w_u+w_e\leq w_v$, then set $w_v'=w_u+w_e$.
+ \end{quote}
+ Now we perform the operation a final time. If the weights still change, we have obtained a negative cycle so there is no shortest path, if not we can reconstruct the path by backwards reasoning as we do for \emph{Dijkstra's algorithm}.
+ \begin{proof}
+ We will only prove the case of iterating the step $n-1$ times. One can easily modify the proof to show that it works if one iterates until the weights no longer modify.
+ Say the optimal path between the source $s$ and $d$ is $\tupl{s,v_1,v_2,\ldots,v_m,d}$. Since the number of vertices is $n$ there cannot exists a longer (shortest) path than a path with $n-1$ edges. This thus means that $m\leq n-2$. The first time we call the subroutine, all vertices are labeled $\infty$ except the source. After applying the first step, all vertices to which an edge from the source are labeled with a value that is optimal for paths with \emph{one} edge or lower (for zero edges, we can only reach the source node which has weight $0$).
+ \paragraph{}
+ Given we have iterated over the first $i$ steps - thus obtain the shortest path to each vertex \emph{with $i$ edges} or lower - now we iterate over all edges we thus virtually ``add'' an edge to the optimal paths with $i$ or less edges. If the constructed path is shorter (less weight), that means that the last vertex of the end has a weight that was higher. We thus replace is with the weight of the new path. After we have done this for every edge, the vertices are labeled with the shortest path with $i+1$ edges or less.
+ \paragraph{}
+ Since we do this $n-1$, times, the vertices are labeled with a path that contain $n-1$ or less edges. This is the largest path with respect to the number of edges possible. If by applying the step again weights change, this means that for at least one vertex, there exists a path of length $n$ results in a shorter path than that of $n-1$. A path that contains $n$ edges however contains at least one edge twice, this thus means there is a loop somewhere. In that case it is beneficial to keep looping over the graph, otherwise one would never have added the edge twice.
+ \paragraph{}
+ Given there is no such loop, we have calculated the weights for all the vertices for paths with at most $n-1$ edges. Since we know there are no cycles, it means we have iterated over all cycle-free paths and that the destination vertex $v$ will be marked with the shortest path.
+ \end{proof}
+ \item This is the well known \emph{Suurballe algorithm}. Suurballe's algorithm makes use of Dijkstra's algorithm twice. The algorithm works as follows:
+ \begin{enumerate}
+  \item First run Dijkstra's algorithm on the graph and return the label of all vertices $\vec{w}$ together with the shortest path $\tupl{v_1,v_2,\ldots,v_n}$;
+  \item Now modify the weights of every edge $e=\tupl{u,v}\in E$ with $w_e'=w_e-w_v+w_u$; and remove the \emph{directed edges} $\tupl{v_i,v_{i+1}}$ of the shortest path from the graph: if the edge $\tupl{v_i,v_{i+1}}$ in $G$ is directed, remove the edge; if the edge was undirected, make it directed such that it is outgoing from $v_{i+1}$ and incoming from $v_{i}$;
+  \item Now run Dijkstra's algorithm again on the modified graph again from source to drain, resulting in an optimal path $\tupl{u_1,u_2,\ldots,u_m}$;
+  \item Now we need to inspect the two paths. If the first path contains an edge $\tupl{v_i,v_{i+1}}$ where the second path contains an edge $\tupl{u_j,u_j+1}=\tupl{v_{i+1},v_i}$ - in other words they share an edge but in the different direction - one needs to perform a \emph{swap}-operation. The swap operation modifies the paths to $\tupl{v_1,v_2,\ldots,v_i,u_{j+2},\ldots,u_m}$ and $\tupl{u_1,u_2,\ldots,u_j,v_{i+2},\ldots,v_n}$. In other words, you remove the edge from the graph by swapping the path ends. The operation is repeated until the paths are no longer modified;
+  \item By putting the second (or the first) path in reverse order, one obtains a cycle with no common edges that is optimal.
+ \end{enumerate}
+ \begin{proof}
+  The algorithm terminates because all substeps sterminate. Dijkstra's algorithm terminates and we call it twice so step (a) and (c) terminate. Modifying the weights can be done by iterating over the edges, since the number of edges is finite, this step terminates as well. Finally removing edges that are contained in both paths definitely terminates, since the paths only contain a finite amount of edges.
+  \paragraph{}
+  Evidently the first path is the shortest path for the original graph. When we call Dijkstra's algorithm on the modified graph, the weight of each path $e=\tupl{s,v_1,\ldots,v_m,t}$ will be equal to $w_'e=w_e+w_t-w_s$. So the weight of the path we obtain is the weight of that path for the original graph \emph{minus} the weight of the shortest path of the original graph. We are thus reasoning about the extra weight of the ``shortest path'' compared to the. We thus obtain the shortest path, and the shortest path - with respect to the original graph - where we removed the edges. By merging them we obtain the shortest cycle containing the two points.
+ \end{proof}
+
+ \item If the graph does not contain positive edges, one can use the \emph{Bellman-Ford algorithm} where we replace the weight of every edge with its negative counterpart. This is however not an assumption we can make. One can expect that if there is a positive cycle, we simply keep running through that cycle. The definition of a path however states that it can contain every edge at most once. If thus enter a positive cycle, we need to exit the cycle at last before we traverse an edge for the second time. You cannot incorporate this behavior in Dijkstra's algorithm because the edges it has already traversed is a property that scales with the length of the path. There are thus an exponential amount of paths each with \emph{different context}. As a result one has to implement a backtracking algorithm that considers all possible paths. The problem is \textsc{NP-hard} and there is an easy reduction from the \emph{Hamiltonian cycle problem}.
+ \begin{proof}
+  Since the backtracking algorithm iterates over all possible paths up to length $n-1$ - thus all real paths - and evaluates the weight of these paths, evidently the algorithm will come up with the longest path.
+ \end{proof}
+
+\end{enumerate}
+
+\end{answer}
+\end{exercise}
+\begin{exercise}[Assignment problem]
+\begin{enumerate}
+\item Say you have $n$ employees $\vec{e}=\tupl{e_1,e_2,\ldots,e_n}$. On a certain day, there are $m$ tasks $\vec{t}=\tupl{t_1,t_2,\ldots,t_m}$ that must be carried out. Each employee can perform a given maximum number of tasks $\vec{b}=\tupl{b_1,b_2,\ldots,b_n}$ that day and furthermore some tasks require the employee to be certified. A matrix $C$ describes the certificates of the employees: an employee $e_i$ is certified to carry out task $t_j$ if and only if $c_{i\,j}=\xtrue$. Describe a way to convert this problem into a graph and that - using a graph algorithm - you can come up with a solution for this problem.
+\item Show - by running your algorithm - an assignment for:
+\begin{eqnarray}
+n&=&3\\
+m&=&4\\
+\vec{b}&=&\tupl{1,2,1}\\
+C&=&\brak{\begin{array}{cccc}
+\xtrue&\xfalse&\xfalse&\xtrue\\
+\xtrue&\xfalse&\xtrue&\xfalse\\
+\xfalse&\xtrue&\xfalse&\xtrue\\
+\end{array}}
+\end{eqnarray}
+\end{enumerate}
+\begin{answer}
+You can represent the problem as a graph with four kinds of nodes:
+\begin{enumerate}
+ \item the source node $w$;
+ \item the sink node $z$;
+ \item the employee nodes $x_i$; and
+ \item the task nodes $y_i$.
+\end{enumerate}
+For each employee $e_i$ there exists an edge between the source $w$ and the employee node $x_i$ with capacity the number of tasks that employee can handle $b_i$. Furthermore for each task $t_i$ we consider a node $y_i$ that is connected with the sink node $z$ with capacity $1$. If an employee $e_i$ is certified to carry out task $t_j$ (thus $c_{ij}=\xtrue$), we add an edge with capacity $1$ between employee node $x_i$ and task node $y_j$. The graph for the given values is shown on \figref{exc151-maxflow}.
+\importtikzfigure{exc151-maxflow}{The graph produced after applying the discussed transformation.}
+\paragraph{}
+We can now generate an assignment by running the \emph{Maximum Flow algorithm} on the generated graph.
+\paragraph{}
+We will now demonstrate the \emph{Maximum Flow algorithm} on the graph (\figref{exc151-maxflow}) as shown in \figref{maxflow-ev}.
+\begin{figure}
+\importtikzsubfigure{exc151-maxflow0}{}
+\importtikzsubfigure{exc151-maxflow1}{}
+\importtikzsubfigure{exc151-maxflow2}{}
+\importtikzsubfigure{exc151-maxflow3}{}
+\importtikzsubfigure{exc151-maxflow4}{}
+\importtikzsubfigure{exc151-maxflow5}{}
+\importtikzsubfigure{exc151-maxflow6}{}
+\importtikzsubfigure{exc151-maxflow7}{}
+\importtikzsubfigure{exc151-maxflow8}{}
+\figlab{maxflow-ev}
+\caption{Evolution of the maxflow algorithm for the given graph.}
+\end{figure}
+\end{answer}
+\end{exercise}
+\begin{exercise}[Graph properties]~~
+\begin{enumerate}
+ \item Give a formula that describes the number of paths of length $k$ between two different vertices in a graph $K_{n,n}$.
+\end{enumerate}
+
+\end{exercise}
+\begin{exercise}[Eulerian and Hamiltonian paths]~~
+\begin{enumerate}
+ \item Can a graph contain both a Eulerian and Hamiltonian path? If so, draw such graph.
+ \item Can a graph contain a path that is both Eulerian and Hamiltonian? If so, what can you say about the shape of such graphs? Prove this.
+ \item An $n$-cube can be defined inductively as follows:
+ \begin{quote}
+  \begin{definition}[$n$-cube]
+   A $1$-cube is a graph that contains exactly one vertex and no edges. An $n$-cube consists of two $n-1$ cubes such that the corresponding vertices of the two cubes are connected.
+  \end{definition}
+ \end{quote}
+ For which values for $n$ does an $n$-cube contain a Hamiltonian path? Prove your answer. Show paths for the $3$- and $4$-cube.
+\end{enumerate}
+\end{exercise}
+\begin{exercise}[Independent set]~~
+\begin{enumerate}
+ \item Construct an algorithm that given a graph $\fun{G}{V,E}$ you subdivide the set of vertices into $\calV=\accl{V_i}_{i=1}^n$ such that $\forall i,j:V_i\cap V_j=\emptyset$, $\cup_{i=1}^nV_i=V$ and for each $\tupl{a,b}\in E$, $a\in V_i\wedge b\in V_j\Rightarrow V_i\neq V_j$.
+ \item The \emph{edge cover problem} is a problem where given a simple graph $\fun{G}{V,E}$ one aims to find a set of edges $E'$ such that each vertex $v\in V$ is adjacent to at least one edge $e\in E$. For the \emph{minimum edge cover problem} the number of edges $\abs{E}$ must be minimal.
+ \begin{enumerate}
+  \item Describe a polynomial algorithm that calculates an edge cover.
+  \item Describe a polynomial algorithm that finds a minimum edge cover.
+  \item Is it harder to find a minimal edge cover if we work with weighted edges?
+  \item Why is it harder to find a matching than a minimal edge cover?
+ \end{enumerate}
+\end{enumerate}
+\end{exercise}
+\end{document}

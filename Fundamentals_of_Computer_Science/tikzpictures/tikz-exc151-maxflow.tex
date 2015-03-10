@@ -1,0 +1,24 @@
+\begin{tikzpicture}[node/.style={state,scale=0.7}]
+\node[node] (w) at (-3.5,0) {$w$};
+\node[node] (x1) at (-1.5,1) {$x_1$};
+\node[node] (x2) at (-1.5,0) {$x_2$};
+\node[node] (x3) at (-1.5,-1) {$x_3$};
+\node[node] (y1) at (1.5,1.5) {$y_1$};
+\node[node] (y2) at (1.5,0.5) {$y_2$};
+\node[node] (y3) at (1.5,-0.5) {$y_3$};
+\node[node] (y4) at (1.5,-1.5) {$y_4$};
+\node[node] (z) at (3.5,0) {$z$};
+\draw [->] (w) to node[above] {1} (x1);
+\draw [->] (w) to node[above] {2} (x2);
+\draw [->] (w) to node[above] {1} (x3);
+\draw [->] (x1) to node[above,sloped,near end] {1} (y1);
+\draw [->] (x1) to node[above,sloped,near end] {1} (y4);
+\draw [->] (x2) to node[above,sloped,near end] {1} (y1);
+\draw [->] (x2) to node[above,sloped,near end] {1} (y3);
+\draw [->] (x3) to node[above,sloped,near end] {1} (y2);
+\draw [->] (x3) to node[above,sloped,near end] {1} (y4);
+\draw [->] (y1) to node[above] {1} (z);
+\draw [->] (y2) to node[above] {1} (z);
+\draw [->] (y3) to node[above] {1} (z);
+\draw [->] (y4) to node[above] {1} (z);
+\end{tikzpicture}
